@@ -1,9 +1,13 @@
-import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
+import {Component} from 'react'
+import {View} from '@tarojs/components'
 
 import "taro-ui/dist/style/components/button.scss" // 按需引入
 import './index.scss'
+// eslint-disable-next-line import/first
+import {AtButton} from "taro-ui";
+import graphQLClient, {gql} from "../../util/apolloClient";
+import errorCodesGraphql from "../../graphql/errorCodes"
+
 
 export default class Index extends Component {
 
@@ -17,15 +21,18 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
+  handlePay(): void {
+    graphQLClient({
+      query: errorCodesGraphql,
+    }).then(res => {
+      console.log(res)
+    })
+  }
+
   render () {
     return (
       <View className='index'>
-        <Text>Hello world!</Text>
-        <AtButton type='primary'>I need Taro UI</AtButton>
-        <Text>Taro UI 支持 Vue 了吗？</Text>
-        <AtButton type='primary' circle={true}>支持</AtButton>
-        <Text>共建？</Text>
-        <AtButton type='secondary' circle={true}>来</AtButton>
+        <AtButton type='primary' onClick={() => this.handlePay()} >支付1分钱</AtButton>
       </View>
     )
   }

@@ -1,39 +1,25 @@
-import {Component} from 'react'
 import {View} from '@tarojs/components'
 
 import "taro-ui/dist/style/components/button.scss" // 按需引入
 import './index.scss'
 // eslint-disable-next-line import/first
 import {AtButton} from "taro-ui";
-import graphQLClient, {gql} from "../../util/apolloClient";
-import errorCodesGraphql from "../../graphql/errorCodes"
+import authCode from "../../nativeInterface/authCode";
 
 
-export default class Index extends Component {
+const Index = () => {
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  handlePay(): void {
-    graphQLClient({
-      query: errorCodesGraphql,
-    }).then(res => {
-      console.log(res)
+  const handlePay = (): void => {
+    authCode().then(code => {
+      console.log(code)
     })
   }
 
-  render () {
     return (
       <View className='index'>
-        <AtButton type='primary' onClick={() => this.handlePay()} >支付1分钱</AtButton>
+        <AtButton type='primary' onClick={handlePay} >支付1分钱</AtButton>
       </View>
     )
-  }
 }
+
+export default Index

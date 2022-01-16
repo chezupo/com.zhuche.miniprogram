@@ -1,4 +1,4 @@
-import GQLError from "../errors/GQLError";
+import BaseError, {ErrorTypes} from "../errors/BaseError";
 // @ts-ignore
 // eslint-disable-next-line import/first
 import Taro from '@tarojs/taro'
@@ -26,12 +26,12 @@ export const gql = (
 
   const hasSDL = result.match(/\b(\w+)\b[\s|\n]+(\w+)/)
   if (!hasSDL || !(hasSDL.length >= 2 && hasSDL.length <= 3)) {
-    throw new GQLError("Failed to parse SDL.")
+    throw new BaseError({message: "Failed to parse SDL.", errorType: ErrorTypes.GQLError})
   }
 
   const operationType = hasSDL[1]
   if (!['query', 'mutaion', 'subscription'].includes(operationType)) {
-    throw new GQLError("Failed to parse SDL.")
+    throw new BaseError({message: "Failed to parse SDL.", errorType: ErrorTypes.GQLError})
   }
 
   const operationName = hasSDL[2] ? hasSDL[2] : null;

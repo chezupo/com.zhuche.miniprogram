@@ -1,0 +1,11 @@
+@import "../../../../global.scss";
+@import "../commond.module.scss";
+
+.main {
+  @include row;
+  display: grid;
+  grid-template-rows: 100%;
+  .button {
+    width: 80%;
+  }
+}

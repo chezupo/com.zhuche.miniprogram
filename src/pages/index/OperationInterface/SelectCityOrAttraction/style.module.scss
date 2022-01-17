@@ -1,0 +1,44 @@
+@import "../../../../global.scss";
+@import "../commond.module.scss";
+
+.titleWrapper {
+  margin-top: $mainContainerLeftAndRightMargin;
+  display: grid;
+  grid-template-columns:$operationInterfaceFirstGridColumn 70% 26.5%;
+  align-items: center;
+  .title {
+    @include globalSubtitle;
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
+
+.storeWrapper {
+  margin-top: 1vh;
+  display: grid;
+  grid-template-columns: 3.5% 68% 28.5%;
+  align-items: center;
+  padding-bottom: 2vw;
+  border-bottom: solid 1px $borderGrayColor;
+  .cityAndStore {
+    display: grid;
+    grid-template-columns: 35% 75%;
+    .store, .city  {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .store {
+      margin-left: 2vw;
+    }
+  }
+  .switch {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+    align-items: center;
+    justify-items: right;
+  }
+}
+

@@ -7,7 +7,6 @@ import {AtButton} from "taro-ui";
 import authCode from "../../nativeInterface/authCode";
 import graphQLClient, {gql} from "../../util/apolloClient";
 import quthrizationGQL from "../../graphql/mutaion/authorization";
-import OperationInterface from "./OperationInterface";
 
 
 const Index = () => {
@@ -84,9 +83,17 @@ const Index = () => {
     })
   }
   return (
-    <View >
-      <OperationInterface />
-    </View>
+    <>
+      <View>
+        疯狂开发中。。。
+        这个只是测试线上的情况，而发布的测试版本。
+      </View>
+      <View className={style.index}>
+        <AtButton type='primary' onClick={handleCode} >登录</AtButton>
+        <AtButton type='primary' onClick={handlePay} >支付1分钱</AtButton>
+        <AtButton type='primary' onClick={handleFreezeOrder} >冻结订单</AtButton>
+      </View>
+    </>
   )
 }
 

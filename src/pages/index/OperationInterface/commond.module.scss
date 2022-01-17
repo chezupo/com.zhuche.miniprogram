@@ -1,0 +1,7 @@
+@import "../../../global.scss";
+@mixin row {
+  margin-top: $mainContainerLeftAndRightMargin;
+  padding: $unit2;
+}
+
+$operationInterfaceFirstGridColumn: 3.5%;

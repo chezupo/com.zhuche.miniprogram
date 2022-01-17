@@ -1,0 +1,17 @@
+@import "../../../global.scss";
+
+:local(.main) {
+  width: $mainContainerWidth;
+  margin: 0 $mainContainerLeftAndRightMargin;
+  box-sizing: border-box;
+  border-radius: $borderRadiusCircle;
+  box-shadow: $boxShadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:local(.container) {
+  margin: 0 $mainContainerLeftAndRightMargin $mainContainerLeftAndRightMargin $mainContainerLeftAndRightMargin;
+  width: 100%;
+}

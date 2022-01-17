@@ -30,7 +30,7 @@ export const gql = (
   }
 
   const operationType = hasSDL[1]
-  if (!['query', 'mutaion', 'subscription'].includes(operationType)) {
+  if (!['query', 'mutation', 'subscription'].includes(operationType)) {
     throw new BaseError({message: "Failed to parse SDL.", errorType: ErrorTypes.GQLError})
   }
 

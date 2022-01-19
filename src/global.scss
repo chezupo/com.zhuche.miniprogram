@@ -4,12 +4,12 @@ $mainContainerWidth: 100vw - $mainContainerLeftAndRightMargin * 2;
 $borderRadiusCircle: .2rem;
 $boxShadow: 2px 2px 8px #2e293314, 2px 4px 8px #473f4f29;
 $subtitleColor: #707070;
-$borderGrayColor: #F5F5F5;
-$primaryThemeColor: #405DFF;;
+$borderGrayColor: #E1E1E1;
+$primaryThemeColor: #3C61FF;
 @mixin globalSubtitle {
   color: $subtitleColor;
   font-size: $subtitleSize;
 }
 $subtitleSize: $unit4;
 
-@import "~taro-ui/dist/style/index.scss";
+$phone5DeviceWidth: 320px;

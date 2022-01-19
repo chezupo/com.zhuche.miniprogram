@@ -1,18 +1,29 @@
 // @ts-ignore
-import React, {useReducer} from "react";
+import React from "react";
 import {Input, View} from "@tarojs/components";
-import style from "./style.module.scss";
+// eslint-disable-next-line import/first
 import {AtIcon} from 'taro-ui'
+// @ts-ignore
+import style from "./style.module.scss";
+import SubscriptionScheduler from "../../../../services/subscriptionService/SubscriptionScheduler";
+import useObserve from "../../../../services/subscriptionService/useObserve";
 
 const SearchIcon = () => (<AtIcon value='search' size='15' className={style.icon} />)
 
 const InputRender = (): React.ReactElement => {
+  const [cityName, observe] = useObserve(SubscriptionScheduler.citySearchObserve);
+  const handleChange = (e): void => {
+    observe.next(e.target.value)
+  }
+
   return (
     <View className={style.inputRender}>
       <View className={style.iconWrapper}>
         <SearchIcon />
       </View>
       <Input
+        onInput={handleChange}
+        value={cityName}
         className={style.input}
         placeholder='搜索'
         placeholderStyle='font-size:13px'
@@ -20,15 +31,16 @@ const InputRender = (): React.ReactElement => {
       />
     </View>
   )
-
 }
 
 const Search = (): React.ReactElement => {
-  const [cancel, dispatcher] = useReducer((state): boolean => !state , true);
+  const [searchMode, observe] = useObserve(SubscriptionScheduler.isCitySearchObserve)
+  console.log("这里是" + searchMode)
+
   const PlaceholderModel = () => (
     <View
       className={style.placeholderWrapper}
-      onClick={dispatcher}
+      onClick={() => observe.next(!searchMode)}
     >
       <View className={style.container}>
         <SearchIcon />
@@ -39,14 +51,14 @@ const Search = (): React.ReactElement => {
   const InputModel = () => (
     <View className={style.main}>
       <InputRender />
-      <View className={style.cancel} onClick={dispatcher}>取消</View>
+      <View className={style.cancel} onClick={() => observe.next(!searchMode)}>取消</View>
     </View>
   )
 
   return (
     <>
-      {cancel && <PlaceholderModel />}
-      {!cancel && <InputModel />}
+      {!searchMode && <PlaceholderModel />}
+      {searchMode && <InputModel />}
     </>
   )
 

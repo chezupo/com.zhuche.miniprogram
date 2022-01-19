@@ -1,14 +1,18 @@
 // @ts-ignore
 import React from "react";
+import Search from "./Search/index";
+import CityList from "./CityList";
+// eslint-disable-next-line import/first
 import {View} from "@tarojs/components";
-import Index from "./Search/index";
+// @ts-ignore
+import style from "./style.module.scss";
 
 const City = (): React.ReactElement => {
   return (
-    <>
-      <Index />
-      <View> search</View>
-    </>
+    <View className={style.main}>
+      <Search />
+      <CityList />
+    </View>
   )
 }
 

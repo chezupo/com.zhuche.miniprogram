@@ -1,0 +1,30 @@
+@import "../../../../../global.scss";
+
+@mixin padding {
+  padding: $mainContainerLeftAndRightMargin;
+}
+
+.main {
+}
+.locationLetter {
+  @include padding;
+}
+.cityNameGroup {
+  @include padding;
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: $unit2;
+ .cityName  {
+   padding: 0 $unit1;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   border-radius: $borderRadiusCircle;
+   $height: $unit9;
+   height: $height;
+   line-height: $height;
+   border: solid 1px #E1E1E1;
+   text-align: center;
+ }
+}

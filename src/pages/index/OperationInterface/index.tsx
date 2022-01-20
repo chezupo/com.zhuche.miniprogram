@@ -1,22 +1,56 @@
 // @ts-ignore
-import React from "react";
+import React, {useState} from "react";
 import {View} from "@tarojs/components";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// 引入 Swiper, SwiperItem 组件
-import style from "./style.module.scss"
-import SelectCityOrAttraction from "./SelectCityOrAttraction";
+// @ts-ignore
+import style from './style.module.scss'
+import SelectCityOrAttraction from "./SelectCityOrStore";
 import DateRange from "./DateRange/DateRange";
-import {AtButton} from "taro-ui";
 import Button from "./Button";
+import useObserve from "../../../util/useObserve";
+import {redirectTo} from "../../../store/router";
+import {
+  currentPickCityPointObserve,
+  CurrentPickCityPointType,
+  endCityObserve, isForeignCityObserve,
+  startCityObserve
+} from "../../../store/cityStore";
 
 const OperationInterface = (): React.ReactElement => {
+  const [, dispatcher] = useObserve(currentPickCityPointObserve)
+  const redirectPickCityPage = () => redirectTo('/pages/index/city/index')
+  const handleClickStartCity = () => {
+    dispatcher.next(CurrentPickCityPointType.START)
+    redirectPickCityPage()
+  }
+  const handleClickEndCity = () => {
+    dispatcher.next(CurrentPickCityPointType.END)
+    redirectPickCityPage()
+  }
+  const [startCity] = useObserve(startCityObserve)
+  const [endCity] = useObserve(endCityObserve)
+  const [isForeignCity] = useObserve(isForeignCityObserve)
+
+  const ForeignCityRender = isForeignCity ? (
+    <SelectCityOrAttraction
+      title='还车地点'
+      pointColor='#405DFF'
+      onClickCity={() => handleClickEndCity()}
+      cityName={endCity.name}
+    />
+  ) : (<></>)
+
   return (
     <View className={style.main}>
       <View className={style.container}>
-        <SelectCityOrAttraction title='取车地点' visitButton />
-        <SelectCityOrAttraction title='还车地点' pointColor='#405DFF' />
-        <DateRange/>
-        <Button/>
+        <SelectCityOrAttraction
+          title='取车地点'
+          visitButton
+          onClickCity={() => handleClickStartCity()}
+          cityName={startCity.name}
+        />
+        {ForeignCityRender}
+        <DateRange />
+        <Button />
       </View>
     </View>
     )

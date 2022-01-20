@@ -1,6 +1,18 @@
-import SubscriptionServiceI, {SubscriptionHandler} from "./SubscriptionServiceI";
+export type SubscriptionHandler = number
 
-export default class SubscriptionService<T> implements SubscriptionServiceI<T>{
+interface SubscriptionServiceI<T> {
+  value: T;
+
+  next(patchData: T): boolean;
+
+  subscription(patchDataCallback:(patchData: T) => void ): SubscriptionHandler;
+
+  unSubscription(subscriptionHandler: SubscriptionHandler): boolean;
+
+  complete(): void
+}
+
+export default class SubscriptionBuilder<T> implements SubscriptionServiceI<T>{
   history: {time: Date; data: T}[] = [];
   private subscriptions: Map<number, (patchData: T) => void> = new Map<number,(patchData: T) => void>();
   value: T;
@@ -9,18 +21,21 @@ export default class SubscriptionService<T> implements SubscriptionServiceI<T>{
 
   constructor(value: T) {
     this.value = value;
+    this.pushHistory(this.value)
+  }
+
+  private pushHistory(newRecord: T): void {
+
+    this.history = [...this.history, {time:new Date(), data: newRecord}]
   }
 
   next(patchData: T): boolean {
     if (this.isComplete) {
       return false
     }
-    this.history = [...this.history, {time:new Date(), data: this.value}]
     this.value = patchData
+    this.pushHistory(this.value)
     this.subscriptions.forEach(callback => callback(this.value))
-    // console.log(this.history)
-    // console.log(this.value)
-
     return true;
   }
 

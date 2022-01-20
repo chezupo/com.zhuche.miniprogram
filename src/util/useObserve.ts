@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import SubscriptionService from "./SubscriptionService";
+import SubscriptionBuilder from "./SubscriptionBuilder";
 
-const useObserve = <T>(observe: SubscriptionService<T>): [T, SubscriptionService<T>] => {
+const useObserve = <T>(observe: SubscriptionBuilder<T>): [T, SubscriptionBuilder<T>] => {
   const [value, setValue] = useState<T>(observe.value)
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const useObserve = <T>(observe: SubscriptionService<T>): [T, SubscriptionService
     return () => {
       observe.unSubscription(subscriptionHandler)
     }
-  }, [])
+  }, [value])
 
 
   return [value, observe]

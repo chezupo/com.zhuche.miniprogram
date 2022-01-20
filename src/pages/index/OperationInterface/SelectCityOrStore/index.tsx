@@ -1,16 +1,22 @@
 // @ts-ignore
 import React from "react";
+import {AtSwitch} from 'taro-ui'
 import {View} from "@tarojs/components";
+// @ts-ignore
 import style from './style.module.scss';
 import Point from "../../../../components/Point";
-import {AtSwitch} from 'taro-ui'
+import useObserve from "../../../../util/useObserve";
+import {isForeignCityObserve} from "../../../../store/cityStore";
 
 type SelectCityOrAttractionPropsType = {
   title: string;
   pointColor?: string;
   visitButton?: boolean;
+  onClickCity: () => void;
+  cityName: string;
 }
 const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.ReactElement => {
+  const [isForeignCity, isForeignDispatcher] = useObserve(isForeignCityObserve)
   return (
     <>
       <View className={style.titleWrapper}>
@@ -25,16 +31,19 @@ const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.R
       <View className={style.storeWrapper}>
         <View />
         <View className={style.cityAndStore}>
-          <View className={style.city}>呼伦贝尔</View>
+          <View className={style.city} onClick={() => props.onClickCity()}>{props.cityName}</View>
           <View className={style.store}>海拉尔火车站送车点</View>
         </View>
         <View className={style.switch}>
-          { props.visitButton && <AtSwitch border={false} />}
+          { props.visitButton && <AtSwitch
+            border
+            checked={isForeignCity}
+            onChange={(v) => isForeignDispatcher.next(v)}
+          />}
         </View>
       </View>
     </>
   )
 }
 
-export default SelectCityOrAttraction
-
+export default SelectCityOrAttraction;

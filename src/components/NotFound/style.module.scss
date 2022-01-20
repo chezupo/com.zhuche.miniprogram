@@ -1,0 +1,17 @@
+@import "../../global.scss";
+.main {
+  display: grid;
+  grid-template-columns: 100%;
+  $grid1: 90%;
+  grid-template-rows: $grid1 100% - $grid1;
+  justify-items: center;
+}
+.image {
+  width: $unit30;
+  height: $unit30;
+}
+
+.title {
+  @include globalSubtitle;
+  font-size: $unit3;
+}

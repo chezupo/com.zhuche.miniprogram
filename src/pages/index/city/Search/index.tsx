@@ -5,13 +5,13 @@ import {Input, View} from "@tarojs/components";
 import {AtIcon} from 'taro-ui'
 // @ts-ignore
 import style from "./style.module.scss";
-import SubscriptionScheduler from "../../../../services/subscriptionService/SubscriptionScheduler";
-import useObserve from "../../../../services/subscriptionService/useObserve";
+import Getters from "../../../../store/getters";
+import useObserve from "../../../../util/useObserve";
 
 const SearchIcon = () => (<AtIcon value='search' size='15' className={style.icon} />)
 
 const InputRender = (): React.ReactElement => {
-  const [cityName, observe] = useObserve(SubscriptionScheduler.citySearchObserve);
+  const [cityName, observe] = useObserve(Getters.citySearchObserve);
   const handleChange = (e): void => {
     observe.next(e.target.value)
   }
@@ -34,8 +34,7 @@ const InputRender = (): React.ReactElement => {
 }
 
 const Search = (): React.ReactElement => {
-  const [searchMode, observe] = useObserve(SubscriptionScheduler.isCitySearchObserve)
-  console.log("这里是" + searchMode)
+  const [searchMode, observe] = useObserve(Getters.isCitySearchObserve)
 
   const PlaceholderModel = () => (
     <View

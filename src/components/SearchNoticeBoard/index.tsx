@@ -1,9 +1,12 @@
+// @ts-ignore
 import React from "react"
 import {Image, View} from "@tarojs/components";
-import searchSvg from "../../asesst/images/undraw_search_re_x5gq.svg"
+// @ts-ignore
+import searchSvg from '../../asesst/images/undraw_search_re_x5gq.svg'
+// @ts-ignore
 import style from "../NotFound/style.module.scss";
 
-const Search = (): React.ReactElement => {
+const SearchNoticeBoard = (): React.ReactElement => {
   return (
     <View className={style.main}>
       <Image src={searchSvg} className={style.image} />
@@ -12,4 +15,4 @@ const Search = (): React.ReactElement => {
   )
 }
 
-export default Search
+export default SearchNoticeBoard

@@ -4,14 +4,14 @@ import Getters, {CityInfoType} from "../../../../../store/getters";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss";
-import Search from "../../../../../components/Search"
+import SearchNoticeBoard from "../../../../../components/SearchNoticeBoard"
 import NotFound from "../../../../../components/NotFound";
 import {CategoryMapCitiesType, cityCategoriesObserve, CityCategory, pickCity} from "../../../../../store/cities";
 
 
 const PleaseEnterSomeThing = (): React.ReactElement => {
   return (<View className={style.emptyContainer}>
-    <Search />
+    <SearchNoticeBoard />
   </View>)
 }
 const ResultRender = (): React.ReactElement => {

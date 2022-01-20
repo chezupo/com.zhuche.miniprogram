@@ -7,17 +7,17 @@ import SelectCityOrAttraction from "./SelectCityOrStore";
 import DateRange from "./DateRange/DateRange";
 import Button from "./Button";
 import useObserve from "../../../util/useObserve";
-import {redirectTo} from "../../../store/router";
+import {navigateTo} from "../../../store/router";
 import {
   currentPickCityPointObserve,
   CurrentPickCityPointType,
   endCityObserve, isForeignCityObserve,
   startCityObserve
-} from "../../../store/cityStore";
+} from "../../../store/cities";
 
 const OperationInterface = (): React.ReactElement => {
   const [, dispatcher] = useObserve(currentPickCityPointObserve)
-  const redirectPickCityPage = () => redirectTo('/pages/index/city/index')
+  const redirectPickCityPage = () => navigateTo('/pages/index/city/index')
   const handleClickStartCity = () => {
     dispatcher.next(CurrentPickCityPointType.START)
     redirectPickCityPage()

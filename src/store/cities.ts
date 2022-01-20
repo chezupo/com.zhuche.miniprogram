@@ -1,5 +1,5 @@
 import {CityInfoType} from "./getters";
-import {goBackRoute} from "./router";
+import {navigateBack} from "./router";
 import SubscriptionBuilder from "../util/SubscriptionBuilder";
 
 export enum CityCategory {
@@ -61,6 +61,6 @@ export const pickCity = (cityInfo: CityInfoType): void => {
 
   }
 
-  goBackRoute()
+  navigateBack()
 }
 

@@ -6,7 +6,7 @@ import {View} from "@tarojs/components";
 import style from './style.module.scss';
 import Point from "../../../../components/Point";
 import useObserve from "../../../../util/useObserve";
-import {isForeignCityObserve} from "../../../../store/cityStore";
+import {isForeignCityObserve} from "../../../../store/cities";
 
 type SelectCityOrAttractionPropsType = {
   title: string;

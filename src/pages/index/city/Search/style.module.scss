@@ -1,5 +1,5 @@
 @import "../../../../global.scss";
-@import "../commond.module.scss";
+@import "../../common.module.scss";
 
 $containerHeight: $unit9;
 $borderRadiusCircle: $borderRadiusCircle;
@@ -10,7 +10,7 @@ $borderRadiusCircle: $borderRadiusCircle;
   grid-column-gap: $unit1;
   align-items: center;
   background: #E8E8E8;
-  height: $searchBarHeight;
+  @include headerHeightMixin;
 }
 @mixin fontSize {
   font-size: $subtitleSize;

@@ -1,8 +1,8 @@
-@import "../../commond.module.scss";
+@import "../../../common.module.scss";
 
 .emptyContainer {
   width: $unit100;
-  height: $cityBarHeight;
+  @include bodyHeightMixin;
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: 100%;
@@ -10,7 +10,7 @@
   align-items: center;
 }
 .listWrapper {
-  height: $cityBarHeight;
+  @include bodyHeightMixin;
   width: $unit100;
   overflow-y: scroll;
   $height: $unit10;

@@ -1,5 +1,5 @@
 import SubscriptionBuilder from "../util/SubscriptionBuilder";
-import {CategoryMapCitiesType, initCityCategories} from "./cityStore";
+import {CategoryMapCitiesType, initCityCategories} from "./cities";
 
 export type CityInfoType = {code: number; name: string; provinceCode: number, pinyin: string}
 

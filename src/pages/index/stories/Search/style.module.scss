@@ -1,0 +1,23 @@
+@import "../../../../global.scss";
+.main {
+  height: 100%;
+}
+.container {
+  margin: 0 $mainContainerLeftAndRightMargin;
+  height: 90%;
+  display: grid;
+  grid-template-rows: 100%;
+  $inputGridWidth: 85%;
+  grid-template-columns: $inputGridWidth 100% - $inputGridWidth;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button {
+  text-align: right;
+}
+.searchSpinner {
+  background: red;
+  height: 100%;
+  border-radius: $borderRadiusCircle;
+}

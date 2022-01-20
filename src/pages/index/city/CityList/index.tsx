@@ -7,7 +7,7 @@ import {View} from "@tarojs/components";
 import CityGroup from "./CityGroup";
 import useObserve from "../../../../util/useObserve";
 import SearchResult from "./SearchResult";
-import {CategoryMapCitiesType, cityCategoriesObserve, CityCategory} from "../../../../store/cityStore";
+import {CategoryMapCitiesType, cityCategoriesObserve, CityCategory} from "../../../../store/cities";
 import Getters from "../../../../store/getters";
 
 

@@ -1,6 +1,7 @@
-@import "../commond.module.scss";
+@import "../../common.module.scss";
 
 .main {
+  @include bodyHeightMixin;
   background: #F5F5F5;
   display: grid;
   grid-template-columns: 93% 7%;
@@ -29,7 +30,7 @@
   }
 }
 .leftBarWrapper {
-  height: $cityBarHeight;
+  @include bodyHeightMixin;
   overflow-y: scroll;
 }
 

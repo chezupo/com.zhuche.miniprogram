@@ -1,0 +1,20 @@
+@import "../../global.scss";
+
+$searchBarHeight: 9vh;
+
+$cityBarHeight: 100vh - $searchBarHeight;
+
+$iphone5DifferenceHeight: 3vh;
+@mixin headerHeightMixin {
+  height: $searchBarHeight - $iphone5DifferenceHeight;
+  @media #{$iphone5} {
+    height: $searchBarHeight;
+  }
+}
+
+@mixin bodyHeightMixin {
+  height: $cityBarHeight + $iphone5DifferenceHeight;
+  @media #{$iphone5} {
+    height: $cityBarHeight;
+  }
+}

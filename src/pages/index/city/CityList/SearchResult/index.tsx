@@ -6,7 +6,7 @@ import {View} from "@tarojs/components";
 import style from "./style.module.scss";
 import Search from "../../../../../components/Search"
 import NotFound from "../../../../../components/NotFound";
-import {CategoryMapCitiesType, cityCategoriesObserve, CityCategory, pickCity} from "../../../../../store/cityStore";
+import {CategoryMapCitiesType, cityCategoriesObserve, CityCategory, pickCity} from "../../../../../store/cities";
 
 
 const PleaseEnterSomeThing = (): React.ReactElement => {

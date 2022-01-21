@@ -1,11 +1,12 @@
 import BaseError, {ErrorTypes} from "../errors/BaseError";
 // @ts-ignore
 import Taro from "@tarojs/taro"
+import {alipay, weapp} from "./base";
 
 const authCode = (): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
     switch (process.env.TARO_ENV) {
-      case 'alipay':
+      case alipay:
         my.getAuthCode({
           scopes: 'auth_user',
           success: ({authCode}) => resolve(authCode as string),
@@ -13,7 +14,7 @@ const authCode = (): Promise<string> => {
         })
         break;
 
-      case 'weapp':
+      case weapp:
         Taro.login({
           success: (res) => res.code ?
             resolve(res.code) :

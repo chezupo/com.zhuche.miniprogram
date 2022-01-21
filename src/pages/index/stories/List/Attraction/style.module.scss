@@ -1,0 +1,65 @@
+@import "../../../../../global.scss";
+
+@mixin subtitleStyle {
+  color: $subtitleColor;
+  font-size: $unit3_5;
+}
+
+.titleWrapper {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  align-items: center;
+  .title {
+    font-size: $unit4;
+    display: grid;
+    grid-template-columns: auto repeat(2, 10%) ;
+    align-items: center;
+    align-content: center;
+  }
+}
+.icon {
+  align-self: center;
+  width: $unit4;
+  height: $unit4;
+}
+.menuIcon {
+  align-self: center;
+  width: $unit6;
+  height: $unit6;
+}
+.tagWrapper {
+  display: flex;
+  .tag {
+    font-size: $unit3;
+    color: $noticeColor;
+    background: $noticeBackgroundColor;
+    padding: $unit0_75;
+    &:not(:last-child) {
+      margin-right: $unit1;
+    }
+  }
+}
+.addressWrapper {
+  display: grid;
+  $firstGrid: 90%;
+  grid-template-columns: $firstGrid 100% - $firstGrid;
+  .address {
+    @include subtitleStyle;
+  }
+}
+.businessHours {
+  margin-top: $unit1;
+  @include subtitleStyle;
+}
+.main {
+  display: grid;
+  grid-gap: $unit1;
+  padding: $mainContainerLeftAndRightMargin 0;
+  &:not(:last-child) {
+    border-bottom: solid 1px $backgroundColor;
+  }
+}
+.guidIcon {
+  width: $unit6;
+  height: $unit6;
+}

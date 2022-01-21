@@ -25,9 +25,7 @@
     display: grid;
     grid-template-columns: 35% 75%;
     .store, .city  {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+      @include textEllipsis;
     }
     .store {
       margin-left: 2vw;

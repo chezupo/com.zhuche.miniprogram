@@ -1,0 +1,50 @@
+@import "../../../../global.scss";
+@import "../../common.module.scss";
+@import "./common.module.scss";
+
+$leftBarWidth:  25vw;
+.main {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: $leftBarWidth 100vw - $leftBarWidth;
+  grid-template-rows: 100%;
+}
+.leftBar {
+  @include bodyHeightMixin;
+  overflow-y: scroll;
+  .itemWrapper {
+    $height: $unit11;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+    @include globalSubtitle;
+    @include textEllipsis;
+  }
+  .activeItem {
+    background: white;
+    width: $leftBarWidth;
+    border-left: solid $unit1 $primaryThemeColor;
+    box-sizing: border-box;
+  }
+}
+.rightBar {
+  @include bodyHeightMixin;
+  overflow-y: scroll;
+}
+
+.popularAttractionsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  box-sizing: border-box;
+  justify-self: center;
+  grid-gap: $unit2;
+  .popularAttractions {
+    color: $color;
+    $height: $unit7;
+    font-size: $unit3;
+    border: solid 1px $borderGrayColor;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+  }
+}

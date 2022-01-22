@@ -39,6 +39,7 @@ $leftBarWidth:  25vw;
   justify-self: center;
   grid-gap: $unit2;
   .popularAttractions {
+    border-radius: $unit1;
     color: $color;
     $height: $unit7;
     font-size: $unit3;

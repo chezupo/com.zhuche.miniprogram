@@ -1,0 +1,27 @@
+@import "../common.module.scss";
+
+$headerWrapperHeight: 6vh;
+$selectWrapperHeight: 5vh;
+$bodyWrapperHeight: 100vh - $headerWrapperHeight - $selectWrapperHeight;
+
+$iphone5HighGain: 1vh;
+@mixin headerWrapperHeight {
+  height: $headerWrapperHeight;
+  @media #{$iphone5} {
+    height: $headerWrapperHeight + $iphone5HighGain;
+  }
+}
+
+@mixin selectWrapperHeight {
+  height: $selectWrapperHeight;
+  @media #{$iphone5} {
+    height: $selectWrapperHeight + $iphone5HighGain;
+  }
+}
+
+@mixin bodyWrapperHeight {
+  height: $bodyWrapperHeight;
+  @media #{$iphone5} {
+    height: $bodyWrapperHeight - $iphone5HighGain * 2;
+  }
+}

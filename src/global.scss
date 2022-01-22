@@ -25,3 +25,19 @@ $iphone5:'only screen and (max-width:320px)';
 $noticeColor:#F57015;
 $noticeBackgroundColor:#FCE7D0;
 
+@mixin ReversalTriangle($triangleHeight: $unit1, $color: black) {
+  width: 0;
+  height: 0;
+  $borderHeight: $triangleHeight;
+  border: $borderHeight solid transparent;
+  border-tottom: 0;
+  border-top: $borderHeight * 1.7 solid $color;
+}
+@mixin Triangle($triangleHeight: $unit1, $color: black) {
+  width: 0;
+  height: 0;
+  $borderHeight: $triangleHeight;
+  border: $borderHeight solid transparent;
+  border-tottom: 0;
+  border-bottom: $borderHeight * 1.7 solid $color;
+}

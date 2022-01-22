@@ -5,11 +5,12 @@ import BusIcon from "../../../../../components/icon/BusIcon";
 import {noticeColor} from "../../../../../config/globalConfig";
 import MenuIcon from "../../../../../components/icon/MenuIcon";
 import GuidIcon from "../../../../../components/icon/GuidIcon";
+import {navigateBack} from "../../../../../store/router";
 
 const Attraction = () => {
   return (
     <>
-      <View className={style.main}>
+      <View className={style.main} onClick={() => navigateBack()}>
         <View className={style.titleWrapper} >
           <View className={style.title}>
             <View> 长沙南站便捷点(站内取还) </View>

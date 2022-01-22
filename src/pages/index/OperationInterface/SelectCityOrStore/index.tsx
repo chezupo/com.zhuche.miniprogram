@@ -7,6 +7,7 @@ import style from './style.module.scss';
 import Point from "../../../../components/Point";
 import useObserve from "../../../../util/useObserve";
 import {isForeignCityObserve} from "../../../../store/cities";
+import {navigateTo} from "../../../../store/router";
 
 type SelectCityOrAttractionPropsType = {
   title: string;
@@ -17,6 +18,7 @@ type SelectCityOrAttractionPropsType = {
 }
 const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.ReactElement => {
   const [isForeignCity, isForeignDispatcher] = useObserve(isForeignCityObserve)
+ // const [] = useObserve()
   return (
     <>
       <View className={style.titleWrapper}>
@@ -32,11 +34,10 @@ const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.R
         <View />
         <View className={style.cityAndStore}>
           <View className={style.city} onClick={() => props.onClickCity()}>{props.cityName}</View>
-          <View className={style.store}>海拉尔火车站送车点</View>
+          <View className={style.store} onClick={() => navigateTo('/pages/index/stories/index')}>海拉尔火车站送车点</View>
         </View>
         <View className={style.switch}>
           { props.visitButton && <AtSwitch
-            border
             checked={isForeignCity}
             onChange={(v) => isForeignDispatcher.next(v)}
           />}

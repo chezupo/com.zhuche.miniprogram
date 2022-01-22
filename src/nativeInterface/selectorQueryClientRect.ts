@@ -6,20 +6,27 @@ export const selectorQueryClientRect = (
   selector: string,
 ): Promise<NodesRef.BoundingClientRectCallbackResult> => {
   return new Promise(resolve => {
-    let query;
     switch (process.env.TARO_ENV) {
       case alipay:
-        query = my.createSelectorQuery()
+        my.createSelectorQuery()
+          .select(selector).boundingClientRect()
+          .exec(ret => {
+            if(ret) {
+              const item = ret[0];
+              resolve(item)
+            }
+            return Promise.reject();
+          })
+
         break;
       default:
-      query = Taro.createSelectorQuery()
+        Taro.createSelectorQuery()
+          .select(selector)
+          .boundingClientRect((res: NodesRef.BoundingClientRectCallbackResult) => {
+            resolve(res)
+          })
+          .exec()
     }
 
-    const result = query
-      .select(selector)
-      .boundingClientRect((res: NodesRef.BoundingClientRectCallbackResult) => {
-        resolve(res)
-      })
-      .exec()
   });
 }

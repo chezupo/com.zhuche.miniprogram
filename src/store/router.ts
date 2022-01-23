@@ -3,7 +3,6 @@ import Getters from "./getters";
 import taro from '@tarojs/taro'
 
 export const navigateTo = (url: string) => {
-
   taro.navigateTo({ url })
 }
 

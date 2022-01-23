@@ -1,0 +1,14 @@
+@import "../../../global.scss";
+
+.playIconCircle {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: $unit8;
+  height: $unit8;
+  border-radius: $unit8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .playIcon {
+    @include LeftTriangle($unit2, white);
+  }
+}

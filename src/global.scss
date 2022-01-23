@@ -31,6 +31,7 @@ $noticeBackgroundColor:#FCE7D0;
   $borderHeight: $triangleHeight;
   border: $borderHeight solid transparent;
   border-tottom: 0;
+  border-top: 0;
   border-top: $borderHeight * 1.7 solid $color;
 }
 @mixin Triangle($triangleHeight: $unit1, $color: black) {
@@ -39,5 +40,16 @@ $noticeBackgroundColor:#FCE7D0;
   $borderHeight: $triangleHeight;
   border: $borderHeight solid transparent;
   border-tottom: 0;
+  border-top: 0;
   border-bottom: $borderHeight * 1.7 solid $color;
+}
+
+@mixin LeftTriangle($triangleHeight: $unit1, $color: black) {
+  width: 0;
+  height: 0;
+  $borderHeight: $triangleHeight;
+  border: $borderHeight solid transparent;
+  border-left: 0;
+  border-right: 0;
+  border-left: $borderHeight * 1.7 solid $color;
 }

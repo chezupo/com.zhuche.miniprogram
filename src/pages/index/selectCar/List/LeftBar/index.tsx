@@ -3,13 +3,12 @@ import * as React from "react";
 import {useMemo, useRef, useState} from "react";
 // @ts-ignore
 import style from './style.module.scss';
-import {useReady} from "@tarojs/taro";
 import {CategoryType, ItemType} from "../index";
 
 type LeftWrapperPropsType = {
   items: ItemType[]
 }
-const LeftWrapper = ({items}: LeftWrapperPropsType): React.ReactElement => {
+const LeftBar = ({items}: LeftWrapperPropsType): React.ReactElement => {
   const [activeItemId, setActiveItemId] = useState<number>(0)
   const prevSiblingId = useMemo<number>(() => {
     let prevItem: ItemType;
@@ -67,4 +66,4 @@ const LeftWrapper = ({items}: LeftWrapperPropsType): React.ReactElement => {
   )
 }
 
-export default LeftWrapper;
+export default LeftBar;

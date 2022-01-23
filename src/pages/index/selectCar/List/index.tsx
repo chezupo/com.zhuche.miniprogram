@@ -2,8 +2,8 @@ import {View} from "@tarojs/components";
 import * as React from "react";
 // @ts-ignore
 import style from './style.module.scss'
-import LeftWrapper from "./LeftWrapper";
-
+import LeftBar from "./LeftBar";
+import RightBar from "./RightBar";
 
 export enum CategoryType  {
   CATEGORY,
@@ -24,8 +24,8 @@ const List = ():React.ReactElement => {
   ]
   return (
     <View className={style.main}>
-      <LeftWrapper items={items} />
-      <View className={style.rightWrapper}>right</View>
+      <LeftBar items={items} />
+      <RightBar />
     </View>
   );
 }

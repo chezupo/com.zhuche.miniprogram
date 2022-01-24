@@ -1,0 +1,8 @@
+@import "../common.module.scss";
+
+@mixin dropdownContainerStyle {
+  background: white;
+  border-bottom-left-radius: $borderRadiusCircle;
+  border-bottom-right-radius: $borderRadiusCircle;
+  padding-bottom: $mainContainerLeftAndRightMargin;
+}

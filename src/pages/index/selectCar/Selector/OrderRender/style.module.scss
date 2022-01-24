@@ -1,0 +1,16 @@
+@import "../common.module.scss";
+.main {
+  font-size: $unit3_5;
+  padding: $mainContainerLeftAndRightMargin;
+  @include dropdownContainerStyle;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit6;
+  .itemWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .active{
+    color: $noticeColor;
+  }
+}

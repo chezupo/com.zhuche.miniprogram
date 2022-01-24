@@ -4,8 +4,8 @@ import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss'
 // eslint-disable-next-line import/first
-import { useReady } from "@tarojs/taro";
 import {selectorQueryClientRect} from "../../../../../nativeInterface/selectorQueryClientRect";
+import { useReady } from "@tarojs/taro";
 
 enum ItemIdType {
   ORDER,
@@ -31,33 +31,41 @@ const SelectorContainer = (props: SelectorContainerPropsType): React.ReactElemen
     { id: ItemIdType.PRICE, name: "价格"},
     { id: ItemIdType.MORE, name: "更多"}
   ]
-  const dropDownRenderRef = useRef(null)
   let DropDownRender;
   switch (activeId) {
     case ItemIdType.ORDER:
       DropDownRender = (
-        <View className={style.itemContainer} ref={dropDownRenderRef}>
+        <View
+          className={style.itemContainer}
+          onClick={(e) =>  e.stopPropagation()}
+        >
           {props.orderComponent}
         </View>
       )
       break
     case ItemIdType.BRAND:
       DropDownRender = (
-        <View className={style.itemContainer} ref={dropDownRenderRef}>
+        <View className={style.itemContainer}
+          onClick={(e) => e.stopPropagation()}
+        >
           {props.brandComponent}
         </View>
     )
       break
     case ItemIdType.PRICE:
       DropDownRender = (
-        <View className={style.itemContainer} ref={dropDownRenderRef}>
+        <View className={style.itemContainer}
+          onClick={(e) => e.stopPropagation()}
+        >
           {props.priceComponent}
         </View>
       )
       break
     case ItemIdType.MORE:
       DropDownRender = (
-      <View className={style.itemContainer} ref={dropDownRenderRef}>
+      <View className={style.itemContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
         {props.moreComponent}
       </View>
     )
@@ -67,10 +75,13 @@ const SelectorContainer = (props: SelectorContainerPropsType): React.ReactElemen
   const dropdownRef = useRef(null)
 
   useReady(() => {
-    selectorQueryClientRect('.' + style.main).
+    setTimeout(() => {
+      selectorQueryClientRect('.' + style.main).
       then((res) => {
-      dropdownRef.current.style.top = res.top + res.height + 'px';
-    })
+        dropdownRef.current.style.top = res.top + res.height + 'px';
+        handleClick(items[1])
+      })
+    }, 10)
   })
 
   const handleClick = (activeItem: ItemType): void => {
@@ -82,15 +93,7 @@ const SelectorContainer = (props: SelectorContainerPropsType): React.ReactElemen
       dropdownRef.current.style.display = 'block'
     }
   }
-  const handleClickDropdownWrapper = async (e) => {
-    const detail = e.detail
-    const elRes = await selectorQueryClientRect('.' + style.itemContainer)
-    const x = elRes.height + elRes.top;
-    let  clickX:number
-    if (detail.x) clickX = detail.x
-    if (detail.pageX) clickX = detail.pageX
-    clickX >= x  && setActiveId(null)
-  }
+  const handleClickDropdownWrapper = () => activeId !== null && setActiveId(null)
 
   return (<>
     <View className={style.main} ref={mainRef} >

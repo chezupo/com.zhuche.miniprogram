@@ -1,14 +1,16 @@
-import {Image, View} from "@tarojs/components";
+import {Button, Image, View} from "@tarojs/components";
 import {useMemo, useState} from "react";
 // @ts-ignore
 import style from "./style.module.scss";
+import RightBarScroll from "./RightBarScroll";
+import LeftBarScroll from "./LeftBarScroll";
 
-type SeriesType = {
+export type SeriesType = {
   id: number;
   name: string;
   isCheck: boolean;
 }
-type BrandType = {
+export type BrandType = {
   name: string;
   id: number;
   url: string;
@@ -124,52 +126,48 @@ const BrandRender = (): React.ReactElement => {
     const newBrands = tmpBrands.map(i => i.id === tmpActiveBrand.id ? tmpActiveBrand : i)
     setBrands(newBrands)
   }
+  const handleClean = (): void => {
+    setBrands(() => {
+      return brands.map(brand => {
+        return {...brand, isCheckAll: false, series: brand.series.map(series => {
+            return {...series, isCheck: false}
+          })}
+      })
+    })
+    setActiveBrand(() => (
+      {
+        ...activeBrand,
+        isCheckAll: false,
+        series: activeBrand.series.map(
+          series => ({...series, isCheck: false}
+          )
+        )})
+    )
+  }
 
   return (
     <View className={style.main}>
       <View className={style.listWrapper}>
-        <View className={style.leftWrapper}>
-          {brands.map(item => (
-            <View
-              className={[style.leftItemWrapper, activeBrand.id === item.id ? style.active : ''].join(' ')}
-              key={item.id}
-              onClick={() => handleActiveBrand(item)}
-            >
-              <Image src={item.url} className={style.image} />
-              <View>{item.name}</View>
-              {
-                checkBrandIds.includes(item.id) && <View className={style.point} />
-              }
-            </View>
-          ))}
-        </View>
-        <View className={style.rightWrapper}>
-          <View
-            className={[style.seriesWrapper, activeBrand.isCheckAll ? style.activeBrand : ''].join(' ')}
-            onClick={handleCheckAllSeries}
-          >
-            <View> 不限车系 </View>
-            { activeBrand.isCheckAll && <View className='at-icon at-icon-check' /> }
-          </View>
+        <LeftBarScroll
+          brands={brands}
+          activeBrand={activeBrand}
+          onActiveBrand={handleActiveBrand}
+          checkBrandIds={checkBrandIds}
+        />
 
-          {activeBrand.series.map(i => (
-            <View
-              className={[style.seriesWrapper, i.isCheck ? style.activeBrand : ''].join(' ')}
-              key={i.id}
-              onClick={() => handleActiveSeries(i)}
-            >
-              <View> {i.name}</View>
-              { i.isCheck && <View className='at-icon at-icon-check' /> }
-            </View>
-          ))}
-
-        </View>
-
-
+        <RightBarScroll
+          activeBrand={activeBrand}
+          onCheckAllSeries={handleCheckAllSeries}
+          onActiveSeries={handleActiveSeries}
+        />
       </View>
 
-      <View>
-        button
+      <View className={style.buttonWrapper}>
+        <View
+          className={style.clearButton}
+          onClick={handleClean}
+        >清空</View>
+        <View className={style.confirmButton}>确定</View>
       </View>
     </View>
   )

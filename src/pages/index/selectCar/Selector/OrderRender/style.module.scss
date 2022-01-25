@@ -3,10 +3,10 @@
   font-size: $unit3_5;
   padding: $mainContainerLeftAndRightMargin;
   @include dropdownContainerStyle;
-  display: grid;
   grid-template-columns: 100%;
-  grid-row-gap: $unit6;
+
   .itemWrapper {
+    padding: $unit3 0;
     display: flex;
     justify-content: space-between;
   }

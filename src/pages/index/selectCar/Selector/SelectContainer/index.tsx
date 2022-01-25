@@ -79,7 +79,7 @@ const SelectorContainer = (props: SelectorContainerPropsType): React.ReactElemen
       selectorQueryClientRect('.' + style.main).
       then((res) => {
         dropdownRef.current.style.top = res.top + res.height + 'px';
-        handleClick(items[1])
+        // handleClick(items[2])
       })
     }, 10)
   })

@@ -1,13 +1,12 @@
-import {View} from '@tarojs/components'
-
 import "taro-ui/dist/style/components/button.scss" // 按需引入
-import style from './index.module.scss'
 // eslint-disable-next-line import/first
-import {AtButton} from "taro-ui";
 import authCode from "../../nativeInterface/authCode";
 import graphQLClient, {gql} from "../../util/apolloClient";
 import quthrizationGQL from "../../graphql/mutaion/authorization";
 import OperationInterface from "./OperationInterface";
+import Layout from "../../container/Layout";
+import Order from "../Order";
+import * as React from "react";
 
 
 const Index = () => {
@@ -84,9 +83,12 @@ const Index = () => {
     })
   }
   return (
-    <View >
-      <OperationInterface />
-    </View>
+    <Layout
+      tabs={[
+        <OperationInterface />,
+        <Order />
+      ]}
+    />
   )
 }
 

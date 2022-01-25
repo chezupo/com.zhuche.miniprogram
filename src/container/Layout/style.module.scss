@@ -1,0 +1,35 @@
+@import "../../global.scss";
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+$height: 91vh;
+.container {
+  height: $height;
+  overflow-y: auto;
+}
+.tabBar {
+  border-top: solid $unit0_5 $borderGrayColor;
+  box-sizing: border-box;
+  height: 100vh - $height;
+  width: $unit100;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  .tabBarItemWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $subtitleColor;
+    font-size: $unit3_5;
+    .icon {
+      font-size: $unit7;
+    }
+  }
+  .active {
+    color: $noticeColor;
+  }
+}

@@ -38,6 +38,8 @@ const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.R
         </View>
         <View className={style.switch}>
           { props.visitButton && <AtSwitch
+            className={style.atSwitch}
+            border={false}
             checked={isForeignCity}
             onChange={(v) => isForeignDispatcher.next(v)}
           />}

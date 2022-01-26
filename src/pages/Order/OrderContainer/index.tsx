@@ -2,7 +2,7 @@ import {Image, View} from "@tarojs/components";
 import * as React from "react";
 import style from "./style.module.scss"
 import Point from "../../../components/Point";
-import {noticeColor, targetAddressPointColor} from "../../../config/globalConfig";
+import {noticeColor, targetAddressPointColor, warningColor} from "../../../config/globalConfig";
 
 /*
 type OrderContainerPropsType = {
@@ -23,7 +23,7 @@ const OrderContainer = (): React.ReactElement => {
     <View className={style.storeWrapper}>
       <View className={style.storeAddressWrapper}>
         <View className={style.pointWrapper}>
-          <Point color={noticeColor} borderSize={pointSize} />
+          <Point color={warningColor} borderSize={pointSize} />
           <View className={style.line} />
           <Point color={targetAddressPointColor} borderSize={pointSize} />
         </View>

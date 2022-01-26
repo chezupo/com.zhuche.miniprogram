@@ -1,3 +1,5 @@
+// @ts-ignore
+import taro from "@tarojs/taro"
 import {View} from "@tarojs/components";
 import {ReactElement} from "react";
 // @ts-ignore
@@ -5,31 +7,29 @@ import style from "./style.module.scss";
 import useObserve from "../../util/useObserve";
 import {currentTabBarObserve, TabBarType as CurrentTabBarType} from "../../store/router";
 
-type LayoutPropsType = {
-  tabs: ReactElement[]
+export type LayoutPropsType = {
+  tabs: TabBarType[]
 }
-type TabBarType = {name: string; icon: string; activeClassName: string; type: CurrentTabBarType}
+export type TabBarType = {name: string; icon: string; type: CurrentTabBarType, element: ReactElement, navTitle: string}
 const Layout = (props: LayoutPropsType): React.ReactElement => {
   const [currentTabBar, tabBarDispatcher] = useObserve(currentTabBarObserve)
-  const tabBars: TabBarType[] = [
-    { name: '首页', icon: 'icon icon-car-o', activeClassName: style.active, type: CurrentTabBarType.HOME },
-    { name: '订单', icon: 'icon icon-order', activeClassName: style.active, type: CurrentTabBarType.ORDER },
-  ]
   const handleChangeTabBar = ( pickTabBar: TabBarType) => tabBarDispatcher.next(pickTabBar.type)
-
-  const index = tabBars.findIndex(i => i.type === currentTabBar)
+  const index = props.tabs.findIndex(i => i.type === currentTabBar)
+  taro.setNavigationBarTitle({ title: props.tabs[index].navTitle })
 
   return (<View className={style.main}>
     <View className={style.container}>
-      {props.tabs[index]}
+
+      {props.tabs[index].element}
     </View>
 
-    <View className={style.tabBar}>
-      {tabBars.map((tabBar, key) => (
+    <View className={style.tabBar} style={{ gridTemplateColumns: `repeat(${props.tabs.length}, 1fr)` }} >
+
+      {props.tabs.map((tabBar, key) => (
         <View
           className={[
             style.tabBarItemWrapper,
-            currentTabBar === tabBar.type ? tabBar.activeClassName : ''
+            currentTabBar === tabBar.type ? style.active : ''
           ].join(' ')}
           key={key}
           onClick={() => handleChangeTabBar(tabBar)}

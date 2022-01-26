@@ -1,0 +1,36 @@
+@import "../../../global.scss";
+
+.walletWrapper {
+  background: white;
+  padding: $mainContainerLeftAndRightMargin;
+  border-radius: $unit3_5;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit4;
+}
+.itemName {
+  color: #2D2D2D;
+  font-weight: bold;
+}
+.itemContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.itemWrapper {
+  display: flex;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: $noticeColor;
+  .item {
+    color: $subtitleColor;
+    font-size: $unit3;
+  }
+  .icon {
+    font-size: $unit7;
+  }
+}
+
+
+

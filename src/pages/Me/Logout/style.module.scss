@@ -1,0 +1,15 @@
+@import "../../../global.scss";
+
+.main {
+  margin-top: $unit6;
+  display: flex;
+  justify-content: center;
+  .button {
+    padding: $unit2 0;
+    text-align: center;
+    width: 90%;
+    background: red;
+    border-radius: $borderRadiusCircle;
+    color: white;
+  }
+}

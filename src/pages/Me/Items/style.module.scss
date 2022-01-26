@@ -1,0 +1,20 @@
+@import "../../../global.scss";
+
+.main {
+  background: white;
+  border-radius: $borderRadiusCircle;
+  padding: 0 $mainContainerLeftAndRightMargin;
+}
+
+.item {
+  border-bottom: none;
+}
+.wechatNoteWrapper {
+  display: flex;
+  align-items: center;
+  .wechatNote {
+    margin-left: $unit2;
+    color: red;
+    font-size: $unit3_5;
+  }
+}

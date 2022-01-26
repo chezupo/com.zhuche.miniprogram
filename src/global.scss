@@ -22,7 +22,8 @@ $iphone5:'only screen and (max-width:320px)';
   text-overflow: ellipsis;
   overflow: hidden;
 }
-$noticeColor:#F57015;
+//$noticeColor:#F57015;
+$noticeColor:#78A4FA;
 $noticeBackgroundColor:#FCE7D0;
 
 @mixin ReversalTriangle($triangleHeight: $unit1, $color: black) {
@@ -54,6 +55,13 @@ $noticeBackgroundColor:#FCE7D0;
   border-left: $borderHeight * 1.7 solid $color;
 }
 $mainContainerHeight: 93vh;
+@mixin mainContainerHeight{
+  height: $mainContainerHeight;
+}
+
+@mixin layoutHeight{
+  height: 100vh - $mainContainerHeight;
+}
 
 $coverImageWidth: $unit30;
 $coverImageHeight: $unit20;

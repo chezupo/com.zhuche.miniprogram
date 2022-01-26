@@ -1,0 +1,36 @@
+@import "../../../../global.scss";
+
+@mixin fontSize {
+  font-size: $unit6;
+}
+
+.itemWrapper {
+  border-bottom: solid $unit0_5 $backgroundColor;
+  $height: $unit12;
+  height: $height;
+  line-height: $height;
+  display: flex;
+}
+.icon  {
+  margin-right: $unit3;
+  color: $noticeColor;
+  @include fontSize;
+}
+.leftWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #2D2D2D;
+}
+.noteWrapper {
+  display: flex;
+  align-items: center;
+  @include globalSubtitle;
+}
+.rightIcon {
+  @include fontSize;
+}
+.subtitle {
+  margin-right: $unit2;
+}

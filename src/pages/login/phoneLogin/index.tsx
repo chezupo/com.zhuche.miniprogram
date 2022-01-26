@@ -15,13 +15,13 @@ const PhoneLogin = (): React.ReactElement => {
     <Image src={logo} className={style.logo} />
     <View className={style.formWrapper}>
       <View className={style.phoneInputWrapper}>
-        <View className={['icon icon-user', style.icon].join(' ')} />
+        <View className={['iconfont icon-user', style.icon].join(' ')} />
         <Input type='number' className={style.input}  placeholder='请输入手机号' />
       </View>
 
       <View className={style.codeWrapper}>
         <View className={style.phoneInputWrapper}>
-          <View className={['icon icon-password', style.icon].join(' ')} />
+          <View className={['iconfont icon-password', style.icon].join(' ')} />
           <Input type='number' className={style.input} placeholder='请输入6位手机验证码' />
         </View>
         <View className={style.code}>获取验证码</View>

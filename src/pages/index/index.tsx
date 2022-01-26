@@ -7,6 +7,9 @@ import OperationInterface from "./OperationInterface";
 import Layout from "../../container/Layout";
 import Order from "../Order";
 import * as React from "react";
+import {TabBarType} from "../../store/router";
+import Me from "../Me";
+import {appName} from "../../config/globalConfig";
 
 
 const Index = () => {
@@ -85,8 +88,9 @@ const Index = () => {
   return (
     <Layout
       tabs={[
-        <OperationInterface />,
-        <Order />
+          { name: '首页', icon: 'iconfont icon-car-o',  type: TabBarType.HOME, element: <OperationInterface /> , navTitle: appName},
+          { name: '订单', icon: 'iconfont icon-order',  type: TabBarType.ORDER, element: <Order /> , navTitle: '全部订单'},
+          { name: '我的', icon: 'iconfont icon-user', type: TabBarType.ME, element: <Me />, navTitle: '我的' },
       ]}
     />
   )

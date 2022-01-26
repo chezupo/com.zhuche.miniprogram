@@ -1,0 +1,12 @@
+@import "../../global.scss";
+.main {
+  @include mainContainerHeight;
+  overflow-y: auto;
+  background: $backgroundColor;
+}
+.itemsWrapper {
+  margin: $mainContainerLeftAndRightMargin $mainContainerLeftAndRightMargin 0 $mainContainerLeftAndRightMargin;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit3;
+}

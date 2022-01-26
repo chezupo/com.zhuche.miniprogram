@@ -6,19 +6,16 @@
   flex-direction: column;
   justify-content: space-between;
 }
-$height: $mainContainerHeight;
-$tabBarHeight: 100vh - $height;
 .container {
-  height: $height;
+  @include mainContainerHeight;
   overflow-y: auto;
 }
 .tabBar {
   border-top: solid $unit0_5 $borderGrayColor;
   box-sizing: border-box;
-  height: $tabBarHeight;
+  @include layoutHeight;
   width: $unit100;
   display: grid;
-  grid-template-columns: repeat(2, 50%);
   .tabBarItemWrapper {
     display: flex;
     flex-direction: column;

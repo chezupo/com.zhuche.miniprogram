@@ -1,0 +1,33 @@
+@import "../../../global.scss";
+
+.main {
+  background: $primaryThemeColor;
+  height: 20%;
+}
+.loginWrapper{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginButton {
+  $height: $unit10;
+  height: $height;
+  line-height: $height;
+  color: white;
+  border: solid 1px white;
+  border-radius: $borderRadiusCircle;
+  width: $unit35;
+  text-align: center;
+}
+.userInfoWrapper {
+  height: 100%;
+  display: grid;
+  align-items: center;
+  $fistGrid: 20%;
+  grid-template-columns: $fistGrid 100% - $fistGrid;
+  margin-left: $mainContainerLeftAndRightMargin;
+  .userInfo {
+      color: white;
+  }
+}

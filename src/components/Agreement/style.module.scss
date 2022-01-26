@@ -2,3 +2,9 @@
 .title {
   color: $noticeColor;
 }
+.main {
+  @include globalSubtitle;
+  color: $subtitleColor;
+  font-size: $unit3_5;
+  text-align: center;
+}

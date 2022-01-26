@@ -11,7 +11,7 @@ type AgreementPropsType = {
 
 const Agreement = (props: AgreementPropsType): React.ReactElement => {
   return (
-    <View>
+    <View className={style.main}>
       <Checkbox
         checked={props.checked}
         value=''

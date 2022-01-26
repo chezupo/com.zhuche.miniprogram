@@ -13,6 +13,5 @@ const getPlatformType = (): AllPlatformType => {
   }
 }
 
-const PlatformType = getPlatformType();
 
-export default PlatformType;
+export default getPlatformType

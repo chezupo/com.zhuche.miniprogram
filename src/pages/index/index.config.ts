@@ -1,3 +1,5 @@
+import {appName} from "../../config/globalConfig";
+
 export default {
-  navigationBarTitleText: '车租婆租车'
+  navigationBarTitleText: `${appName}租车`
 }

@@ -1,0 +1,16 @@
+@import "./common.module.scss";
+
+.main {
+
+}
+.tabs {
+  position: fixed;
+  top: 0;
+}
+
+.orderListWrapper {
+  @include orderContainer;
+  background: $backgroundColor;
+  padding: 0 $unit2 $unit2;
+  overflow-y: auto;
+}

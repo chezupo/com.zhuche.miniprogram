@@ -6,7 +6,8 @@
   flex-direction: column;
   justify-content: space-between;
 }
-$height: 91vh;
+$height: $mainContainerHeight;
+$tabBarHeight: 100vh - $height;
 .container {
   height: $height;
   overflow-y: auto;
@@ -14,7 +15,7 @@ $height: 91vh;
 .tabBar {
   border-top: solid $unit0_5 $borderGrayColor;
   box-sizing: border-box;
-  height: 100vh - $height;
+  height: $tabBarHeight;
   width: $unit100;
   display: grid;
   grid-template-columns: repeat(2, 50%);
@@ -24,9 +25,9 @@ $height: 91vh;
     justify-content: center;
     align-items: center;
     color: $subtitleColor;
-    font-size: $unit3_5;
+    font-size: $unit3;
     .icon {
-      font-size: $unit7;
+      font-size: $unit6;
     }
   }
   .active {

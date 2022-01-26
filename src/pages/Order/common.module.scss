@@ -1,0 +1,11 @@
+@import "../../global.scss";
+
+$tabsHeight: 6vh;
+$orderContainerHeight: $mainContainerHeight - $tabsHeight;
+@mixin tabs{
+  height: $tabsHeight;
+}
+
+@mixin orderContainer{
+  height: $orderContainerHeight;
+}

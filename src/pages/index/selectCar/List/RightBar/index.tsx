@@ -1,10 +1,11 @@
-import {Text, View} from "@tarojs/components";
+import {View} from "@tarojs/components";
 import {showModal} from "@tarojs/taro"
 import * as React from "react";
 // @ts-ignore
 import style from './style.module.scss'
-import Car, {CarInfoType, CarPropsType} from "./Car";
+import Car, {CarInfoType} from "./Car";
 import Notice from "../Notice";
+import {switchTab, TabBarType} from "../../../../../store/router";
 
 const RightBar = (): React.ReactElement => {
   const cars: CarInfoType[] = [
@@ -205,11 +206,7 @@ const RightBar = (): React.ReactElement => {
       license: '浙A牌'
     },
   ]
-  const handleSelectCar = (car: CarInfoType) => {
-    showModal({
-      content: '支付功能正在开发中，审核小哥，先让我通过上线一个版本，我才能去申请免押支付，不然下个支付环节无法下去，拜托拜托!!!'
-    })
-  }
+  const handleSelectCar = (car: CarInfoType) => switchTab(TabBarType.ORDER)
 
 
   return (<View className={style.main}>

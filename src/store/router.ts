@@ -19,7 +19,7 @@ export const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new Subscri
 
 export const switchTab = (tabBar: TabBarType): void => {
   currentTabBarObserve.next(tabBar)
-  taro.redirectTo({
+  taro.reLaunch({
     url: '/pages/index/index'
   })
 }

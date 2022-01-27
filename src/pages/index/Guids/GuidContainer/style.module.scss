@@ -1,0 +1,40 @@
+@import "../../../../global.scss";
+
+.container {
+  display: grid;
+  border-radius: $borderRadiusCircle / 2;
+  grid-template-columns: repeat(2, 1fr);
+  padding: $unit3;
+  height: $unit25;
+  color: #5B5B5B;
+}
+.image {
+  $size: $unit20;
+  width: $size;
+  height: $size * 1;
+}
+.title {
+  font-size: $unit4;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: $unit3;
+  color: $subtitleColor;
+}
+.goDetail {
+  display: flex;
+  align-items: center;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.leftWrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit0_5;
+}

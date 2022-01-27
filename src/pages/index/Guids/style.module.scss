@@ -1,0 +1,38 @@
+@import "../common.module.scss";
+.main {
+  margin: 0 $mainContainerLeftAndRightMargin;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: $unit3;
+}
+@mixin swiper {
+  height: $unit100;
+  width: $unit80;
+}
+.swiper {
+  @include swiper;
+}
+.swiperContainer {
+  @include swiper;
+  position: relative;
+}
+.image {
+  border-radius: $borderRadiusCircle;
+  @include swiper;
+}
+.buttonWrapper {
+  position: absolute;
+  bottom: 5%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .button {
+    width: 80%;
+    background: $noticeColor;
+    padding: $unit2 0;
+    color: white;
+    text-align: center;
+    border-radius: $borderRadiusCircle;
+  }
+}
+

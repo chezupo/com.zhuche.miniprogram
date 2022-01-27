@@ -21,7 +21,7 @@ export const getCurrentRoute = (): string => Getters.currentRouteObserve.value
 
 export const getHistory = (): string[] => Getters.currentRouteObserve.history.map(i => i.data)
 
-export const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new SubscriptionBuilder<TabBarType>(TabBarType.ME)
+export const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new SubscriptionBuilder<TabBarType>(TabBarType.HOME)
 
 export const switchTab = (tabBar: TabBarType): void => {
   currentTabBarObserve.next(tabBar)

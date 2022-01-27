@@ -1,0 +1,16 @@
+@import "../../global.scss";
+@import "./common.module.scss";
+
+.main{
+  position: relative;
+}
+.operationInterface {
+  position: absolute;
+  top: $swiperRenderHeight - $unit3;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit2;
+}
+.swiperRender {
+  height: $swiperRenderHeight;
+}

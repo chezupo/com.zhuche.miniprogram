@@ -14,8 +14,10 @@ import {
   endCityObserve, isForeignCityObserve,
   startCityObserve
 } from "../../../store/cities";
-
-const OperationInterface = (): React.ReactElement => {
+type OperationInterfacePropsType = {
+  className?: string
+}
+const OperationInterface = (props: OperationInterfacePropsType): React.ReactElement => {
   const [, dispatcher] = useObserve(currentPickCityPointObserve)
   const redirectPickCityPage = () => navigateTo('/pages/index/city/index')
   const handleClickStartCity = () => {
@@ -40,7 +42,7 @@ const OperationInterface = (): React.ReactElement => {
   ) : (<></>)
 
   return (
-    <View className={style.main}>
+    <View className={[style.main, props.className ? props.className : ''].join(' ')}>
       <View className={style.container}>
         <SelectCityOrAttraction
           title='取车地点'

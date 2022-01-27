@@ -4,9 +4,11 @@ import * as React from "react";
 import Taro from "@tarojs/taro";
 // @ts-ignore
 import style from "./style.module.scss";
+import useObserve from "../../util/useObserve";
+import {commonDataObserve} from "../../store/common";
 
 const Customer = (): React.ReactElement => {
-  const phone: string = '400-400-400'
+  const [{servicePhone: phone}] = useObserve(commonDataObserve)
   const handleCall = (): void => Taro.makePhoneCall({ phoneNumber: phone })
 
   return (

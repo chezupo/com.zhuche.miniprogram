@@ -3,20 +3,22 @@ import * as React from "react";
 import {useReducer} from "react";
 import {Button} from "@tarojs/components";
 import useObserve from "../../../util/useObserve";
-import {noticeObserve} from "../../../store/notice";
+import {commonDataObserve} from "../../../store/common";
+// @ts-ignore
+import style from './style.module.scss'
 
 const NoticeBar = (): React.ReactElement => {
-  const [notice, noticeDispatcher] = useObserve(noticeObserve)
+  const [commonData, commonDispatcher] = useObserve(commonDataObserve)
   const [isShowNoticeModel, isShowNoticeModelDispatch] = useReducer((state): boolean => !state , false)
   const handleGoToMore = (): void => {
     isShowNoticeModelDispatch()
   }
   const handleClose = ():void =>{
-    noticeDispatcher.next({...notice, isShow: false})
+    commonDispatcher.next({...commonData, notice: {...commonData.notice, isShow: false,}} )
   }
   return (
     <>
-      {notice.isShow &&
+      {commonData.notice.isShow &&
         <AtNoticebar
           icon='volume-plus'
           close
@@ -24,14 +26,15 @@ const NoticeBar = (): React.ReactElement => {
           showMore
           onGotoMore={handleGoToMore}
           onClose={handleClose}
+          className={style.noticeBar}
         >
-          {notice.content}
+          {commonData.notice.content}
         </AtNoticebar>
       }
       <AtModal isOpened={isShowNoticeModel}>
         <AtModalHeader>公告</AtModalHeader>
         <AtModalContent>
-          {notice.content}
+          {commonData.notice.content}
         </AtModalContent>
         <AtModalAction>
           <Button onClick={isShowNoticeModelDispatch}>取消</Button>

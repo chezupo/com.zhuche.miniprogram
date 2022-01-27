@@ -14,8 +14,9 @@ import Banners from "./Banners";
 // @ts-ignore
 import style from './style.module.scss'
 import Guilds from "./Guids";
-import {AtNoticebar} from "taro-ui";
+import {AtFab, AtNoticebar} from "taro-ui";
 import NoticeBar from "./NoticeBar";
+import ComplaintFeedbackBar from "./ComplaintFeedbackBar";
 
 const Index = () => {
   const handleCode = async (): Promise<void> => {
@@ -92,6 +93,7 @@ const Index = () => {
   }
   const IndexRender = () => (
     <>
+      <ComplaintFeedbackBar />
       <NoticeBar />
       <View className={style.main}>
         <Banners className={style.swiperRender} />

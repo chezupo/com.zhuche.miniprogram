@@ -1,0 +1,23 @@
+@import "../../../global.scss";
+
+.main {
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  top: $unit20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $unit3;
+  background: white;
+  color: $noticeColor;
+  $borderRadius: $unit2;
+  border-bottom-left-radius: $borderRadius;
+  border-top-left-radius: $borderRadius;
+  $padding: $unit0_75;
+  padding: $padding 0 $padding $padding;
+}
+.icon {
+  font-size: $unit3_5;
+  padding-right: $unit0_5;
+}

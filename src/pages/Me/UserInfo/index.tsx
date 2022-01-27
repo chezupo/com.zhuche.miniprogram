@@ -6,6 +6,7 @@ import useObserve from "../../../util/useObserve";
 import {isLoginObserve} from "../../../store/user";
 // @ts-ignore
 import style from "./style.module.scss"
+import {replaceStr} from "../../../util/helper";
 
 const UserInfo = (): React.ReactElement => {
   const handleLogin = (): void => navigateTo('/pages/login/index')
@@ -30,7 +31,7 @@ const UserInfo = (): React.ReactElement => {
         />
         <View className={style.userInfo}>
           <View>张四</View>
-          <View>13427898987</View>
+          <View>{replaceStr('13427898987', 3, 4, '*')}</View>
         </View>
       </View>
     </View>

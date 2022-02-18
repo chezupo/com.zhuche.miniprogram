@@ -13,7 +13,7 @@ const Guilds = (): React.ReactElement => {
     {title: '新手指引', subTitle: '三步租车不用愁', svg: bookSvg, backgroundColor: '#bfdbfe'},
     {title: '道路救援', subTitle: '道路救援指南', svg: towingSvg, backgroundColor: '#d1fae5'},
   ]
-  const [isOpenCurtain, isOpenCurtainDispatch] = useReducer((state): boolean => !state, false)
+  const [isOpenCurtain, isOpenCurtainDispatch] = useReducer((state): boolean => !state,false)
   const handleCloseCurtain = (): void => {
     isOpenCurtainDispatch()
   }
@@ -25,13 +25,41 @@ const Guilds = (): React.ReactElement => {
     'https://zhuche-a1001.qiniu.wuchuheng.com/guid7.png',
   ]
 
+  const SwiperRender = () => (
+    <Swiper
+      indicatorColor='#999'
+      indicatorActiveColor={`${noticeColor}`}
+      autoplay
+      circular
+      className={style.swiper}
+    >
+      {beginnerGuids.map((guid, key) => (
+        <SwiperItem key={key}>
+          <View className={style.swiperContainer}>
+            <Image
+              src={guid}
+              className={style.image}
+            />
+          </View>
+          {
+            beginnerGuids.length === key + 1 && (
+              <View className={style.buttonWrapper} onClick={handleCloseCurtain}>
+                <View className={style.button}>去选车</View>
+              </View>
+            )
+          }
+        </SwiperItem>
+      ))}
+    </Swiper>
+
+  )
   return (
     <>
       <View className={style.main}>
-          <GuidContainer
-            data={guids[0]}
-            onClick={handleCloseCurtain}
-          />
+        <GuidContainer
+          data={guids[0]}
+          onClick={handleCloseCurtain}
+        />
         <GuidContainer
           data={guids[1]}
           onClick={() => {}}
@@ -42,31 +70,7 @@ const Guilds = (): React.ReactElement => {
         isOpened={isOpenCurtain}
         onClose={handleCloseCurtain}
       >
-        <Swiper
-          indicatorColor='#999'
-          indicatorActiveColor={`${noticeColor}`}
-          autoplay
-          circular
-          className={style.swiper}
-        >
-          {beginnerGuids.map((guid, key) => (
-            <SwiperItem key={key}>
-              <View className={style.swiperContainer}>
-                <Image
-                  src={guid}
-                  className={style.image}
-                />
-              </View>
-              {
-                beginnerGuids.length === key + 1 && (
-                  <View className={style.buttonWrapper} onClick={handleCloseCurtain}>
-                    <View className={style.button}>去选车</View>
-                  </View>
-                )
-              }
-            </SwiperItem>
-          ))}
-        </Swiper>
+        { isOpenCurtain && <SwiperRender />}
       </AtCurtain>
     </>
   )

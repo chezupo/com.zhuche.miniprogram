@@ -2,15 +2,20 @@ import * as React from "react";
 import {Image, Swiper, SwiperItem} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss'
+import getters from "../../../store/getters";
+import useObserve from "../../../util/useObserve";
+import {BannerType} from "../../../store/banner";
+import {navigateTo} from "../../../store/router";
 
 type SwiperRenderPropsType = {
   className?: string
 }
 const Banners = (props: SwiperRenderPropsType): React.ReactElement => {
-  const banners: {id: number; imageUrl: string; target: string}[] = [
-    {id: 1, imageUrl: 'https://zhuche-a1001.qiniu.wuchuheng.com/banner1.jpeg', target: '' },
-    {id: 2, imageUrl: 'https://zhuche-a1001.qiniu.wuchuheng.com/banner2.jpeg', target: '' }
-  ]
+  const [banners] = useObserve(getters.bannerObserve)
+
+  const handleRedirectBannerDetail = (currentBanner:BannerType) => {
+    navigateTo(`/pages/bannerDetail/index?id=${currentBanner.id}`)
+  }
 
   return (
     <Swiper
@@ -22,7 +27,9 @@ const Banners = (props: SwiperRenderPropsType): React.ReactElement => {
     >
       {banners.map((banner, key) => (
         <SwiperItem key={key}>
-          <Image src={banner.imageUrl} className={style.image} />
+          <Image src={banner.imgKey} className={style.image}
+            onClick={() => handleRedirectBannerDetail(banner)}
+          />
         </SwiperItem>
       ))}
 

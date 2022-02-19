@@ -24,6 +24,13 @@ export default class SubscriptionBuilder<T> implements SubscriptionServiceI<T>{
     this.pushHistory(this.value)
   }
 
+  static initCallBack<T>(value: T, callback: () => Promise<T>) {
+    const subscriptionHandler = new SubscriptionBuilder<T>(value)
+    callback().then(newValue => subscriptionHandler.next(newValue))
+
+    return subscriptionHandler
+  }
+
   private pushHistory(newRecord: T): void {
 
     this.history = [...this.history, {time:new Date(), data: newRecord}]

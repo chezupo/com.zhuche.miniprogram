@@ -6,7 +6,8 @@ export default {
     'pages/index/selectCar/index',
     'pages/index/complaintFeedback/index',
     'pages/login/index',
-    'pages/login/phoneLogin/index'
+    'pages/login/phoneLogin/index',
+    'pages/bannerDetail/index'
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -1,7 +1,9 @@
 import {useEffect, useState} from "react";
 import SubscriptionBuilder from "./SubscriptionBuilder";
 
-const useObserve = <T>(observe: SubscriptionBuilder<T>): [T, SubscriptionBuilder<T>] => {
+export type UseObserveType = <T>(observe: SubscriptionBuilder<T>) => [T, SubscriptionBuilder<T>]
+
+const useObserve: UseObserveType = <T>(observe) => {
   const [value, setValue] = useState<T>(observe.value)
 
   useEffect(() => {

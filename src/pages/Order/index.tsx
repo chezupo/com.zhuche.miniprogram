@@ -1,10 +1,13 @@
 import {View} from "@tarojs/components";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Tabs from "./Tabs";
 // @ts-ignore
 import style from "./style.module.scss"
 import OrderContainer from "./OrderContainer";
+import useObserve from "../../util/useObserve";
+import {useAppStoreSelector} from "../../store";
+import {navigateToLoginOrRegister} from "../../store/module/router";
 
 export type OrderCategoryType = {id: number; name: string}
 

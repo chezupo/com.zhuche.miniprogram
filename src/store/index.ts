@@ -2,15 +2,15 @@ import SubscriptionBuilder from "../util/SubscriptionBuilder";
 import {BannerListType, bannerObserve} from "./module/banner";
 import {meObserve, MeType} from "./module/me";
 import * as React from "react";
-import {useContext} from "react";
 import {currentTabBarObserve, TabBarType} from "./module/router";
 import {commonDataObserve, CommonDataType} from "./module/common";
 import {popularAttractionsObserve, PopularAttractionType} from "./module/stores";
 import city, {CityType} from "./module/cities";
+import {messageObserve, MessageType} from "./module/message";
 
 export type CityInfoType = {code: number; name: string; provinceCode: number, pinyin: string}
 
-type StoreType = {
+export type StoreType = {
   banners: SubscriptionBuilder<BannerListType>
   me: SubscriptionBuilder<MeType>
   currentRoute:SubscriptionBuilder<string>
@@ -19,7 +19,8 @@ type StoreType = {
   currentTab: SubscriptionBuilder<TabBarType>
   commonData: SubscriptionBuilder<CommonDataType>
   popularAttractions: SubscriptionBuilder<PopularAttractionType>
-  city: CityType
+  city: CityType,
+  message: SubscriptionBuilder<MessageType>
 }
 export const store: StoreType = {
   banners:bannerObserve,
@@ -30,11 +31,12 @@ export const store: StoreType = {
   currentTab: currentTabBarObserve,
   commonData: commonDataObserve,
   popularAttractions: popularAttractionsObserve,
-  city: city
+  city: city,
+  message: messageObserve
 }
 
 export const AppStoreContext = React.createContext(store)
 
-export const useAppStoreSelector = ( ): StoreType => {
-  return useContext(AppStoreContext)
+export const useAppStoreSelector = (): StoreType => {
+  return React.useContext(AppStoreContext)
 }

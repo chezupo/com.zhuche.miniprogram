@@ -1,28 +1,22 @@
-import {Component} from 'react'
 import './global.scss'
 import 'taro-ui/dist/style/index.scss'
 import './asesst/font/iconfont/iconfont.css'
-import {store, AppStoreContext} from "./store";
+import {AppStoreContext, store} from "./store";
+import * as React from "react";
+import {useEffect} from "react";
+import {loginThunk} from "./store/module/me";
 
-class App extends Component {
+const App: React.FC = (props) => {
+  useEffect(() => {
+    loginThunk().then(() => {
 
-  componentDidMount () {}
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
-
-  // this.props.children 是将要会渲染的页面
-
-  render () {
-    return (
-      <AppStoreContext.Provider value={store}>
-        {this.props.children}
-      </AppStoreContext.Provider>
-    )
-  }
+    })
+  }, [])
+  return (
+    <AppStoreContext.Provider value={store}>
+      {props.children}
+    </AppStoreContext.Provider>
+  )
 }
 
 

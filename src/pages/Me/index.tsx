@@ -7,14 +7,17 @@ import Balance from "./Balance";
 import Items from "./Items";
 import Customer from "../../components/Customer";
 import Logout from "./Logout";
+import useObserve from "../../util/useObserve";
+import {useAppStoreSelector} from "../../store";
 
 const Me = (): React.ReactElement => {
+  const [me] = useObserve(useAppStoreSelector().me)
   return (<View className={style.main}>
     <UserInfo />
     <View className={style.itemsWrapper}>
       <Balance />
       <Items />
-      <Logout />
+      {me.accessToken && <Logout /> }
       <Customer />
     </View>
   </View>)

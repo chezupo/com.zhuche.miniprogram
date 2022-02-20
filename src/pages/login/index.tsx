@@ -1,16 +1,16 @@
 import {Button, Image, View} from "@tarojs/components";
 import * as React from "react";
-import {useEffect, useReducer} from "react";
+import {useReducer} from "react";
 // @ts-ignore
 import style from "./style.module.scss"
 // @ts-ignore
 import carSvg from "../../asesst/images/undraw_by_my_car_ttge.svg";
 import getPlatformType, {AllPlatformType} from "../../util/platformType";
 import Agreement from "../../components/Agreement";
-import {navigateTo} from "../../store/module/router";
-import Taro from "@tarojs/taro"
-import {loginThunk} from "../../store/module/me";
-import authCode from "../../nativeInterface/authCode";
+import {goToSwitchTab, navigateTo} from "../../store/module/router";
+import * as Taro from "@tarojs/taro";
+import {uploadUserInfoThunk} from "../../store/module/me";
+import {store} from "../../store";
 
 const Login = (): React.ReactElement => {
   const [agreement, dispatch] = useReducer((state): boolean => !state, false)
@@ -18,10 +18,21 @@ const Login = (): React.ReactElement => {
   let platform: string;
   if (getPlatformType() ===  AllPlatformType.ALIPAY ) platform = '支付宝'
   if (getPlatformType() ===  AllPlatformType.WECHAT) platform = '微信'
-  const handleLogin = (): void => {
-    Taro.showLoading("登录中...")
-    loginThunk().then(() => {
+  const handleMessage = () => {
+    setTimeout(() => {
+      store.message.next({
+        title: '登录成功 🎉 🎉 🎉',
+        type: 'info',
+        duration: 5000
+      })
+    }, 500)
+  }
+  const handleUploadUserInfo = (): void => {
+    Taro.showLoading({title: '登录中...'})
+    uploadUserInfoThunk().then(() => {
+      handleMessage()
       Taro.hideLoading()
+      goToSwitchTab()
     }).catch(() => {
       Taro.hideLoading()
     })
@@ -36,13 +47,10 @@ const Login = (): React.ReactElement => {
       <Button
         openType='getAuthorize'
         scope='userInfo'
-        onGetAuthorize={handleLogin}
+        onGetAuthorize={handleUploadUserInfo}
         className={style.directLogin}
       >{platform}账号一键登录</Button>
-        <View
-          onClick={handleLogin}
-          className={style.directLogin}
-        >{platform}tmp</View>
+
       <View
         className={style.phoneLoginOrRegister}
         onClick={handleLoginOrRegister}

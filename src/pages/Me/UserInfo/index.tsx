@@ -7,15 +7,15 @@ import {isLoginObserve} from "../../../store/module/me";
 // @ts-ignore
 import style from "./style.module.scss"
 import {replaceStr} from "../../../util/helper";
+import {useAppStoreSelector} from "../../../store";
 
-const UserInfo = (): React.ReactElement => {
+const UserInfo: React.FC = ()=> {
   const handleLogin = (): void => navigateTo('/pages/login/index')
-  const [isLogin, isLoginDispatcher] = useObserve(isLoginObserve)
-  const coverImage: string = '';
+  const [me] = useObserve(useAppStoreSelector().me)
   return (
     <View className={style.main}>
       {
-        !isLogin &&
+        me.isNewUser &&
         <View className={style.loginWrapper}>
           <View
             className={style.loginButton}
@@ -28,10 +28,11 @@ const UserInfo = (): React.ReactElement => {
           text='车'
           circle
           size='large'
+          {...(me.avatar ? {image: me.avatar} : {})}
         />
         <View className={style.userInfo}>
-          <View>张四</View>
-          <View>{replaceStr('13427898987', 3, 4, '*')}</View>
+          <View>{me.nickName}</View>
+          { me.phone && <View>{replaceStr(me.phone, 3, 4, '*')}</View> }
         </View>
       </View>
     </View>

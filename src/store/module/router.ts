@@ -30,6 +30,12 @@ export const switchTab = (tabBar: TabBarType): void => {
   })
 }
 
+export const goToSwitchTab = (): void => {
+  taro.reLaunch({
+    url: '/pages/index/index'
+  })
+}
+
 export const navigateBack = ():void => {
   taro.navigateBack()
 }

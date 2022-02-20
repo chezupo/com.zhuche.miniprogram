@@ -16,8 +16,6 @@ import style from './style.module.scss'
 import Guilds from "./Guids";
 import NoticeBar from "./NoticeBar";
 import ComplaintFeedbackBar from "./ComplaintFeedbackBar";
-import {useEffect} from "react";
-import {loginThunk} from "../../store/module/me";
 
 const Index = () => {
   const handleCode = async (): Promise<void> => {
@@ -105,17 +103,12 @@ const Index = () => {
       </View>
     </>
   )
-  useEffect(() => {
-    loginThunk().then(() => {
-
-    })
-  }, [])
 
   return (
     <Layout
       tabs={[
           { name: '首页', icon: 'iconfont icon-car-o',  type: TabBarType.HOME, element:  <IndexRender />, navTitle: appName},
-          { name: '订单', icon: 'iconfont icon-order',  type: TabBarType.ORDER, element: <Order /> , navTitle: '全部订单'},
+          { name: '订单', icon: 'iconfont icon-order',  type: TabBarType.ORDER, element: <Order /> , navTitle: '全部订单', isPermission: true},
           { name: '我的', icon: 'iconfont icon-user', type: TabBarType.ME, element: <Me />, navTitle: '我的' },
       ]}
     />

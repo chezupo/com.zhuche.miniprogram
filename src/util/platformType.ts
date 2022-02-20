@@ -1,8 +1,9 @@
-export enum AllPlatformType {
-  ALIPAY,
-  WECHAT,
-  H5
+import ErrorHandle, {ErrorType} from "../config/ErrorHandle";
 
+export enum AllPlatformType {
+  ALIPAY="alipay",
+  WECHAT="wechat",
+  H5="h5"
 }
 
 const getPlatformType = (): AllPlatformType => {
@@ -13,5 +14,17 @@ const getPlatformType = (): AllPlatformType => {
   }
 }
 
+export const getPlatformName = (): string => {
+  let platform: string
+  if (getPlatformType() === AllPlatformType.ALIPAY) {
+    platform = AllPlatformType.ALIPAY
+  } else if (getPlatformType() === AllPlatformType.WECHAT) {
+    platform = AllPlatformType.WECHAT
+  } else {
+    throw new ErrorHandle(ErrorType.NOT_SUPPORT_PLATFORM)
+  }
+
+  return platform
+}
 
 export default getPlatformType

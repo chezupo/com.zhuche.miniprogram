@@ -7,6 +7,8 @@ import Point from "../../../components/Point";
 import {AtActionSheet, AtActionSheetItem} from "taro-ui";
 import {useReducer, useState} from "react";
 import {navigateTo, navigateToLoginOrRegister} from "../../../store/module/router";
+import useObserve from "../../../util/useObserve";
+import {useAppStoreSelector} from "../../../store";
 
 type NotePropstype = {title: string}
 const WechatNote = (props: NotePropstype): React.ReactElement => {
@@ -28,10 +30,10 @@ const Items = (): React.ReactElement => {
     {title: '身份认证', icon: 'iconfont icon-shenfenzheng'} ,
     {title: '驾照认证', icon: 'iconfont icon-kaojiazhao'} ,
   ]
-  const [isLogin, ] = useState<boolean>(false)
+  const [me] = useObserve(useAppStoreSelector().me)
   const [isActionPanel, actionDispatch] = useReducer((state): boolean => !state, false)
   const handleClick = (item: ItemContainerType) => {
-    if (!isLogin) actionDispatch()
+    if (!me.isNewUser) actionDispatch()
   }
   const handleLoginOrRegister = ():void => {
     actionDispatch()

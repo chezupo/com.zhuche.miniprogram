@@ -1,26 +1,41 @@
-// @ts-ignore
-import taro from "@tarojs/taro"
 import {View} from "@tarojs/components";
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 // @ts-ignore
 import style from "./style.module.scss";
 import useObserve from "../../util/useObserve";
-import {TabBarType as CurrentTabBarType} from "../../store/module/router";
+import {navigateToLoginOrRegister, TabBarType as CurrentTabBarType} from "../../store/module/router";
 import {useAppStoreSelector} from "../../store";
+import * as taro from "@tarojs/taro";
+import Message from "../../components/Message";
+
 
 export type LayoutPropsType = {
   tabs: TabBarType[]
 }
-export type TabBarType = {name: string; icon: string; type: CurrentTabBarType, element: ReactElement, navTitle: string}
+export type TabBarType = {name: string; icon: string; type: CurrentTabBarType, element: ReactElement, navTitle: string; isPermission?: boolean}
 const Layout = (props: LayoutPropsType): React.ReactElement => {
   const [currentTabBar, tabBarDispatcher] = useObserve( useAppStoreSelector().currentTab )
-  const handleChangeTabBar = ( pickTabBar: TabBarType) => tabBarDispatcher.next(pickTabBar.type)
+  const [me] = useObserve(useAppStoreSelector().me)
+  const [permissionIndex, setPermissionIndex] = useState<TabBarType>(null)
+  if (!me.isNewUser && permissionIndex) {
+    tabBarDispatcher.next(permissionIndex.type)
+    setPermissionIndex(null)
+  }
+  const handleChangeTabBar = ( pickTabBar: TabBarType) => {
+    if (pickTabBar.isPermission && me.isNewUser) {
+        setPermissionIndex(pickTabBar)
+        navigateToLoginOrRegister()
+    }else {
+      tabBarDispatcher.next(pickTabBar.type)
+      setPermissionIndex(null)
+    }
+  }
   const index = props.tabs.findIndex(i => i.type === currentTabBar)
   taro.setNavigationBarTitle({ title: props.tabs[index].navTitle })
 
   return (<View className={style.main}>
+    <Message />
     <View className={style.container}>
-
       {props.tabs[index].element}
     </View>
 

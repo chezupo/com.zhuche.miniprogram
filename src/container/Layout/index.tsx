@@ -5,14 +5,15 @@ import {ReactElement} from "react";
 // @ts-ignore
 import style from "./style.module.scss";
 import useObserve from "../../util/useObserve";
-import {currentTabBarObserve, TabBarType as CurrentTabBarType} from "../../store/router";
+import {TabBarType as CurrentTabBarType} from "../../store/module/router";
+import {useAppStoreSelector} from "../../store";
 
 export type LayoutPropsType = {
   tabs: TabBarType[]
 }
 export type TabBarType = {name: string; icon: string; type: CurrentTabBarType, element: ReactElement, navTitle: string}
 const Layout = (props: LayoutPropsType): React.ReactElement => {
-  const [currentTabBar, tabBarDispatcher] = useObserve(currentTabBarObserve)
+  const [currentTabBar, tabBarDispatcher] = useObserve( useAppStoreSelector().currentTab )
   const handleChangeTabBar = ( pickTabBar: TabBarType) => tabBarDispatcher.next(pickTabBar.type)
   const index = props.tabs.findIndex(i => i.type === currentTabBar)
   taro.setNavigationBarTitle({ title: props.tabs[index].navTitle })

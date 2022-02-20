@@ -5,7 +5,7 @@ import * as React from "react";
 import style from './style.module.scss'
 import Car, {CarInfoType} from "./Car";
 import Notice from "../Notice";
-import {switchTab, TabBarType} from "../../../../../store/router";
+import {switchTab, TabBarType} from "../../../../../store/module/router";
 
 const RightBar = (): React.ReactElement => {
   const cars: CarInfoType[] = [

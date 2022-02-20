@@ -6,8 +6,8 @@ import {View} from "@tarojs/components";
 import style from './style.module.scss';
 import Point from "../../../../components/Point";
 import useObserve from "../../../../util/useObserve";
-import {isForeignCityObserve} from "../../../../store/cities";
-import {navigateTo} from "../../../../store/router";
+import {navigateTo} from "../../../../store/module/router";
+import {useAppStoreSelector} from "../../../../store";
 
 type SelectCityOrAttractionPropsType = {
   title: string;
@@ -17,8 +17,7 @@ type SelectCityOrAttractionPropsType = {
   cityName: string;
 }
 const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.ReactElement => {
-  const [isForeignCity, isForeignDispatcher] = useObserve(isForeignCityObserve)
- // const [] = useObserve()
+  const [isForeignCity, isForeignDispatcher] = useObserve( useAppStoreSelector().city.isForeignCityObserve )
   return (
     <>
       <View className={style.titleWrapper}>

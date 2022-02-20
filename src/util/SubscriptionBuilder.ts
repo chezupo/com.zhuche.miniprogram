@@ -1,3 +1,5 @@
+import log, {info} from "./log";
+
 export type SubscriptionHandler = number
 
 interface SubscriptionServiceI<T> {
@@ -43,6 +45,8 @@ export default class SubscriptionBuilder<T> implements SubscriptionServiceI<T>{
     this.value = patchData
     this.pushHistory(this.value)
     this.subscriptions.forEach(callback => callback(this.value))
+    log.info("Next newValue", this.value)
+
     return true;
   }
 

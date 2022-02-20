@@ -3,7 +3,7 @@ import {AtButton} from "taro-ui";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
-import {navigateTo} from "../../../../store/router";
+import {navigateTo} from "../../../../store/module/router";
 
 const Button = (): React.ReactElement => {
   const handleSelectCar = () => navigateTo('/pages/index/selectCar/index')

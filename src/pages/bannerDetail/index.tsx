@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as Taro from "@tarojs/taro"
 import useObserve from "../../util/useObserve";
-import Getters from "../../store/getters";
+import {useAppStoreSelector} from "../../store";
 import {View} from "@tarojs/components";
 
 const BannerDetail: React.FC = ()  => {
-  const [banners] = useObserve(Getters.bannerObserve)
+  const [banners] = useObserve(useAppStoreSelector().banners)
   const {id} = Taro.getCurrentInstance().router.params
   const banner = banners.find(i => i.id == parseInt(id) )
   Taro.setNavigationBarTitle({title: banner.title})

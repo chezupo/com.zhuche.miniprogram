@@ -1,12 +1,12 @@
 import useObserve from "../../../../../util/useObserve";
-import Getters, {CityInfoType} from "../../../../../store/getters";
+import {CityInfoType, useAppStoreSelector} from "../../../../../store";
 // eslint-disable-next-line import/first
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss";
 import SearchNoticeBoard from "../../../../../components/SearchNoticeBoard"
 import NotFound from "../../../../../components/NotFound";
-import {CategoryMapCitiesType, cityCategoriesObserve, CityCategory, pickCity} from "../../../../../store/cities";
+import {CategoryMapCitiesType, CityCategory, pickCity} from "../../../../../store/module/cities";
 
 
 const PleaseEnterSomeThing = (): React.ReactElement => {
@@ -15,8 +15,10 @@ const PleaseEnterSomeThing = (): React.ReactElement => {
   </View>)
 }
 const ResultRender = (): React.ReactElement => {
-  const [cityName] = useObserve(Getters.citySearchObserve)
-  const [categoryMapCities] = useObserve<CategoryMapCitiesType>(cityCategoriesObserve)
+  const [cityName] = useObserve(
+    useAppStoreSelector().citySearch,
+  )
+  const [categoryMapCities] = useObserve<CategoryMapCitiesType>( useAppStoreSelector().city.cityCategoriesObserve )
   const cities: CityInfoType[] = []
   categoryMapCities.forEach((list,cityCategory) => {
     if (cityCategory === CityCategory.POPULAR) return;
@@ -44,7 +46,7 @@ const ResultRender = (): React.ReactElement => {
 }
 
 const SearchResult = (): React.ReactElement => {
-  const [cityName] = useObserve(Getters.citySearchObserve)
+  const [cityName] = useObserve( useAppStoreSelector().citySearch )
   return (<>
     {cityName.length === 0 && <PleaseEnterSomeThing /> }
     {cityName.length > 0 && <ResultRender /> }

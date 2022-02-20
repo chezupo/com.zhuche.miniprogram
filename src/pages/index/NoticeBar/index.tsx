@@ -3,12 +3,12 @@ import * as React from "react";
 import {useReducer} from "react";
 import {Button} from "@tarojs/components";
 import useObserve from "../../../util/useObserve";
-import {commonDataObserve} from "../../../store/common";
 // @ts-ignore
 import style from './style.module.scss'
+import {useAppStoreSelector} from "../../../store";
 
 const NoticeBar = (): React.ReactElement => {
-  const [commonData, commonDispatcher] = useObserve(commonDataObserve)
+  const [commonData, commonDispatcher] = useObserve( useAppStoreSelector().commonData )
   const [isShowNoticeModel, isShowNoticeModelDispatch] = useReducer((state): boolean => !state , false)
   const handleGoToMore = (): void => {
     isShowNoticeModelDispatch()

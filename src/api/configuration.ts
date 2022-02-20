@@ -1,4 +1,4 @@
-import {ConfigurationType} from "../store/configuration";
+import {ConfigurationType} from "../store/module/configuration";
 import * as request from "../util/requestClient";
 
 // 获取配置

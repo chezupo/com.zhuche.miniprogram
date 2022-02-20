@@ -3,12 +3,12 @@ import * as React from "react";
 import Taro from "@tarojs/taro";
 import {Text, View} from "@tarojs/components";
 import useObserve from "../../../util/useObserve";
-import {commonDataObserve} from "../../../store/common";
 // @ts-ignore
 import style from './style.module.scss'
+import {useAppStoreSelector} from "../../../store";
 
 const ServicePhone = (): React.ReactElement => {
-  const [{servicePhone}] = useObserve(commonDataObserve)
+  const [{servicePhone}] = useObserve(useAppStoreSelector().commonData)
   const handleCallServicePhone = (): void => Taro.makePhoneCall({phoneNumber: servicePhone})
   return (
     <View

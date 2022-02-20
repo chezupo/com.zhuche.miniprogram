@@ -6,7 +6,7 @@ import style from "./style.module.scss"
 import Point from "../../../components/Point";
 import {AtActionSheet, AtActionSheetItem} from "taro-ui";
 import {useReducer, useState} from "react";
-import {navigateTo, navigateToLoginOrRegister} from "../../../store/router";
+import {navigateTo, navigateToLoginOrRegister} from "../../../store/module/router";
 
 type NotePropstype = {title: string}
 const WechatNote = (props: NotePropstype): React.ReactElement => {

@@ -1,7 +1,8 @@
-import { Component } from 'react'
+import {Component} from 'react'
 import './global.scss'
 import 'taro-ui/dist/style/index.scss'
 import './asesst/font/iconfont/iconfont.css'
+import {store, AppStoreContext} from "./store";
 
 class App extends Component {
 
@@ -14,9 +15,15 @@ class App extends Component {
   componentDidCatchError () {}
 
   // this.props.children 是将要会渲染的页面
+
   render () {
-    return this.props.children
+    return (
+      <AppStoreContext.Provider value={store}>
+        {this.props.children}
+      </AppStoreContext.Provider>
+    )
   }
 }
+
 
 export default App

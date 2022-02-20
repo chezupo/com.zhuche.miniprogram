@@ -5,10 +5,10 @@ import Taro from "@tarojs/taro";
 // @ts-ignore
 import style from "./style.module.scss";
 import useObserve from "../../util/useObserve";
-import {commonDataObserve} from "../../store/common";
+import {useAppStoreSelector} from "../../store";
 
 const Customer = (): React.ReactElement => {
-  const [{servicePhone: phone}] = useObserve(commonDataObserve)
+  const [{servicePhone: phone}] = useObserve(useAppStoreSelector().commonData)
   const handleCall = (): void => Taro.makePhoneCall({ phoneNumber: phone })
 
   return (

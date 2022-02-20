@@ -8,7 +8,7 @@ const authCode = (): Promise<string> => {
     switch (process.env.TARO_ENV) {
       case alipay:
         my.getAuthCode({
-          scopes: 'auth_user',
+          scopes: 'auth_base',
           success: ({authCode}) => resolve(authCode as string),
           fail: () => reject(new BaseError({errorType: ErrorTypes.USER_AUTH_REJECT, message: 'User refusal to authorize.'}))
         })

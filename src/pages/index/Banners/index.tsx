@@ -2,17 +2,16 @@ import * as React from "react";
 import {Image, Swiper, SwiperItem} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss'
-import getters from "../../../store/getters";
+import {BannerType} from "../../../store/module/banner";
+import {navigateTo} from "../../../store/module/router";
+import {useAppStoreSelector} from "../../../store";
 import useObserve from "../../../util/useObserve";
-import {BannerType} from "../../../store/banner";
-import {navigateTo} from "../../../store/router";
 
 type SwiperRenderPropsType = {
   className?: string
 }
 const Banners = (props: SwiperRenderPropsType): React.ReactElement => {
-  const [banners] = useObserve(getters.bannerObserve)
-
+  const[banners] = useObserve(useAppStoreSelector().banners)
   const handleRedirectBannerDetail = (currentBanner:BannerType) => {
     navigateTo(`/pages/bannerDetail/index?id=${currentBanner.id}`)
   }

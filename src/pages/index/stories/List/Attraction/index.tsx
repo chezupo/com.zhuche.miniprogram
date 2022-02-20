@@ -5,7 +5,7 @@ import BusIcon from "../../../../../components/icon/BusIcon";
 import {noticeColor} from "../../../../../config/globalConfig";
 import MenuIcon from "../../../../../components/icon/MenuIcon";
 import GuidIcon from "../../../../../components/icon/GuidIcon";
-import {navigateBack} from "../../../../../store/router";
+import {navigateBack} from "../../../../../store/module/router";
 
 const Attraction = () => {
   return (

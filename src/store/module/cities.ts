@@ -1,6 +1,6 @@
-import {CityInfoType} from "./getters";
+import {CityInfoType, store} from "../index";
 import {navigateBack} from "./router";
-import SubscriptionBuilder from "../util/SubscriptionBuilder";
+import SubscriptionBuilder from "../../util/SubscriptionBuilder";
 
 export enum CityCategory {
   POPULAR="热门城市",
@@ -14,6 +14,13 @@ export type CategoryMapCitiesType = Map<CityCategory, CityInfoType[]>
 export enum CurrentPickCityPointType {
   START,
   END
+}
+export type CityType = {
+  startCity: SubscriptionBuilder<CityInfoType>
+  endCity: SubscriptionBuilder<CityInfoType>
+  currentPickCityPoint: SubscriptionBuilder<CurrentPickCityPointType>
+  isForeignCityObserve: SubscriptionBuilder<boolean>
+  cityCategoriesObserve:SubscriptionBuilder<CategoryMapCitiesType>
 }
 
 export const initCityCategories = new Map<CityCategory, CityInfoType[]>([
@@ -37,26 +44,27 @@ export const initCityCategories = new Map<CityCategory, CityInfoType[]>([
   ]]
 ])
 
-export const startCityObserve: SubscriptionBuilder<CityInfoType> = new SubscriptionBuilder<CityInfoType>(
+const startCityObserve: SubscriptionBuilder<CityInfoType> = new SubscriptionBuilder<CityInfoType>(
   { code: 4601,	name: "海口市", provinceCode:	46,	pinyin: "haikoushi"}
 )
 
-export const endCityObserve: SubscriptionBuilder<CityInfoType> = new SubscriptionBuilder<CityInfoType>(
+const endCityObserve: SubscriptionBuilder<CityInfoType> = new SubscriptionBuilder<CityInfoType>(
   { code: 4601,	name: "海口市", provinceCode:	46,	pinyin: "haikoushi"}
 )
 
-export const currentPickCityPointObserve: SubscriptionBuilder<CurrentPickCityPointType> = new SubscriptionBuilder<CurrentPickCityPointType>(CurrentPickCityPointType.START)
-export const isForeignCityObserve: SubscriptionBuilder<boolean> = new SubscriptionBuilder<boolean>(false)
+const currentPickCityPointObserve: SubscriptionBuilder<CurrentPickCityPointType> = new SubscriptionBuilder<CurrentPickCityPointType>(CurrentPickCityPointType.START)
+const isForeignCityObserve: SubscriptionBuilder<boolean> = new SubscriptionBuilder<boolean>(false)
 
-export const cityCategoriesObserve = new SubscriptionBuilder<CategoryMapCitiesType>(initCityCategories)
+const cityCategoriesObserve = new SubscriptionBuilder<CategoryMapCitiesType>(initCityCategories)
+
 
 export const pickCity = (cityInfo: CityInfoType): void => {
-  switch (currentPickCityPointObserve.value) {
+  switch (store.city.currentPickCityPoint.value) {
     case CurrentPickCityPointType.END:
-      endCityObserve.next(cityInfo)
+      store.city.endCity.next(cityInfo)
       break;
     case CurrentPickCityPointType.START:
-      startCityObserve.next(cityInfo)
+      store.city.startCity.next(cityInfo)
       break;
 
   }
@@ -64,3 +72,11 @@ export const pickCity = (cityInfo: CityInfoType): void => {
   navigateBack()
 }
 
+const city: CityType = {
+  startCity: startCityObserve,
+  endCity: endCityObserve,
+  currentPickCityPoint: currentPickCityPointObserve,
+  isForeignCityObserve: isForeignCityObserve,
+  cityCategoriesObserve: cityCategoriesObserve
+}
+export default city

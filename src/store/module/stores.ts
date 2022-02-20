@@ -1,13 +1,13 @@
-import SubscriptionBuilder from "../util/SubscriptionBuilder";
+import SubscriptionBuilder from "../../util/SubscriptionBuilder";
 
-type PopularAttractionType = {
+export type PopularAttractionType = {
   id: number;
   name: string;
   lat: number;
   lng: number;
-}
+}[]
 
-export const popularAttractionsObserve = new SubscriptionBuilder<PopularAttractionType[]>([
+export const popularAttractionsObserve = new SubscriptionBuilder<PopularAttractionType>([
   {id: 1, name: '橘子洲头', lat: 1, lng: 1},
   {id: 2, name: '岳麓山', lat: 1, lng: 1},
   {id: 3, name: '世界之窗', lat: 1, lng: 1},

@@ -5,13 +5,13 @@ import {Input, View} from "@tarojs/components";
 import {AtIcon} from 'taro-ui'
 // @ts-ignore
 import style from "./style.module.scss";
-import Getters from "../../../../store/getters";
+import {store, useAppStoreSelector} from "../../../../store";
 import useObserve from "../../../../util/useObserve";
 
 const SearchIcon = () => (<AtIcon value='search' size='15' className={style.icon} />)
 
 const InputRender = (): React.ReactElement => {
-  const [cityName, observe] = useObserve(Getters.citySearchObserve);
+  const [cityName, observe] = useObserve( useAppStoreSelector().citySearch );
   const handleChange = (e): void => {
     observe.next(e.target.value)
   }
@@ -34,7 +34,7 @@ const InputRender = (): React.ReactElement => {
 }
 
 const Search = (): React.ReactElement => {
-  const [searchMode, observe] = useObserve(Getters.isCitySearchObserve)
+  const [searchMode, observe] = useObserve( store.isCitySearch )
 
   const PlaceholderModel = () => (
     <View

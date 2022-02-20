@@ -7,12 +7,12 @@ import {View} from "@tarojs/components";
 import CityGroup from "./CityGroup";
 import useObserve from "../../../../util/useObserve";
 import SearchResult from "./SearchResult";
-import {CategoryMapCitiesType, cityCategoriesObserve, CityCategory} from "../../../../store/cities";
-import Getters from "../../../../store/getters";
+import {CategoryMapCitiesType, CityCategory} from "../../../../store/module/cities";
+import {useAppStoreSelector} from "../../../../store";
 
 
 const VisitMode = (): React.Element => {
-  const [categoryMapCities] = useObserve<CategoryMapCitiesType>(cityCategoriesObserve)
+  const [categoryMapCities] = useObserve<CategoryMapCitiesType>( useAppStoreSelector().city.cityCategoriesObserve )
 
   let CityItemsRender = [];
   let locations: Set<CityCategory> = new Set<CityCategory>();
@@ -49,7 +49,7 @@ const VisitMode = (): React.Element => {
 
 
 const Index = (): React.ReactElement => {
-  const [value] = useObserve(Getters.isCitySearchObserve);
+  const [value] = useObserve( useAppStoreSelector().isCitySearch );
 
   return (
     <View className={style.main}>

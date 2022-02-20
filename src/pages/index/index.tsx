@@ -7,16 +7,17 @@ import quthrizationGQL from "../../graphql/mutaion/authorization";
 import OperationInterface from "./OperationInterface";
 import Layout from "../../container/Layout";
 import Order from "../Order";
-import {TabBarType} from "../../store/router";
+import {TabBarType} from "../../store/module/router";
 import Me from "../Me";
 import {appName} from "../../config/globalConfig";
 import Banners from "./Banners";
 // @ts-ignore
 import style from './style.module.scss'
 import Guilds from "./Guids";
-import {AtFab, AtNoticebar} from "taro-ui";
 import NoticeBar from "./NoticeBar";
 import ComplaintFeedbackBar from "./ComplaintFeedbackBar";
+import {useEffect} from "react";
+import {loginThunk} from "../../store/module/me";
 
 const Index = () => {
   const handleCode = async (): Promise<void> => {
@@ -104,6 +105,11 @@ const Index = () => {
       </View>
     </>
   )
+  useEffect(() => {
+    loginThunk().then(() => {
+
+    })
+  }, [])
 
   return (
     <Layout

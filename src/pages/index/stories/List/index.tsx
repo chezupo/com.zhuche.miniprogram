@@ -5,8 +5,8 @@ import {View} from "@tarojs/components";
 import style from './style.module.scss';
 import GroupContainer from "./GroupContainer/groupContainer";
 import useObserve from "../../../../util/useObserve";
-import {popularAttractionsObserve} from "../../../../store/stores";
 import Attraction from "./Attraction";
+import {useAppStoreSelector} from "../../../../store";
 
 type AreaType = {code: number; name: string}
 const List = (): React.ReactElement => {
@@ -26,7 +26,7 @@ const List = (): React.ReactElement => {
   ]
   const getCssId = (code: number): string => `area_${code}`
   const [activeArea, setActiveArea] = useState<AreaType>({code: 1, name: "热门景点"})
-  const [popularAttractions] = useObserve(popularAttractionsObserve);
+  const [popularAttractions] = useObserve( useAppStoreSelector().popularAttractions );
 
   return (
     <View className={style.main}>

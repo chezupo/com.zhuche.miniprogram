@@ -1,6 +1,6 @@
 import {View} from "@tarojs/components";
 import * as React from "react";
-import * as router from '../../../store/router'
+import * as router from '../../../store/module/router'
 // @ts-ignore
 import style from './style.module.scss'
 

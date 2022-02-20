@@ -1,5 +1,5 @@
-import SubscriptionBuilder from "../util/SubscriptionBuilder";
-import {getConfiguration} from "../api/configuration";
+import SubscriptionBuilder from "../../util/SubscriptionBuilder";
+import {getConfiguration} from "../../api/configuration";
 
 export type ConfigurationType = {
   imgPrefix: string

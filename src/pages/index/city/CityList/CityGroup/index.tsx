@@ -3,8 +3,8 @@ import {View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss";
 // @ts-ignore
-import {CityCategory, pickCity} from "../../../../../store/cities";
-import {CityInfoType} from "../../../../../store/getters";
+import {CityCategory, pickCity} from "../../../../../store/module/cities";
+import {CityInfoType} from "../../../../../store";
 
 type CityGroupPropsType = {
   title: CityCategory;

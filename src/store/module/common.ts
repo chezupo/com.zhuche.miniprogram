@@ -1,10 +1,10 @@
-import SubscriptionBuilder from "../util/SubscriptionBuilder";
+import SubscriptionBuilder from "../../util/SubscriptionBuilder";
 
 type NoticeType = {
   isShow: boolean;
   content: string
 }
-type CommonDataType = {
+export type CommonDataType = {
   servicePhone: string;
   notice: NoticeType
 }

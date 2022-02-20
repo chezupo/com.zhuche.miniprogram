@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, {useState} from "react";
+import React from "react";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss'
@@ -7,18 +7,15 @@ import SelectCityOrAttraction from "./SelectCityOrStore";
 import DateRange from "./DateRange/DateRange";
 import Button from "./Button";
 import useObserve from "../../../util/useObserve";
-import {navigateTo} from "../../../store/router";
-import {
-  currentPickCityPointObserve,
-  CurrentPickCityPointType,
-  endCityObserve, isForeignCityObserve,
-  startCityObserve
-} from "../../../store/cities";
+import {navigateTo} from "../../../store/module/router";
+import {CurrentPickCityPointType} from "../../../store/module/cities";
+import {useAppStoreSelector} from "../../../store";
+
 type OperationInterfacePropsType = {
   className?: string
 }
 const OperationInterface = (props: OperationInterfacePropsType): React.ReactElement => {
-  const [, dispatcher] = useObserve(currentPickCityPointObserve)
+  const [, dispatcher] = useObserve( useAppStoreSelector().city.currentPickCityPoint )
   const redirectPickCityPage = () => navigateTo('/pages/index/city/index')
   const handleClickStartCity = () => {
     dispatcher.next(CurrentPickCityPointType.START)
@@ -28,9 +25,9 @@ const OperationInterface = (props: OperationInterfacePropsType): React.ReactElem
     dispatcher.next(CurrentPickCityPointType.END)
     redirectPickCityPage()
   }
-  const [startCity] = useObserve(startCityObserve)
-  const [endCity] = useObserve(endCityObserve)
-  const [isForeignCity] = useObserve(isForeignCityObserve)
+  const [startCity] = useObserve( useAppStoreSelector().city.startCity )
+  const [endCity] = useObserve( useAppStoreSelector().city.endCity )
+  const [isForeignCity] = useObserve( useAppStoreSelector().city.isForeignCityObserve )
 
   const ForeignCityRender = isForeignCity ? (
     <SelectCityOrAttraction

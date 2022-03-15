@@ -1,7 +1,7 @@
+import * as React from "react";
 import SubscriptionBuilder from "../util/SubscriptionBuilder";
 import {BannerListType, bannerObserve} from "./module/banner";
 import {meObserve, MeType} from "./module/me";
-import * as React from "react";
 import {currentTabBarObserve, TabBarType} from "./module/router";
 import {commonDataObserve, CommonDataType} from "./module/common";
 import {popularAttractionsObserve, PopularAttractionType} from "./module/stores";

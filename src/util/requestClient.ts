@@ -1,7 +1,7 @@
 import * as Taro from "@tarojs/taro"
 import {meObserve} from "../store/module/me";
 
-const prefixUrl = "https://a1001zhuche.jds.wuchuheng.com/api/v1"
+const prefixUrl = "https://a1001zhuche.jds.wuchuheng.com/api/v1/miniProgram"
 const getHeaders = (): Object => {
   const token = `Bearer ${meObserve.value.accessToken}`
   return   {...(token.length > 7 ? {header: {Authorization: token}} : {})}

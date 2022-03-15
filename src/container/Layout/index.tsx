@@ -4,7 +4,7 @@ import {ReactElement, useState} from "react";
 import style from "./style.module.scss";
 import useObserve from "../../util/useObserve";
 import {navigateToLoginOrRegister, TabBarType as CurrentTabBarType} from "../../store/module/router";
-import {useAppStoreSelector} from "../../store";
+import {store, useAppStoreSelector} from "../../store";
 import * as taro from "@tarojs/taro";
 import Message from "../../components/Message";
 
@@ -22,7 +22,7 @@ const Layout = (props: LayoutPropsType): React.ReactElement => {
     setPermissionIndex(null)
   }
   const handleChangeTabBar = ( pickTabBar: TabBarType) => {
-    if (pickTabBar.isPermission && me.isNewUser) {
+    if (pickTabBar.isPermission && store.me.value.isNewUser) {
         setPermissionIndex(pickTabBar)
         navigateToLoginOrRegister()
     }else {

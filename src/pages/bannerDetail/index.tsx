@@ -11,7 +11,8 @@ const BannerDetail: React.FC = ()  => {
   Taro.setNavigationBarTitle({title: banner.title})
 
   return (
-    <View dangerouslySetInnerHTML={{ __html: banner.content}}></View>
+    <>hello</>
+    // <View dangerouslySetInnerHTML={{ __html: banner.content}}></View>
   )
 }
 

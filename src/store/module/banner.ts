@@ -4,6 +4,7 @@ import {getBanners} from "../../api/banners";
 export type BannerType = {
   id: number
   imgKey: string
+  prefixUrl: string
   content: string
   title: string
 }

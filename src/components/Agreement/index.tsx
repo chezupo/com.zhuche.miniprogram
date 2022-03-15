@@ -12,13 +12,7 @@ type AgreementPropsType = {
 const Agreement = (props: AgreementPropsType): React.ReactElement => {
   return (
     <View className={style.main}>
-      <Checkbox
-        checked={props.checked}
-        value=''
-        onChange={() => props.onChange()}
-        className={style.checkBox}
-      />
-      我已阅读并同意
+      登录则默认同意
       <Text className={style.title}>《{`${appName}`}会员注册协议》</Text>和
       <Text className={style.title}>
         《{`${appName}`}租车隐私政策》</Text>

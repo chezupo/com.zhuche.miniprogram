@@ -13,5 +13,6 @@
 
 .title {
   @include globalSubtitle;
-  font-size: $unit3;
+  margin-top: $unit3;
+  font-size: $unit3_5;
 }

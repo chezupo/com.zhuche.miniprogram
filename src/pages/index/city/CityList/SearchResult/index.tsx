@@ -7,6 +7,7 @@ import style from "./style.module.scss";
 import SearchNoticeBoard from "../../../../../components/SearchNoticeBoard"
 import NotFound from "../../../../../components/NotFound";
 import {CategoryMapCitiesType, CityCategory, pickCity} from "../../../../../store/module/cities";
+import * as React from "react";
 
 
 const PleaseEnterSomeThing = (): React.ReactElement => {
@@ -47,6 +48,7 @@ const ResultRender = (): React.ReactElement => {
 
 const SearchResult = (): React.ReactElement => {
   const [cityName] = useObserve( useAppStoreSelector().citySearch )
+
   return (<>
     {cityName.length === 0 && <PleaseEnterSomeThing /> }
     {cityName.length > 0 && <ResultRender /> }

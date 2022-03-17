@@ -1,31 +1,29 @@
-import { NodesRef } from "@tarojs/taro";
-import Taro from "@tarojs/taro";
-import {alipay} from "./base";
+import Taro, {NodesRef} from "@tarojs/taro";
 
 export const selectorQueryClientRect = (
   selector: string,
 ): Promise<NodesRef.BoundingClientRectCallbackResult> => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     switch (process.env.TARO_ENV) {
-      case alipay:
-        my.createSelectorQuery()
-          .select(selector).boundingClientRect()
-          .exec(ret => {
-            if(ret) {
-              const item = ret[0];
-              resolve(item)
-            }
-            return Promise.reject();
-          })
-
-        break;
+      // case alipay:
+      //   my.createSelectorQuery()
+      //     .select(selector).boundingClientRect()
+      //     .exec(ret => {
+      //       if(ret) {
+      //         const item = ret[0];
+      //         resolve(item)
+      //       }
+      //       reject()
+      //     })
+      //
+      //   break;
       default:
         Taro.createSelectorQuery()
           .select(selector)
           .boundingClientRect((res: NodesRef.BoundingClientRectCallbackResult) => {
             resolve(res)
           })
-          .exec()
+          .exec(ret => resolve(ret[0]))
     }
 
   });

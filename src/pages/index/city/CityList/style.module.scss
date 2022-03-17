@@ -6,15 +6,15 @@
   display: grid;
   grid-template-columns: 93% 7%;
   grid-template-rows: 100%;
+  .city {
+    height: 100%;
+    width: 100%;
+  }
 }
 .locationBarWrapper {
   border-left: solid 1px $borderGrayColor;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 100%;
-  $firstGrid: 2%;
-  //grid-template-rows: $firstGrid 100% - $firstGrid;
-  grid-template-rows: $firstGrid 90% - $firstGrid;
+  padding-top: .5rem;
 }
 .locationListWrapper {
   display: grid;
@@ -34,3 +34,12 @@
   overflow-y: scroll;
 }
 
+.notFoundWrapper {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  height: 100%;
+  width: 100vw;
+}

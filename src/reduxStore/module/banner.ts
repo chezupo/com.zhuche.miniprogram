@@ -1,6 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {BannerType} from "../../store/module/banner";
 import {AppDispatch, RootState} from "../index";
+import * as Taro from "@tarojs/taro";
+import {prefixUrl} from "../../util/requestClient";
 import {getBanners} from "../../api/banners";
 
 type InitialStateType = {
@@ -28,13 +30,14 @@ export const {save, setLoading, init} = bannersSlice.actions
 
 export const initThunk = () => {
   return (dispatch: AppDispatch, getSate: () => RootState): Promise<void> => {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       dispatch(setLoading(true))
       getBanners().then(res => {
         dispatch(init(res))
         return resolve()
-      }).catch(e =>reject(e))
-        .finally(() => setLoading(false))
+      })
+        .catch(e => reject(e))
+        .finally(() => dispatch(setLoading(false)))
     })
   }
 }

@@ -44,7 +44,7 @@ $borderRadiusCircle: $borderRadiusCircle;
 
 .cancel {
   text-align: center;
-  color: #3DB1AD;
+  color: $primaryThemeColor;
   @include fontSize;
 }
 

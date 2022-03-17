@@ -1,19 +1,18 @@
+import * as React from "react";
+import {useState} from "react";
 // @ts-ignore
-import React from "react";
 import {Input, View} from "@tarojs/components";
 // eslint-disable-next-line import/first
 import {AtIcon} from 'taro-ui'
 // @ts-ignore
 import style from "./style.module.scss";
-import {store, useAppStoreSelector} from "../../../../store";
-import useObserve from "../../../../util/useObserve";
 
 const SearchIcon = () => (<AtIcon value='search' size='15' className={style.icon} />)
 
-const InputRender = (): React.ReactElement => {
-  const [cityName, observe] = useObserve( useAppStoreSelector().citySearch );
-  const handleChange = (e): void => {
-    observe.next(e.target.value)
+const InputRender:React.FC<SearchPropsType> = (props) => {
+  const handleChange = (e) => {
+    const value = e.currentTarget.value as string
+    props.onChange(value)
   }
 
   return (
@@ -23,7 +22,7 @@ const InputRender = (): React.ReactElement => {
       </View>
       <Input
         onInput={handleChange}
-        value={cityName}
+        value={props.value}
         className={style.input}
         placeholder='搜索'
         placeholderStyle='font-size:13px'
@@ -33,13 +32,18 @@ const InputRender = (): React.ReactElement => {
   )
 }
 
-const Search = (): React.ReactElement => {
-  const [searchMode, observe] = useObserve( store.isCitySearch )
+export type SearchPropsType = {
+  value: string
+  onChange: (value: string) => void
+  onCancel?: () => void
+}
+const Search: React.FC<SearchPropsType>  = (props): React.ReactElement => {
+  const [searchMode, setSearchMode] = useState<boolean>(false)
 
   const PlaceholderModel = () => (
     <View
       className={style.placeholderWrapper}
-      onClick={() => observe.next(!searchMode)}
+      onClick={() => setSearchMode(!searchMode)}
     >
       <View className={style.container}>
         <SearchIcon />
@@ -47,10 +51,14 @@ const Search = (): React.ReactElement => {
       </View>
     </View>
   )
+  const handleCancel = () => {
+    setSearchMode(false)
+    props.onCancel()
+  }
   const InputModel = () => (
     <View className={style.main}>
-      <InputRender />
-      <View className={style.cancel} onClick={() => observe.next(!searchMode)}>取消</View>
+      <InputRender  onChange={props.onChange} value={props.value} />
+      <View className={style.cancel} onClick={handleCancel}>取消</View>
     </View>
   )
 

@@ -1,4 +1,4 @@
-import log, {info} from "./log";
+import log from "./log";
 
 export type SubscriptionHandler = number
 

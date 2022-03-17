@@ -1,9 +1,10 @@
 import * as Taro from "@tarojs/taro"
-import {meObserve} from "../store/module/me";
+import {store} from "../store";
 
-const prefixUrl = "https://a1001zhuche.jds.wuchuheng.com/api/v1/miniProgram"
+export const prefixUrl = "https://a1001zhuche.jds.wuchuheng.com/api/v1/miniProgram"
 const getHeaders = (): Object => {
-  const token = `Bearer ${meObserve.value.accessToken}`
+  console.log(store)
+  const token = `Bearer ${store?.me.value.accessToken || ''}`
   return   {...(token.length > 7 ? {header: {Authorization: token}} : {})}
 }
 export const get = <T>(url: string): Promise<T> => {

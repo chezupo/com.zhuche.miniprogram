@@ -7,6 +7,7 @@ import {navigateToLoginOrRegister, TabBarType as CurrentTabBarType} from "../../
 import {store, useAppStoreSelector} from "../../store";
 import * as taro from "@tarojs/taro";
 import Message from "../../components/Message";
+import * as React from "react";
 
 
 export type LayoutPropsType = {

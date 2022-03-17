@@ -1,62 +1,60 @@
-// @ts-ignore
-import React from "react";
+import * as React from "react";
 // @ts-ignore
 import style from './style.module.scss';
 // eslint-disable-next-line import/first
 import {View} from "@tarojs/components";
-import CityGroup from "./CityGroup";
-import useObserve from "../../../../util/useObserve";
-import SearchResult from "./SearchResult";
-import {CategoryMapCitiesType, CityCategory} from "../../../../store/module/cities";
-import {useAppStoreSelector} from "../../../../store";
+import {AtIndexes} from "taro-ui";
+import {useAppSelector} from "../../../../reduxStore";
+import NotFound from "../../../../components/NotFound";
 
-
-const VisitMode = (): React.Element => {
-  const [categoryMapCities] = useObserve<CategoryMapCitiesType>( useAppStoreSelector().city.cityCategoriesObserve )
-
-  let CityItemsRender = [];
-  let locations: Set<CityCategory> = new Set<CityCategory>();
-  categoryMapCities.forEach((v, k) => {
-    locations.add(k);
-    CityItemsRender.push( <CityGroup title={k} items={v} key={k} /> )
-  } )
-  let LocationItemsRender: React.ReactElement[] = [];
-  locations.forEach((v, k) => {
-    const isPopularCity = k === CityCategory.POPULAR
-    LocationItemsRender.push(
-      <View
-        className={style.letter}
-        key={k}
-      >
-        {isPopularCity ? v.substring(0, 2) : v}
-      </View>
-    )
-  })
-
-  return (<>
-    <View className={style.leftBarWrapper}>
-      {CityItemsRender}
-    </View>
-    <View className={style.locationBarWrapper}>
-      <View className={style.tmp}></View>
-      <View className={style.locationListWrapper}>
-        {LocationItemsRender}
-      </View>
-    </View>
-  </>)
+type IndexPropsType = {
+  value: string
 }
+const CityList: React.FC<IndexPropsType> = (props) => {
+  const {value} = props
+  const city = useAppSelector(state => state.city)
+  let list = city.list.map(el => (
+    {
+      title: el.key,
+      key: el.key,
+      items: el.list
+    })
+  )
+  if (value.length > 0) {
+    list = list.map(el => {
+      return {...el, items: el.items.filter(item => {
+          const match = item.name.match(value) || item.pinyin.match(value)
+            if (!!match) {
+              console.log(item.name, value, match)
+              return true
+            } else {
+              return false
+            }
+        }) }
+    }).filter(item => item.items.length > 0)
+  }
 
-
-
-const Index = (): React.ReactElement => {
-  const [value] = useObserve( useAppStoreSelector().isCitySearch );
 
   return (
     <View className={style.main}>
-      {!value && <VisitMode /> }
-      {value && <SearchResult /> }
+      {
+        list.length === 0 && (<View className={style.notFoundWrapper}>
+          <NotFound title='很抱歉，没有找到结果，您可以换个词试试。' />
+        </View>)
+      }
+      {
+        list.length > 0 && ( <View className={style.city}>
+            <AtIndexes
+              list={list}
+              // onClick={this.onClick.bind(this)}
+            >
+            </AtIndexes>
+          </View>
+        )
+      }
+
     </View>
   )
 }
 
-export default Index;
+export default CityList;

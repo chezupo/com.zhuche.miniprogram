@@ -10,6 +10,4 @@ export type BannerType = {
 }
 export type BannerListType = BannerType[]
 
-export const bannerObserve: SubscriptionBuilder<BannerListType> = SubscriptionBuilder.initCallBack<BannerListType>([], async () => {
-  return await getBanners()
-})
+export const bannerObserve: SubscriptionBuilder<BannerListType> = new SubscriptionBuilder<BannerListType>([])

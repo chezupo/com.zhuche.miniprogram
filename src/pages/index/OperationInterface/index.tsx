@@ -6,37 +6,43 @@ import style from './style.module.scss'
 import SelectCityOrAttraction from "./SelectCityOrStore";
 import DateRange from "./DateRange/DateRange";
 import Button from "./Button";
-import useObserve from "../../../util/useObserve";
-import {navigateTo} from "../../../store/module/router";
-import {CurrentPickCityPointType} from "../../../store/module/cities";
-import {useAppStoreSelector} from "../../../store";
+import {navigateToCity, navigateToStore} from "../../../store/module/router";
+import {useAppDispatch, useAppSelector} from "../../../reduxStore";
+import {
+  setStartCityOrEndCity,
+  setStartStoreOrEndStore,
+  StartCityOrEndCityType,
+  StartStoreOrEndStoreType
+} from "../../../reduxStore/module/order"
+import {messageObserve} from "../../../store/module/message";
+import {CityType} from "../../../typings";
 
 type OperationInterfacePropsType = {
   className?: string
 }
 const OperationInterface = (props: OperationInterfacePropsType): React.ReactElement => {
-  const [, dispatcher] = useObserve( useAppStoreSelector().city.currentPickCityPoint )
-  const redirectPickCityPage = () => navigateTo('/pages/index/city/index')
+  const dispatch = useAppDispatch()
   const handleClickStartCity = () => {
-    dispatcher.next(CurrentPickCityPointType.START)
-    redirectPickCityPage()
+    dispatch(setStartCityOrEndCity(StartCityOrEndCityType.START))
+    navigateToCity()
   }
   const handleClickEndCity = () => {
-    dispatcher.next(CurrentPickCityPointType.END)
-    redirectPickCityPage()
+    dispatch(setStartCityOrEndCity(StartCityOrEndCityType.END))
+    navigateToCity()
   }
-  const [startCity] = useObserve( useAppStoreSelector().city.startCity )
-  const [endCity] = useObserve( useAppStoreSelector().city.endCity )
-  const [isForeignCity] = useObserve( useAppStoreSelector().city.isForeignCityObserve )
-
-  const ForeignCityRender = isForeignCity ? (
-    <SelectCityOrAttraction
-      title='还车地点'
-      pointColor='#405DFF'
-      onClickCity={() => handleClickEndCity()}
-      cityName={endCity.name}
-    />
-  ) : (<></>)
+  const createOrder = useAppSelector(state => state.order.createOrder)
+  const handleRedirect = (cityType:CityType | null, setStartStoreOrStoreCity: StartStoreOrEndStoreType) => {
+    if (cityType === null) {
+      messageObserve.next({type: 'error', title: '请先选择城市'})
+    } else {
+      dispatch(setStartStoreOrEndStore(setStartStoreOrStoreCity))
+      navigateToStore()
+    }
+  }
+  const handleClickStartStore = () => {
+    handleRedirect(createOrder.startCity, StartStoreOrEndStoreType.START)
+  }
+  const handleClickEndStore = () => handleRedirect(createOrder.endCity, StartStoreOrEndStoreType.END)
 
   return (
     <View className={[style.main, props.className ? props.className : ''].join(' ')}>
@@ -45,9 +51,20 @@ const OperationInterface = (props: OperationInterfacePropsType): React.ReactElem
           title='取车地点'
           visitButton
           onClickCity={() => handleClickStartCity()}
-          cityName={startCity.name}
+          onClickStore={handleClickStartStore}
+          cityName={createOrder.startCity?.name || ''}
+          storeName={createOrder.startStore?.name ? `${createOrder.startStore?.name}${createOrder.startStore.mark ? `(${createOrder.startStore.mark})` : ''}` : ''}
         />
-        {ForeignCityRender}
+        {
+          createOrder.isForeignCity && <SelectCityOrAttraction
+            onClickStore={handleClickEndStore}
+            title='还车地点'
+            pointColor='#405DFF'
+            onClickCity={() => handleClickEndCity()}
+            cityName={createOrder.endCity?.name || ''}
+            storeName={createOrder.endStore?.name ? `${createOrder.endStore?.name}${createOrder.endStore.mark ? `(${createOrder.endStore.mark})` : ''}` : ''}
+          />
+        }
         <DateRange />
         <Button />
       </View>

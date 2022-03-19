@@ -7,11 +7,12 @@ const getHeaders = (): Object => {
   const token = `Bearer ${store?.me.value.accessToken || ''}`
   return   {...(token.length > 7 ? {header: {Authorization: token}} : {})}
 }
-export const get = <T>(url: string): Promise<T> => {
+export const get = <T>(url: string, query?: Record<string, any> ): Promise<T> => {
   return new Promise<T>((resolve, reject) => {
     Taro.request({
       ...getHeaders(),
       url: `${prefixUrl}${url}`,
+      ...(query ? {data: query} : {}),
       success: (res) => {
         const {data} = res
         if (data.data) {

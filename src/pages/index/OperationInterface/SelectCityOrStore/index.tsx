@@ -5,9 +5,8 @@ import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
 import Point from "../../../../components/Point";
-import useObserve from "../../../../util/useObserve";
-import {navigateTo} from "../../../../store/module/router";
-import {useAppStoreSelector} from "../../../../store";
+import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
+import {setCreateOrderIsForeignCity} from "../../../../reduxStore/module/order";
 
 type SelectCityOrAttractionPropsType = {
   title: string;
@@ -15,9 +14,15 @@ type SelectCityOrAttractionPropsType = {
   visitButton?: boolean;
   onClickCity: () => void;
   cityName: string;
+  onClickStore: () => void
+  storeName: string
 }
 const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.ReactElement => {
-  const [isForeignCity, isForeignDispatcher] = useObserve( useAppStoreSelector().city.isForeignCityObserve )
+  const {isForeignCity} = useAppSelector(state => state.order.createOrder)
+  const dispatch = useAppDispatch()
+  const handleChange = (newIsForeignCity: boolean): void => {
+    dispatch(setCreateOrderIsForeignCity(newIsForeignCity))
+  }
   return (
     <>
       <View className={style.titleWrapper}>
@@ -32,15 +37,32 @@ const SelectCityOrAttraction = (props: SelectCityOrAttractionPropsType): React.R
       <View className={style.storeWrapper}>
         <View />
         <View className={style.cityAndStore}>
-          <View className={style.city} onClick={() => props.onClickCity()}>{props.cityName}</View>
-          <View className={style.store} onClick={() => navigateTo('/pages/index/stories/index')}>海拉尔火车站送车点</View>
+          {
+            props.cityName ? (
+              <View className={style.city} onClick={() => props.onClickCity()}>{props.cityName}</View>
+            ) : (
+              <View className={[style.city, style.noticeColor].join(' ')} onClick={() => props.onClickCity()}>请选择</View>
+            )
+          }
+          {
+            props.storeName ? (
+              <View className={style.store} onClick={props.onClickStore}>
+                {props.storeName}
+              </View>
+            ) : (
+              <View className={[style.store, !props.storeName ? style.noticeColor : ''].join(' ')} onClick={props.onClickStore}>
+                请选择门店
+              </View>
+            )
+          }
+
         </View>
         <View className={style.switch}>
           { props.visitButton && <AtSwitch
             className={style.atSwitch}
             border={false}
             checked={isForeignCity}
-            onChange={(v) => isForeignDispatcher.next(v)}
+            onChange={handleChange}
           />}
         </View>
       </View>

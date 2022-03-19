@@ -8,10 +8,11 @@ import style from './style.module.scss';
 
 type NotFoundPropsType = {
     title?: string
+    style?: Record<string, string>
 }
 const NotFound = (props: NotFoundPropsType): React.ReactElement => {
   return (
-    <View className={style.main}>
+    <View className={style.main} style={{...(props.style ? {...props.style} : {})}} >
       <Image src={notfound} className={style.image} />
       <View className={style.title}>{props.title ? props.title : '没有数据'}</View>
     </View>

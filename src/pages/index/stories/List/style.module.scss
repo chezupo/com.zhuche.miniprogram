@@ -12,6 +12,9 @@ $leftBarWidth:  25vw;
 .leftBar {
   @include bodyHeightMixin;
   overflow-y: scroll;
+  background: white;
+  border-right: solid 1px $borderGrayColor;
+  box-sizing: border-box;
   .itemWrapper {
     $height: $unit11;
     height: $height;
@@ -21,7 +24,8 @@ $leftBarWidth:  25vw;
     @include textEllipsis;
   }
   .activeItem {
-    background: white;
+    background: $noticeColor;
+    color: white;
     width: $leftBarWidth;
     border-left: solid $unit1 $primaryThemeColor;
     box-sizing: border-box;
@@ -48,4 +52,12 @@ $leftBarWidth:  25vw;
     line-height: $height;
     text-align: center;
   }
+}
+.emptyWrapper {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-size: $unit3_5;
+  margin: $unit1 0;
+  color: $subtitleColor;
 }

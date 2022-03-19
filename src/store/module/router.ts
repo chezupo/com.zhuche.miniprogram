@@ -9,8 +9,20 @@ export  enum TabBarType {
   ME
 }
 
+const homeUrl = '/pages/index/index'
+const storeUrl = '/pages/index/stories/index'
+const cityUrl = '/pages/index/city/index'
 export const navigateTo = (url: string) => {
   taro.navigateTo({ url })
+}
+export const navigateToHome = () => {
+  goToSwitchTab()
+}
+export const navigateToStore = () => {
+  taro.navigateTo({url: storeUrl})
+}
+export const navigateToCity = () => {
+  taro.navigateTo({url:cityUrl})
 }
 
 export const navigateToLoginOrRegister = () => {
@@ -25,9 +37,7 @@ export const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new Subscri
 
 export const switchTab = (tabBar: TabBarType): void => {
   store.currentTab.next(tabBar)
-  taro.reLaunch({
-    url: '/pages/index/index'
-  })
+  taro.reLaunch({ url: homeUrl })
 }
 
 export const goToSwitchTab = (): void => {

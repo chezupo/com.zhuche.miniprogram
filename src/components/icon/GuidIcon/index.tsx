@@ -1,13 +1,21 @@
 import {IconPropsType} from "../icon";
+import * as React from "react";
 import BaseIcon from "../BaseIcon";
+import {ITouchEvent} from "@tarojs/components/types/common";
 
-const GuidIcon = (props: IconPropsType): React.ReactElement => {
-  const color = props.color ? props.color : ''
+
+type GuidIconPropsType = {
+  onClick?: (event: ITouchEvent) => void
+} & IconPropsType
+const GuidIcon: React.FC<GuidIconPropsType>   = (props) => {
   const svg = `
   <svg t="1642755060723" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="19991" width="200" height="200"><path d="M506.88 40.96c-179.2 0-324.266667 145.066667-324.266667 324.266667 0 172.373333 291.84 510.293333 305.493334 523.946666 5.12 5.12 11.946667 8.533333 18.773333 8.533334s13.653333-3.413333 18.773333-8.533334c11.946667-13.653333 305.493333-351.573333 305.493334-523.946666 0-179.2-145.066667-324.266667-324.266667-324.266667z m0 443.733333c-71.68 0-129.706667-58.026667-129.706667-129.706666s58.026667-129.706667 129.706667-129.706667c71.68 0 129.706667 58.026667 129.706667 129.706667s-58.026667 129.706667-129.706667 129.706666z" fill="#40BDB9" p-id="19992" data-spm-anchor-id="a313x.7781069.0.i7" class="selected"></path><path d="M512 983.04c-177.493333 0-477.866667-29.013333-477.866667-138.24 0-54.613333 68.266667-92.16 206.506667-117.76 18.773333-3.413333 35.84 8.533333 39.253333 27.306667 3.413333 18.773333-8.533333 35.84-27.306666 39.253333-102.4 17.066667-141.653333 40.96-150.186667 51.2 22.186667 27.306667 168.96 71.68 409.6 71.68s387.413333-44.373333 409.6-71.68c-8.533333-10.24-46.08-32.426667-143.36-49.493333-18.773333-3.413333-30.72-20.48-27.306667-39.253334s20.48-30.72 39.253334-27.306666c134.826667 23.893333 201.386667 63.146667 201.386666 116.053333-1.706667 109.226667-302.08 138.24-479.573333 138.24z m411.306667-134.826667z" fill="#40BDB9" p-id="19993" data-spm-anchor-id="a313x.7781069.0.i12" class="selected"></path></svg>
   `
 
-  return (<BaseIcon svg={svg} className={props.className} />)
+  return (<BaseIcon
+    svg={svg} className={props.className}
+    onClick={props.onClick}
+  />)
 }
 
 export default GuidIcon

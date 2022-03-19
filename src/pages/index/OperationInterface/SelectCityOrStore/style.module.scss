@@ -27,6 +27,9 @@
     .store, .city  {
       @include textEllipsis;
     }
+    .noticeColor {
+      color: gray;
+    }
     .store {
       margin-left: 2vw;
     }

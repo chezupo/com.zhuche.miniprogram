@@ -7,26 +7,25 @@ import GroupContainer from "./GroupContainer/groupContainer";
 import useObserve from "../../../../util/useObserve";
 import Attraction from "./Attraction";
 import {useAppStoreSelector} from "../../../../store";
+import {useAppSelector} from "../../../../reduxStore";
+import {StartStoreOrEndStoreType} from "../../../../reduxStore/module/order";
+import {AreaStoreType, AreaType, StoreItemType} from "../../../../typings";
+import NotFound from "../../../../components/NotFound";
 
-type AreaType = {code: number; name: string}
+const defaultActiveItem: AreaType = {code:'0', name: '全部'}
 const List = (): React.ReactElement => {
-  const items: AreaType[] = [
-    {code: 1, name: '热门景点'},
-    {code: 2, name: '热门景点2'},
-    {code: 3, name: '热门景点3'},
-    {code: 4, name: '热门景点4'},
-    {code: 5, name: '热门景点5'},
-    {code: 6, name: '热门景点6'},
-    {code: 7, name: '热门景点7'},
-    {code: 8, name: '热门景点8'},
-    {code: 9, name: '热门景点9'},
-    {code: 10, name: '热门景点10dsfdsfsfsdf'},
-    {code: 11, name: '热门景点11'},
-    {code: 12, name: '热门景点12'},
-  ]
-  const getCssId = (code: number): string => `area_${code}`
-  const [activeArea, setActiveArea] = useState<AreaType>({code: 1, name: "热门景点"})
+  const getCssId = (code: string): string => `area_${code}`
+  const [activeArea, setActiveArea] = useState<AreaType>(defaultActiveItem)
   const [popularAttractions] = useObserve( useAppStoreSelector().popularAttractions );
+  const {createOrder} = useAppSelector(state => state.order)
+  let cityStores:AreaStoreType[]  = createOrder.startStoreOrEndStore === StartStoreOrEndStoreType.START ?
+    createOrder.starCityStores : createOrder.endCityStores
+  const items: AreaType[] = [
+    defaultActiveItem,
+    ...cityStores.map(({name, code})=> ({name, code}))
+  ]
+  const codeMapAreaStore: Map<string, AreaStoreType> = new Map<string, AreaStoreType>()
+  cityStores.forEach(area => codeMapAreaStore.set(area.code, area) )
 
   return (
     <View className={style.main}>
@@ -43,51 +42,68 @@ const List = (): React.ReactElement => {
           ))
         }
       </View>
-      <View className={style.rightBar}>
-        <GroupContainer title='热门景点'>
-          <View className={style.popularAttractionsContainer}>
-            {
-              popularAttractions.map(popularAttraction => (
-                <View className={style.popularAttractions}
-                  key={popularAttraction.id}
-                >{popularAttraction.name}</View>
-              ))
-            }
-          </View>
-        </GroupContainer>
 
-        <GroupContainer title='常用门店'>
-          <>
-            <Attraction />
-            <Attraction />
-            <Attraction />
-            <Attraction />
-          </>
-        </GroupContainer>
-        <GroupContainer title='常用门店'>
-          <>
-            <Attraction />
-            <Attraction />
-            <Attraction />
-            <Attraction />
-          </>
-        </GroupContainer>
-        <GroupContainer title='常用门店'>
-          <>
-            <Attraction />
-            <Attraction />
-            <Attraction />
-            <Attraction />
-          </>
-        </GroupContainer>
-        <GroupContainer title='常用门店'>
-          <>
-            <Attraction />
-            <Attraction />
-            <Attraction />
-            <Attraction />
-          </>
-        </GroupContainer>
+      <View className={style.rightBar}>
+        {
+          activeArea.code === defaultActiveItem.code && (<>
+            <GroupContainer title='热门景点'>
+              <View className={style.popularAttractionsContainer}>
+                {
+                  popularAttractions.map(popularAttraction => (
+                    <View
+                      className={style.popularAttractions}
+                      key={popularAttraction.id}
+                    >{popularAttraction.name}</View>
+                  ))
+                }
+              </View>
+            </GroupContainer>
+            {
+              cityStores.map(area =>
+                <GroupContainer title={area.name}>
+                  <>
+                    { area.stores.length > 0 &&
+                    area.stores.map(storeItem => (
+                      <Attraction
+                        key={storeItem.id}
+                        value={storeItem}
+                        isShortAddress
+                      />
+                    ))
+                    }
+                    {
+                      area.stores.length === 0 && (<View className={style.emptyWrapper}><View>
+                        抱歉!该地区暂未开通
+                      </View></View>)
+                    }
+                  </>
+                </GroupContainer>
+              )
+            }
+          </>)
+        }
+        {
+          activeArea.code !== defaultActiveItem.code && (
+            <GroupContainer title={codeMapAreaStore.get( activeArea.code).name} >
+              <>
+                { codeMapAreaStore.get( activeArea.code).stores.length > 0 &&
+                codeMapAreaStore.get( activeArea.code).stores.map(storeItem => (
+                  <Attraction
+                    key={storeItem.id}
+                    value={storeItem}
+                    isShortAddress
+                  />
+                ))
+                }
+                {
+                  codeMapAreaStore.get( activeArea.code).stores.length === 0 && (<View className={style.emptyWrapper}>
+                    <NotFound title='抱歉!该地区暂未开通' style={{padding: "1rem 0"}} />
+                  </View>)
+                }
+              </>
+            </GroupContainer>
+          )
+        }
       </View>
     </View>
   )

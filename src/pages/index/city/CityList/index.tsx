@@ -6,9 +6,11 @@ import {View} from "@tarojs/components";
 import {AtIndexes} from "taro-ui";
 import {useAppSelector} from "../../../../reduxStore";
 import NotFound from "../../../../components/NotFound";
+import {CityType} from "../../../../typings";
 
 type IndexPropsType = {
   value: string
+  onChange: (city:CityType) => void
 }
 const CityList: React.FC<IndexPropsType> = (props) => {
   const {value} = props
@@ -25,7 +27,6 @@ const CityList: React.FC<IndexPropsType> = (props) => {
       return {...el, items: el.items.filter(item => {
           const match = item.name.match(value) || item.pinyin.match(value)
             if (!!match) {
-              console.log(item.name, value, match)
               return true
             } else {
               return false
@@ -46,7 +47,7 @@ const CityList: React.FC<IndexPropsType> = (props) => {
         list.length > 0 && ( <View className={style.city}>
             <AtIndexes
               list={list}
-              // onClick={this.onClick.bind(this)}
+              onClick={props.onChange}
             >
             </AtIndexes>
           </View>

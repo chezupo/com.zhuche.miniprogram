@@ -7,7 +7,8 @@ export default {
     'pages/index/complaintFeedback/index',
     'pages/login/index',
     'pages/login/phoneLogin/index',
-    'pages/bannerDetail/index'
+    'pages/bannerDetail/index',
+    'pages/index/OperationInterface/DateRange/DateTimePicker/index'
   ],
   window: {
     backgroundTextStyle: 'light',

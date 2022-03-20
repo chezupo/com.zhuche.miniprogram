@@ -1,0 +1,19 @@
+@import "../common.module.scss";
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.noteWrapper {
+  display: grid;
+  grid-row-gap: $unit1;
+  .month {
+
+  }
+  .week {
+    color: $subtitleColor;
+    font-size: $unit3_5;
+  }
+}

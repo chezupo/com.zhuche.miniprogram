@@ -1,0 +1,47 @@
+@import "../../../commond.module";
+
+@mixin spin {
+  height: $itemHeight;
+  position: absolute;
+  background: gray;
+  opacity: 0.1;
+  width: 100%;
+}
+$itemHeight: $unit10;
+
+.scrollWrapper {
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+}
+.item {
+  height: $itemHeight;
+  text-align: center;
+  line-height: $itemHeight;
+  font-size: $itemHeight * 0.55;
+  box-sizing: border-box;
+}
+.containerWrapper{
+  width: 100%;
+  position: relative;
+  .topSpin {
+    @include spin;
+    top: 0;
+  }
+  .bottomSpin {
+    @include spin;
+    bottom: 0;
+  }
+  height: $itemHeight * 3;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+  font-size: $unit5;
+  padding: $unit1 0;
+}
+
+.main {
+  width: 100%;
+}

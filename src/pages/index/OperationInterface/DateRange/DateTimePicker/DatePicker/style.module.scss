@@ -1,0 +1,25 @@
+@import "../../../commond.module.scss";
+
+$height: $unit80;
+$weekHeight: $unit12;
+.main {
+  display: flex;
+  flex-direction: column;
+  height: $height;
+  .week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+    background: white;
+    height: $weekHeight;
+    align-items: center;
+    color: $subtitleColor;
+  }
+  .scrollWrapper {
+    flex-grow: 1;
+    .scroll {
+      height: $height - $weekHeight;
+      background: $backgroundColor;
+    }
+  }
+}

@@ -18,7 +18,7 @@ const config = {
     options: {
     }
   },
-  framework: 'react',
+  framework: 'preact',
   mini: {
     postcss: {
       pxtransform: {

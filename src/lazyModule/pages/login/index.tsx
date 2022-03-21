@@ -7,14 +7,14 @@ import style from "./style.module.scss"
 import carSvg from "../../../asesst/images/undraw_by_my_car_ttge.svg";
 import getPlatformType, {AllPlatformType} from "../../../util/platformType";
 import Agreement from "../../../components/Agreement";
-import {goToSwitchTab, navigateTo} from "../../../store/module/router";
+import {goToSwitchTab, navigateTo, navigateToPhoneLoginPage} from "../../../store/module/router";
 import * as Taro from "@tarojs/taro";
 import {uploadUserInfoThunk} from "../../../store/module/me";
 import {store} from "../../../store";
 
 const Login = (): React.ReactElement => {
   const [agreement, dispatch] = useReducer((state): boolean => !state, false)
-  const handleLoginOrRegister = () => navigateTo('/pages/login/phoneLogin/index')
+  const handleLoginOrRegister = () => navigateToPhoneLoginPage()
   let platform: string;
   if (getPlatformType() ===  AllPlatformType.ALIPAY ) platform = '支付宝'
   if (getPlatformType() ===  AllPlatformType.WECHAT) platform = '微信'

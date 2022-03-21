@@ -3,3 +3,36 @@
 .noticeBar {
   //background: $noticeBackgroundColor;
 }
+.main {
+  display: grid;
+  padding: 0 $unit2;
+  grid-template-columns: 10% 10% 62% 18%;
+  background: $primaryThemeColor2;
+  align-items: center;
+  height: $unit8;
+  font-size: $unit3;
+  color: $subtitleColor;
+  .content {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: $unit8;
+    padding: 0;
+    margin: 0;
+  }
+  @mixin  icon {
+  }
+  .rightIcon{
+    font-size: $unit3;
+    display: inline;
+    @include icon;
+  }
+  .closeIcon {
+    @include icon;
+    font-size: $unit6;
+  }
+  .noticeIcon {
+    @include icon;
+    font-size: $unit3_5;
+  }
+}

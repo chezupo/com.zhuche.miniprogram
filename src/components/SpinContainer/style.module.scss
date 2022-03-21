@@ -1,0 +1,12 @@
+.spinContainer {
+  position: fixed;
+  top: 0;
+  --tw-bg-opacity: .5;
+  background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}

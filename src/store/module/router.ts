@@ -32,6 +32,10 @@ const navigateToLoginOrRegister = () => taro.navigateTo({ url: `${lazyModulePref
 
 const navigateToSelectCarPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/index`)
 
+const navigateToFeedbackPage = () => navigateTo(`${lazyModulePrefix}/pages/complaintFeedback/index`)
+
+const navigateToPhoneLoginPage = () => navigateTo(`${lazyModulePrefix}/pages/login/phoneLogin/index`)
+
 const getCurrentRoute = (): string => store.currentRoute.value
 
 const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
@@ -65,5 +69,7 @@ export {
   currentTabBarObserve,
   switchTab,
   goToSwitchTab,
-  navigateToSelectCarPage
+  navigateToSelectCarPage,
+  navigateToFeedbackPage,
+  navigateToPhoneLoginPage
 }

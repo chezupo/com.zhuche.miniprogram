@@ -12,7 +12,7 @@ export type CommonDataType = {
 export const commonDataObserve: SubscriptionBuilder<CommonDataType> = new SubscriptionBuilder({
   servicePhone: '400-400-400',
   notice: {
-    isShow: false,
-    content: null
+    isShow: true,
+    content: "内容............"
   }
 })

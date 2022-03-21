@@ -1,46 +1,42 @@
-import {AtModal, AtModalAction, AtModalContent, AtModalHeader, AtNoticebar} from "taro-ui";
 import * as React from "react";
-import {useReducer} from "react";
-import {Button} from "@tarojs/components";
-import useObserve from "../../../util/useObserve";
+import {useRef, useState} from "react";
 // @ts-ignore
 import style from './style.module.scss'
-import {useAppStoreSelector} from "../../../store";
+import {View} from "@tarojs/components";
+import Icon from "../../../components/Icon";
+import * as Taro from "@tarojs/taro";
 
 const NoticeBar = (): React.ReactElement => {
-  const [commonData, commonDispatcher] = useObserve( useAppStoreSelector().commonData )
-  const [isShowNoticeModel, isShowNoticeModelDispatch] = useReducer((state): boolean => !state , false)
-  const handleGoToMore = (): void => {
-    isShowNoticeModelDispatch()
-  }
-  const handleClose = ():void =>{
-    commonDispatcher.next({...commonData, notice: {...commonData.notice, isShow: false,}} )
-  }
+  const [isVisitable, setIsVisitable] = useState<boolean>(true)
+  const  contentRef = useRef()
+  const content: string = 'hello1 hello2 hello3 hello4 hello5 hello6 hello7 hello8 hello9 hello10 hello11 hello12 hello13 hello14'
+ const handleShowDetail = (): void => {
+    Taro.showModal({ title: '消息公告', content })
+ }
+
   return (
     <>
-      {commonData.notice.isShow &&
-        <AtNoticebar
-          icon='volume-plus'
-          close
-          single
-          showMore
-          onGotoMore={handleGoToMore}
-          onClose={handleClose}
-          className={style.noticeBar}
-        >
-          {commonData.notice.content}
-        </AtNoticebar>
+      {
+        isVisitable && (
+          <view className={style.main}>
+            <Icon value='close' className={style.closeIcon} onClick={() => setIsVisitable(false) } />
+            <Icon value='notice' className={style.noticeIcon} />
+            <View
+              className={style.content}
+              ref={contentRef}
+              onClick={handleShowDetail}
+            >
+              {content}
+            </View>
+            <view
+              className={style.more}
+              onClick={handleShowDetail}
+            >
+              查看详情<Icon value='right' className={style.rightIcon} />
+            </view>
+          </view>
+        )
       }
-      <AtModal isOpened={isShowNoticeModel}>
-        <AtModalHeader>公告</AtModalHeader>
-        <AtModalContent>
-          {commonData.notice.content}
-        </AtModalContent>
-        <AtModalAction>
-          <Button onClick={isShowNoticeModelDispatch}>取消</Button>
-          <Button onClick={isShowNoticeModelDispatch}>确定</Button>
-        </AtModalAction>
-      </AtModal>
     </>
   )
 }

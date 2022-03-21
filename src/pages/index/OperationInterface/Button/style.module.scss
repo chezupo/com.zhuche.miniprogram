@@ -5,7 +5,8 @@
   @include row;
   display: grid;
   grid-template-rows: 100%;
+  justify-content: center;
   .button {
-    width: 80%;
+    width: $unit80;
   }
 }

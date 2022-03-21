@@ -1,21 +1,20 @@
 import * as React from "react";
-import {AtButton} from "taro-ui";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
-import {navigateTo, navigateToSelectCarPage} from "../../../../store/module/router";
+import {navigateToSelectCarPage} from "../../../../store/module/router";
+import CommonButton from "../../../../components/Button"
 
 const Button = (): React.ReactElement => {
   const handleSelectCar = () => navigateToSelectCarPage()
 
   return(
     <View className={style.main}>
-      <AtButton
+      <CommonButton
         onClick={handleSelectCar}
         type='primary'
-        circle
         className={style.button}
-      >去选车</AtButton>
+      >去选车</CommonButton>
     </View>
     )
 }

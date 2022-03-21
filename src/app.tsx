@@ -1,4 +1,3 @@
-import 'taro-ui/dist/style/index.scss'
 import * as React from "react";
 import {useEffect} from "react";
 import {Provider} from 'react-redux'

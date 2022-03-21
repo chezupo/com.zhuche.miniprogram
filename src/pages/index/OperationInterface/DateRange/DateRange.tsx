@@ -14,7 +14,7 @@ const DateRange: React.FC<DateRangePropsType> = (props) => {
   let noticeStr: string = ''
   const hours = (props.endTime.getTime() - props.starTime.getTime() ) / 60 / 60 / 1000;
   noticeStr += hours / 24 > 0 ?  (hours / 24).toFixed(0) + '天' : ''
-  noticeStr += hours % 24 > 0 ? hours % 24 + '小时' : ''
+  noticeStr += hours % 24 > 0 ? Math.round(hours % 24) + '小时' : ''
 
   return (
     <>

@@ -17,7 +17,7 @@ const ButtonRender: React.FC<ButtonRenderPropsType> = (props) => {
   if (props.endTime && props.startTime) {
     const hours =  (props.endTime.getTime() - props.startTime.getTime()) / (60 * 60 * 1000)
     notice += '共' + (hours / 24).toFixed(0) + '天'
-    notice += hours % 24 > 0 ? hours % 24  + '小时' : ''
+    notice += hours % 24 > 0 ? Math.round( hours % 24)  + '小时' : ''
   }
 
   return (

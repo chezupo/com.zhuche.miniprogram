@@ -9,6 +9,7 @@ import {useReducer, useState} from "react";
 import {navigateTo, navigateToLoginOrRegister} from "../../../store/module/router";
 import useObserve from "../../../util/useObserve";
 import {useAppStoreSelector} from "../../../store";
+import * as Taro from "@tarojs/taro";
 
 type NotePropstype = {title: string}
 const WechatNote = (props: NotePropstype): React.ReactElement => {
@@ -30,14 +31,18 @@ const Items = (): React.ReactElement => {
     {title: '身份认证', icon: 'iconfont icon-shenfenzheng'} ,
     {title: '驾照认证', icon: 'iconfont icon-kaojiazhao'} ,
   ]
-  const [me] = useObserve(useAppStoreSelector().me)
-  const [isActionPanel, actionDispatch] = useReducer((state): boolean => !state, false)
   const handleClick = (item: ItemContainerType) => {
-    if (!me.isNewUser) actionDispatch()
-  }
-  const handleLoginOrRegister = ():void => {
-    actionDispatch()
-    navigateToLoginOrRegister()
+    Taro.showModal({
+      title: '消息提示',
+      content: '您还未登录，无法进行操作, 是否前去登录？',
+      success: (res) => {
+        if (res.confirm) {
+          navigateToLoginOrRegister()
+        } else {
+          console.log("not")
+        }
+      }
+    })
   }
 
   return (
@@ -51,18 +56,6 @@ const Items = (): React.ReactElement => {
           />
         ))}
       </View>
-      <AtActionSheet
-        isOpened={isActionPanel}
-        cancelText='取消'
-        title='您还未登录，请登录后再试'
-        onCancel={actionDispatch}
-      >
-        <AtActionSheetItem
-          onClick={handleLoginOrRegister}
-        >
-          登录/注册
-        </AtActionSheetItem>
-      </AtActionSheet>
     </>
   )
 }

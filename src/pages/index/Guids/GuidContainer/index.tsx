@@ -1,4 +1,4 @@
-import {Image, View} from "@tarojs/components";
+import {Image, ITouchEvent, View} from "@tarojs/components";
 import * as React from "react";
 // @ts-ignore
 import style from './style.module.scss'
@@ -11,7 +11,7 @@ export type ContainerType = {
 }
 export type ContainerPropsType = {
   data: ContainerType
-  onClick: () => void
+  onClick: (e: ITouchEvent) => void
 }
 
 const GuidContainer = (props: ContainerPropsType): React.ReactElement => {

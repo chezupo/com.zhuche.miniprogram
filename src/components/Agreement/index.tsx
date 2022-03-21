@@ -1,8 +1,8 @@
 import * as React from "react";
-import {Checkbox, Text, View} from "@tarojs/components";
-import {appName} from "../../config/globalConfig";
+import {Text, View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss"
+import {useAppSelector} from "../../reduxStore";
 
 type AgreementPropsType = {
   checked: boolean
@@ -10,6 +10,7 @@ type AgreementPropsType = {
 }
 
 const Agreement = (props: AgreementPropsType): React.ReactElement => {
+  const {appName} = useAppSelector(state => state.configuration.config)
   return (
     <View className={style.main}>
       登录则默认同意

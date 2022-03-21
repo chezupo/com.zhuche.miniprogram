@@ -16,7 +16,8 @@ const numberMapWeekStr: Record<number, string> = {
 
 export {replaceStr, numberMapWeekStr}
 
-export const debounce = <T>(callback: (params: T) => void, wait: number): (params: T) => void => {
+type DebounceType<T> = (params?: T) => void
+export const debounce = <T>(callback: DebounceType<T>, wait: number): DebounceType<T> => {
   let timer: ReturnType<typeof setTimeout>;
 
   return (keyword) => {

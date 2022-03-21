@@ -6,15 +6,16 @@ import Layout from "../../container/Layout";
 import Order from "../Order";
 import {TabBarType} from "../../store/module/router";
 import Me from "../Me";
-import {appName} from "../../config/globalConfig";
 import Banners from "./Banners";
 // @ts-ignore
 import style from './style.module.scss'
 import Guilds from "./Guids";
 import NoticeBar from "./NoticeBar";
 import ComplaintFeedbackBar from "./ComplaintFeedbackBar";
+import {useAppSelector} from "../../reduxStore";
 
 const Index = () => {
+  const {configuration} = useAppSelector(state => state)
   const handleCode = async (): Promise<void> => {
     const code = await authCode();
     // const res = await graphQLClient({
@@ -104,7 +105,7 @@ const Index = () => {
   return (
     <Layout
       tabs={[
-          { name: '首页', icon: 'iconfont icon-car-o',  type: TabBarType.HOME, element:  <IndexRender />, navTitle: appName},
+          { name: '首页', icon: 'iconfont icon-car-o',  type: TabBarType.HOME, element:  <IndexRender />, navTitle: configuration.config.appName},
           { name: '订单', icon: 'iconfont icon-order',  type: TabBarType.ORDER, element: <Order /> , navTitle: '全部订单', isPermission: true},
           { name: '我的', icon: 'iconfont icon-user', type: TabBarType.ME, element: <Me />, navTitle: '我的' },
       ]}

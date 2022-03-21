@@ -1,10 +1,12 @@
-import SubscriptionBuilder from "../../util/SubscriptionBuilder";
-import {getConfiguration} from "../../api/configuration";
-
-export type ConfigurationType = {
+type ConfigurationType = {
   imgPrefix: string
+  appName: string
+  logo: string
+  amapKey: string
+  amapSearchKey: string
+  notice: string
 }
 
-export const ConfigurationObserve = SubscriptionBuilder.initCallBack<ConfigurationType>({imgPrefix: ''}, async ():Promise<ConfigurationType> => {
-  return await getConfiguration()
-})
+export {
+  ConfigurationType
+}

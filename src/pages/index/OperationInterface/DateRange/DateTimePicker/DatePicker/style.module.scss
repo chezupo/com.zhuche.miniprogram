@@ -1,7 +1,7 @@
-@import "../../../commond.module.scss";
+@import "../common.module.scss";
 
-$height: $unit80;
-$weekHeight: $unit12;
+$height: $dateHeight;
+$weekHeight: 5vh;
 .main {
   display: flex;
   flex-direction: column;

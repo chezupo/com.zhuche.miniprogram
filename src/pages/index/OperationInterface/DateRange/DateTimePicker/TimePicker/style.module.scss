@@ -1,13 +1,15 @@
-@import "../../../commond.module";
+@import "../common.module.scss";
 
+$height: $timePickerHeight;
+$itemHeight: $height  / 4;
 @mixin spin {
   height: $itemHeight;
   position: absolute;
-  background: gray;
-  opacity: 0.1;
   width: 100%;
+  background: $primaryThemeColor2;
+  //filter: blur(20px);
+  opacity: 0.5;
 }
-$itemHeight: $unit10;
 
 .scrollWrapper {
   height: 100%;
@@ -37,11 +39,15 @@ $itemHeight: $unit10;
 
 .title {
   text-align: center;
+  box-sizing: border-box;
+  border-top: solid $borderGrayColor 1px;
   width: 100%;
   font-size: $unit5;
-  padding: $unit1 0;
+  height: $itemHeight;
+  line-height: $itemHeight;
 }
 
 .main {
   width: 100%;
+  height: $height;
 }

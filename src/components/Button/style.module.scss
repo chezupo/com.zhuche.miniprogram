@@ -1,0 +1,21 @@
+@import "../../global.scss";
+.button {
+  $height: $unit10;
+  height: $height;
+  width: 100%;
+  border-radius: $unit5;
+  border: solid 1px $borderGrayColor;
+  text-align: center;
+  line-height: $height;
+}
+
+.primary{
+  background: $primaryThemeColor;
+  color: white;
+}
+.disable {
+  background: $noticeBackgroundColor;
+  background: $noticeBackgroundColor;
+  color: white;
+
+}

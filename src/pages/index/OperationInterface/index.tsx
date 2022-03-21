@@ -65,7 +65,10 @@ const OperationInterface = (props: OperationInterfacePropsType): React.ReactElem
             storeName={createOrder.endStore?.name ? `${createOrder.endStore?.name}${createOrder.endStore.mark ? `(${createOrder.endStore.mark})` : ''}` : ''}
           />
         }
-        <DateRange />
+        <DateRange
+          starTime={new Date(createOrder.starTime)}
+          endTime={new Date(createOrder.endTime)}
+        />
         <Button />
       </View>
     </View>

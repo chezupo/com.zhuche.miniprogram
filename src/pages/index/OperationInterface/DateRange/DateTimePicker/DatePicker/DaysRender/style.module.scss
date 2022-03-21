@@ -2,7 +2,7 @@
 
 $dateHeight: $unit9;
 @mixin rangeStyle {
-  background-color: rgb(186 230 253);
+  background-color: $primaryThemeColor2;
 }
 .main {
   width: 100%;

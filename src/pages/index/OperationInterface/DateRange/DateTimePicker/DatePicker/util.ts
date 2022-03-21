@@ -54,6 +54,35 @@ const getNextMonthTime = (time: Date): Date => {
   return new Date(fullYear, month, date, hour, muns, seconds, ms)
 }
 
-export {monthMapName, isSameDate, timeToDateTime, timeToMonthTime, getNextMonthTime}
+type ParseDateType = {
+  fullYear: number
+  month: number
+  date: number
+  hours: number
+  minutes: number
+  seconds: number
+  milliseconds: number
+}
+
+const parseDate = (date: Date): ParseDateType => {
+  return {
+    fullYear: date.getFullYear(),
+    month: date.getMonth(),
+    date: date.getDate(),
+    hours: date.getHours(),
+    minutes: date.getMinutes(),
+    seconds: date.getSeconds(),
+    milliseconds: date.getMilliseconds()
+  }
+}
+
+export {
+  monthMapName,
+  isSameDate,
+  timeToDateTime,
+  timeToMonthTime,
+  getNextMonthTime,
+  parseDate
+}
 
 

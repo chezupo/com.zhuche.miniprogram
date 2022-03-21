@@ -12,35 +12,37 @@ export  enum TabBarType {
 const homeUrl = '/pages/index/index'
 const storeUrl = '/pages/index/stories/index'
 const cityUrl = '/pages/index/city/index'
-export const navigateTo = (url: string) => {
+const timeRangeUrl = '/pages/index/OperationInterface/DateRange/DateTimePicker/index'
+const navigateTo = (url: string) => {
   taro.navigateTo({ url })
 }
-export const navigateToHome = () => {
+const navigateToHome = () => {
   goToSwitchTab()
 }
-export const navigateToStore = () => {
+const navigateToStore = () => {
   taro.navigateTo({url: storeUrl})
 }
-export const navigateToCity = () => {
+const navigateToCity = () => {
   taro.navigateTo({url:cityUrl})
 }
+const navigateTimeRangePage = () => taro.navigateTo({ url: timeRangeUrl})
 
-export const navigateToLoginOrRegister = () => {
+const navigateToLoginOrRegister = () => {
   taro.navigateTo({ url: '/pages/login/index'})
 }
 
-export const getCurrentRoute = (): string => store.currentRoute.value
+const getCurrentRoute = (): string => store.currentRoute.value
 
-export const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
+const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
 
-export const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new SubscriptionBuilder<TabBarType>(TabBarType.HOME)
+const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new SubscriptionBuilder<TabBarType>(TabBarType.HOME)
 
-export const switchTab = (tabBar: TabBarType): void => {
+const switchTab = (tabBar: TabBarType): void => {
   store.currentTab.next(tabBar)
   taro.reLaunch({ url: homeUrl })
 }
 
-export const goToSwitchTab = (): void => {
+const goToSwitchTab = (): void => {
   taro.reLaunch({
     url: '/pages/index/index'
   })
@@ -48,4 +50,18 @@ export const goToSwitchTab = (): void => {
 
 export const navigateBack = ():void => {
   taro.navigateBack()
+}
+
+export {
+  navigateTo,
+  navigateToHome,
+  navigateToStore,
+  navigateToCity,
+  navigateTimeRangePage,
+  navigateToLoginOrRegister,
+  getCurrentRoute,
+  getHistory,
+  currentTabBarObserve,
+  switchTab,
+  goToSwitchTab,
 }

@@ -53,7 +53,6 @@ const TimePicker: React.FC<TimePickerPropsType> = (props) => {
     <View className={style.main}>
       <view className={style.title}>{props.title}</view>
       <View className={style.containerWrapper}>
-        <View className={style.topSpin} />
         <ScrollView
           showScrollbar={false}
           className={style.scrollWrapper}
@@ -71,6 +70,7 @@ const TimePicker: React.FC<TimePickerPropsType> = (props) => {
           }
           <View className={style.item} />
         </ScrollView>
+        <View className={style.topSpin} />
         <View className={style.bottomSpin} />
       </View>
     </View>

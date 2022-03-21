@@ -11,6 +11,7 @@ export enum StartStoreOrEndStoreType {
   START,
   END
 }
+export type TimestampType = number
 type CreateOrderType = {
   startCity: CityType | null
   endCity: CityType | null
@@ -21,6 +22,8 @@ type CreateOrderType = {
   endCityStores: AreaStoreType[]
   startStore: StoreItemType | null
   endStore: StoreItemType | null
+  starTime: TimestampType
+  endTime: TimestampType
 }
 
 type InitialStateType = { createOrder: CreateOrderType }
@@ -34,7 +37,9 @@ const initialState: InitialStateType = {
     endCityStores: [],
     startCityOrEndCity: StartCityOrEndCityType.START,
     startStoreOrEndStore: StartStoreOrEndStoreType.START,
-    isForeignCity: false
+    isForeignCity: false,
+    starTime: (new Date()).getTime(),
+    endTime: (new Date()).getTime() + 60 * 60 * 24 * 1000 * 2
   }
 }
 const orderSlice = createSlice({
@@ -117,6 +122,16 @@ const orderSlice = createSlice({
           endStore: payload.payload
         }
       }
+    },
+    setTime: (state, payload: PayloadAction<{startTime: TimestampType; endTime: TimestampType}>): InitialStateType => {
+      return {
+        ...state,
+        createOrder: {
+          ...state.createOrder,
+          starTime: payload.payload.startTime,
+          endTime: payload.payload.endTime
+        }
+      }
     }
   }
 })
@@ -148,6 +163,7 @@ export const {
   setStarStore,
   setEndStore,
   setEndCityStores,
+  setTime,
 } = actions
 export {setStartCityThunk, setEndCityStoresThunk}
 export default orderReducer

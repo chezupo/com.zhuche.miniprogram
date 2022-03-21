@@ -1,0 +1,63 @@
+@import "../../../../global";
+@import "../../../../pages/index/common.module";
+@import "common.module";
+
+$leftBarWidth:  25vw;
+.main {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: $leftBarWidth 100vw - $leftBarWidth;
+  grid-template-rows: 100%;
+}
+.leftBar {
+  @include bodyHeightMixin;
+  overflow-y: scroll;
+  background: white;
+  border-right: solid 1px $borderGrayColor;
+  box-sizing: border-box;
+  .itemWrapper {
+    $height: $unit11;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+    @include globalSubtitle;
+    @include textEllipsis;
+  }
+  .activeItem {
+    background: $noticeColor;
+    color: white;
+    width: $leftBarWidth;
+    border-left: solid $unit1 $primaryThemeColor;
+    box-sizing: border-box;
+  }
+}
+.rightBar {
+  @include bodyHeightMixin;
+  overflow-y: scroll;
+}
+
+.popularAttractionsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  box-sizing: border-box;
+  justify-self: center;
+  grid-gap: $unit2;
+  .popularAttractions {
+    border-radius: $unit1;
+    color: $color;
+    $height: $unit7;
+    font-size: $unit3;
+    border: solid 1px $borderGrayColor;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+  }
+}
+.emptyWrapper {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-size: $unit3_5;
+  margin: $unit1 0;
+  color: $subtitleColor;
+}

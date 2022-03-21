@@ -1,0 +1,16 @@
+@import "../common.module";
+.main {
+  font-size: $unit3_5;
+  padding: $mainContainerLeftAndRightMargin;
+  @include dropdownContainerStyle;
+  grid-template-columns: 100%;
+
+  .itemWrapper {
+    padding: $unit3 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .active{
+    color: $noticeColor;
+  }
+}

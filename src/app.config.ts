@@ -1,14 +1,21 @@
 export default {
   pages: [
-    'pages/index/index',
-    'pages/index/city/index',
-    'pages/index/stories/index',
-    'pages/index/selectCar/index',
-    'pages/index/complaintFeedback/index',
-    'pages/login/index',
-    'pages/login/phoneLogin/index',
-    'pages/bannerDetail/index',
-    'pages/index/OperationInterface/DateRange/DateTimePicker/index'
+    'pages/index/index'
+  ],
+  subPackages: [
+    {
+      root: "lazyModule",
+      pages: [
+        'pages/login/index',
+        'pages/login/phoneLogin/index',
+        'pages/DateTimePicker/index',
+        'pages/bannerDetail/index',
+        'pages/complaintFeedback/index',
+        'pages/city/index',
+        'pages/stories/index',
+        'pages/selectCar/index',
+      ]
+    }
   ],
   window: {
     backgroundTextStyle: 'light',

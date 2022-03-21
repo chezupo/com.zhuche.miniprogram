@@ -1,0 +1,12 @@
+@import "../../../../../pages/index/common.module";
+
+.noticeWrapper {
+  margin: $mainContainerLeftAndRightMargin;
+  .notice {
+    &:last-child {
+      color: $subtitleColor;
+      margin-left: $unit2;
+      font-size: $unit3_5;
+    }
+  }
+}

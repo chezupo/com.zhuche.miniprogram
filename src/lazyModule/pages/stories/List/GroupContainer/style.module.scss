@@ -1,0 +1,13 @@
+@import "../../../../../global";
+@import "../common.module";
+
+.title{
+  font-size: $unit3;
+  color: $color;
+  margin: $unit2 $mainContainerLeftAndRightMargin;
+}
+.container {
+  padding: $mainContainerLeftAndRightMargin;
+  background: white;
+  border-radius: $borderRadiusCircle;
+}

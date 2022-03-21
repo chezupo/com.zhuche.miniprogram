@@ -1,0 +1,53 @@
+@import "../common.module";
+
+$height: $timePickerHeight;
+$itemHeight: $height  / 4;
+@mixin spin {
+  height: $itemHeight;
+  position: absolute;
+  width: 100%;
+  background: $primaryThemeColor2;
+  //filter: blur(20px);
+  opacity: 0.5;
+}
+
+.scrollWrapper {
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+}
+.item {
+  height: $itemHeight;
+  text-align: center;
+  line-height: $itemHeight;
+  font-size: $itemHeight * 0.55;
+  box-sizing: border-box;
+}
+.containerWrapper{
+  width: 100%;
+  position: relative;
+  .topSpin {
+    @include spin;
+    top: 0;
+  }
+  .bottomSpin {
+    @include spin;
+    bottom: 0;
+  }
+  height: $itemHeight * 3;
+}
+
+.title {
+  text-align: center;
+  box-sizing: border-box;
+  border-top: solid $borderGrayColor 1px;
+  width: 100%;
+  font-size: $unit5;
+  height: $itemHeight;
+  line-height: $itemHeight;
+}
+
+.main {
+  width: 100%;
+  height: $height;
+}

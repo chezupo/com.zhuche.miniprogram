@@ -3,10 +3,10 @@ import {AtButton} from "taro-ui";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
-import {navigateTo} from "../../../../store/module/router";
+import {navigateTo, navigateToSelectCarPage} from "../../../../store/module/router";
 
 const Button = (): React.ReactElement => {
-  const handleSelectCar = () => navigateTo('/pages/index/selectCar/index')
+  const handleSelectCar = () => navigateToSelectCarPage()
 
   return(
     <View className={style.main}>

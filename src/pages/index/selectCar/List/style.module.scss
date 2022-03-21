@@ -1,8 +1,0 @@
-@import "../common.module.scss";
-
-.main {
-  @include bodyWrapperHeight;
-  display: grid;
-  $firstGrid: 20%;
-  grid-template-columns: $firstGrid 100% - $firstGrid;
-}

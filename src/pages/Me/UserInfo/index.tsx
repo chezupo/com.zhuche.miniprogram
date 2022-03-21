@@ -1,7 +1,7 @@
 import {View} from "@tarojs/components";
 import {AtAvatar} from "taro-ui";
 import * as React from "react";
-import {navigateTo} from "../../../store/module/router";
+import {navigateTo, navigateToLoginOrRegister} from "../../../store/module/router";
 import useObserve from "../../../util/useObserve";
 import {isLoginObserve} from "../../../store/module/me";
 // @ts-ignore
@@ -10,7 +10,7 @@ import {replaceStr} from "../../../util/helper";
 import {useAppStoreSelector} from "../../../store";
 
 const UserInfo: React.FC = ()=> {
-  const handleLogin = (): void => navigateTo('/pages/login/index')
+  const handleLogin = (): void => navigateToLoginOrRegister()
   const [me] = useObserve(useAppStoreSelector().me)
   return (
     <View className={style.main}>

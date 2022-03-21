@@ -9,10 +9,11 @@ export  enum TabBarType {
   ME
 }
 
+const lazyModulePrefix = '/lazyModule'
 const homeUrl = '/pages/index/index'
 const storeUrl = '/pages/index/stories/index'
 const cityUrl = '/pages/index/city/index'
-const timeRangeUrl = '/pages/index/OperationInterface/DateRange/DateTimePicker/index'
+const timeRangeUrl = `${lazyModulePrefix}/pages/DateTimePicker/index`
 const navigateTo = (url: string) => {
   taro.navigateTo({ url })
 }
@@ -27,9 +28,9 @@ const navigateToCity = () => {
 }
 const navigateTimeRangePage = () => taro.navigateTo({ url: timeRangeUrl})
 
-const navigateToLoginOrRegister = () => {
-  taro.navigateTo({ url: '/pages/login/index'})
-}
+const navigateToLoginOrRegister = () => taro.navigateTo({ url: `${lazyModulePrefix}/pages/login/index`})
+
+const navigateToSelectCarPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/index`)
 
 const getCurrentRoute = (): string => store.currentRoute.value
 
@@ -64,4 +65,5 @@ export {
   currentTabBarObserve,
   switchTab,
   goToSwitchTab,
+  navigateToSelectCarPage
 }

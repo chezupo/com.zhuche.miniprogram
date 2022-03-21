@@ -1,0 +1,90 @@
+@import "../../../../pages/index/common.module";
+
+.main {
+  @include bodyHeightMixin;
+  .emptyWrapper {
+    @include bodyHeightMixin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.itemWrapper {
+  background: white;
+  display: grid;
+  $firstGrid: 60%;
+  grid-template-columns: $firstGrid 100% - $firstGrid;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px $borderGrayColor;
+  $padding: $unit3;
+  padding: $unit1 0;
+  grid-column-gap: $unit2;
+  .name {
+    padding-left: $padding;
+    @include textEllipsis;
+  }
+  .address {
+    margin-top: $unit1;
+    padding-left: $padding;
+    @include textEllipsis;
+    font-size: $unit3_5;
+  }
+  .cityAreaWrapper {
+    color: $subtitleColor;
+    width: 100%;
+    font-size: $unit4;
+    flex-direction: row-reverse;
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    justify-content: right;
+    justify-items: right;
+    .cityArea {
+      display: inline-block;
+      @include textEllipsis;
+    }
+    .rightIcon {
+      padding-right: $padding;
+    }
+  }
+}
+.bottom {
+  width: 100%;
+  text-align: center;
+  margin-top: $unit5;
+  @include globalSubtitle;
+}
+.loading {
+  @include bodyHeightMixin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .spinWrapper {
+    .title {
+      margin-top: $unit3;
+    }
+    .spin {
+      animation: spin 1s steps(8) infinite;
+    }
+  }
+}
+@keyframes spin {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+.notFoundWrapper {
+  @include bodyHeightMixin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.itemRender {
+  &:first-child {
+    margin-top: $unit2;
+  }
+  background: white;
+  border-radius: $borderRadiusCircle;
+  margin: 0 $unit2;
+  padding: $unit4;
+}

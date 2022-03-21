@@ -1,0 +1,6 @@
+@import "../../../global";
+
+$bottomHeight: 12vh;
+$topHeight: 7vh;
+$timePickerHeight: 16vh;
+$dateHeight: 100vh - $bottomHeight - $topHeight - $timePickerHeight;

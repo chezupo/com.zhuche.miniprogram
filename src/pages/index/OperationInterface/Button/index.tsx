@@ -4,9 +4,31 @@ import {View} from "@tarojs/components";
 import style from './style.module.scss';
 import {navigateToSelectCarPage} from "../../../../store/module/router";
 import CommonButton from "../../../../components/Button"
+import {useAppSelector} from "../../../../reduxStore";
+import {messageObserve} from "../../../../store/module/message";
 
 const Button = (): React.ReactElement => {
-  const handleSelectCar = () => navigateToSelectCarPage()
+  const {createOrder} = useAppSelector(state => state.order)
+  const handleErrorMessage = (message: string): void => {
+    messageObserve.next({
+      title: message,
+      type: 'error',
+      duration: 10000
+    })
+  }
+  const handleSelectCar = () => {
+    if ( createOrder.startCity === null) {
+      handleErrorMessage('请选择取车城市和门店')
+    } else if (createOrder.startStore === null) {
+      handleErrorMessage('请选择取车门店')
+    }else if (createOrder.isForeignCity === true) {
+      const {endStore, endCity} = createOrder
+      if (endCity === null) handleErrorMessage('请选择异地还车的城市')
+      else if (endStore === null) handleErrorMessage('请选择异地还车的商店')
+    } else {
+      navigateToSelectCarPage()
+    }
+  }
 
   return(
     <View className={style.main}>

@@ -1,8 +1,9 @@
 import SubscriptionBuilder from "../../util/SubscriptionBuilder";
 
+export type MessageTypeType = 'info' | 'success' | 'error' | 'warning'
 export type MessageType = {
   title: string
-  type: 'info' | 'success' | 'error' | 'warning'
+  type: MessageType
   duration?: number
 }
 

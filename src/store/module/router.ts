@@ -2,6 +2,7 @@ import {store} from "../index";
 // @ts-ignore
 import taro from '@tarojs/taro'
 import SubscriptionBuilder from "../../util/SubscriptionBuilder";
+import {prefixUrl} from "../../util/requestClient";
 
 export  enum TabBarType {
   HOME,
@@ -11,8 +12,8 @@ export  enum TabBarType {
 
 const lazyModulePrefix = '/lazyModule'
 const homeUrl = '/pages/index/index'
-const storeUrl = '/pages/index/stories/index'
-const cityUrl = '/pages/index/city/index'
+const storeUrl = `${prefixUrl}/pages/stories/index`
+const cityUrl = `${lazyModulePrefix}/pages/city/index`
 const timeRangeUrl = `${lazyModulePrefix}/pages/DateTimePicker/index`
 const navigateTo = (url: string) => {
   taro.navigateTo({ url })

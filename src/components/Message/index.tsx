@@ -1,7 +1,6 @@
 import * as React from "react";
 import {useState} from "react";
-import useObserve from "../../util/useObserve";
-import {store, useAppStoreSelector} from "../../store";
+import {store} from "../../store";
 import {useCallback, useEffect, useReducer} from "preact/hooks";
 import TransitionEase from "../TransitionEase";
 import style from './style.module.scss'
@@ -19,7 +18,9 @@ const Message: React.FC = () => {
     info: 'background-color: rgb(161 161 170)'
   }
   const [isShow, setIsShow] = useState<boolean>(false)
-  const [message, messageDispatch] = useReducer((state: MessageType, newMessage: MessageType): MessageType => newMessage, null)
+  const [message, messageDispatch] = useReducer((state: MessageType, newMessage: MessageType): MessageType => {
+    return newMessage
+  } , null)
   const [, timerDispatch] = useReducer((state: TimerType, newTimer: TimerType ): TimerType => {
     state && clearTimeout(state)
     return newTimer
@@ -39,11 +40,10 @@ const Message: React.FC = () => {
     })
 
     return () => {
-      debugger
       store.message.unSubscription(messageSubscriptionHandler)
     }
   }, [])
-  console.log(isShow)
+
   return (<TransitionEase
     visitable={isShow}
     height='8vw'

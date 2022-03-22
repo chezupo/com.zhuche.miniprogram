@@ -12,7 +12,7 @@ export  enum TabBarType {
 
 const lazyModulePrefix = '/lazyModule'
 const homeUrl = '/pages/index/index'
-const storeUrl = `${prefixUrl}/pages/stories/index`
+const storeUrl = `${lazyModulePrefix}/pages/stories/index`
 const cityUrl = `${lazyModulePrefix}/pages/city/index`
 const timeRangeUrl = `${lazyModulePrefix}/pages/DateTimePicker/index`
 const navigateTo = (url: string) => {

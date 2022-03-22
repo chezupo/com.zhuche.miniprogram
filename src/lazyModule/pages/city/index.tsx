@@ -10,6 +10,7 @@ import {CityType} from "../../../typings";
 import {useAppDispatch, useAppSelector} from "../../../reduxStore";
 import {setEndCityStoresThunk, setStartCityThunk, StartCityOrEndCityType} from "../../../reduxStore/module/order";
 import {navigateToHome} from "../../../store/module/router";
+import 'taro-ui/dist/style/index.scss'
 
 const City = (): React.ReactElement => {
   const [value, setValue] = useState<string>('')

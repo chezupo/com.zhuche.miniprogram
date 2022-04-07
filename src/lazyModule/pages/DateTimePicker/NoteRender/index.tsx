@@ -1,15 +1,13 @@
 import * as React from "react";
 import {View} from "@tarojs/components";
 import style from "./style.module.scss"
+import {formatTimeNumber} from "../../../../util/helper";
 
 type NoteItemRenderPropsType = {
   time?: Date
   subtitleTextAliceRight?: boolean
 }
 const NoteItemRender: React.FC<NoteItemRenderPropsType> = (props) => {
-  const formatNumber = (n: number): string => {
-    return n < 9 ? `0${n}` : `${n}`
-  }
   const dayMapStr: Record<number, string> = {
     0: '星期日',
     1: '星期一',
@@ -26,7 +24,7 @@ const NoteItemRender: React.FC<NoteItemRenderPropsType> = (props) => {
         {!props.time && (<>还车日期</>)}
       </View>
       <View className={[style.week, props.subtitleTextAliceRight ? style.textAliceRight : '' ].join(' ')}>
-        {props.time && <> {dayMapStr[props.time.getDay()]} {`${ formatNumber(props.time.getHours())}:${formatNumber( props.time.getMinutes())}`} </>}
+        {props.time && <> {dayMapStr[props.time.getDay()]} {`${formatTimeNumber(props.time.getHours())}:${formatTimeNumber( props.time.getMinutes())}`} </>}
         {!props.time && (<>请选择</>)}
       </View>
     </View>

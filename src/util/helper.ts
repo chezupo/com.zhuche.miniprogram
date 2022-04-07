@@ -27,3 +27,9 @@ export const debounce = <T>(callback: DebounceType<T>, wait: number): DebounceTy
     }, wait)
   }
 }
+
+const formatTimeNumber = (n: number): string => n < 9 ? `0${n}` : `${n}`
+
+export {
+  formatTimeNumber
+}

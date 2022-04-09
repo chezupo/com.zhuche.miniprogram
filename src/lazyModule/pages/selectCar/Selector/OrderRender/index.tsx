@@ -1,7 +1,8 @@
+import React, {useState} from "react";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
-import {useState} from "react";
+import ContainerWithButtons from "../components/ContainerWithButtons";
 
 type Itemype = {id:number; name: string }
 const OrderRender = (): React.ReactElement => {
@@ -13,22 +14,24 @@ const OrderRender = (): React.ReactElement => {
   ]
   const handleSelectItem = (item: Itemype) => setActiveId(item.id)
 
-  return (<View className={style.main}>
-    {
-      items.map(item => (
-        <View
-          key={item.id}
-          className={[style.itemWrapper, activeId === item.id ? style.active : ''].join(' ')}
-          onClick={() => handleSelectItem(item)}
-        >
-          <View>
-            {item.name}
+  return (
+    <ContainerWithButtons className={style.main}>
+      {
+        items.map(item => (
+          <View
+            key={item.id}
+            className={[style.itemWrapper, activeId === item.id ? style.active : ''].join(' ')}
+            onClick={() => handleSelectItem(item)}
+          >
+            <View>
+              {item.name}
+            </View>
+            <View className='at-icon at-icon-check' />
           </View>
-          <View className='at-icon at-icon-check'></View>
-        </View>
-      ))
-    }
-  </View>)
+        ))
+      }
+    </ContainerWithButtons>
+  )
 }
 
 export default OrderRender

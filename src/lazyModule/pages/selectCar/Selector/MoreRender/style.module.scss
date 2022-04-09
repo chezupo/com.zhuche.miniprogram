@@ -1,0 +1,15 @@
+@import "../common.module";
+
+.main {
+  padding: $mainContainerLeftAndRightMargin;
+}
+.containerWrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: $unit2;
+}
+.selfContainerWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: $unit2;
+}

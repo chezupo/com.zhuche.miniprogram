@@ -1,0 +1,62 @@
+@import "../../global.scss";
+
+$color: $gray2;
+.main {
+  margin-top: $unit3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: $unit10;
+}
+.point {
+  height: $unit2_5;
+  background: $color;
+  width: $unit0_5;
+  position: relative;
+  .flag {
+    z-index: 1;
+    $size: $unit7;
+    height: $size;
+    width: $size;
+    background: white;
+    box-shadow: 0px 5px 5px $gray2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .verticalLine {
+      width: $unit0_5;
+      height: 50%;
+      background: $color;
+      &:nth-child(2) {
+        margin: 0 $unit0_5;
+      }
+    }
+    border-radius: 100%;
+    position: absolute;
+    top: -($size / 2);
+    left:-($size / 2);;
+  }
+  .title {
+    position: absolute;
+    bottom: -$unit10;
+    $width: $unit7;
+    width: $width;
+    text-align: center;
+    left: -($width / 2);
+  }
+}
+.line {
+  height: $unit0_5;
+  margin-bottom: $unit0_5;;
+  background: $color;
+  position: relative;
+}
+
+.activeLine {
+  background: $primaryThemeColor;
+}
+.clickSpin {
+  height: $unit8;
+  position: relative;
+  top: -($unit2_5);
+}

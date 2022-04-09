@@ -1,0 +1,23 @@
+@import "../../common.module";
+
+.main {
+  display:grid;
+  grid-row-gap: $unit4;
+  font-size: $unit3_5;
+  @include dropdownContainerStyle;
+  grid-template-columns: 100%;
+  background: white;
+}
+
+.buttonWrapper {
+  padding: $mainContainerLeftAndRightMargin $mainContainerLeftAndRightMargin 0;
+  border-top: solid #F3F3F3 1px;
+  font-size: $unit4;
+  display: grid;
+  grid-template-columns: 30% auto;
+  grid-column-gap: $unit3;
+  .conformButton {
+    background: $primaryThemeColor;
+    color: white;
+  }
+}

@@ -1,0 +1,25 @@
+@import "../common.module";
+.main {
+  padding: $mainContainerLeftAndRightMargin;
+  display:grid;
+  grid-row-gap: $unit4;
+}
+
+.priceContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: $unit2;
+}
+
+.item {
+  background: #F3F3F3;
+  text-align: center;
+  padding: $unit2_5;
+  border-radius: $unit4;
+  color: $subtitleColor;
+  font-size: $unit3_5;
+}
+.active {
+  background: $primaryThemeColor2;
+  color: $primaryThemeColor;
+}

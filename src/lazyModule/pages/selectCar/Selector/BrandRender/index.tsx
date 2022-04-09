@@ -1,9 +1,10 @@
 import {Button, Image, View} from "@tarojs/components";
-import {useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 // @ts-ignore
 import style from "./style.module.scss";
 import RightBarScroll from "./RightBarScroll";
 import LeftBarScroll from "./LeftBarScroll";
+import ContainerWithButtons from "../components/ContainerWithButtons";
 
 export type SeriesType = {
   id: number;
@@ -146,30 +147,24 @@ const BrandRender = (): React.ReactElement => {
   }
 
   return (
-    <View className={style.main}>
-      <View className={style.listWrapper}>
-        <LeftBarScroll
-          brands={brands}
-          activeBrand={activeBrand}
-          onActiveBrand={handleActiveBrand}
-          checkBrandIds={checkBrandIds}
-        />
+    <>
+      <ContainerWithButtons >
+        <View className={style.listWrapper}>
+          <LeftBarScroll
+            brands={brands}
+            activeBrand={activeBrand}
+            onActiveBrand={handleActiveBrand}
+            checkBrandIds={checkBrandIds}
+          />
 
-        <RightBarScroll
-          activeBrand={activeBrand}
-          onCheckAllSeries={handleCheckAllSeries}
-          onActiveSeries={handleActiveSeries}
-        />
-      </View>
-
-      <View className={style.buttonWrapper}>
-        <View
-          className={style.clearButton}
-          onClick={handleClean}
-        >清空</View>
-        <View className={style.confirmButton}>确定</View>
-      </View>
-    </View>
+          <RightBarScroll
+            activeBrand={activeBrand}
+            onCheckAllSeries={handleCheckAllSeries}
+            onActiveSeries={handleActiveSeries}
+          />
+        </View>
+      </ContainerWithButtons>
+    </>
   )
 }
 

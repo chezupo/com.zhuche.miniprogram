@@ -1,9 +1,9 @@
 import * as React from "react";
-import SelectorContainer from "./SelectContainer";
-// eslint-disable-next-line import/first
-import {View} from "@tarojs/components";
+import SelectorContainer from "./components/SelectContainer";
 import OrderRender from "./OrderRender";
 import BrandRender from "./BrandRender";
+import PriceRender from "./PriceRender";
+import MoreRender from "./MoreRender";
 
 const Selector = (): React.ReactElement => {
   return (<SelectorContainer
@@ -13,8 +13,8 @@ const Selector = (): React.ReactElement => {
     brandComponent={
       <BrandRender />
     }
-    priceComponent={<View>3</View>}
-    moreComponent={<View>4</View>}
+    priceComponent={<PriceRender />}
+    moreComponent={<MoreRender />}
   />
   )
 }

@@ -6,7 +6,7 @@ import style from "./style.module.scss"
 
 export type ItemContainerType = {
   title: string
-  icon: string
+  icon: React.ReactElement
   noteClassName?: string
   note?: ReactElement
 }
@@ -22,7 +22,9 @@ const ItemContainer = (props: ItemContainerPropsType): React.ReactElement => {
       className={[style.itemWrapper, props.className ? props.className : ''].join(' ')}
       onClick={() => props.onClick(props.data)}
     >
-      <View className={[props.data.icon, style.icon].join(' ')} />
+      <View className={[style.icon].join(' ')} >
+        {props.data.icon}
+      </View>
       <View className={style.leftWrapper}>
         <View>{props.data.title}</View>
         <View className={style.noteWrapper}>

@@ -11,7 +11,13 @@ export type IconType = 'close' |
   'seat' |
   'power' |
   'displacement' |
-  'user'
+  'user' |
+  'wechat' |
+  'weizhangshigujilu' |
+  'lianxiren' |
+  'shenfenzheng' |
+  'kaojiazhao'
+
 type IconPropsType = {
   value: IconType
   className?: string

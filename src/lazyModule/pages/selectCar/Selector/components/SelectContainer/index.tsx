@@ -1,11 +1,11 @@
 import * as React from "react";
+import { useReady } from "@tarojs/taro";
 import {ReactElement, useRef, useState} from "react";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss'
 // eslint-disable-next-line import/first
 import {selectorQueryClientRect} from "../../../../../../nativeInterface/selectorQueryClientRect";
-import { useReady } from "@tarojs/taro";
 
 enum ItemIdType {
   ORDER,

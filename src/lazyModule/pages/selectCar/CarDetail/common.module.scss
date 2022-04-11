@@ -1,0 +1,15 @@
+@import "../../../../global.scss";
+
+$containerPadding: $unit2_5;
+$mainBackground:#F6F6F6;
+
+.containerWrapper {
+  background: white;
+  padding: $containerPadding;
+  .container {
+    padding-top: $unit2_5;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: $unit4;
+  }
+}

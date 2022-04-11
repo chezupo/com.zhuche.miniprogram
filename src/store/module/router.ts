@@ -1,6 +1,5 @@
-import {store} from "../index";
-// @ts-ignore
 import taro from '@tarojs/taro'
+import {store} from "../index";
 import SubscriptionBuilder from "../../util/SubscriptionBuilder";
 import {prefixUrl} from "../../util/requestClient";
 
@@ -32,6 +31,8 @@ const navigateTimeRangePage = () => taro.navigateTo({ url: timeRangeUrl})
 const navigateToLoginOrRegister = () => taro.navigateTo({ url: `${lazyModulePrefix}/pages/login/index`})
 
 const navigateToSelectCarPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/index`)
+
+const navigateToCarDetailPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/CarDetail/index`)
 
 const navigateToFeedbackPage = () => navigateTo(`${lazyModulePrefix}/pages/complaintFeedback/index`)
 
@@ -72,5 +73,6 @@ export {
   goToSwitchTab,
   navigateToSelectCarPage,
   navigateToFeedbackPage,
-  navigateToPhoneLoginPage
+  navigateToPhoneLoginPage,
+  navigateToCarDetailPage
 }

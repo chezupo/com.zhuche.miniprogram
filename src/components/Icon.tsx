@@ -1,10 +1,22 @@
 import {ITouchEvent, View} from "@tarojs/components";
 import * as React from "react";
+import {CSSProperties} from "react";
 
+export type IconType = 'close' |
+  'right' |
+  'notice' |
+  'tousupingjia' |
+  'engine' |
+  'volume' |
+  'seat' |
+  'power' |
+  'displacement' |
+  'user'
 type IconPropsType = {
-  value: 'close' | 'right' | 'notice' | 'tousupingjia'
+  value: IconType
   className?: string
   onClick?: (evnet: ITouchEvent) => void
+  style?: CSSProperties | string
 }
 const Icon: React.FC<IconPropsType> = props => {
   return (
@@ -15,6 +27,7 @@ const Icon: React.FC<IconPropsType> = props => {
         props.className || ''
       ].join(' ')}
       onClick={e => props.onClick && props.onClick(e)}
+      {...(props.style ? {style: props.style} : {})}
     />
   )
 }

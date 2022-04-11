@@ -14,6 +14,7 @@ export default {
         'pages/city/index',
         'pages/stories/index',
         'pages/selectCar/index',
+        'pages/selectCar/CarDetail/index'
       ]
     }
   ],

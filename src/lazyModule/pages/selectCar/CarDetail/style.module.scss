@@ -1,0 +1,23 @@
+@import "./common.module.scss";
+
+.main {
+  background: $mainBackground;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit2;
+}
+
+.buttonWrapper {
+  position: fixed;
+  bottom: $unit4;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  .button {
+    width: 70%;
+    background: $primaryThemeColor;
+    color: white;
+  }
+}
+

@@ -5,13 +5,15 @@ import cityReducer from "./module/city";
 import enhancer from "./enhancer";
 import orderReducer from "./module/order"
 import configurationReducer from "./module/configuration";
+import carReducer from "./module/cars";
 
 const store =  configureStore({
     reducer: {
       banner:bannersReducer,
       city: cityReducer,
       order: orderReducer,
-      configuration: configurationReducer
+      configuration: configurationReducer,
+      cars: carReducer
     },
   enhancers: [enhancer]
   }

@@ -1,0 +1,47 @@
+@import "../../../../../global.scss";
+
+.baseInfoWrapper {
+  background: #fff;
+  .imageContainer {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    .tag {
+      position: absolute;
+      opacity: .6;
+      bottom: $unit1;
+      left: $unit4;
+      background: gray;
+      padding: $unit1;
+      font-size: $unit2_5;
+      color: white;
+      border-radius: $unit4;
+    }
+  }
+  .nameWrapper {
+    margin-top: $unit2_5;
+    padding: $unit2_5;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit4;
+    .name{
+      font-weight: 500;
+    }
+    .tags{
+      display: flex;
+      .tag {
+        margin: 0 $unit2;
+        &:first-child{
+          margin: 0;
+        }
+        color: $primaryThemeColor;
+        background: $primaryThemeColor2;
+        padding:$unit1 $unit2;
+        text-align: center;
+        font-size: $unit2_5;
+        border-radius: $unit1;
+      }
+    }
+  }
+}

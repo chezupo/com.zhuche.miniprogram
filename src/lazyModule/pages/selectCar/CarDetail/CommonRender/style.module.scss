@@ -1,0 +1,83 @@
+@import "../common.module.scss";
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .name {
+    font-size: $unit4;
+    font-weight: 500;
+  }
+  .relate {
+    font-size: $unit3;
+    .text {
+      color: $primaryThemeColor;
+    }
+  }
+}
+.tagsWrapper {
+  padding: $unit4 0;
+  border-bottom: 1px solid $mainBackground;
+  display: flex;
+  .tag {
+    padding: $unit1 $unit2;
+    background-color: $primaryThemeColor2;
+    font-size: $unit3;
+    color: $primaryThemeColor;
+    border-radius: $unit3;
+    margin-left: $unit1;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.user {
+  padding-top: $unit4;
+  display: flex;
+  .avatar {
+    $size: $unit8;
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+  }
+  .infoWrapper {
+    margin-left: $unit1;
+    .nameWrapper {
+      display: flex;
+    }
+    .name {
+      font-size: $unit3_5;
+    }
+    .tag {
+      background: $primaryThemeColor;
+      font-size: $unit2;
+      color: white;
+      border-radius: $unit3_5;
+      padding: $unit0_75 $unit2;
+      margin-left: $unit1;
+    }
+    .date {
+      font-size: $unit2_5;
+      color: $subtitleColor;
+    }
+  }
+}
+.content {
+  color: $subtitleColor;
+  padding-top: $unit1;
+}
+
+.imagesWrapper {
+  padding-top: $unit2;
+  padding-bottom: $unit4;
+  border-bottom: 1px solid $mainBackground;
+  display: flex;
+  .image {
+    max-width: 19%;
+    margin-left: 1%;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

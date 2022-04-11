@@ -4,11 +4,13 @@ import {useMemo, useRef, useState} from "react";
 // @ts-ignore
 import style from './style.module.scss';
 import {CategoryType, ItemType} from "../index";
+import {CarItemType} from "../../../../../typings";
 
 type LeftWrapperPropsType = {
   items: ItemType[]
+  onChange: (newCars: CarItemType[]) => void
 }
-const LeftBar = ({items}: LeftWrapperPropsType): React.ReactElement => {
+const LeftBar = ({items, onChange}: LeftWrapperPropsType): React.ReactElement => {
   const [activeItemId, setActiveItemId] = useState<number>(0)
   const prevSiblingId = useMemo<number>(() => {
     let prevItem: ItemType;
@@ -25,6 +27,7 @@ const LeftBar = ({items}: LeftWrapperPropsType): React.ReactElement => {
 
   const handleActiveCategory = (activeItem: ItemType) => {
     setActiveItemId(activeItem.id)
+    onChange(activeItem.cars)
   }
   const leftContainerRef = useRef(null)
   return (

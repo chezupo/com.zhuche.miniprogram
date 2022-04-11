@@ -1,31 +1,53 @@
 import {View} from "@tarojs/components";
+import {useEffect, useState} from "preact/hooks";
 import * as React from "react";
 // @ts-ignore
 import style from './style.module.scss'
 import LeftBar from "./LeftBar";
 import RightBar from "./RightBar";
+import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
+import { CarItemType } from "../../../../typings";
+import {getCarsThunk} from "../../../../reduxStore/module/cars";
 
 export enum CategoryType  {
   CATEGORY,
   RECOMMAND
 }
-export type ItemType = {id: number; name: string; miniPrice: number; type: CategoryType}
+export type ItemType = {
+  id: number;
+  name: string;
+  miniPrice: number;
+  type: CategoryType
+  cars: CarItemType[]
+}
+
 const List = ():React.ReactElement => {
+  const {categories, list} = useAppSelector(state => state.cars)
+  const [showCars, setShowCars] = useState<CarItemType[]>([])
+  const {createOrder} = useAppSelector(state => state.order);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (list.length === 0 && createOrder.startStore?.id) {
+      dispatch(getCarsThunk(createOrder.startStore.id)).then(() =>{
+        console.log("Get cars.")
+      })
+    }
+    setShowCars(list)
+  }, [])
+  useEffect(() => {
+    if (showCars.length === 0 && list.length > 0) setShowCars(list)
+  }, [list])
+
   const items: ItemType[] = [
-    {id: 0, name: '推荐', miniPrice: 0, type: CategoryType.RECOMMAND},
-    {id: 1, name: '经济型', miniPrice: 117.5, type: CategoryType.CATEGORY},
-    {id: 2, name: '舒适型', miniPrice: 118.5, type: CategoryType.CATEGORY},
-    {id: 3, name: '精英型', miniPrice: 118.5, type: CategoryType.CATEGORY},
-    {id: 4, name: 'SUV型', miniPrice: 222.5, type: CategoryType.CATEGORY},
-    {id: 5, name: 'SUV型', miniPrice: 222.5, type: CategoryType.CATEGORY},
-    {id: 6, name: '5-15座商务', miniPrice: 222.5, type: CategoryType.CATEGORY},
-    {id: 7, name: '电动型', miniPrice: 222.5, type: CategoryType.CATEGORY},
-    {id: 8, name: '高端车', miniPrice: 222.5, type: CategoryType.CATEGORY},
+    {id: 0, name: '推荐', miniPrice: 0, type: CategoryType.RECOMMAND, cars: list },
   ]
+  categories.forEach(({id, name, cars, price}) => {
+    items.push({id, miniPrice: price, name, type: CategoryType.CATEGORY, cars})
+  })
   return (
     <View className={style.main}>
-      <LeftBar items={items} />
-      <RightBar />
+      <LeftBar items={items} onChange={setShowCars} />
+      <RightBar cars={showCars} />
     </View>
   );
 }

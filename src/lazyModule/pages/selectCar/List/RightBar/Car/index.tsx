@@ -1,34 +1,18 @@
 import * as React from "react";
+import {CoverImage, Text, View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss";
-// eslint-disable-next-line import/first
-import {CoverImage, Text, View} from "@tarojs/components";
 import PlayIcon from "../../../../../../components/icon/PlayIcon";
-
-export type CarInfoType = {
-  id: number
-  cover: string
-  mp4: string
-  banners: string[]
-  name:string
-  tags: string[]
-  configurations: Set<{
-    name: string
-    value: string
-  }>
-  satisfaction: number
-  price: number
-  license?: string
-  subtitle: string
-}
+import {CarItemType} from "../../../../../../typings";
 
 export type CarPropsType = {
-  carInfo: CarInfoType
-  onClick?: (carInfo: CarInfoType) => void
+  data: CarItemType
+  onClick?: (car: CarItemType) => void
+  onShowDetail: () => void
 }
 const Car  = (props: CarPropsType): React.ReactElement => {
   const handleClick = () => {
-    props.onClick && props.onClick(props.carInfo)
+    props.onClick && props.onClick(props.data)
   }
 
   return (
@@ -37,22 +21,26 @@ const Car  = (props: CarPropsType): React.ReactElement => {
       >
         <View className={style.firstRowWrapper}>
           <View className={style.imageWrapper}>
-            <CoverImage src={props.carInfo.cover} className={style.image} />
+            <CoverImage src={props.data.cover} className={style.image} />
             <View className={style.playIconWrapper}>
               <PlayIcon />
             </View>
           </View>
           <View className={style.leftInfoWrapper}>
             <View className={style.nameWrapper}>
-              <View> {props.carInfo.name} </View>
+              <View> {props.data.name} </View>
               {
-                props.carInfo.license && <View className={style.license}>{props.carInfo.license}</View>
+                props.data.number && <View className={style.license}>{props.data.number.substring(0, 2)}</View>
               }
             </View>
-            <View className={style.configurationWrapper}>{props.carInfo.subtitle}</View>
+            <View className={style.configurationWrapper}>
+              {props.data.shift === 'MANUAL' ? '手动' : '自动'}{props.data.gasVolume}L/
+              {props.data.seats}座/
+              {props.data.type ? props.data.type : ''}
+            </View>
 
             <View className={style.tagWrapper} >
-              {props.carInfo.tags.map((tag, key) => (
+              {props.data.tags.map((tag, key) => (
                 <View className={style.tag} key={key}>{tag}</View>
               ))}
             </View>
@@ -60,8 +48,14 @@ const Car  = (props: CarPropsType): React.ReactElement => {
         </View>
 
         <View className={style.secondRowWrapper}>
-          <View className={style.satisfactionWrapper}>
-            <View> <Text className={style.satisfaction}>{props.carInfo.satisfaction}%</Text>满意 </View>
+          <View
+            className={style.satisfactionWrapper}
+            onClick={e => {
+              e.stopPropagation();
+              props.onShowDetail()
+            }}
+          >
+            <View> <Text className={style.satisfaction}>100%</Text>满意 </View>
             <View className={style.carDetail}>
               <View>
                 车辆详情
@@ -72,7 +66,7 @@ const Car  = (props: CarPropsType): React.ReactElement => {
 
           <View >
             <Text className={style.price}>￥</Text>
-            <Text className={style.price}>{props.carInfo.price}</Text>
+            <Text className={style.price}>{props.data.price}</Text>
             <Text className={style.price}>/均价</Text>
           </View>
         </View>

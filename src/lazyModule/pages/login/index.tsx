@@ -36,7 +36,7 @@ const Login = (): React.ReactElement => {
       handleMessage()
       goToSwitchTab()
     }catch (e) {
-      debugger
+
     } finally {
       Taro.hideLoading()
     }
@@ -54,7 +54,6 @@ const Login = (): React.ReactElement => {
         onGetAuthorize={handleUploadUserInfo}
         className={style.directLogin}
       >{platform}账号一键登录</Button>
-
       <View
         className={style.phoneLoginOrRegister}
         onClick={handleLoginOrRegister}

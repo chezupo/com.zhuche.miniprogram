@@ -1,5 +1,5 @@
 import SubscriptionBuilder from "../../util/SubscriptionBuilder";
-import {hasLogin} from "../../util/auth";
+import {hasLogin} from "../../util/authUtil";
 import {store} from "../index";
 import {UserInfoType} from "../../nativeInterface/getUserProfile";
 

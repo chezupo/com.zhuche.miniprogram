@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../reduxStore";
 // @ts-ignore
 import style from "./style.module.scss";
 import {setActiveTab, TabBarType as LayoutTabBarType} from "../../reduxStore/module/layout";
+import {isLogin} from "../../util/authUtil";
 
 export type LayoutPropsType = {
   tabs: TabBarType[]
@@ -31,7 +32,7 @@ const Layout = (props: LayoutPropsType): React.ReactElement => {
     setPermissionIndex(null)
   }
   const handleChangeTabBar = ( pickTabBar: TabBarType) => {
-    if (pickTabBar.isPermission && me.data?.isNewUser) {
+    if (pickTabBar.isPermission && !isLogin()) {
         setPermissionIndex(pickTabBar)
         navigateToLoginOrRegister()
     }else {

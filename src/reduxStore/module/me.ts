@@ -10,11 +10,13 @@ import {getUserProfile} from "../../nativeInterface/getUserProfile";
 type InitialStateType = {
   data?: MeItemType
   loading: boolean
+  isLogin: boolean
 }
 
 const initialState:InitialStateType = {
   data: undefined,
-  loading: false
+  loading: false,
+  isLogin: false
 }
 
 const meSlice = createSlice({
@@ -23,18 +25,20 @@ const meSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<MeItemType>) => {
       const {payload} = action
-      return {...state, data: payload}
+      const isLogin = !!payload.city || !!payload.nickName || !!payload.countryCode
+      return {...state, data: payload, isLogin}
     },
     uploadUserInfo: (state, action: PayloadAction<MeItemType>) => {
-      return {...state, data: action.payload}
+      return {...state, data: action.payload, isLogin: true}
     },
     logout: (state) => {
       const {data, ...other} = state
-      return {...other}
+      return {...other, isLogin: false}
     }
   }
 })
 
+// 静默登录
 const loginThunk =  () => {
   return async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
     if (AllPlatformType.ALIPAY === getPlatformType()) {
@@ -54,6 +58,7 @@ const loginThunk =  () => {
   }
 }
 
+// 手动触发登录并收集提交用户信息
 const uploadUserInfoThunk = () => {
   return async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
     let me: MeItemType = getState().me.data

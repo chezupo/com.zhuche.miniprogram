@@ -1,5 +1,6 @@
 import * as Taro from "@tarojs/taro";
 import {AccessTokenType} from "../store/module/me";
+import store from "../reduxStore";
 
 const saveKey = "auth";
 
@@ -17,10 +18,8 @@ export const hasLogin = (): Promise<AccessTokenType> => {
   })
 }
 
-export const saveAccessToken = (accessToken: AccessTokenType): void => {
-  accessToken.expiration = Date.now() + accessToken.expiration
-  Taro.setStorage({
-    key: saveKey,
-    data: JSON.stringify(accessToken)
-  })
+const isLogin = (): boolean => {
+  return store.getState().me.isLogin
 }
+
+export {isLogin}

@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Image, Text} from "@tarojs/components";
+import {Image, View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
 import Icon from "../../../../../components/Icon";

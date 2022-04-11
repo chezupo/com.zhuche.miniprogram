@@ -24,7 +24,10 @@ const UserInfo: React.FC = ()=> {
       {
         meData && (
           <View className={style.userInfoWrapper}>
-            <Image src={meData.avatar} style={{width: '1rem', height: '1rem'}} />
+            <Image
+              src={meData.avatar}
+              className={style.image}
+            />
             <View className={style.userInfo}>
               <View>{meData.nickName || '匿名用户'}</View>
               { meData.phone && <View>{replaceStr(meData.phone, 3, 4, '*')}</View> }

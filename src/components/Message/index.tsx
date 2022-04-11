@@ -1,12 +1,13 @@
 import * as React from "react";
-import {CSSProperties, useState} from "react";
-import {store} from "../../store";
 import {useCallback, useEffect, useReducer} from "preact/hooks";
-import TransitionEase from "../TransitionEase";
-import style from './style.module.scss'
+import {CSSProperties, useState} from "react";
 import {View} from "@tarojs/components";
+import {store} from "../../store";
+import TransitionEase from "../TransitionEase";
 import {MessageType, MessageTypeType} from "../../store/module/message";
 import {debounce} from '../../util/helper'
+// @ts-ignore
+import style from './style.module.scss'
 
 type TimerType = ReturnType<typeof setTimeout>
 

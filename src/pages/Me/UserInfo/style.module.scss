@@ -31,3 +31,9 @@
       color: white;
   }
 }
+.image {
+  $size: $unit14;
+  width: $size;
+  height: $size;
+  border-radius: 100%;
+}

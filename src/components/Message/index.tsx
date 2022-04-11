@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useState} from "react";
+import {CSSProperties, useState} from "react";
 import {store} from "../../store";
 import {useCallback, useEffect, useReducer} from "preact/hooks";
 import TransitionEase from "../TransitionEase";
@@ -11,11 +11,11 @@ import {debounce} from '../../util/helper'
 type TimerType = ReturnType<typeof setTimeout>
 
 const Message: React.FC = () => {
-  const typeMapColor: Record<MessageTypeType, string> = {
-    error: 'background-color: rgb(239 68 68)',
-    success: 'background-color: rgb(74 222 128)',
-    warning: 'background-color: rgb(249 115 22)',
-    info: 'background-color: rgb(161 161 170)'
+  const typeMapColor: Record<MessageTypeType, CSSProperties> = {
+    error: {backgroundColor: 'rgb(239 68 68)'},
+    success: {backgroundColor: 'rgb(74 222 128)'},
+    warning: {backgroundColor: 'rgb(249 115 22)'},
+    info: {backgroundColor: 'rgb(161 161 170)'}
   }
   const [isShow, setIsShow] = useState<boolean>(false)
   const [message, messageDispatch] = useReducer((state: MessageType, newMessage: MessageType): MessageType => {
@@ -47,7 +47,6 @@ const Message: React.FC = () => {
   return (<TransitionEase
     visitable={isShow}
     height='8vw'
-    // @ts-ignore
     style={message ? typeMapColor[message.type] : {}}
     className={style.main}
   >

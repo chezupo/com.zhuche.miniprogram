@@ -1,12 +1,12 @@
 import * as React from "react";
-import {ReactChild} from "react";
+import {CSSProperties, ReactChild} from "react";
 import {useEffect, useState} from "preact/hooks";
 
 type MessagePropsType = {
   children: ReactChild
   height: string
   className?: string
-  style?: Record<string, string>
+  style?: CSSProperties
 }
 type HideAndShowPropsType = {
   disableVisitableStyle: Record<string, string>

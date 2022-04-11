@@ -23,7 +23,7 @@ const Login = (): React.ReactElement => {
     setTimeout(() => {
       store.message.next({
         title: '登录成功 🎉 🎉 🎉',
-        type: 'info',
+        type: 'success',
         duration: 5000
       })
     }, 500)

@@ -1,20 +1,19 @@
-import {View} from "@tarojs/components";
+import {Image, View} from "@tarojs/components";
 import {AtAvatar} from "taro-ui";
 import * as React from "react";
 import {navigateToLoginOrRegister} from "../../../store/module/router";
-import useObserve from "../../../util/useObserve";
 // @ts-ignore
 import style from "./style.module.scss"
 import {replaceStr} from "../../../util/helper";
-import {useAppStoreSelector} from "../../../store";
+import {useAppSelector} from "../../../reduxStore";
 
 const UserInfo: React.FC = ()=> {
   const handleLogin = (): void => navigateToLoginOrRegister()
-  const [me] = useObserve(useAppStoreSelector().me)
+  const meData = useAppSelector(state => state.me.data)
   return (
     <View className={style.main}>
       {
-        me.isNewUser &&
+        !meData &&
         <View className={style.loginWrapper}>
           <View
             className={style.loginButton}
@@ -22,18 +21,17 @@ const UserInfo: React.FC = ()=> {
           >登录/注册</View>
         </View>
       }
-      <View className={style.userInfoWrapper}>
-        <AtAvatar
-          text='车'
-          circle
-          size='large'
-          {...(me.avatar ? {image: me.avatar} : {})}
-        />
-        <View className={style.userInfo}>
-          <View>{me.nickName}</View>
-          { me.phone && <View>{replaceStr(me.phone, 3, 4, '*')}</View> }
-        </View>
-      </View>
+      {
+        meData && (
+          <View className={style.userInfoWrapper}>
+            <Image src={meData.avatar} style={{width: '1rem', height: '1rem'}} />
+            <View className={style.userInfo}>
+              <View>{meData.nickName || '匿名用户'}</View>
+              { meData.phone && <View>{replaceStr(meData.phone, 3, 4, '*')}</View> }
+            </View>
+          </View>
+        )
+      }
     </View>
   )
 }

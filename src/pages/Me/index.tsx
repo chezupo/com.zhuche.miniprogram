@@ -9,15 +9,16 @@ import Customer from "../../components/Customer";
 import Logout from "./Logout";
 import useObserve from "../../util/useObserve";
 import {useAppStoreSelector} from "../../store";
+import {useAppSelector} from "../../reduxStore";
 
 const Me = (): React.ReactElement => {
-  const [me] = useObserve(useAppStoreSelector().me)
+  const meData = useAppSelector(state => state.me.data)
   return (<View className={style.main}>
     <UserInfo />
     <View className={style.itemsWrapper}>
       <Balance />
       <Items />
-      {me.accessToken && <Logout /> }
+      {meData && <Logout /> }
       <Customer />
     </View>
   </View>)

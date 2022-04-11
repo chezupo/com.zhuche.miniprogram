@@ -3,7 +3,7 @@ import SubscriptionBuilder from "../../util/SubscriptionBuilder";
 export type MessageTypeType = 'info' | 'success' | 'error' | 'warning'
 export type MessageType = {
   title: string
-  type: MessageType
+  type: MessageTypeType
   duration?: number
 }
 

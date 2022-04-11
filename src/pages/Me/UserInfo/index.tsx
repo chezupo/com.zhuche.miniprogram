@@ -1,9 +1,8 @@
 import {View} from "@tarojs/components";
 import {AtAvatar} from "taro-ui";
 import * as React from "react";
-import {navigateTo, navigateToLoginOrRegister} from "../../../store/module/router";
+import {navigateToLoginOrRegister} from "../../../store/module/router";
 import useObserve from "../../../util/useObserve";
-import {isLoginObserve} from "../../../store/module/me";
 // @ts-ignore
 import style from "./style.module.scss"
 import {replaceStr} from "../../../util/helper";

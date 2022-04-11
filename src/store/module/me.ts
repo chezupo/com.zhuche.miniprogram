@@ -1,11 +1,7 @@
 import SubscriptionBuilder from "../../util/SubscriptionBuilder";
-import getPlatformType, {AllPlatformType} from "../../util/platformType";
-import authCode from "../../nativeInterface/authCode";
-import {authorize} from "../../api/authoriztion";
 import {hasLogin} from "../../util/auth";
 import {store} from "../index";
-import {getUserProfile, UserInfoType} from "../../nativeInterface/getUserProfile";
-import {getMeInfo, updateMeInfo} from "../../api/me";
+import {UserInfoType} from "../../nativeInterface/getUserProfile";
 
 export type MeType = {
   id: number
@@ -44,34 +40,3 @@ export const meObserve: SubscriptionBuilder<MeType> = SubscriptionBuilder.initCa
   }
 })
 
-// 登录
-export const loginThunk = async (): Promise<void> => {
-  if (AllPlatformType.ALIPAY === getPlatformType()) {
-    const code = await authCode()
-    const {isNewUser, accessToken} = await authorize(code)
-    store.me.next( {...store.me.value, isNewUser, accessToken})
-
-    if (!isNewUser) {
-      const newUserInfo = await getMeInfo()
-      const newMe: MeType = {...store.me.value, ...newUserInfo}
-      store.me.next(newMe)
-    }
-  }
-}
-
-// 上传用户信息
-export const uploadUserInfoThunk = async (): Promise<void> => {
-  let me: MeType = store.me.value
-  if (!me.accessToken) {
-    await loginThunk()
-    me = store.me.value
-  }
-  const {avatar, nickName, city, code, countryCode, gender, province} = await getUserProfile()
-  const res = await updateMeInfo({avatar, province, nickName, countryCode, code, gender, city})
-  store.me.next({...me, ...res})
-}
-
-// 登出
-export const logoutThunk = async (): Promise<void> => {
-  store.me.next(initUser)
-}

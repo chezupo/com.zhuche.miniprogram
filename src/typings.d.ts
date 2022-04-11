@@ -126,3 +126,17 @@ declare type CommentItemType = {
   user: UserItemType
   store: StoreItemType
 }
+
+declare type MeItemType = {
+  id?: number,
+  phone?: string,
+  nickName?: string
+  accessToken: string
+  isNewUser: boolean
+  avatar?: string
+  city?: string
+  code?: string
+  countryCode?: string
+  gender?: string
+  province?: string
+}

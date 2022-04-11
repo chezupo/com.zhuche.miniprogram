@@ -4,20 +4,21 @@ import {useReducer} from "react";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss"
-import {logoutThunk} from "../../../store/module/me";
 import useObserve from "../../../util/useObserve";
 import {useAppStoreSelector} from "../../../store";
+import {useAppDispatch} from "../../../reduxStore";
+import {logout} from "../../../reduxStore/module/me";
 
 const Logout = (): React.ReactElement => {
   const [isOpenPanel, isOpenPanelDispatcher] = useReducer((state): boolean => !state , false)
   const [,messageObserve] = useObserve(useAppStoreSelector().message)
+  const dispatch = useAppDispatch()
   const handleLogout = (): void => {
     isOpenPanelDispatcher()
-    logoutThunk().then(() => {
-      messageObserve.next({
-        title: '您已退出登录',
-        type: "error"
-      })
+    dispatch(logout())
+    messageObserve.next({
+      title: '您已退出登录',
+      type: "error"
     })
   }
 

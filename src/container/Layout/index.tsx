@@ -1,13 +1,14 @@
 import {View} from "@tarojs/components";
+import * as taro from "@tarojs/taro";
+import * as React from "react";
 import {ReactElement, useState} from "react";
-// @ts-ignore
-import style from "./style.module.scss";
 import useObserve from "../../util/useObserve";
 import {navigateToLoginOrRegister, TabBarType as CurrentTabBarType} from "../../store/module/router";
-import {store, useAppStoreSelector} from "../../store";
-import * as taro from "@tarojs/taro";
+import {useAppStoreSelector} from "../../store";
 import Message from "../../components/Message";
-import * as React from "react";
+import {useAppSelector} from "../../reduxStore";
+// @ts-ignore
+import style from "./style.module.scss";
 
 
 export type LayoutPropsType = {
@@ -16,14 +17,14 @@ export type LayoutPropsType = {
 export type TabBarType = {name: string; icon: string; type: CurrentTabBarType, element: ReactElement, navTitle: string; isPermission?: boolean}
 const Layout = (props: LayoutPropsType): React.ReactElement => {
   const [currentTabBar, tabBarDispatcher] = useObserve( useAppStoreSelector().currentTab )
-  const [me] = useObserve(useAppStoreSelector().me)
+  const me = useAppSelector(state => state.me)
   const [permissionIndex, setPermissionIndex] = useState<TabBarType>(null)
-  if (!me.isNewUser && permissionIndex) {
+  if (!me.data?.isNewUser && permissionIndex) {
     tabBarDispatcher.next(permissionIndex.type)
     setPermissionIndex(null)
   }
   const handleChangeTabBar = ( pickTabBar: TabBarType) => {
-    if (pickTabBar.isPermission && store.me.value.isNewUser) {
+    if (pickTabBar.isPermission && me.data?.isNewUser) {
         setPermissionIndex(pickTabBar)
         navigateToLoginOrRegister()
     }else {

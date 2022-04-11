@@ -7,13 +7,14 @@ import style from "./style.module.scss"
 import carSvg from "../../../asesst/images/undraw_by_my_car_ttge.svg";
 import getPlatformType, {AllPlatformType} from "../../../util/platformType";
 import Agreement from "../../../components/Agreement";
-import {goToSwitchTab, navigateTo, navigateToPhoneLoginPage} from "../../../store/module/router";
+import {goToSwitchTab, navigateToPhoneLoginPage} from "../../../store/module/router";
 import * as Taro from "@tarojs/taro";
-import {uploadUserInfoThunk} from "../../../store/module/me";
 import {store} from "../../../store";
+import {useAppDispatch} from "../../../reduxStore";
+import {uploadUserInfoThunk} from "../../../reduxStore/module/me";
 
 const Login = (): React.ReactElement => {
-  const [agreement, dispatch] = useReducer((state): boolean => !state, false)
+  const [agreement, agreementDispatch] = useReducer((state): boolean => !state, false)
   const handleLoginOrRegister = () => navigateToPhoneLoginPage()
   let platform: string;
   if (getPlatformType() ===  AllPlatformType.ALIPAY ) platform = '支付宝'
@@ -27,15 +28,18 @@ const Login = (): React.ReactElement => {
       })
     }, 500)
   }
-  const handleUploadUserInfo = (): void => {
-    Taro.showLoading({title: '登录中...'})
-    uploadUserInfoThunk().then(() => {
+  const dispatch = useAppDispatch()
+  const handleUploadUserInfo = async (): Promise<void> => {
+    await Taro.showLoading({title: '登录中...'})
+    try {
+      await dispatch(uploadUserInfoThunk())
       handleMessage()
-      Taro.hideLoading()
       goToSwitchTab()
-    }).catch(() => {
+    }catch (e) {
+      debugger
+    } finally {
       Taro.hideLoading()
-    })
+    }
   }
 
   return (
@@ -56,7 +60,7 @@ const Login = (): React.ReactElement => {
         onClick={handleLoginOrRegister}
       >手机号登录/注册</View>
       <View className={style.agreementWrapper}>
-        <Agreement checked={agreement} onChange={dispatch} />
+        <Agreement checked={agreement} onChange={agreementDispatch} />
       </View>
     </View>
   )

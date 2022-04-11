@@ -42,7 +42,7 @@ const getCurrentRoute = (): string => store.currentRoute.value
 
 const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
 
-const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new SubscriptionBuilder<TabBarType>(TabBarType.HOME)
+const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new SubscriptionBuilder<TabBarType>(TabBarType.ME)
 
 const switchTab = (tabBar: TabBarType): void => {
   store.currentTab.next(tabBar)

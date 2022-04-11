@@ -1,13 +1,13 @@
 import React from 'react';
 import {useEffect, useState} from "preact/hooks";
-import {Text, View} from "@tarojs/components";
-// @ts-ignore
-import style from "./style.module.scss";
+import {Image, Text, View} from "@tarojs/components";
 import CommonItemRender from "./CommonItemRender";
 import {CommentItemType} from "../../../../../typings";
 import {getCarComments} from "../../../../../api/cars";
-import EmptyRender from "../../../stories/SearchResultRender/EmptyRender";
-import NotFound from "../../../../../components/NotFound";
+// @ts-ignore
+import style from "./style.module.scss";
+// @ts-ignore
+import notfound from "../../../../../asesst/images/undraw_not_found_-60-pq.svg";
 
 export type CommonTagItemType = {
   name: string
@@ -77,7 +77,14 @@ const CommonRender: React.FC<CommonRenderPropsType> = props => {
           } )
         }
       </View>
-      { activeComments.comments.length === 0 && <NotFound /> }
+      { activeComments.comments.length === 0 &&
+        <>
+          <View className={style.notFoundWrapper}>
+            <Image src={notfound} className={style.image} />
+            <View className={style.title}>没有数据</View>
+          </View>
+        </>
+      }
       { activeComments.comments.length > 0 &&
         activeComments.comments.map(comment => ( <CommonItemRender
           key={comment.id}

@@ -6,6 +6,7 @@ import enhancer from "./enhancer";
 import orderReducer from "./module/order"
 import configurationReducer from "./module/configuration";
 import carReducer from "./module/cars";
+import meReducer from "./module/me";
 
 const store =  configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store =  configureStore({
       city: cityReducer,
       order: orderReducer,
       configuration: configurationReducer,
-      cars: carReducer
+      cars: carReducer,
+      me: meReducer
     },
   enhancers: [enhancer]
   }

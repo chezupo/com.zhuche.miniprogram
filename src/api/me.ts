@@ -1,11 +1,9 @@
 import {UserInfoType} from "../nativeInterface/getUserProfile";
 import * as request from "../util/requestClient";
 import {getPlatformName} from "../util/platformType";
+import {MeItemType} from "../typings";
 
-export type MeInfoType = {
- id: number
-  isNewUser: boolean
-} & UserInfoType
+export type MeInfoType = MeItemType
 
 export const updateMeInfo = async (meInfo: UserInfoType):Promise<MeInfoType> => {
   const platform = getPlatformName()

@@ -29,12 +29,13 @@ type CreateOrderType = {
 type InitialStateType = { createOrder: CreateOrderType }
 const initialState: InitialStateType = {
   createOrder: {
-    // todo demo date
+    // startCity: null,
     startCity: {
         "code": "4602",
         "name": "三亚市",
         "pinyin": "sanya"
     },
+    // startStore: null,
     startStore: {
       "id": 1,
       "name": "三亚店",
@@ -203,7 +204,13 @@ const orderSlice = createSlice({
           endTime: payload.payload.endTime
         }
       }
-    }
+    },
+    resetStartStore: (state) => {
+      return {...state, createOrder: {...state.createOrder, startStore: null}}
+    },
+    resetEndStore: (state) => {
+      return {...state, createOrder: {...state.createOrder, endStore: null}}
+    },
   }
 })
 const {reducer: orderReducer, actions} = orderSlice
@@ -213,6 +220,10 @@ const setStartCityThunk = (city: CityType) => {
     dispatch(setCreatedStartCity(city))
     const areaStores = await getAreaStores(city.code)
     dispatch(setStarCityStores(areaStores))
+    const {startStore} = getState().order.createOrder
+    if (startStore && startStore.city.code !== city.code) {
+      dispatch(resetStartStore())
+    }
   }
 }
 
@@ -221,6 +232,10 @@ const setEndCityStoresThunk = (city: CityType) => {
     dispatch(setCreatedEndCity(city))
     const areaStores = await getAreaStores(city.code)
     dispatch(setEndCityStores(areaStores))
+    const {endStore} = getState().order.createOrder
+    if (endStore && endStore.city.code !== city.code) {
+      dispatch(resetEndStore())
+    }
   }
 }
 
@@ -235,6 +250,8 @@ export const {
   setEndStore,
   setEndCityStores,
   setTime,
+  resetEndStore,
+  resetStartStore
 } = actions
 export {setStartCityThunk, setEndCityStoresThunk}
 export default orderReducer

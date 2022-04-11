@@ -109,19 +109,20 @@ declare type CarItemType = {
   updatedAt: string
   store: StoreItemType
   carCategory: CarCategoryItemType
+  comments: CommentItemType[]
 }
 declare type OrderItemType = {
   id: number
 }
 declare type CommentItemType = {
-  "id": number
+  id: number
   createdAt: string
-  "content": string
-  "rating": number
-  "images": string[]
-  "flag": string
-  "order": OrderItemType
-  "car": CarItemType
-  "user": UserItemType
-  "store": StoreItemType
+  content: string
+  rating: number
+  images: string[]
+  flag: string
+  order: OrderItemType
+  car: CarItemType
+  user: UserItemType
+  store: StoreItemType
 }

@@ -1,11 +1,13 @@
 import React from 'react';
+import {useEffect, useState} from "preact/hooks";
 import {Text, View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss";
 import CommonItemRender from "./CommonItemRender";
 import {CommentItemType} from "../../../../../typings";
-import {useEffect, useState} from "preact/hooks";
 import {getCarComments} from "../../../../../api/cars";
+import EmptyRender from "../../../stories/SearchResultRender/EmptyRender";
+import NotFound from "../../../../../components/NotFound";
 
 export type CommonTagItemType = {
   name: string
@@ -25,8 +27,10 @@ const flagMapComments:Map<string, CommentItemType[]> = new Map<string, CommentIt
 const allFlag = '全部'
 const CommonRender: React.FC<CommonRenderPropsType> = props => {
   const [activeComments, setActiveComments] = useState<ActiveCommentsType>({flag: allFlag, comments: []})
+  const [total, setTotal] = useState<number>(0)
   useEffect(() => {
     getCarComments(props.id).then(comments => {
+      setTotal(comments.length)
       flagMapComments.set("全部", comments)
       comments.forEach(item => {
         const key = item.flag;
@@ -55,7 +59,9 @@ const CommonRender: React.FC<CommonRenderPropsType> = props => {
     <View className={style.containerWrapper}>
       <View className={style.comment}>
         <View className={style.key}>用户评价</View>
-        <View className={style.relate}>满意度: <Text className={style.text}>100%</Text></View>
+        {
+          total > 0 && <View className={style.relate}>满意度: <Text className={style.text}>100%</Text></View>
+        }
       </View>
       <View className={style.tagsWrapper}>
         {
@@ -71,7 +77,8 @@ const CommonRender: React.FC<CommonRenderPropsType> = props => {
           } )
         }
       </View>
-      {
+      { activeComments.comments.length === 0 && <NotFound /> }
+      { activeComments.comments.length > 0 &&
         activeComments.comments.map(comment => ( <CommonItemRender
           key={comment.id}
           images={comment.images}

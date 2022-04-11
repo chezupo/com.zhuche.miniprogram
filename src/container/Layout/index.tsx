@@ -2,25 +2,32 @@ import {View} from "@tarojs/components";
 import * as taro from "@tarojs/taro";
 import * as React from "react";
 import {ReactElement, useState} from "react";
-import useObserve from "../../util/useObserve";
-import {navigateToLoginOrRegister, TabBarType as CurrentTabBarType} from "../../store/module/router";
-import {useAppStoreSelector} from "../../store";
+import {navigateToLoginOrRegister} from "../../store/module/router";
 import Message from "../../components/Message";
-import {useAppSelector} from "../../reduxStore";
+import {useAppDispatch, useAppSelector} from "../../reduxStore";
 // @ts-ignore
 import style from "./style.module.scss";
-
+import {setActiveTab, TabBarType as LayoutTabBarType} from "../../reduxStore/module/layout";
 
 export type LayoutPropsType = {
   tabs: TabBarType[]
 }
-export type TabBarType = {name: string; icon: string; type: CurrentTabBarType, element: ReactElement, navTitle: string; isPermission?: boolean}
+export type TabBarType = {
+  name: string
+  icon: React.ReactElement
+  type: LayoutTabBarType
+  element: ReactElement
+  navTitle: string
+  isPermission?: boolean
+}
+
 const Layout = (props: LayoutPropsType): React.ReactElement => {
-  const [currentTabBar, tabBarDispatcher] = useObserve( useAppStoreSelector().currentTab )
+  const dispatch = useAppDispatch()
+  const currentTabBar = useAppSelector(state => state.layout.activeTab)
   const me = useAppSelector(state => state.me)
   const [permissionIndex, setPermissionIndex] = useState<TabBarType>(null)
   if (!me.data?.isNewUser && permissionIndex) {
-    tabBarDispatcher.next(permissionIndex.type)
+    dispatch(setActiveTab(permissionIndex.type))
     setPermissionIndex(null)
   }
   const handleChangeTabBar = ( pickTabBar: TabBarType) => {
@@ -28,7 +35,7 @@ const Layout = (props: LayoutPropsType): React.ReactElement => {
         setPermissionIndex(pickTabBar)
         navigateToLoginOrRegister()
     }else {
-      tabBarDispatcher.next(pickTabBar.type)
+      dispatch(setActiveTab(pickTabBar.type))
       setPermissionIndex(null)
     }
   }
@@ -52,7 +59,7 @@ const Layout = (props: LayoutPropsType): React.ReactElement => {
           key={key}
           onClick={() => handleChangeTabBar(tabBar)}
         >
-          <View className={[ tabBar.icon, style.icon, ].join(' ')} />
+          {tabBar.icon}
           <View>{tabBar.name}</View>
         </View>
       ))}

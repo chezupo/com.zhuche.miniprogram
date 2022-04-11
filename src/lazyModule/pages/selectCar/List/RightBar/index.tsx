@@ -4,11 +4,12 @@ import * as React from "react";
 import style from './style.module.scss'
 import Car from "./Car";
 import Notice from "../Notice";
-import {navigateToCarDetailPage, switchTab, TabBarType} from "../../../../../store/module/router";
+import {navigateToCarDetailPage, switchTab} from "../../../../../store/module/router";
 import {CarItemType} from "../../../../../typings";
-import { useAppDispatch } from "../../../../../reduxStore";
+import {useAppDispatch} from "../../../../../reduxStore";
 import {setCarDetail} from "../../../../../reduxStore/module/cars";
 import EmptyRender from "../../../stories/SearchResultRender/EmptyRender";
+import {TabBarType} from "../../../../../reduxStore/module/layout";
 
 type RightBarPropsType = {
   cars: CarItemType[]

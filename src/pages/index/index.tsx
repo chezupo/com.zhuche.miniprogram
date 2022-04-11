@@ -4,7 +4,6 @@ import authCode from "../../nativeInterface/authCode";
 import OperationInterface from "./OperationInterface";
 import Layout from "../../container/Layout";
 import Order from "../Order";
-import {TabBarType} from "../../store/module/router";
 import Me from "../Me";
 import Banners from "./Banners";
 // @ts-ignore
@@ -13,6 +12,8 @@ import Guilds from "./Guids";
 import NoticeBar from "./NoticeBar";
 import ComplaintFeedbackBar from "./ComplaintFeedbackBar";
 import {useAppSelector} from "../../reduxStore";
+import {TabBarType} from "../../reduxStore/module/layout";
+import Icon from "../../components/Icon";
 
 const Index = () => {
   const {configuration} = useAppSelector(state => state)
@@ -105,9 +106,9 @@ const Index = () => {
   return (
     <Layout
       tabs={[
-          { name: '首页', icon: 'iconfont icon-car-o',  type: TabBarType.HOME, element:  <IndexRender />, navTitle: configuration.config.appName},
-          { name: '订单', icon: 'iconfont icon-order',  type: TabBarType.ORDER, element: <Order /> , navTitle: '全部订单', isPermission: true},
-          { name: '我的', icon: 'iconfont icon-user', type: TabBarType.ME, element: <Me />, navTitle: '我的' },
+          { name: '首页', icon: <Icon value='car-o' style={{fontSize: '7vw'}} />,  type: TabBarType.HOME, element:  <IndexRender />, navTitle: configuration.config.appName},
+          { name: '订单', icon: <Icon value='order' style={{fontSize: '7vw'}} /> ,  type: TabBarType.ORDER, element: <Order /> , navTitle: '全部订单', isPermission: true},
+          { name: '我的', icon: <Icon value='user' style={{fontSize: '7vw'}} />, type: TabBarType.ME, element: <Me />, navTitle: '我的' },
       ]}
     />
   )

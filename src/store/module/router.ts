@@ -1,13 +1,7 @@
 import taro from '@tarojs/taro'
 import {store} from "../index";
-import SubscriptionBuilder from "../../util/SubscriptionBuilder";
-import {prefixUrl} from "../../util/requestClient";
-
-export  enum TabBarType {
-  HOME,
-  ORDER,
-  ME
-}
+import reduxStore from "../../reduxStore/index";
+import {setActiveTab, TabBarType} from "../../reduxStore/module/layout";
 
 const lazyModulePrefix = '/lazyModule'
 const homeUrl = '/pages/index/index'
@@ -28,7 +22,9 @@ const navigateToCity = () => {
 }
 const navigateTimeRangePage = () => taro.navigateTo({ url: timeRangeUrl})
 
-const navigateToLoginOrRegister = () => taro.navigateTo({ url: `${lazyModulePrefix}/pages/login/index`})
+const navigateToLoginOrRegister = () => {
+  taro.navigateTo({ url: `${lazyModulePrefix}/pages/login/index`})
+}
 
 const navigateToSelectCarPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/index`)
 
@@ -38,14 +34,11 @@ const navigateToFeedbackPage = () => navigateTo(`${lazyModulePrefix}/pages/compl
 
 const navigateToPhoneLoginPage = () => navigateTo(`${lazyModulePrefix}/pages/login/phoneLogin/index`)
 
-const getCurrentRoute = (): string => store.currentRoute.value
 
 const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
 
-const currentTabBarObserve: SubscriptionBuilder<TabBarType> = new SubscriptionBuilder<TabBarType>(TabBarType.ME)
-
 const switchTab = (tabBar: TabBarType): void => {
-  store.currentTab.next(tabBar)
+  reduxStore.dispatch(setActiveTab(tabBar))
   taro.reLaunch({ url: homeUrl })
 }
 
@@ -66,9 +59,7 @@ export {
   navigateToCity,
   navigateTimeRangePage,
   navigateToLoginOrRegister,
-  getCurrentRoute,
   getHistory,
-  currentTabBarObserve,
   switchTab,
   goToSwitchTab,
   navigateToSelectCarPage,

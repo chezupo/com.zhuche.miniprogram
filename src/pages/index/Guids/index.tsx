@@ -7,6 +7,8 @@ import towingSvg from "../../../asesst/images/undraw_towing_-6-yy4.svg";
 import GuidContainer, {ContainerType} from "./GuidContainer";
 import {AtCurtain} from "taro-ui";
 import SwipperRender from "./SwipperRender";
+import {useAppSelector} from "../../../reduxStore";
+import taro from "@tarojs/taro";
 
 const Guilds = (): React.ReactElement => {
   const guids: ContainerType[] = [
@@ -28,7 +30,18 @@ const Guilds = (): React.ReactElement => {
     'https://zhuche-a1001.qiniu.wuchuheng.com/guid5.png',
     'https://zhuche-a1001.qiniu.wuchuheng.com/guid7.png',
   ]
-
+  const {config} = useAppSelector(state => state.configuration)
+  const handleCallServicePhone = async () => {
+    const res = await taro.showModal({
+      title: '道路救援',
+      content: '您正在拨打道路救援客服电话，是否确定呼叫?',
+    })
+    if (res.confirm) {
+      await taro.makePhoneCall({
+        phoneNumber: config.servicePhone
+      })
+    }
+  }
 
   return (
     <>
@@ -39,7 +52,7 @@ const Guilds = (): React.ReactElement => {
         />
         <GuidContainer
           data={guids[1]}
-          onClick={() => {}}
+          onClick={handleCallServicePhone}
         />
       </View>
 

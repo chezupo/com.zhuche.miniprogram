@@ -5,6 +5,8 @@ type ConfigurationType = {
   amapKey: string
   amapSearchKey: string
   notice: string
+  insurance: number
+  servicePhone
 }
 
 export {

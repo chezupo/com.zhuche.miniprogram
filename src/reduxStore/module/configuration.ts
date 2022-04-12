@@ -1,8 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ConfigurationType} from "../../store/module/configuration";
-import {AppDispatch, RootState} from "../index";
+import store, {AppDispatch, RootState} from "../index";
 import {getConfiguration} from "../../api/configuration";
-import store from '../index'
 import {debounce} from "../../util/helper";
 
 type InitialStateType = {
@@ -16,7 +15,9 @@ const initialState: InitialStateType = {
     amapSearchKey: '',
     appName: '',
     notice: '',
-    logo: ''
+    logo: '',
+    servicePhone: '',
+    insurance: 0
   },
   isShowNotice: true
 }

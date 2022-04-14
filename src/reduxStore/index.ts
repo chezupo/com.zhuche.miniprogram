@@ -8,6 +8,7 @@ import configurationReducer from "./module/configuration";
 import carReducer from "./module/cars";
 import meReducer from "./module/me";
 import layoutReducer from "./module/layout";
+import agreementReducer from "./module/agreement";
 
 const store =  configureStore({
     reducer: {
@@ -17,7 +18,8 @@ const store =  configureStore({
       configuration: configurationReducer,
       cars: carReducer,
       me: meReducer,
-      layout: layoutReducer
+      layout: layoutReducer,
+      agreement: agreementReducer
     },
   enhancers: [enhancer]
   }

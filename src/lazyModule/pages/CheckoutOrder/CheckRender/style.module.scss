@@ -1,0 +1,27 @@
+@import "../../../../global.scss";
+
+$fontSize: $unit3_5;
+$color: $primaryThemeColor;
+.itemWrapper {
+  display: flex;
+  align-items: center;
+  font-size: $fontSize;
+  .titleWrapper {
+    margin-left: $unit2;
+    .title {
+      color: $color;
+    }
+  }
+}
+.servicePhoneWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $fontSize;
+  .container {
+    color: gray;
+  }
+  .servicePhone {
+    color: $color;
+  }
+}

@@ -34,6 +34,7 @@ const navigateToFeedbackPage = () => navigateTo(`${lazyModulePrefix}/pages/compl
 
 const navigateToPhoneLoginPage = () => navigateTo(`${lazyModulePrefix}/pages/login/phoneLogin/index`)
 
+const navigateToCheckoutOrderAgreement = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/Agreements/index`)
 
 const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
 
@@ -65,5 +66,6 @@ export {
   navigateToSelectCarPage,
   navigateToFeedbackPage,
   navigateToPhoneLoginPage,
-  navigateToCarDetailPage
+  navigateToCarDetailPage,
+  navigateToCheckoutOrderAgreement
 }

@@ -1,8 +1,9 @@
-import SpinContainer from "../../../components/SpinContainer";
-import {Image, ITouchEvent, Swiper, SwiperItem, View} from "@tarojs/components";
-import {noticeColor} from "../../../config/globalConfig";
-import style from "./style.module.scss";
 import * as React from "react";
+import {Image, ITouchEvent, Swiper, SwiperItem, View} from "@tarojs/components";
+import SpinContainer from "../../../components/SpinContainer";
+import {noticeColor} from "../../../config/globalConfig";
+// @ts-ignore
+import style from "./style.module.scss";
 
 type SwipperRenderPropsType = {
   onClose: () => void

@@ -1,0 +1,84 @@
+@import "../../../../global.scss";
+
+.main {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit3;
+}
+.image {
+  width: 100%;
+}
+.baseInfo {
+  display: grid;
+  grid-template-columns: 35% auto;
+  grid-column-gap: $unit4;
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    .name {
+      font-weight: 500;
+    }
+    .tags {
+      font-size: $unit3;
+      margin-top: $unit3;
+    }
+  }
+}
+
+.storeWrapper {
+  display: flex;
+  .lineWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .line {
+      height: $unit10;
+      border-left: $unit0_5 solid $gray2;
+    }
+  }
+  .storeNameWrapper {
+    margin-left: $unit2;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit3;
+    .storeName {
+      .date {
+        margin-top: $unit1;
+        font-size: $unit3_5;
+        color: $subtitleColor;
+      }
+    }
+  }
+}
+.icon {
+  font-size: $unit4;
+  font-weight: bold;
+}
+.name {
+  display: flex;
+  align-items: center;
+}
+.commentWrapper {
+  font-size: $unit4;
+  display: flex;
+  justify-content: space-between;
+}
+.rateWrapper {
+  .rate {
+    font-weight: bold;
+    font-size: $unit5;
+  }
+}
+.color {
+  color: $primaryThemeColor;
+}
+.comment {
+  display: flex;
+  align-items: center;
+  .icon {
+    font-size: $unit4;
+    color: $subtitleColor;
+  }
+}

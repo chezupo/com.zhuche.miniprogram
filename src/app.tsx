@@ -7,19 +7,21 @@ import './global.scss'
 import './asesst/font/iconfont/iconfont.css'
 import {initThunk} from "./reduxStore/module/banner";
 import {initThunk as cityInitThunk} from "./reduxStore/module/city"
-import permission from "./components/Permission";
 import {loginThunk} from "./reduxStore/module/me";
 
 const InitData: React.FC  = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
-    permission.call([
-      dispatch(loginThunk()),
-      dispatch(initThunk()),
-      dispatch(cityInitThunk())
-    ]).then(() => {
-      console.log("App data init.")
-    })
+
+      dispatch(loginThunk()).then(() => {
+
+      })
+      dispatch(initThunk()).then(() => {
+
+      })
+      dispatch(cityInitThunk()).then(() => {
+
+      })
   }, [])
   return <></>
 }

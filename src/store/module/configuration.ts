@@ -6,7 +6,9 @@ type ConfigurationType = {
   amapSearchKey: string
   notice: string
   insurance: number
-  servicePhone
+  servicePhone: string
+  orderAgreement: string
+  insuranceAgreement: string
 }
 
 export {

@@ -1,10 +1,10 @@
 import * as React from "react";
 import {View} from "@tarojs/components";
-// @ts-ignore
-import style from "./style.module.scss";
 import Header from "./Header";
 import Selector from "./Selector";
 import List from "./List";
+// @ts-ignore
+import style from "./style.module.scss";
 
 const SelectCar = ():React.ReactElement => {
   return (<>

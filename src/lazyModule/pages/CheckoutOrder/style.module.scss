@@ -1,0 +1,23 @@
+@import "../../../global";
+
+.main{
+  background: #F3F3F3;
+  &:after {
+    width: 140%;
+    height: $unit50;
+    position: absolute;
+    left: -20%;
+    top: 0;
+    z-index: 1;
+    content: '';
+    border-radius: 0 0 50% 50%;
+    background: $primaryThemeColor;
+  }
+}
+
+.container {
+  padding:$unit2 $unit3;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit1_5;
+}

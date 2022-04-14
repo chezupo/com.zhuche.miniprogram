@@ -140,3 +140,9 @@ declare type MeItemType = {
   gender?: string
   province?: string
 }
+
+declare type AgreementItemType = {
+  id: number
+  title: string
+  content: string
+}

@@ -22,7 +22,10 @@ export type IconType = 'close' |
   'kaojiazhao' |
   'car-o' |
   'order' |
-  'users'
+  'users' |
+  'insurance' |
+  'help' |
+  'exclamation-mark'
 
 type IconPropsType = {
   value: IconType

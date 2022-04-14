@@ -17,7 +17,9 @@ const initialState: InitialStateType = {
     notice: '',
     logo: '',
     servicePhone: '',
-    insurance: 0
+    insurance: 0,
+    orderAgreement: '',
+    insuranceAgreement: ''
   },
   isShowNotice: true
 }

@@ -1,0 +1,76 @@
+@import "../../../../global.scss";
+
+.main {
+  .title {
+    font-weight: bold;
+    $fontSize: $unit4;
+    display: flex;
+    align-items: center;
+    font-size: $fontSize;
+    .icon {
+      font-size: $fontSize;
+      margin-right: $unit2;
+      color: $primaryThemeColor;
+    }
+  }
+  .itemTitle {
+    margin-top: $unit2;
+    display: flex;
+    align-items: center;
+    $fontSize: $unit4;
+    font-size: $fontSize;
+    .icon {
+      margin-left: $unit1;
+      font-size: $fontSize + $unit1;
+      color: $subtitleColor;
+    }
+  }
+}
+.itemWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subTitle {
+  font-size: $unit3;
+  margin-top: $unit1;
+  color: $subtitleColor;
+}
+.amountWrapper {
+  font-size: $unit3_5;
+  .amount {
+    color: $subtitleColor;
+    margin-right: $unit2;
+  }
+  .number {
+    font-weight: bold;
+    font-size: $unit4;
+  }
+  .radio {
+    margin-left: $unit1;
+  }
+}
+.spinContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: $unit100;
+  height: 100vh;
+  .contentContainer {
+    width: $unit80;
+    .content {
+      background: white;
+      height: $unit100;
+      padding: $unit2;
+    }
+    .button {
+      color: white;
+      border-radius: 0;
+      background: $primaryThemeColor;
+      border: 0;
+    }
+  }
+}
+

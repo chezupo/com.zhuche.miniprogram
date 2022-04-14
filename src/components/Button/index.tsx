@@ -1,7 +1,7 @@
 import * as React from "react";
 import {ITouchEvent, View} from "@tarojs/components";
+// @ts-ignore
 import style from './style.module.scss'
-
 
 type ButtonPropsType = {
   children: React.ReactChildren | React.ReactNode | React.ReactDOM

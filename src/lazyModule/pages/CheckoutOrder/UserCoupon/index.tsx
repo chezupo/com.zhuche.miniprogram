@@ -32,6 +32,7 @@ const ItemRender: React.FC<ItemRenderPropsType> = ({data, onShowRule, onChange, 
   const d = now.getDate()
   const checked = checkedUserCoupon && checkedUserCoupon.id === data.id
   const handleClick = () => {
+    if (!data.isValid) return ;
     checkedUserCoupon && checkedUserCoupon.id === data.id ? onCancel() : onChange(data)
   }
 

@@ -36,6 +36,10 @@ const navigateToPhoneLoginPage = () => navigateTo(`${lazyModulePrefix}/pages/log
 
 const navigateToCheckoutOrderAgreement = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/Agreements/index`)
 
+const navigateToCheckoutOrder = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/index`)
+
+const navigateToUserCoupon = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/UserCoupon/index`)
+
 const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
 
 const switchTab = (tabBar: TabBarType): void => {
@@ -67,5 +71,7 @@ export {
   navigateToFeedbackPage,
   navigateToPhoneLoginPage,
   navigateToCarDetailPage,
-  navigateToCheckoutOrderAgreement
+  navigateToCheckoutOrderAgreement,
+  navigateToUserCoupon,
+  navigateToCheckoutOrder
 }

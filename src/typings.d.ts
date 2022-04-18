@@ -139,10 +139,26 @@ declare type MeItemType = {
   countryCode?: string
   gender?: string
   province?: string
+  isAuthorizeBaseInfo?: boolean
 }
 
 declare type AgreementItemType = {
   id: number
   title: string
   content: string
+}
+
+declare type UserCouponItemType = {
+  id: number
+  amount: number
+  content: string
+  createdAt: string
+  expired: number
+  isValid: boolean
+  isWithHoliday: boolean
+  isWithRent: boolean
+  isWithServiceAmount: boolean
+  meetAmount: boolean
+  reason: string
+  title: string
 }

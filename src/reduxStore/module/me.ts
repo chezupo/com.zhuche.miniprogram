@@ -6,17 +6,16 @@ import {authorize} from "../../api/authoriztion";
 import {getMeInfo, updateMeInfo} from "../../api/me";
 import {AppDispatch, RootState} from "../index";
 import {getUserProfile} from "../../nativeInterface/getUserProfile";
+import {setToken} from "../../util/authUtil";
 
 type InitialStateType = {
   data?: MeItemType
   loading: boolean
-  isLogin: boolean
 }
 
 const initialState:InitialStateType = {
   data: undefined,
   loading: false,
-  isLogin: false
 }
 
 const meSlice = createSlice({
@@ -25,8 +24,7 @@ const meSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<MeItemType>) => {
       const {payload} = action
-      const isLogin = !!payload.city || !!payload.nickName || !!payload.countryCode
-      return {...state, data: payload, isLogin}
+      return {...state, data: payload}
     },
     uploadUserInfo: (state, action: PayloadAction<MeItemType>) => {
       return {...state, data: action.payload, isLogin: true}
@@ -44,6 +42,7 @@ const loginThunk =  () => {
     if (AllPlatformType.ALIPAY === getPlatformType()) {
       const code = await authCode()
       const {isNewUser, accessToken} = await authorize(code)
+      setToken(accessToken)
       dispatch(login({
         isNewUser,
         accessToken,

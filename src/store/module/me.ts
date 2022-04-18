@@ -26,7 +26,6 @@ const initUser: MeType = {
   province:''
 }
 
-export const isLoginObserve: SubscriptionBuilder<boolean> = new SubscriptionBuilder<boolean>(false)
 export const meObserve: SubscriptionBuilder<MeType> = SubscriptionBuilder.initCallBack<MeType>(initUser, async () => {
   try{
     const accessToken = await hasLogin();

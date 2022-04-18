@@ -1,0 +1,133 @@
+@import "../../../../global.scss";
+
+$background: #F0F0F0;
+$gap: $unit3;
+@mixin background {
+  background: $background;
+}
+@mixin grayColor{
+  color: gray;
+}
+
+.main {
+  @include background;
+  max-height: 100%;
+  padding: $gap;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $gap;
+}
+.lineWrapper {
+  position: relative;
+  $size: $unit4;
+  $sidePosition: -$gap - $size / 2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  .point {
+    position: absolute;
+    width: $size;
+    height: $size;
+    @include background;
+    border-radius: 100%;
+  }
+  .leftPoint {
+    @extend .point;
+    left: $sidePosition;
+  }
+  .rightPoint {
+    @extend .point;
+    right: $sidePosition;
+  }
+  .line {
+    border-bottom: dashed $unit0-75 $background;
+    width: 100%;
+  }
+}
+.bottomWrapper {
+  padding-top: $gap;
+  display: flex;
+  justify-content: space-between;
+  @mixin fontSize {
+    $size: $unit3;
+    font-size: $size;
+  }
+
+  .reasonWrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit1;
+    @include fontSize;
+    .icon {
+      @include fontSize;
+    }
+    .title {
+      color: red;
+      display: flex;
+    }
+    .reason {
+      @include grayColor;
+    }
+  }
+  .rule {
+    @include grayColor;
+    @include fontSize;
+  }
+}
+.topBar {
+  padding-bottom: $gap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .leftBar {
+    display: flex;
+    .amountWrapper {
+      margin-right: $gap;
+      color: $primaryThemeColor;
+      .amount {
+        font-weight: bold;
+        font-size: $unit10;
+      }
+    }
+  }
+  .titleWrapper {
+    .title {
+      @include textEllipsis;
+    }
+    padding-right: $gap;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $gap;
+  }
+  .dateTime {
+    @include grayColor;
+    font-size: $unit3_5;
+  }
+}
+.menuWrapper {
+  height: 100%;
+  padding: 0 $gap;
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-column-gap: $unit2;
+  align-items: center;
+}
+
+.bodyWrapper {
+  height: 100%;
+  @include background;
+}
+
+.disableColor {
+  color: #C5C5C5 !important;
+}
+.spinContainer {
+  z-index: 2;
+  .content {
+    background: white;
+    padding: $unit4;
+    width: $unit85;
+    border-radius: $unit4;
+  }
+}

@@ -25,7 +25,8 @@ export type IconType = 'close' |
   'users' |
   'insurance' |
   'help' |
-  'exclamation-mark'
+  'exclamation-mark' |
+  'coupon'
 
 type IconPropsType = {
   value: IconType

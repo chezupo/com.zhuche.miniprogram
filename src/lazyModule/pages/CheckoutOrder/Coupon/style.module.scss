@@ -1,0 +1,63 @@
+@import "../../../../global.scss";
+
+$iconFontSize: $unit4;
+.main {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit2;
+}
+.title {
+  font-weight: bold;
+}
+.itemWrapper {
+  display: grid;
+  align-items: center;
+  grid-column-gap: $unit1_5;
+  .nameWrapper {
+    $fontSize: $unit3_5;
+    font-weight: bold;
+    display: flex;
+    font-size: $fontSize;
+    align-items: center;
+    .icon {
+      margin-left: $unit0_5;
+      color: red;
+      font-size: $unit4;
+    }
+  }
+  .title {
+    font-size: $unit3;
+    line-height: $unit5;
+    color: #5C5C5C;
+  }
+  .priceWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .price {
+      color: $primaryThemeColor;
+      font-size: $unit4;
+    }
+    .icon {
+      color: #D9D9D9;
+      font-size: $unit4;
+    }
+  }
+}
+.validCoupon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .icon {
+    color: #D9D9D9;
+    font-size: $unit4;
+  }
+}
+.hasCouponNotice {
+  margin-right: $unit2;
+  background: red;
+  padding: $unit1;
+  border-radius: $unit1;
+  font-size: $unit3;
+  color: white;
+}

@@ -6,13 +6,17 @@ import Car from "./Car/Car";
 import Insurance from "./Insurance";
 import OrderAgreement from "./OrderAgreement";
 import CheckRender from "./CheckRender";
+import Coupon from "./Coupon";
+import {useAppSelector} from "../../../reduxStore";
 
 const Order: React.FC = () => {
+  const userCoupon = useAppSelector(state => state.order.createOrder.userCoupon)
   return (
     <View className={style.main}>
       <View className={style.container}>
         <Car />
         <Insurance />
+        <Coupon checkedCoupon={userCoupon} />
         <OrderAgreement />
         <CheckRender />
       </View>

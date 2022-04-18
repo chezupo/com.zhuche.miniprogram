@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AreaStoreType, CityType, StoreItemType} from "../../typings";
+import {AreaStoreType, CityType, StoreItemType, UserCouponItemType} from "../../typings";
 import {AppDispatch, RootState} from "../index";
 import {getAreaStores} from "../../api/area";
 
@@ -24,6 +24,7 @@ type CreateOrderType = {
   endStore: StoreItemType | null
   starTime: TimestampType
   endTime: TimestampType
+  userCoupon?: UserCouponItemType
 }
 
 type InitialStateType = { createOrder: CreateOrderType }
@@ -211,6 +212,21 @@ const orderSlice = createSlice({
     resetEndStore: (state) => {
       return {...state, createOrder: {...state.createOrder, endStore: null}}
     },
+
+    /**
+     * 设置优惠卷
+     * @param state
+     * @param action
+     */
+    setUserCoupon: (state, action: PayloadAction<UserCouponItemType>): InitialStateType => {
+      return {
+        ...state,
+        createOrder: {
+          ...state.createOrder,
+          userCoupon: action.payload
+        }
+      }
+    }
   }
 })
 const {reducer: orderReducer, actions} = orderSlice
@@ -251,7 +267,8 @@ export const {
   setEndCityStores,
   setTime,
   resetEndStore,
-  resetStartStore
+  resetStartStore,
+  setUserCoupon
 } = actions
 export {setStartCityThunk, setEndCityStoresThunk}
 export default orderReducer

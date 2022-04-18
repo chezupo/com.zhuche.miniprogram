@@ -9,6 +9,7 @@ import carReducer from "./module/cars";
 import meReducer from "./module/me";
 import layoutReducer from "./module/layout";
 import agreementReducer from "./module/agreement";
+import userCouponReducer from "./module/userCoupons";
 
 const store =  configureStore({
     reducer: {
@@ -19,7 +20,8 @@ const store =  configureStore({
       cars: carReducer,
       me: meReducer,
       layout: layoutReducer,
-      agreement: agreementReducer
+      agreement: agreementReducer,
+      userCoupons: userCouponReducer
     },
   enhancers: [enhancer]
   }

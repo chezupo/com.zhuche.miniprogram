@@ -16,7 +16,8 @@ export default {
         'pages/selectCar/index',
         'pages/selectCar/CarDetail/index',
         'pages/CheckoutOrder/index',
-        'pages/CheckoutOrder/Agreements/index'
+        'pages/CheckoutOrder/Agreements/index',
+        'pages/CheckoutOrder/UserCoupon/index'
       ]
     }
   ],

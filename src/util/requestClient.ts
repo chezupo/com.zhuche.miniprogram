@@ -1,9 +1,10 @@
 import * as Taro from "@tarojs/taro"
 import store from "../reduxStore"
+import {getToken} from "./authUtil";
 
 export const prefixUrl = "https://a1001zhuche.jds.wuchuheng.com/api/v1/miniProgram"
 const getHeaders = (): Object => {
-  const token = `Bearer ${store.getState().me.data?.accessToken || ''}`
+  const token = `Bearer ${store.getState().me.data?.accessToken || getToken() || ''}`
   return   {...(token.length > 7 ? {header: {Authorization: token}} : {})}
 }
 export const get = <T>(url: string, query?: Record<string, any> ): Promise<T> => {

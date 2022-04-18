@@ -1,0 +1,9 @@
+$bodyWrapperHeight: 90vh;
+
+.bodyWrapper {
+  height: $bodyWrapperHeight;
+  overflow-y: scroll;
+}
+.menuWrapper {
+  height: 100vh - $bodyWrapperHeight;
+}

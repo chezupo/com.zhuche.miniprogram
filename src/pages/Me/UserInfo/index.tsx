@@ -1,19 +1,20 @@
 import {Image, View} from "@tarojs/components";
-import {AtAvatar} from "taro-ui";
 import * as React from "react";
 import {navigateToLoginOrRegister} from "../../../store/module/router";
 // @ts-ignore
 import style from "./style.module.scss"
 import {replaceStr} from "../../../util/helper";
 import {useAppSelector} from "../../../reduxStore";
+import {useIsLogin} from "../../../util/authUtilHook";
 
 const UserInfo: React.FC = ()=> {
   const handleLogin = (): void => navigateToLoginOrRegister()
   const meData = useAppSelector(state => state.me.data)
+  const isLogin = useIsLogin()
   return (
     <View className={style.main}>
       {
-        !meData &&
+        !isLogin &&
         <View className={style.loginWrapper}>
           <View
             className={style.loginButton}
@@ -22,7 +23,7 @@ const UserInfo: React.FC = ()=> {
         </View>
       }
       {
-        meData && (
+        isLogin && (
           <View className={style.userInfoWrapper}>
             <Image
               src={meData.avatar}

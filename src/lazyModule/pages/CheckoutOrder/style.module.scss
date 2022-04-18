@@ -12,6 +12,7 @@
 }
 .carContainer {
   position: relative;
+  overflow: hidden;
   &:after {
     width: 140%;
     height: $unit50;

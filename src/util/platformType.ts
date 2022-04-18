@@ -1,9 +1,15 @@
 import ErrorHandle, {ErrorType} from "../config/ErrorHandle";
 
 export enum AllPlatformType {
-  ALIPAY="支付宝",
-  WECHAT="微信",
+  ALIPAY="alipay",
+  WECHAT="wechat",
   H5="h5"
+}
+
+const playFormTypeMapName: Record<AllPlatformType, string> = {
+  [AllPlatformType.ALIPAY]: '支付宝',
+  [AllPlatformType.WECHAT]: '微信',
+  [AllPlatformType.H5]: 'h5'
 }
 
 const getPlatformType = (): AllPlatformType => {
@@ -14,8 +20,8 @@ const getPlatformType = (): AllPlatformType => {
   }
 }
 
-export const getPlatformName = (): string => {
-  let platform: string
+export const getPlatformName = (): AllPlatformType  => {
+  let platform: AllPlatformType
   if (getPlatformType() === AllPlatformType.ALIPAY) {
     platform = AllPlatformType.ALIPAY
   } else if (getPlatformType() === AllPlatformType.WECHAT) {
@@ -27,4 +33,9 @@ export const getPlatformName = (): string => {
   return platform
 }
 
+const getChinesName = (): string => {
+  return playFormTypeMapName[ getChinesName()]
+}
+
+export {playFormTypeMapName}
 export default getPlatformType

@@ -1,6 +1,6 @@
 import React from "preact/compat";
 import {View} from "@tarojs/components";
-import {ReactChildren, ReactNode} from "react";
+import {CSSProperties, ReactChildren, ReactNode} from "react";
 // @ts-ignore
 import style from './style.module.scss';
 
@@ -9,10 +9,16 @@ type MenuContainerPropsType = {
   menuBar: ReactChildren | ReactNode
   bodyClassName?: string
   menuBarClassName?: string
+  bodyHeight?: number
 }
 const MenuContainer: React.FC<MenuContainerPropsType> = props => {
+  const {bodyHeight} = props
+  const [bodyStyle, bottomStyle]: [CSSProperties, CSSProperties] = bodyHeight ? [{height: `${bodyHeight}vh`}, {height: `${100 - bodyHeight}vh`}] : [{}, {}]
+
   return (<>
-    <View className={
+    <View
+      style={bodyStyle}
+      className={
       [
         style.bodyWrapper,
         props.bodyClassName || ''
@@ -21,7 +27,10 @@ const MenuContainer: React.FC<MenuContainerPropsType> = props => {
     >
       {props.children}
     </View>
-    <View className={[ style.menuWrapper, props.menuBarClassName ].join(' ')} >
+    <View
+      style={bottomStyle}
+      className={[ style.menuWrapper, props.menuBarClassName ].join(' ')}
+    >
       {props.menuBar}
     </View>
   </>)

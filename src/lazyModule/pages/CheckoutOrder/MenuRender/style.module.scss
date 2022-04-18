@@ -1,0 +1,119 @@
+@import "../../../../global.scss";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  height: 100%;
+  align-items: center;
+  padding: 0 $unit4;
+  .amount {
+    font-size: $unit6;
+    font-weight: bold;
+  }
+}
+.themeColor {
+  color: $primaryThemeColor;
+  margin-left: $unit1;
+}
+.amountTitle {
+  font-size: $unit3_5;
+}
+.rightWrapper {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .button{
+    width: 60%;
+  }
+  .detailTitle {
+    font-size: $unit3_5;
+    color: $primaryThemeColor;
+  }
+}
+.main {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 100%;
+  $firstRow: 30%;
+  grid-template-rows: $firstRow 100% - $firstRow;
+  .noticeWrapper {
+    background: $primaryThemeColor2;
+    display: flex;
+    align-items: center;
+    color: $primaryThemeColor;
+    line-height: 100%;
+    font-size: $unit3_5;
+    padding-left: $unit4;
+    .icon {
+      font-size: $unit3_5;
+      padding-right: $unit2;
+    }
+    .notice {
+      display: flex;
+    }
+  }
+}
+
+.spinWrapper {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  .spinContainer {
+    padding-bottom: $unit5;
+    $borderRadius: $borderRadiusCircle * 1.5;
+    border-radius: $borderRadius $borderRadius 0 0 ;
+    width: $unit100;
+    background: white;
+    @mixin padding {
+      padding: $unit5;
+    }
+    @mixin grayColor {
+      color: gray;
+    }
+    .header{
+      .icon {
+        font-size: $unit7;
+        font-weight: bold;
+      }
+      @include padding;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .rule {
+        font-size: $unit3_5;
+        @include grayColor;
+      }
+    }
+    .itemsWrapper {
+      .itemWrapper {
+        display: flex;
+        font-size: $unit3_5;
+        padding: $unit1_5 $unit5;
+        justify-content: space-between;
+        @include grayColor;
+        .amount {
+          font-size: $unit3;
+        }
+      }
+    }
+    .line {
+      border-bottom: solid 1px $gray2;
+    }
+    .amountItemWrapper {
+      .title {
+        color: black;
+      }
+      padding: $unit5 $unit5!important;
+      .amount {
+        color: $primaryThemeColor;
+      }
+      .amountNumber {
+        font-size: $unit5;
+        font-weight: bold;
+      }
+    }
+  }
+}

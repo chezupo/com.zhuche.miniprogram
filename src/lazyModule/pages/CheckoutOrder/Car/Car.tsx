@@ -7,9 +7,12 @@ import Icon from "../../../../components/Icon";
 // @ts-ignore
 import style from './style.module.scss'
 
-const Car: React.FC = props => {
+type CarPropsType = {
+ className?: string
+}
+const Car: React.FC<CarPropsType> = props => {
   return (
-    <Container className={style.main}>
+    <Container className={[style.main, props.className || ''].join(' ')}>
       <View className={style.baseInfo}>
         <Image
           src='https://zhuche-a1001.qiniu.wuchuheng.com/2022-4-10-22-22-23-1649600543498-cover.jpg'

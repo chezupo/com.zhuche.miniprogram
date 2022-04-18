@@ -1,8 +1,8 @@
 import ErrorHandle, {ErrorType} from "../config/ErrorHandle";
 
 export enum AllPlatformType {
-  ALIPAY="alipay",
-  WECHAT="wechat",
+  ALIPAY="支付宝",
+  WECHAT="微信",
   H5="h5"
 }
 

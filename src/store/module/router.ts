@@ -34,7 +34,10 @@ const navigateToFeedbackPage = () => navigateTo(`${lazyModulePrefix}/pages/compl
 
 const navigateToPhoneLoginPage = () => navigateTo(`${lazyModulePrefix}/pages/login/phoneLogin/index`)
 
-const navigateToCheckoutOrderAgreement = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/Agreements/index`)
+const navigateToCheckoutOrderAgreement = (index?: number) => {
+  const params = index ? `?index=${index}` : ''
+  navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/Agreements/index` + params)
+}
 
 const navigateToCheckoutOrder = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/index`)
 

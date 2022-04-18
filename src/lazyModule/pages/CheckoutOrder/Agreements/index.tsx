@@ -6,14 +6,19 @@ import Icon from "../../../../components/Icon";
 import style from "./style.module.scss";
 import {AgreementItemType} from "../../../../typings";
 import {getCheckoutOrderAgreements} from "../../../../api/Agreements";
+import {useRouter} from "@tarojs/taro";
 
 const Agreements: React.FC = () => {
   const [data, setData] = useState<AgreementItemType[]>([])
   const [detail, setDetail] = useState<string>('')
+  const {params} = useRouter()
+
   useEffect(() => {
     getCheckoutOrderAgreements().then(res => {
       setData(res)
-      // setDetail(res[3].content)
+      if (params.index) {
+        setDetail(res[parseInt(params.index)].content)
+      }
     })
   }, [])
 

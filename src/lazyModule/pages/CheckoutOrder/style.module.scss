@@ -2,6 +2,16 @@
 
 .main{
   background: #F3F3F3;
+}
+
+.container {
+  padding:$unit2 $unit3;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit1_5;
+}
+.carContainer {
+  position: relative;
   &:after {
     width: 140%;
     height: $unit50;
@@ -13,11 +23,4 @@
     border-radius: 0 0 50% 50%;
     background: $primaryThemeColor;
   }
-}
-
-.container {
-  padding:$unit2 $unit3;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-row-gap: $unit1_5;
 }

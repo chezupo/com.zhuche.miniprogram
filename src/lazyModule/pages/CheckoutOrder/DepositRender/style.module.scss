@@ -1,0 +1,18 @@
+@import "../../../../global.scss";
+
+.main {
+
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit2;
+}
+.title {
+  font-weight: bold;
+}
+.itemWrapper {
+  display: grid;
+  align-items: center;
+  grid-column-gap: $unit1_5;
+  font-size: $unit3_5;
+  color: gray;
+}

@@ -19,6 +19,7 @@ $color: $primaryThemeColor;
   align-items: center;
   font-size: $fontSize;
   .container {
+    padding: $unit4;
     color: gray;
   }
   .servicePhone {

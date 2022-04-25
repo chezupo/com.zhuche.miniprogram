@@ -6,22 +6,34 @@ import {primaryThemeColor} from "../../../../global";
 import Icon from "../../../../components/Icon";
 // @ts-ignore
 import style from './style.module.scss'
+import {CarItemType, StoreItemType} from "../../../../typings";
+import {TimestampType} from "../../../../reduxStore/module/order";
+import {convertDate} from "../../../../util/Carlendar";
 
 type CarPropsType = {
- className?: string
+  className?: string
+  data: CarItemType
+  startStore: StoreItemType
+  endStore: StoreItemType
+  startTime: TimestampType
+  endTime: TimestampType
 }
 const Car: React.FC<CarPropsType> = props => {
+  const {data, startStore, endStore} = props
+  const startTime = new Date(props.startTime)
+  const endTime = new Date(props.endTime)
+
   return (
     <Container className={[style.main, props.className || ''].join(' ')}>
       <View className={style.baseInfo}>
         <Image
-          src='https://zhuche-a1001.qiniu.wuchuheng.com/2022-4-10-22-22-23-1649600543498-cover.jpg'
+          src={data.cover}
           className={style.image}
           mode='widthFix'
         />
         <View className={style.info}>
-          <View className={style.name}>本田凌派</View>
-          <View className={style.tags}>自动 | 5座</View>
+          <View className={style.name}>{data.name}</View>
+          <View className={style.tags}>{data.shift === 'AUTO' ? '自动' : '手动'} | {data.seats}座</View>
         </View>
       </View>
       <View className={style.storeWrapper}>
@@ -33,31 +45,35 @@ const Car: React.FC<CarPropsType> = props => {
         <View className={style.storeNameWrapper}>
           <View className={style.storeName}>
             <View className={style.name}>
-              <View>惠州-市面广场店 </View>
+              <View>{startStore.city.name}-{startStore.name} </View>
               <Icon value='right' className={style.icon} />
             </View>
-            <View className={style.date}>04月20日 09：00</View>
+            <View className={style.date}>{convertDate(new Date(startTime))}</View>
           </View>
           <View className={style.storeName}>
             <View className={style.name}>
-              <View>惠州-市面广场店 </View>
+              <View>{endStore.city.name}-{endStore.name} </View>
               <Icon value='right' className={style.icon} />
             </View>
-            <View className={style.date}>04月20日 09：00</View>
+            <View className={style.date}>{convertDate(new Date(endTime))}</View>
           </View>
         </View>
       </View>
-      <View className={style.commentWrapper}>
-        <View className={style.rateWrapper}>
-          <Text className={[style.rate, style.color].join(' ')}>100</Text><Text className={style.color}>%</Text>满意
-        </View>
-        <View className={style.comment}>
-          <View>
-            共有<Text className={style.color}>10</Text>条用户评价
+      {
+        !!data.comments?.length && (
+          <View className={style.commentWrapper}>
+            <View className={style.rateWrapper}>
+              <Text className={[style.rate, style.color].join(' ')}>100</Text><Text className={style.color}>%</Text>满意
+            </View>
+            <View className={style.comment}>
+              <View>
+                共有<Text className={style.color}>{data.comments.length}</Text>条用户评价
+              </View>
+              <Icon value='right' className={style.icon} />
+            </View>
           </View>
-          <Icon value='right' className={style.icon} />
-        </View>
-      </View>
+        )
+      }
     </Container>
   )
 }

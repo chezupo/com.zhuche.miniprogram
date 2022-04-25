@@ -1,17 +1,24 @@
 import React from "react";
 import {useState} from "preact/hooks";
-import {Radio, ScrollView, Text, View} from "@tarojs/components";
+import {ScrollView, Text, View} from "@tarojs/components";
 import Container from "../components";
 // @ts-ignore
 import style from './style.module.scss'
 import Icon from "../../../../components/Icon";
-import {primaryThemeColor} from "../../../../global";
 import SpinContainer from "../../../../components/SpinContainer";
 import Button from "../../../../components/Button";
 import {useAppSelector} from "../../../../reduxStore";
 import {htmlStringConvert} from "../../../../util/htmlStringUtil";
+import Radio from "../../../../components/Radio";
+import {primaryThemeColor} from "../../../../global";
 
-const Insurance: React.FC = props => {
+type InsurancePropsType = {
+  checked: boolean
+  onChange: (newValue: boolean) => void
+  insuranceFee: number
+  days: number
+}
+const Insurance: React.FC<InsurancePropsType> = props => {
   const [visitableDetail, setVisitableDetail] = useState<boolean>(false)
   let insuranceAgreement = useAppSelector(state => state.configuration.config.insuranceAgreement)
   insuranceAgreement = htmlStringConvert(insuranceAgreement)
@@ -34,12 +41,14 @@ const Insurance: React.FC = props => {
 
           <View className={style.amountWrapper}>
             <Text className={style.amount}>
-              ￥25 * 24
+              ￥{props.insuranceFee} * {props.days}
             </Text>
-            ￥<Text className={style.number}>1276</Text>
+            ￥<Text className={style.number}>{props.insuranceFee * props.days}</Text>
             <Radio
               className={style.radio}
+              checked={props.checked}
               color={primaryThemeColor}
+              onChange={props.onChange}
             />
           </View>
         </View>

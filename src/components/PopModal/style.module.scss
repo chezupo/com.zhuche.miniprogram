@@ -1,0 +1,34 @@
+@import "../../global.scss";
+
+.main {
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container {
+    border-radius: $borderRadiusCircle;
+    background: white;
+    width: $unit80;
+    padding: $unit3;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit3_5;
+    .content {
+      color: $gray2;
+      font-size: $unit3_5;
+    }
+  }
+}
+.buttonWrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  .button {
+    border: none;
+  }
+  .Isee {
+    color: $gray2;
+  }
+  .confirm {
+    color: $primaryThemeColor;
+  }
+}

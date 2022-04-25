@@ -39,6 +39,8 @@ const navigateToCheckoutOrderAgreement = (index?: number) => {
   navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/Agreements/index` + params)
 }
 
+const navigateToOrder = () => switchTab(TabBarType.ORDER)
+
 const navigateToCheckoutOrder = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/index`)
 
 const navigateToUserCoupon = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/UserCoupon/index`)
@@ -76,5 +78,6 @@ export {
   navigateToCarDetailPage,
   navigateToCheckoutOrderAgreement,
   navigateToUserCoupon,
-  navigateToCheckoutOrder
+  navigateToCheckoutOrder,
+  navigateToOrder
 }

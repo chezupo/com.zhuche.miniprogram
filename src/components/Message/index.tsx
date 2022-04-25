@@ -11,7 +11,10 @@ import style from './style.module.scss'
 
 type TimerType = ReturnType<typeof setTimeout>
 
-const Message: React.FC = () => {
+type MessagePropsType = {
+  style?: CSSProperties
+}
+const Message: React.FC<MessagePropsType> = props => {
   const typeMapColor: Record<MessageTypeType, CSSProperties> = {
     error: {backgroundColor: 'rgb(239 68 68)'},
     success: {backgroundColor: 'rgb(74 222 128)'},
@@ -34,7 +37,6 @@ const Message: React.FC = () => {
     }, newMessage?.duration || 1000)
     timerDispatch(newTimer)
   }, 250), [])
-
   useEffect(() => {
     const messageSubscriptionHandler = store.message.subscription((newMessage) => {
       handleShowMessage(newMessage)
@@ -44,11 +46,13 @@ const Message: React.FC = () => {
       store.message.unSubscription(messageSubscriptionHandler)
     }
   }, [])
+  let css: CSSProperties = message ?typeMapColor[message.type] : {}
+  css = {...css, ...(props.style || {})}
 
   return (<TransitionEase
     visitable={isShow}
     height='8vw'
-    style={message ? typeMapColor[message.type] : {}}
+    style={css}
     className={style.main}
   >
     <View>{message ? message.title : ''}</View>

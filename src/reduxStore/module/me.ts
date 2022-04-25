@@ -3,7 +3,7 @@ import {MeItemType} from "../../typings";
 import getPlatformType, {AllPlatformType} from "../../util/platformType";
 import authCode from "../../nativeInterface/authCode";
 import {authorize} from "../../api/authoriztion";
-import {getMeInfo, updateMeInfo} from "../../api/me";
+import {getMeInfo, updateMeInfo, updateMyPhoneNumber, UpdateMyPhoneNumberQueryType} from "../../api/me";
 import {AppDispatch, RootState} from "../index";
 import {getUserProfile} from "../../nativeInterface/getUserProfile";
 import {setToken} from "../../util/authUtil";
@@ -32,6 +32,9 @@ const meSlice = createSlice({
     logout: (state) => {
       const {data, ...other} = state
       return {...other, isLogin: false}
+    },
+    save: (state, action: PayloadAction<MeItemType>): InitialStateType => {
+      return {...state, data: action.payload}
     }
   }
 })
@@ -71,8 +74,18 @@ const uploadUserInfoThunk = () => {
   }
 }
 
+/**
+ * 更新用户手机号
+ */
+const updateMyPhoneNumberThunk = (queryData: UpdateMyPhoneNumberQueryType) => {
+  return async (dispatch: AppDispatch): Promise<void> => {
+    const newUserInfo = await updateMyPhoneNumber(queryData)
+    dispatch(save(newUserInfo))
+  }
+}
+
 const meReducer = meSlice.reducer
 
-export {loginThunk, uploadUserInfoThunk}
-export const {login, uploadUserInfo, logout} = meSlice.actions
+export {loginThunk, uploadUserInfoThunk, updateMyPhoneNumberThunk}
+export const {login, uploadUserInfo, logout, save} = meSlice.actions
 export default meReducer

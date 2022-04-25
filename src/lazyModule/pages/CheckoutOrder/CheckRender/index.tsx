@@ -8,7 +8,11 @@ import style from './style.module.scss'
 import {useAppSelector} from "../../../../reduxStore";
 import {navigateToCheckoutOrderAgreement} from "../../../../store/module/router";
 
-const CheckRender: React.FC = () => {
+type CheckRenderPropsType = {
+  checked: boolean
+  onChange: (newValue: boolean) => void
+}
+const CheckRender: React.FC<CheckRenderPropsType> = props => {
   const {servicePhone} = useAppSelector(state => state.configuration.config)
   const handleCallPhone = () => {
     taro.makePhoneCall({phoneNumber: servicePhone})
@@ -19,12 +23,17 @@ const CheckRender: React.FC = () => {
 
   return (<>
     <View className={style.itemWrapper}>
-      <Checkbox value='hello' color={primaryThemeColor} />
-      <View
-        className={style.titleWrapper}
-        onClick={handleShowCheckoutOrderAgreement}
-      >
-        已阅读并同意<Text className={style.title}>《{config.navigationBarTitleText}》</Text>
+      <Checkbox
+        value='hello'
+        color={primaryThemeColor}
+        checked={props.checked}
+        onChange={() => props.onChange(!props.checked)}
+      />
+      <View className={style.titleWrapper} >
+        <Text onClick={() => props.onChange(!props.checked)}>已阅读并同意</Text>
+        <Text className={style.title}
+          onClick={handleShowCheckoutOrderAgreement}
+        >《{config.navigationBarTitleText}》</Text>
       </View>
     </View>
     <View className={style.servicePhoneWrapper}>

@@ -1,8 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {BannerType} from "../../store/module/banner";
 import {AppDispatch, RootState} from "../index";
-import * as Taro from "@tarojs/taro";
-import {prefixUrl} from "../../util/requestClient";
 import {getBanners} from "../../api/banners";
 
 type InitialStateType = {

@@ -38,6 +38,8 @@
   color: $subtitleColor;
 }
 .amountWrapper {
+  display: flex;
+  align-items: center;
   font-size: $unit3_5;
   .amount {
     color: $subtitleColor;
@@ -74,3 +76,6 @@
   }
 }
 
+.radio {
+  margin-left: $unit1;
+}

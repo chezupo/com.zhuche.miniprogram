@@ -9,7 +9,9 @@ import {useAppStoreSelector} from "../../store";
 
 const Customer = (): React.ReactElement => {
   const [{servicePhone: phone}] = useObserve(useAppStoreSelector().commonData)
-  const handleCall = (): void => Taro.makePhoneCall({ phoneNumber: phone })
+  const handleCall = (): void => {
+    Taro.makePhoneCall({ phoneNumber: phone }) .then(() => console.log("Call phone success."))
+  }
 
   return (
     <View

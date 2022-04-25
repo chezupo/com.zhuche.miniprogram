@@ -95,7 +95,12 @@
         justify-content: space-between;
         @include grayColor;
         .amount {
+          display: flex;
           font-size: $unit3;
+          .wrapperAmount {
+            text-decoration: line-through;
+            margin-right: $unit2;
+          }
         }
       }
     }
@@ -116,4 +121,12 @@
       }
     }
   }
+}
+.popConfirmButton {
+  border: none;
+  color: $primaryThemeColor;
+}
+
+.activeAmount {
+  color: $primaryThemeColor;
 }

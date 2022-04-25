@@ -102,17 +102,54 @@ declare type CarItemType = {
   rand: BrandItemType // 品牌
   number: string // 车牌号
   isOnline: boolean // 是否上架
-  price: number
+  rent: number // 租金
+  deposit: number // 押金
+  handlingFee: number // 手续费
+  insuranceFee: number // 驾无忧(保险)
   configs: StoreCarConfigItemType[]
-  deposit: number
   createdAt: string
   updatedAt: string
   store: StoreItemType
   carCategory: CarCategoryItemType
   comments: CommentItemType[]
 }
+
+declare type OrderPayType = 'ALIPAY' | 'WECHAT'
+
+declare type OrderStatus =
+  'CREDITING' | // 信用授权中
+  'PAYING' | // 支付中
+  'CAR_PICKUP_IN_PROGRESS' | // 取车中
+  'USING' | // 使用中
+  'OVERTIME' | // 用车超时
+  'RETURNING' | // 还车中
+  'FINISHED' | // 已完成
+  'RENEWED' | // 已续约
+  'CANCELED' // 已取消
+
+
 declare type OrderItemType = {
-  id: number
+  "id": number
+  "startTimeStamp": number
+  "endTimeStamp": number
+  "isInsurance": false,
+  "insuranceFee": number
+  "rent": number
+  "deposit": number
+  "handlingFee": number
+  "waiverAmount": number
+  "amount": number
+  "alipayToken": string
+  "alipayTradeNo": string
+  "alipayOutTradeNo": string
+  "createAlipayAt": number
+  "status": OrderStatus
+  "title": string
+  "startStore": StoreItemType
+  "payType": OrderPayType,
+  "endStore": StoreItemType
+  "car": CarItemType
+  cover: string
 }
 declare type CommentItemType = {
   id: number
@@ -158,7 +195,7 @@ declare type UserCouponItemType = {
   isWithHoliday: boolean
   isWithRent: boolean
   isWithServiceAmount: boolean
-  meetAmount: boolean
+  meetAmount: number
   reason: string
   title: string
 }

@@ -4,20 +4,24 @@ import * as React from "react";
 import style from './style.module.scss'
 import Car from "./Car";
 import Notice from "../Notice";
-import {navigateToCarDetailPage, switchTab} from "../../../../../store/module/router";
+import {navigateToCarDetailPage, navigateToCheckoutOrder, switchTab} from "../../../../../store/module/router";
 import {CarItemType} from "../../../../../typings";
 import {useAppDispatch} from "../../../../../reduxStore";
 import {setCarDetail} from "../../../../../reduxStore/module/cars";
 import EmptyRender from "../../../stories/SearchResultRender/EmptyRender";
 import {TabBarType} from "../../../../../reduxStore/module/layout";
+import {setCar} from "../../../../../reduxStore/module/order";
 
 type RightBarPropsType = {
   cars: CarItemType[]
 
 }
 const RightBar: React.FC<RightBarPropsType> = ({cars}) => {
-  const handleSelectCar = (car: CarItemType) => switchTab(TabBarType.ORDER)
   const dispatch = useAppDispatch()
+  const handleSelectCar = (car: CarItemType) => {
+    dispatch(setCar(car))
+    navigateToCheckoutOrder()
+  }
   const handleShowDetail = (car: CarItemType) => {
     dispatch(setCarDetail(car))
     navigateToCarDetailPage()

@@ -1,0 +1,17 @@
+@import "../../global.scss";
+.main {
+ background: white;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit5;
+  justify-items: center;
+  padding: $unit2;
+  border-radius: $unit3_5;
+  width: $unit45;
+  .image {
+    height: $unit30;
+  }
+  .text {
+    color: gray;
+  }
+}

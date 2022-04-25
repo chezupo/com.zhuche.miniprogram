@@ -1,4 +1,5 @@
 import {View} from "@tarojs/components";
+import taro from "@tarojs/taro";
 import {useEffect, useState} from "preact/hooks";
 import * as React from "react";
 // @ts-ignore
@@ -22,10 +23,17 @@ export type ItemType = {
 }
 
 const List = ():React.ReactElement => {
-  const {categories, list} = useAppSelector(state => state.cars)
+  const {categories, list, loading} = useAppSelector(state => state.cars)
   const [showCars, setShowCars] = useState<CarItemType[]>([])
   const {createOrder} = useAppSelector(state => state.order);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (loading) {
+      taro.showLoading({title: '汽车加载中...'})
+    } else {
+      taro.hideLoading()
+    }
+  }, [loading])
   useEffect(() => {
     if (list.length === 0 && createOrder.startStore?.id) {
       dispatch(getCarsThunk(createOrder.startStore.id)).then(() =>{

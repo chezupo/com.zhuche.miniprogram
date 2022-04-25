@@ -2,13 +2,13 @@ import React from "preact/compat";
 import {View} from "@tarojs/components";
 import Container from "../components";
 import {useAppSelector} from "../../../../reduxStore";
-import {getPlatformName} from "../../../../util/platformType";
+import {getChinesName} from "../../../../util/platformType";
 // @ts-ignore
 import style from "./style.module.scss";
 
 const DepositRender: React.FC = () => {
   const {appName} = useAppSelector(state => state.configuration.config)
-  let platformName: string = getPlatformName();
+  let platformName: string = getChinesName();
 
   return (
       <Container className={style.main}>

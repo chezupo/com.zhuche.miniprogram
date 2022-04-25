@@ -34,8 +34,8 @@ export const getPlatformName = (): AllPlatformType  => {
 }
 
 const getChinesName = (): string => {
-  return playFormTypeMapName[ getChinesName()]
+  return playFormTypeMapName[ getPlatformType()]
 }
 
-export {playFormTypeMapName}
+export {playFormTypeMapName, getChinesName}
 export default getPlatformType

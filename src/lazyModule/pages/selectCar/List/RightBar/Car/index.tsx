@@ -66,7 +66,7 @@ const Car  = (props: CarPropsType): React.ReactElement => {
 
           <View >
             <Text className={style.price}>￥</Text>
-            <Text className={style.price}>{props.data.price}</Text>
+            <Text className={style.price}>{props.data.rent}</Text>
             <Text className={style.price}>/均价</Text>
           </View>
         </View>

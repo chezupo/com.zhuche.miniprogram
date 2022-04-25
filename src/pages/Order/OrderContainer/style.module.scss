@@ -75,16 +75,30 @@
     height: $unit0_5;
     width: $unit8;
   }
-
 }
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
+  justify-items: center;
+  .button {
+      margin-left: $unit1;
+  }
 }
 .button {
+  width: $unit18;
+  text-align: center;
   background: $noticeColor;
   color: white;
   border-radius: $borderRadiusCircle;
   padding: $unit1_5 $unit3;
   font-size: $unit3_5;
+}
+
+.notice {
+  text-align: right;
+  color:red;
+  font-size: $unit3;
+}
+.orderNo {
+  font-size: $subtitleSize;
 }

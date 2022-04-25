@@ -1,5 +1,6 @@
 import * as React from "react";
-import {ITouchEvent, View} from "@tarojs/components";
+import {Button as TaroButton, ITouchEvent} from "@tarojs/components";
+import {ButtonProps} from "@tarojs/components/types/Button";
 // @ts-ignore
 import style from './style.module.scss'
 
@@ -9,24 +10,26 @@ type ButtonPropsType = {
   type?: 'primary'
   isDisable?: boolean
   onClick?: (event: ITouchEvent) => void
-}
-const Button: React.FC<ButtonPropsType> = (props) => {
+} & ButtonProps
+const Button: React.FC<ButtonPropsType> = ({children, className, type, isDisable, onClick, ...props}) => {
+
   const handleClick = (e: ITouchEvent) => {
-    props.onClick && !props.isDisable && props.onClick(e)
+    onClick && !isDisable && onClick(e)
   }
 
   return (
-    <View
+    <TaroButton
       onClick={handleClick}
       className={[
         style.button,
-        props.className || '',
-        props.type && props.type === 'primary' ? style.primary : '',
-        props.isDisable ? style.disable : ''
+        className || '',
+        type && type === 'primary' ? style.primary : '',
+        isDisable ? style.disable : ''
       ].join(' ')}
+      {...props}
     >
-      {props.children}
-    </View>
+      {children}
+    </TaroButton>
   )
 }
 

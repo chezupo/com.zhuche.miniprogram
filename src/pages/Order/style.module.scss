@@ -14,3 +14,14 @@
   padding: 0 $unit2 $unit2;
   overflow-y: auto;
 }
+.bottom {
+  margin-top: $unit3_5;
+  text-align: center;
+  color: gray;
+}
+.emptyWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

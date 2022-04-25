@@ -4,7 +4,6 @@ import {useEffect, useState} from "preact/hooks";
 import {View} from "@tarojs/components";
 import Car from "./Car/Car";
 import Insurance from "./Insurance";
-import OrderAgreement from "./OrderAgreement";
 import CheckRender from "./CheckRender";
 import Coupon from "./Coupon";
 import {useAppSelector} from "../../../reduxStore";
@@ -17,6 +16,8 @@ import Message from "../../../components/Message";
 import {createOrder} from "../../../api/order";
 import tradePay from "../../../nativeInterface/tradePay";
 import {navigateToOrder} from "../../../store/module/router";
+import RemarkRender from "./MarkRender";
+import OrderAgreement from "./OrderAgreement";
 
 const Order: React.FC = () => {
   const {
@@ -78,6 +79,7 @@ const Order: React.FC = () => {
   }
   useEffect(() => handleInitAmountList(), [car, starTime, endTime, userCoupon, isInsuranceFee, userCoupon])
   useEffect(() => handleInitAmountList(), [])
+  const [remark, setRemark] = useState<string>('')
   const handleSubmit = () => {
     const p = async (): Promise<void> => {
       if (!allowed) {
@@ -87,6 +89,7 @@ const Order: React.FC = () => {
       await taro.showLoading({title: '创建中...'})
       try {
         const newOrder = await createOrder({
+          remark,
           carId: car.id,
           endStoreId: isForeignCity ? endStore.id : startStore.id,
           startStoreId: startStore.id,
@@ -140,6 +143,7 @@ const Order: React.FC = () => {
             />
             <Coupon checkedCoupon={userCoupon} amountList={amountList} />
             <DepositRender />
+            <RemarkRender value={remark} onChange={setRemark} />
             <OrderAgreement />
             <CheckRender
               checked={allowed}

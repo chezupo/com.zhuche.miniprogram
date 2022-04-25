@@ -3,6 +3,7 @@ import getPlatformType from "../util/platformType";
 import {OrderItemType} from "../typings";
 
 type CreateOrderQueryType = {
+  remark: string
   carId: number
   endStoreId: number
   startStoreId: number

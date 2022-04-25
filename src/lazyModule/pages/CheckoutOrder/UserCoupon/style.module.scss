@@ -11,7 +11,6 @@ $gap: $unit3;
 
 .main {
   @include background;
-  min-height: 100%;
   padding: $gap;
   display: grid;
   grid-template-columns: 100%;

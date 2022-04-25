@@ -43,7 +43,10 @@ const navigateToOrder = () => switchTab(TabBarType.ORDER)
 
 const navigateToCheckoutOrder = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/index`)
 
-const navigateToUserCoupon = () => navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/UserCoupon/index`)
+const navigateToUserCoupon = (amount?: number) => {
+  const query = amount ? `?amount=${amount}` : ''
+  navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/UserCoupon/index${query}`)
+}
 
 const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
 

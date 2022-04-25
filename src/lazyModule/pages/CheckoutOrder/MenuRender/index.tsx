@@ -1,6 +1,7 @@
 import React from "preact/compat";
 import {useCallback, useEffect, useState} from "preact/hooks";
 import {ITouchEvent, Text, View} from "@tarojs/components";
+import {debounce} from "@wuchuhengtools/helper";
 // @ts-ignore
 import style from './style.module.scss';
 import Button from "../../../../components/Button";
@@ -12,7 +13,6 @@ import {CarItemType} from "../../../../typings";
 import getPhoneNumber from "../../../../nativeInterface/getPhoneNumber";
 import {updateMyPhoneNumberThunk} from "../../../../reduxStore/module/me";
 import PopModal from "../../../../components/PopModal";
-import {debounce} from "@wuchuhengtools/helper";
 
 type PayNowItemType = {
   title: string
@@ -146,9 +146,9 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
                     <View className={style.title}>{item.title}</View>
                     <View className={style.amount}>
                       {
-                        !!item.waiverFee && ( <Text className={[style.wrapperAmount].join(' ')}>￥{item.waiverFee}</Text> )
+                        !!item.waiverFee && ( <Text className={[style.wrapperAmount].join(' ')}>￥{Math.round(item.waiverFee * 100) / 100}</Text> )
                       }
-                      <Text className={item.activeColor ? style.activeAmount : ''}>￥{item.amount}</Text>
+                      <Text className={item.activeColor ? style.activeAmount : ''}>￥{Math.round(item.amount * 100) / 100}</Text>
                     </View>
                   </View>
                 )
@@ -164,7 +164,7 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
                   >
                     <View className={style.title}>{item.title}</View>
                     <View className={style.amount}>
-                      <Text>￥{item.amount}</Text>
+                      <Text>￥{Math.round(item.amount * 100) / 100}</Text>
                     </View>
                   </View>
                 )

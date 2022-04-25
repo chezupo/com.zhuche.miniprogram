@@ -10,7 +10,7 @@ type InitialStateType = {
   activeTab: TabBarType
 }
 const initialState: InitialStateType = {
-  activeTab: TabBarType.ORDER
+  activeTab: TabBarType.HOME
 }
 
 

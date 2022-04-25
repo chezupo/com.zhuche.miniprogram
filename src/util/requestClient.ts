@@ -1,11 +1,22 @@
 import * as Taro from "@tarojs/taro"
 import store from "../reduxStore"
 import {getToken} from "./authUtil";
+import {navigateToLoginOrRegister} from "../store/module/router";
 
 export const prefixUrl = "https://a1001zhuche.jds.wuchuheng.com/api/v1/miniProgram"
 const getHeaders = (): Object => {
   const token = `Bearer ${store.getState().me.data?.accessToken || getToken() || ''}`
   return   {...(token.length > 7 ? {header: {Authorization: token}} : {})}
+}
+const checkRes = async <T>(res): Promise<T> => {
+  const {data} = res
+  if (data.data) {
+    return data.data as T
+  }
+  if (data.errorCode === 40202) {
+    navigateToLoginOrRegister()
+  }
+  throw new Error(data)
 }
 export const get = <T>(url: string, query?: Record<string, any> ): Promise<T> => {
   return new Promise<T>((resolve, reject) => {
@@ -13,14 +24,11 @@ export const get = <T>(url: string, query?: Record<string, any> ): Promise<T> =>
       ...getHeaders(),
       url: `${prefixUrl}${url}`,
       ...(query ? {data: query} : {}),
-      success: (res) => {
-        const {data} = res
-        if (data.data) {
-          return  resolve(data.data as T)
-        } else if (data.data === null) {
-          return resolve(null)
-        }
-      },
+      success: (res) =>
+        checkRes<T>(res)
+          .then((data) => resolve(data) )
+          .catch(err => reject(err))
+      ,
       fail: (e) => reject(e)
     });
   })
@@ -33,14 +41,11 @@ export const post = <T>(url: string, requestData?: Object): Promise<T> => {
       method: 'POST',
       ...(requestData? {data: requestData} : {}),
       url: `${prefixUrl}${url}`,
-      success: (res) => {
-        const {data} = res
-        if (data.data) {
-          return  resolve(data.data as T)
-        } else if (data.data === null) {
-          return resolve(null)
-        }
-      },
+      success: (res) =>
+        checkRes<T>(res)
+          .then((data) => resolve(data) )
+          .catch(err => reject(err))
+      ,
       fail: (e) => reject(e)
     });
   })
@@ -53,14 +58,11 @@ export const put = <T>(url: string, requestData?: Object): Promise<T> => {
       method: 'PUT',
       ...(requestData? {data: requestData} : {}),
       url: `${prefixUrl}${url}`,
-      success: (res) => {
-        const {data} = res
-        if (data.data) {
-          return  resolve(data.data as T)
-        } else if (data.data === null) {
-          return resolve(null)
-        }
-      },
+      success: (res) =>
+        checkRes<T>(res)
+          .then((data) => resolve(data) )
+          .catch(err => reject(err))
+      ,
       fail: (e) => reject(e)
     });
   })

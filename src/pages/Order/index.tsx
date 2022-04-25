@@ -18,10 +18,9 @@ const tabs: OrderCategoryType[] = [
       'USING',  // 使用中
       'RETURNING',  // 还车中
       'FINISHED',  // 已完成
-      'EXPIRED',  // 已过期
+      'OVERTIME',  // 用车超时
       'RENEWED',  // 已续约
       'CANCELED' // 已取消
-
     ]
   },
   {id: 1, name: '待支付', status:  [

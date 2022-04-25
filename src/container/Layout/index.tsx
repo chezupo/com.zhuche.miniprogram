@@ -9,6 +9,8 @@ import {useAppDispatch, useAppSelector} from "../../reduxStore";
 import style from "./style.module.scss";
 import {setActiveTab, TabBarType as LayoutTabBarType} from "../../reduxStore/module/layout";
 import {isLogin} from "../../util/authUtil";
+import {useRouter} from "@tarojs/taro";
+import {useEffect} from "preact/hooks";
 
 export type LayoutPropsType = {
   tabs: TabBarType[]
@@ -42,6 +44,13 @@ const Layout = (props: LayoutPropsType): React.ReactElement => {
   }
   const index = props.tabs.findIndex(i => i.type === currentTabBar)
   taro.setNavigationBarTitle({ title: props.tabs[index].navTitle })
+  const {params} = useRouter()
+  useEffect(() => {
+    if (params.tab) {
+      // @ts-ignore
+      dispatch(setActiveTab(params.tab))
+    }
+  }, [])
 
   return (<View className={style.main}>
     <Message />

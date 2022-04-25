@@ -138,7 +138,7 @@ const Order: React.FC = () => {
               checked={isInsuranceFee}
               onChange={setIsInsuranceFee}
             />
-            <Coupon checkedCoupon={userCoupon} />
+            <Coupon checkedCoupon={userCoupon} amountList={amountList} />
             <DepositRender />
             <OrderAgreement />
             <CheckRender

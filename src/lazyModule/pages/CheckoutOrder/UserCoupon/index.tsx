@@ -15,6 +15,7 @@ import SpinContainer from "../../../../components/SpinContainer";
 import Radio from "../../../../components/Radio";
 import {primaryThemeColor} from "../../../../global";
 import {navigateToCheckoutOrder, navigateToCheckoutOrderAgreement} from "../../../../store/module/router";
+import {useRouter} from "@tarojs/taro";
 
 type ItemRenderPropsType = {
   data: UserCouponItemType
@@ -24,7 +25,11 @@ type ItemRenderPropsType = {
   onCancel: () => void
 }
 const ItemRender: React.FC<ItemRenderPropsType> = ({data, onShowRule, onChange, checkedUserCoupon, onCancel}) => {
-  const isValidClassName = data.isValid ? '' : style.disableColor
+  const {params} = useRouter()
+  const isMeetAmount = !params?.amount || parseFloat(params.amount) >= data.meetAmount
+  const isValid = data.isValid && isMeetAmount
+  const reason = !isValid ? data.reason || '消费额度不足' : ''
+  const isValidClassName = isValid ? '' : style.disableColor
   const dayTimeStamp = 60 * 60 * 24 * 1000;
   const now = new Date( (new Date(data.createdAt)).getTime() + data.expired * dayTimeStamp)
   const y = now.getFullYear()
@@ -32,7 +37,7 @@ const ItemRender: React.FC<ItemRenderPropsType> = ({data, onShowRule, onChange, 
   const d = now.getDate()
   const checked = checkedUserCoupon && checkedUserCoupon.id === data.id
   const handleClick = () => {
-    if (!data.isValid) return ;
+    if (!isValid) return ;
     checkedUserCoupon && checkedUserCoupon.id === data.id ? onCancel() : onChange(data)
   }
 
@@ -55,7 +60,7 @@ const ItemRender: React.FC<ItemRenderPropsType> = ({data, onShowRule, onChange, 
           </View>
           <View>
             {
-              data.isValid &&
+              isValid &&
               (
                 <Radio checked={checked} color={primaryThemeColor} />
               )
@@ -70,12 +75,12 @@ const ItemRender: React.FC<ItemRenderPropsType> = ({data, onShowRule, onChange, 
         <View className={style.bottomWrapper}>
           <View className={style.reasonWrapper}>
             {
-              !data.isValid && (<>
+              !isValid && (<>
                 <View className={style.title}>
                   <Icon value='exclamation-mark' className={style.icon} />
                   <View>不可用原因</View>
                 </View>
-                <View className={style.reason}>节假日不可用</View>
+                <View className={style.reason}>{reason}</View>
               </>)
             }
           </View>

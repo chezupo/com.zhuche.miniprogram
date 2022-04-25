@@ -1,7 +1,9 @@
 import React from "preact/compat";
 import {Image, View} from "@tarojs/components";
 import SpinContainer from "../SpinContainer";
+// @ts-ignore
 import loadingSvg from "../../asesst/images/loading.svg"
+// @ts-ignore
 import style from './style.module.scss';
 
 const Loading: React.FC = () => {

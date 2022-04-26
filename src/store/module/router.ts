@@ -65,6 +65,10 @@ export const navigateBack = ():void => {
   taro.navigateBack()
 }
 
+const navigateArgumentDetail = (id: number) => {
+  navigateTo(`${lazyModulePrefix}/pages/ArgumentDetail/index?id=${id}`)
+}
+
 export {
   navigateTo,
   navigateToHome,
@@ -82,5 +86,6 @@ export {
   navigateToCheckoutOrderAgreement,
   navigateToUserCoupon,
   navigateToCheckoutOrder,
-  navigateToOrder
+  navigateToOrder,
+  navigateArgumentDetail,
 }

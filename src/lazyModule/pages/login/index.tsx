@@ -54,10 +54,10 @@ const Login = (): React.ReactElement => {
         onGetAuthorize={handleUploadUserInfo}
         className={style.directLogin}
       >{platform}账号一键登录</Button>
-      <View
-        className={style.phoneLoginOrRegister}
-        onClick={handleLoginOrRegister}
-      >手机号登录/注册</View>
+      {/*<View*/}
+      {/*  className={style.phoneLoginOrRegister}*/}
+      {/*  onClick={handleLoginOrRegister}*/}
+      {/*>手机号登录/注册</View>*/}
       <View className={style.agreementWrapper}>
         <Agreement checked={agreement} onChange={agreementDispatch} />
       </View>

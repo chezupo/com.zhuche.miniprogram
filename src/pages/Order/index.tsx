@@ -1,4 +1,5 @@
 import * as React from "react";
+import taro, {usePullDownRefresh} from "@tarojs/taro";
 import {useEffect, useState} from "react";
 import Tabs from "./Tabs";
 // @ts-ignore
@@ -7,7 +8,6 @@ import Loading from "../../components/Loading";
 import {getOrders} from "../../api/order";
 import {OrderItemType, OrderStatus} from "../../typings";
 import TabContainer from "./components/TabContainer";
-import taro, {usePullDownRefresh} from "@tarojs/taro";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 

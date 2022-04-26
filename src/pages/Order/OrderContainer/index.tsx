@@ -11,6 +11,9 @@ import {convertDate} from "../../../util/Carlendar";
 // @ts-ignore
 import style from "./style.module.scss"
 import {OrderCategoryType} from "../index";
+import {ITouchEvent} from "@tarojs/components/types/common";
+import taro from "@tarojs/taro";
+import Icon from "../../../components/Icon";
 
 type OrderContainerPropsType = {
   data: OrderItemType
@@ -46,15 +49,23 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const handlePay = () => {
 
   }
-
   const pointSize: number = 2;
+  const tradeNo = data.alipayTradeNo;
+  const handleCopy = async (e: ITouchEvent) => {
+    await taro.setClipboardData({ data: tradeNo })
+    await taro.showToast({title: '订单号复制成功', duration: 5000})
+    e.stopPropagation()
+  }
+
   return (
     <View className={style.main}>
       <View className={style.headerWrapper}>
         <View className={style.status}>{statusMapChinese[data.status].title}</View>
         <View>￥{props.data.amount}</View>
       </View>
-      <View className={style.orderNo}>订单号: {data.alipayTradeNo}</View>
+      <View className={style.orderNo} onClick={handleCopy}>
+        <View>订单号: {tradeNo}</View><Icon className={style.copyIcon} value='copy' />
+      </View>
       <View className={style.name}>{props.data.title}</View>
       <View className={style.storeWrapper}>
         <View className={style.storeAddressWrapper}>

@@ -7,6 +7,7 @@ import Loading from "../../components/Loading";
 import {getOrders} from "../../api/order";
 import {OrderItemType, OrderStatus} from "../../typings";
 import TabContainer from "./components/TabContainer";
+import taro, {usePullDownRefresh} from "@tarojs/taro";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 
@@ -44,14 +45,24 @@ const Order = () : React.ReactElement => {
   const [allOrders, setAllOrders] = useState<OrderItemType[]>([])
   const [showOrders, setShowOrders] = useState<OrderItemType[]>([])
   const [currentOrderCategory, setCurrentOrderCategory ]= useState<OrderCategoryType>(tabs[0])
-  useEffect(() => {
+  const handleFetchData = () => {
     setLoading(true)
     getOrders().then(newOrders => {
       setAllOrders(newOrders)
       setShowOrders(newOrders)
-    } ).finally(() => {
       setLoading(false)
+      taro.stopPullDownRefresh()
+    } ).catch(() => {
+      setLoading(false)
+      taro.stopPullDownRefresh()
     })
+  }
+  usePullDownRefresh(() => {
+    handleFetchData()
+  })
+
+  useEffect(() => {
+    handleFetchData()
   }, [])
 
   const handleChange = (changeActiveId: number) => {

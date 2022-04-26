@@ -23,23 +23,20 @@ const Coupon: React.FC<CouponPropsType> = props => {
   } = props.amountList
   const amount = handlingFee + rent + insuranceFee
   const {list} = useAppSelector(state => state.userCoupons)
-  const count = list.filter(item => item.isValid && item.meetAmount <= amount).length
+  const count = list.filter(item => item.isValid && item.meetAmount <= amount ).length
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(iniUserCouponThunk()).then(() => {
       console.log("Init userCoupons")
     })
   }, [])
-  const handleClickCoupon = () => {
-    !!count && navigateToUserCoupon(amount)
-  }
 
   return (<>
     <Container className={style.main}>
       <View className={style.title}>更多优惠</View>
           <View className={style.itemWrapper}
             style={{gridTemplateColumns: !props.checkedCoupon ? '27% auto' : '27% auto 23%'}}
-            onClick={handleClickCoupon}
+            onClick={() => navigateToUserCoupon(amount)}
           >
             <View className={style.nameWrapper}>
               <View >优惠卷折扣</View>

@@ -101,4 +101,10 @@
 }
 .orderNo {
   font-size: $subtitleSize;
+  display: flex;
+  align-items: center;
+}
+.copyIcon {
+  @include globalSubtitle;
+  margin-left: $unit1;
 }

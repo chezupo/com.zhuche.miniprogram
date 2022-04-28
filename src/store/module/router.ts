@@ -75,6 +75,8 @@ const navigateStoreDetail = (id: number) => {
 
 const navigateToViolationPage = () => navigateTo(`${lazyModulePrefix}/pages/ViolationPage/index`)
 const navigateToContactPage = () => navigateTo(`${lazyModulePrefix}/pages/ContactPage/index`)
+const navigateToIdCarValidationPage = () => navigateTo(`${lazyModulePrefix}/pages/IdCarValidationPage/index`)
+const navigateToDriverLicenceValidationPage = () => navigateTo(`${lazyModulePrefix}/pages/DriverLicenceValidationPage/index`)
 
 export {
   navigateTo,
@@ -97,5 +99,7 @@ export {
   navigateArgumentDetail,
   navigateStoreDetail,
   navigateToViolationPage,
-  navigateToContactPage
+  navigateToContactPage,
+  navigateToIdCarValidationPage,
+  navigateToDriverLicenceValidationPage,
 }

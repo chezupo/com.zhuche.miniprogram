@@ -6,7 +6,12 @@ import ItemContainer, {ItemContainerEventType, ItemContainerType} from "./ItemCo
 // @ts-ignore
 import style from "./style.module.scss"
 import Point from "../../../components/Point";
-import {navigateToContactPage, navigateToLoginOrRegister, navigateToViolationPage} from "../../../store/module/router";
+import {
+  navigateToContactPage, navigateToDriverLicenceValidationPage,
+  navigateToIdCarValidationPage,
+  navigateToLoginOrRegister,
+  navigateToViolationPage
+} from "../../../store/module/router";
 import Icon from "../../../components/Icon";
 import getPlatformType from "../../../util/platformType";
 import {isLogin} from "../../../util/authUtil";
@@ -58,6 +63,12 @@ const Items = (): React.ReactElement => {
       case ItemContainerEventType.CONTACT:
         navigateToContactPage()
         break;
+      case ItemContainerEventType.ID_CAR:
+        navigateToIdCarValidationPage();
+        break
+      case ItemContainerEventType.DRIVER_S_LICENSE:
+        navigateToDriverLicenceValidationPage()
+        break
     }
   }
 

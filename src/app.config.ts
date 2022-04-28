@@ -22,7 +22,9 @@ export default {
         'pages/stories/DetailPage/index',
         'pages/stories/DetailPage/GuideDetailPage/index',
         'pages/ViolationPage/index',
-        'pages/ContactPage/index'
+        'pages/ContactPage/index',
+        'pages/DriverLicenceValidationPage/index',
+        'pages/IdCarValidationPage/index',
       ]
     }
   ],

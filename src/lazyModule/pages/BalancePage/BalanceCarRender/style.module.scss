@@ -25,3 +25,23 @@
     }
   }
 }
+
+.topUpWrapper {
+  background: white;
+  border-radius: $borderRadiusCircle;
+  width: $unit80;
+  padding: $unit5;
+  .inputWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: $unit10;
+    font-size: $unit8;
+  }
+  .buttonWrapper {
+    margin-top: $unit4;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: $unit2;
+  }
+}
+

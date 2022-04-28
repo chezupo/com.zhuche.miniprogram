@@ -48,15 +48,28 @@ const loginThunk =  () => {
       setToken(accessToken)
       dispatch(login({
         isNewUser,
+        balance: 0,
         accessToken,
       }))
       const newUserInfo = await getMeInfo()
       const meData = getState().me.data
+      console.log(meData)
       dispatch(login({
         ...meData,
         ...newUserInfo
       }))
     }
+  }
+}
+
+const refreshThunk = () => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    const newUserInfo = await getMeInfo()
+    const meData = getState().me.data
+    dispatch(login({
+      ...meData,
+      ...newUserInfo
+    }))
   }
 }
 
@@ -68,7 +81,7 @@ const uploadUserInfoThunk = () => {
       await dispatch(loginThunk())
       me = getState().me.data
     }
-    const {avatar, nickName, city, code, countryCode, gender, province} = await getUserProfile()
+    const {avatar, nickName, city, code, countryCode, gender, province, } = await getUserProfile()
     const res = await updateMeInfo({avatar, province, nickName, countryCode, code, gender, city})
     dispatch(uploadUserInfo({...me, ...res}))
   }
@@ -86,6 +99,6 @@ const updateMyPhoneNumberThunk = (queryData: UpdateMyPhoneNumberQueryType) => {
 
 const meReducer = meSlice.reducer
 
-export {loginThunk, uploadUserInfoThunk, updateMyPhoneNumberThunk}
+export {loginThunk, uploadUserInfoThunk, updateMyPhoneNumberThunk, refreshThunk}
 export const {login, uploadUserInfo, logout, save} = meSlice.actions
 export default meReducer

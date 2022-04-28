@@ -7,9 +7,11 @@ import {useAppSelector} from '../../../../reduxStore';
 import Button from "../../../../components/Button";
 // @ts-ignore
 import style from "./style.module.scss"
+import {useCheckedCar} from "../../../../util/carUtil";
 
 const CarDetail: React.FC = () => {
   const data = useAppSelector(state => state.cars.showCarItemDetail!)
+  const handleSelectCar = useCheckedCar()
   const commonTags: CommonTagItemType[] = [
     {name: '全部', total: 4},
     {name: '全部', total: 4},
@@ -39,7 +41,10 @@ const CarDetail: React.FC = () => {
       <ConfigRender configs={configs} />
       <CommonRender commonTags={commonTags} id={data.id} />
       <View className={style.buttonWrapper}>
-        <Button className={style.button}>立即预订</Button>
+        <Button
+          className={style.button}
+          onClick={() => handleSelectCar(data)}
+        >立即预订</Button>
       </View>
     </View>
   </>)

@@ -1,4 +1,4 @@
-import {deleteRequest, get, post, patch, put} from "../util/requestClient";
+import {deleteRequest, get, post, put} from "../util/requestClient";
 import {UserContactItemType} from "../typings";
 
 const getUserContact = async () => {

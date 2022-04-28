@@ -11,6 +11,7 @@ import {setCarDetail} from "../../../../../reduxStore/module/cars";
 import EmptyRender from "../../../stories/SearchResultRender/EmptyRender";
 import {TabBarType} from "../../../../../reduxStore/module/layout";
 import {setCar} from "../../../../../reduxStore/module/order";
+import {useCheckedCar} from "../../../../../util/carUtil";
 
 type RightBarPropsType = {
   cars: CarItemType[]
@@ -18,10 +19,7 @@ type RightBarPropsType = {
 }
 const RightBar: React.FC<RightBarPropsType> = ({cars}) => {
   const dispatch = useAppDispatch()
-  const handleSelectCar = (car: CarItemType) => {
-    dispatch(setCar(car))
-    navigateToCheckoutOrder()
-  }
+  const handleSelectCar = useCheckedCar()
   const handleShowDetail = (car: CarItemType) => {
     dispatch(setCarDetail(car))
     navigateToCarDetailPage()

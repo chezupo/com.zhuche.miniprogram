@@ -177,6 +177,7 @@ declare type MeItemType = {
   gender?: string
   province?: string
   isAuthorizeBaseInfo?: boolean
+  balance?: number
 }
 
 declare type AgreementItemType = {

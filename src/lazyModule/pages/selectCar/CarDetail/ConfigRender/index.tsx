@@ -21,7 +21,7 @@ const ConfigRender: React.FC<ConfigRenderPropsType> = props => {
           props.configs.map((tag, i) => (
             <View className={style.itemWrapper} key={i}>
               <Icon value={tag.icon} className={[style.icon, tag.className || ''].join(' ')} />
-              <View className={style.key}>{tag.key}</View>
+              <View className={style.key}>{tag.name}</View>
             </View>
           ))
         }

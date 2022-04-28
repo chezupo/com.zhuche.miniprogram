@@ -1,16 +1,15 @@
 import * as React from "react";
-import ItemContainer, {ItemContainerType} from "./ItemContainner";
+import {CSSProperties} from "react";
+import * as Taro from "@tarojs/taro";
 import {View} from "@tarojs/components";
+import ItemContainer, {ItemContainerEventType, ItemContainerType} from "./ItemContainner";
 // @ts-ignore
 import style from "./style.module.scss"
 import Point from "../../../components/Point";
-import {AtActionSheet, AtActionSheetItem} from "taro-ui";
-import {CSSProperties, useReducer, useState} from "react";
-import {navigateTo, navigateToLoginOrRegister} from "../../../store/module/router";
-import useObserve from "../../../util/useObserve";
-import {useAppStoreSelector} from "../../../store";
-import * as Taro from "@tarojs/taro";
+import {navigateToContactPage, navigateToLoginOrRegister, navigateToViolationPage} from "../../../store/module/router";
 import Icon from "../../../components/Icon";
+import getPlatformType from "../../../util/platformType";
+import {isLogin} from "../../../util/authUtil";
 
 type NotePropstype = {title: string}
 const WechatNote = (props: NotePropstype): React.ReactElement => {
@@ -27,24 +26,39 @@ const WechatNote = (props: NotePropstype): React.ReactElement => {
 const Items = (): React.ReactElement => {
   const  iconStyle: CSSProperties = {fontSize: '5vw'}
   const items: ItemContainerType[] = [
-    {title: '绑定公众号', icon: <Icon value='wechat' style={{...iconStyle, fontSize: '6vw'}} />, note: <WechatNote title='待绑定' />} ,
-    {title: '违章查询', icon: <Icon value='weizhangshigujilu' style={iconStyle} />} ,
-    {title: '紧急联系人', icon: <Icon value='lianxiren' style={iconStyle} />} ,
-    {title: '身份认证', icon: <Icon value='shenfenzheng' style={iconStyle} />} ,
-    {title: '驾照认证', icon: <Icon value='kaojiazhao' style={iconStyle} />} ,
+  ...(getPlatformType() === 'wechat' ? [
+    {title: '绑定公众号', icon: <Icon value='wechat' style={{...iconStyle, fontSize: '6vw'}} />,eventType: ItemContainerEventType.WECHAT_OFFICE, note: <WechatNote title='待绑定' />, }
+  ] : []),
+    {title: '违章查询', icon: <Icon value='weizhangshigujilu' style={iconStyle} />, eventType: ItemContainerEventType.VIOLATION } ,
+    {title: '紧急联系人', icon: <Icon value='lianxiren' style={iconStyle} />, eventType: ItemContainerEventType.CONTACT } ,
+    {title: '身份认证', icon: <Icon value='shenfenzheng' style={iconStyle} />, eventType: ItemContainerEventType.ID_CAR } ,
+    {title: '驾照认证', icon: <Icon value='kaojiazhao' style={iconStyle} />, eventType: ItemContainerEventType.DRIVER_S_LICENSE } ,
   ]
   const handleClick = (item: ItemContainerType) => {
-    Taro.showModal({
-      title: '消息提示',
-      content: '您还未登录，无法进行操作, 是否前去登录？',
-      success: (res) => {
-        if (res.confirm) {
-          navigateToLoginOrRegister()
-        } else {
-          console.log("not")
+    if (!isLogin()) {
+      Taro.showModal({
+        title: '消息提示',
+        content: '您还未登录，无法进行操作, 是否前去登录？',
+        success: (res) => {
+          if (res.confirm) {
+            navigateToLoginOrRegister()
+          } else {
+            console.log("not")
+          }
         }
-      }
-    })
+      })
+      return
+    }
+    switch (item.eventType) {
+      // 定向到违章页
+      case ItemContainerEventType.VIOLATION:
+        navigateToViolationPage()
+        break;
+      // 定向到联系人页
+      case ItemContainerEventType.CONTACT:
+        navigateToContactPage()
+        break;
+    }
   }
 
   return (

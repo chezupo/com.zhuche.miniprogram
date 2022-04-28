@@ -1,0 +1,39 @@
+@import "../../commond.module";
+
+.headerWrapper {
+  @include padding;
+  .nameWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    .name {
+      font-size: $unit4_5;
+      font-weight: bold;
+    }
+    .iconWrapper {
+      display: flex;
+      .icon {
+        font-size: $unit3;
+        background: $primaryThemeColor2;
+        color: $primaryThemeColor;
+        padding: $unit1;
+        text-align: center;
+        border-radius: 100%;
+        &:not(:first-child) {
+          margin-left: $unit2;
+        }
+      }
+      .h24 {
+        border-radius: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .rate {
+    color: $primaryThemeColor;
+    margin-top: $unit3;
+  }
+}

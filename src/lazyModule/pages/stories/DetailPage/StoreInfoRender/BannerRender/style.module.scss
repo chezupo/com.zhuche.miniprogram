@@ -1,0 +1,10 @@
+@import "../../../../../../global.scss";
+
+.main {
+  border-top-left-radius: $borderRadiusCircle;
+  border-top-right-radius: $borderRadiusCircle;
+}
+.image {
+  width: 100%;
+  height: $unit50;
+}

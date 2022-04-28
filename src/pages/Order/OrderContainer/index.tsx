@@ -2,6 +2,8 @@
  * 订单项组件
  */
 import {Image, View} from "@tarojs/components";
+import {ITouchEvent} from "@tarojs/components/types/common";
+import taro from "@tarojs/taro";
 import {useState} from "preact/hooks";
 import * as React from "react";
 import Point from "../../../components/Point";
@@ -11,9 +13,8 @@ import {convertDate} from "../../../util/Carlendar";
 // @ts-ignore
 import style from "./style.module.scss"
 import {OrderCategoryType} from "../index";
-import {ITouchEvent} from "@tarojs/components/types/common";
-import taro from "@tarojs/taro";
 import Icon from "../../../components/Icon";
+import {navigateStoreDetail} from "../../../store/module/router";
 
 type OrderContainerPropsType = {
   data: OrderItemType
@@ -55,6 +56,9 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     await taro.setClipboardData({ data: tradeNo })
     await taro.showToast({title: '订单号复制成功', duration: 5000})
     e.stopPropagation()
+  }
+  const handleShowStoreDetail = () => {
+    navigateStoreDetail(props.data.startStore.id)
   }
 
   return (
@@ -122,7 +126,10 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
               <View className={style.button}>
                 取消订单
               </View>
-              <View className={style.button}>
+              <View
+                className={style.button}
+                onClick={handleShowStoreDetail}
+              >
                 联系门店
               </View>
             </>

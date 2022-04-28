@@ -69,6 +69,13 @@ const navigateArgumentDetail = (id: number) => {
   navigateTo(`${lazyModulePrefix}/pages/ArgumentDetail/index?id=${id}`)
 }
 
+const navigateStoreDetail = (id: number) => {
+  navigateTo(`${lazyModulePrefix}/pages/stories/DetailPage/index?id=${id}`)
+}
+
+const navigateToViolationPage = () => navigateTo(`${lazyModulePrefix}/pages/ViolationPage/index`)
+const navigateToContactPage = () => navigateTo(`${lazyModulePrefix}/pages/ContactPage/index`)
+
 export {
   navigateTo,
   navigateToHome,
@@ -88,4 +95,7 @@ export {
   navigateToCheckoutOrder,
   navigateToOrder,
   navigateArgumentDetail,
+  navigateStoreDetail,
+  navigateToViolationPage,
+  navigateToContactPage
 }

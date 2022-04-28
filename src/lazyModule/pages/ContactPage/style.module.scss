@@ -1,0 +1,46 @@
+@import "../../../global.scss";
+
+.main {
+  background: $backgroundColor;
+}
+.bottomWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .button {
+    width: 70%;
+  }
+}
+.formWrapper {
+  background: white;
+  width: 80%;
+  border-radius: $borderRadiusCircle;
+  padding: $unit5;
+  .form {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit4;
+    .formItem {
+      display: grid;
+      grid-template-columns: 20% auto;
+      align-items: center;
+      .input {
+        height: 100%;
+        border: 1px solid $gray2;
+      }
+    }
+  }
+  .buttonWrapper {
+    margin-top: $unit7;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: $unit4;
+  }
+}
+.emptyWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

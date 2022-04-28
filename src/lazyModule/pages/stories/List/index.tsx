@@ -63,13 +63,13 @@ const List = (): React.ReactElement => {
                 <GroupContainer title={area.name}>
                   <>
                     { area.stores.length > 0 &&
-                    area.stores.map(storeItem => (
-                      <Attraction
-                        key={storeItem.id}
-                        value={storeItem}
-                        isShortAddress
-                      />
-                    ))
+                      area.stores.map(storeItem => (
+                        <Attraction
+                          key={storeItem.id}
+                          value={storeItem}
+                          isShortAddress
+                        />
+                      ))
                     }
                     {
                       area.stores.length === 0 && (<View className={style.emptyWrapper}><View>
@@ -87,13 +87,13 @@ const List = (): React.ReactElement => {
             <GroupContainer title={codeMapAreaStore.get( activeArea.code).name} >
               <>
                 { codeMapAreaStore.get( activeArea.code).stores.length > 0 &&
-                codeMapAreaStore.get( activeArea.code).stores.map(storeItem => (
-                  <Attraction
-                    key={storeItem.id}
-                    value={storeItem}
-                    isShortAddress
-                  />
-                ))
+                  codeMapAreaStore.get( activeArea.code).stores.map(storeItem => (
+                    <Attraction
+                      key={storeItem.id}
+                      value={storeItem}
+                      isShortAddress
+                    />
+                  ))
                 }
                 {
                   codeMapAreaStore.get( activeArea.code).stores.length === 0 && (<View className={style.emptyWrapper}>

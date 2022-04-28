@@ -1,0 +1,46 @@
+@import "../../../../../global.scss";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  $tabsHeight: 5vh;
+  .tabWrapper {
+    height: $tabsHeight;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+  .bodyWrapper {
+    .swiperWrapper {
+      height: 100vh - $tabsHeight;
+      width: 100%;
+    }
+    .itemWrapper {
+      height: 100vh - $tabsHeight - 2vh;
+    }
+    .image {
+      width: 100%;
+    }
+    height: 100vh - $tabsHeight;
+    width: 100%;
+    background: #3E3C3B;
+  }
+}
+.notice {
+  margin-top: $unit4_5;
+  margin-left: $unit4_5;
+  color: white;
+}
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .line {
+    margin-top: $unit1;
+    width: 70%;
+    border-bottom: solid $unit0_75 $primaryThemeColor;
+  }
+  .activeTab {
+    color: $primaryThemeColor;
+  }
+}

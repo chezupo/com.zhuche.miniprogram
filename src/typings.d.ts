@@ -199,3 +199,10 @@ declare type UserCouponItemType = {
   reason: string
   title: string
 }
+
+declare type UserContactItemType = {
+  id: number
+  name: string
+  phone: string
+  relation: string
+}

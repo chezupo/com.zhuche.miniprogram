@@ -4,11 +4,19 @@ import {View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss"
 
+export enum ItemContainerEventType  {
+  VIOLATION='违章',
+  WECHAT_OFFICE='公众号',
+  CONTACT='联系人',
+  ID_CAR='身份证',
+  DRIVER_S_LICENSE='驾驶证'
+}
 export type ItemContainerType = {
   title: string
   icon: React.ReactElement
   noteClassName?: string
   note?: ReactElement
+  eventType: ItemContainerEventType
 }
 export type ItemContainerPropsType = {
   data: ItemContainerType

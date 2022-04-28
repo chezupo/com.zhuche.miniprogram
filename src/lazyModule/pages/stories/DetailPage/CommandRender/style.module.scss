@@ -1,0 +1,25 @@
+@import "../commond.module.scss";
+
+.main {
+  margin-top: $gap;
+  background: white;
+  border-radius: $borderRadiusCircle;
+  .header  {
+    @include padding;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .count {
+      margin-left: $unit2;
+    }
+    .icon {
+      font-size: $unit4_5;
+    }
+  }
+  .commandWrapper {
+    @include padding;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit4;
+  }
+}

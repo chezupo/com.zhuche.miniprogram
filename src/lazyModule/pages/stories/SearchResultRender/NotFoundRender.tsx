@@ -1,7 +1,8 @@
 import * as React from "react";
 import {View} from "@tarojs/components";
-import style from "./style.module.scss"
 import SearchNoticeBoard from "../../../../components/SearchNoticeBoard";
+// @ts-ignore
+import style from "./style.module.scss"
 
 const NotFoundRender: React.FC = () => {
   return (

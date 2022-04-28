@@ -27,7 +27,14 @@ export type IconType = 'close' |
   'help' |
   'exclamation-mark' |
   'coupon' |
-  'copy'
+  'copy' |
+  'phone' |
+  'navigation' |
+  'train' |
+  'airport'|
+  'delete'|
+  'edit'
+
 
 type IconPropsType = {
   value: IconType

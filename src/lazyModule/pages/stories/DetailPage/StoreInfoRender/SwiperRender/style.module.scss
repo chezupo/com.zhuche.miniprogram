@@ -1,0 +1,15 @@
+@import "../../../../../../global.scss";
+
+.itemWrapper {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr) ;
+  grid-column-gap: $unit0_5;
+  justify-content: center;
+  width: 100%;
+  .image {
+    border-radius: $unit2;
+    width: 100%;
+    height: $unit20;
+  }
+}

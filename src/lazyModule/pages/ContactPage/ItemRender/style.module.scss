@@ -1,0 +1,30 @@
+@import "../../../../global.scss";
+
+.main {
+  background: white;
+  margin: $unit2;
+  padding: $unit4;
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+  border-radius: $borderRadiusCircle;
+  .leftWrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit2;
+  }
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 20% auto;
+}
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .icon {
+    font-size: $unit7;
+  }
+  .deleteIcon {
+  }
+}

@@ -13,6 +13,8 @@ type PopModalPropsType = {
   content: string
   title: string
   confirm?: ReactNode
+  okText?: string
+  cancelText?: string
 }
 const PopModal: React.FC<PopModalPropsType> = props => {
   return (
@@ -28,13 +30,17 @@ const PopModal: React.FC<PopModalPropsType> = props => {
             !props.confirm && (
               <Button className={[style.button, style.confirm].join(' ')}
                 onClick={() => props.onConfirm()}
-              >重新授权</Button>
+              >
+                {props.okText || '重新授权' }
+              </Button>
             )
           }
           <Button
             className={[style.button, style.Isee].join(' ')}
             onClick={() => props.onCancel()}
-          >我知道了</Button>
+          >
+            {props.cancelText || '我知道了' }
+          </Button>
         </View>
       </View>
     </SpinContainer>

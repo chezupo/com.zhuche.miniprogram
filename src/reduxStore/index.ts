@@ -21,7 +21,7 @@ const store =  configureStore({
       me: meReducer,
       layout: layoutReducer,
       agreement: agreementReducer,
-      userCoupons: userCouponReducer
+      userCoupons: userCouponReducer,
     },
   enhancers: [enhancer]
   }

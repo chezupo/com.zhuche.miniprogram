@@ -10,7 +10,7 @@ const getHeaders = (): Object => {
 }
 const checkRes = async <T>(res): Promise<T> => {
   const {data} = res
-  if (data.data) {
+  if (data.isSuccess) {
     return data.data as T
   }
   if (data.errorCode === 40202) {
@@ -67,3 +67,21 @@ export const put = <T>(url: string, requestData?: Object): Promise<T> => {
     });
   })
 }
+
+const deleteRequest = <T>(url: string): Promise<T> => {
+  return new Promise<T>((resolve, reject) => {
+    Taro.request({
+      ...getHeaders(),
+      method: 'DELETE',
+      url: `${prefixUrl}${url}`,
+      success: (res) =>
+        checkRes<T>(res)
+          .then((data) => resolve(data) )
+          .catch(err => reject(err))
+      ,
+      fail: (e) => reject(e)
+    });
+  })
+}
+
+export {deleteRequest}

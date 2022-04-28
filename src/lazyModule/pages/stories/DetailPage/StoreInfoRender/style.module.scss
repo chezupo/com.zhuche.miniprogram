@@ -1,0 +1,64 @@
+@import "../commond.module";
+
+.main {
+  background: white;
+  border-radius: $borderRadiusCircle;
+  .switchWrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit4;
+    @include padding;
+    .buttonWrapper {
+      display: flex;
+      .button {
+        border: solid $unit0_5 $backgroundColor;
+        border-radius: $borderRadiusCircle;
+        padding: $unit1 $unit2;
+        text-align: center;
+        &:last-child {
+          margin-left: $unit2;
+        }
+      }
+      .active {
+        color: white;
+        background: $primaryThemeColor;
+      }
+    }
+  }
+  .addressWrapper {
+    @include padding;
+    display: grid;
+    $firstColumn: 70%;
+    grid-template-columns: $firstColumn 100% - $firstColumn;
+    .address {
+      font-size: $unit3;
+      display: grid;
+      grid-template-columns: 100%;
+      grid-row-gap: $unit1;
+    }
+    .iconWrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      .tipWrapper {
+        position: relative;
+        .tip {
+          position: absolute;
+          right: -$unit5;
+          top: -$unit2;
+          font-size: $unit2;
+          padding: $unit0_5 $unit0_75;
+          border-radius: $unit1;
+          color: white;
+          background: red;
+        }
+      }
+      .icon {
+        font-size: $unit6;
+        color: $primaryThemeColor;
+      }
+    }
+  }
+}

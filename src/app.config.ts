@@ -18,7 +18,11 @@ export default {
         'pages/CheckoutOrder/index',
         'pages/CheckoutOrder/Agreements/index',
         'pages/CheckoutOrder/UserCoupon/index',
-        'pages/ArgumentDetail/index'
+        'pages/ArgumentDetail/index',
+        'pages/stories/DetailPage/index',
+        'pages/stories/DetailPage/GuideDetailPage/index',
+        'pages/ViolationPage/index',
+        'pages/ContactPage/index'
       ]
     }
   ],

@@ -1,0 +1,21 @@
+@import "../../../../global.scss";
+
+.main {
+  background: $backgroundColor;
+  $padding: $unit3;
+  min-height:100%;
+  padding: $padding;
+  overflow-y: scroll;
+}
+.bottomBar {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .button {
+    background: $primaryThemeColor;
+    width: 80%;
+    color: white;
+  }
+}
+

@@ -1,0 +1,38 @@
+@import "../../../../../../global.scss";
+
+.main {
+  .userWrapper {
+    display: flex;
+    align-items: center;
+    .avatar {
+      $size: $unit10;
+      width: $size;
+      height: $size;
+      border-radius: 100%;
+    }
+    .nameWrapper {
+      display: flex;
+      align-items: center;
+    }
+    .tag {
+      background: $primaryThemeColor;
+      color: white;
+      font-size: $unit2;
+      border-radius: $unit4_5;
+      margin-left: $unit2;
+      padding: $unit0_5 $unit1;
+    }
+    .infoWrapper {
+      margin-left: $unit3;
+      .date {
+        color: gray;
+        font-size: $unit3_5;
+      }
+    }
+  }
+  .command {
+    margin-top: $unit2;
+    color: gray;
+    font-size: $unit3_5;
+  }
+}

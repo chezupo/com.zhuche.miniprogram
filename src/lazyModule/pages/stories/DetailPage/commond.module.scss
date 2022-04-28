@@ -1,0 +1,8 @@
+@import "../../../../global";
+
+$gap: $unit3;
+
+@mixin padding {
+  padding: $gap;
+}
+

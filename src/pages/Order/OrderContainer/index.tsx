@@ -58,7 +58,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     e.stopPropagation()
   }
   const handleShowStoreDetail = () => {
-    navigateStoreDetail(props.data.startStore.id)
+    navigateStoreDetail(props.data.startStore.id, true)
   }
 
   return (

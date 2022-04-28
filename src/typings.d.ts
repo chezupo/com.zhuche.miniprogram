@@ -26,7 +26,7 @@ declare type UserItemType = {
   isEnabled: boolean
 }
 
-export type StoreItemType = {
+declare type StoreItemType = {
   id: number
   name: string
   mark: string

@@ -69,14 +69,17 @@ const navigateArgumentDetail = (id: number) => {
   navigateTo(`${lazyModulePrefix}/pages/ArgumentDetail/index?id=${id}`)
 }
 
-const navigateStoreDetail = (id: number) => {
-  navigateTo(`${lazyModulePrefix}/pages/stories/DetailPage/index?id=${id}`)
+const navigateStoreDetail = (id: number, isFromOrder?: boolean) => {
+  const query = isFromOrder ? `&isFromOrder=true`  : ''
+
+  navigateTo(`${lazyModulePrefix}/pages/stories/DetailPage/index?id=${id}${query}`)
 }
 
 const navigateToViolationPage = () => navigateTo(`${lazyModulePrefix}/pages/ViolationPage/index`)
 const navigateToContactPage = () => navigateTo(`${lazyModulePrefix}/pages/ContactPage/index`)
 const navigateToIdCarValidationPage = () => navigateTo(`${lazyModulePrefix}/pages/IdCarValidationPage/index`)
 const navigateToDriverLicenceValidationPage = () => navigateTo(`${lazyModulePrefix}/pages/DriverLicenceValidationPage/index`)
+const navigateToBalancePage = () =>  navigateTo(`${lazyModulePrefix}/pages/BalancePage/index`)
 
 export {
   navigateTo,
@@ -102,4 +105,5 @@ export {
   navigateToContactPage,
   navigateToIdCarValidationPage,
   navigateToDriverLicenceValidationPage,
+  navigateToBalancePage
 }

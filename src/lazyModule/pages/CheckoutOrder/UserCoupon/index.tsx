@@ -1,4 +1,5 @@
 import React from "preact/compat";
+import {useRouter} from "@tarojs/taro";
 import {Text, View} from "@tarojs/components";
 import {useEffect, useState} from "preact/hooks";
 import MenuContainer from "../../../../components/MenuContainer";
@@ -14,8 +15,7 @@ import {iniUserCouponThunk} from "../../../../reduxStore/module/userCoupons";
 import SpinContainer from "../../../../components/SpinContainer";
 import Radio from "../../../../components/Radio";
 import {primaryThemeColor} from "../../../../global";
-import {navigateToCheckoutOrder, navigateToCheckoutOrderAgreement} from "../../../../store/module/router";
-import {useRouter} from "@tarojs/taro";
+import {navigateToCheckoutOrder} from "../../../../store/module/router";
 
 type ItemRenderPropsType = {
   data: UserCouponItemType
@@ -91,6 +91,7 @@ const ItemRender: React.FC<ItemRenderPropsType> = ({data, onShowRule, onChange, 
   )
 }
 const UserCoupon: React.FC = () => {
+  const {params} = useRouter()
   const [rule, setRule] = useState<string | undefined>()
   const [userCoupon, setUserCoupon ] = useState<UserCouponItemType | undefined>()
   const {list: coupons} = useAppSelector(state => state.userCoupons)
@@ -120,50 +121,65 @@ const UserCoupon: React.FC = () => {
     navigateToCheckoutOrder()
   }
 
-  return (<>
-    <MenuContainer
-      menuBar={(
-          <View className={style.menuWrapper}>
-            <Button
-              isDisable={!userCoupon}
-              onClick={handleReset}
-            >不使用优惠卷</Button>
-            <Button
-              type='primary'
-              isDisable={!userCoupon}
-              onClick={handleConfirm}
-            >绑卷</Button>
-          </View>
-      )}
-    >
-      <View className={style.bodyWrapper}>
-        <View className={style.main}>
-          {
-            coupons.map(coupon => (
-              <ItemRender
-                onChange={handleChange}
-                onCancel={() => setUserCoupon(undefined)}
-                checkedUserCoupon={userCoupon}
-                key={coupon.id}
-                data={coupon}
-                onShowRule={setRule}
-              />
-            ))
-          }
-        </View>
+  const body = (
+    <View className={[style.bodyWrapper, !params.amount ? style.fullHeight : '' ].join(' ')}>
+      <View className={style.main}>
+        {
+          coupons.map(coupon => (
+            <ItemRender
+              onChange={handleChange}
+              onCancel={() => setUserCoupon(undefined)}
+              checkedUserCoupon={userCoupon}
+              key={coupon.id}
+              data={coupon}
+              onShowRule={setRule}
+            />
+          ))
+        }
       </View>
-    </MenuContainer>
-    {
-      rule && (
-        <SpinContainer
-          className={style.spinContainer}
-          onClick={() => setRule(undefined)}
-        >
-          <View className={style.content} dangerouslySetInnerHTML={{__html: rule}} />
-        </SpinContainer>
-      )
-    }
-  </>)
+    </View>
+  )
+  return (
+    <>
+      {
+        !!!params.amount && (<>{body}</> )
+      }
+      {
+        params.amount && (
+          <>
+            <MenuContainer
+              menuBar={(
+                <View className={style.menuWrapper}>
+                  <Button
+                    isDisable={!userCoupon}
+                    onClick={handleReset}
+                  >不使用优惠卷</Button>
+                  <Button
+                    type='primary'
+                    isDisable={!userCoupon}
+                    onClick={handleConfirm}
+                  >绑卷</Button>
+                </View>
+              )}
+            >
+              {body}
+            </MenuContainer>
+          </>
+        )
+      }
+      {
+        rule && (
+          <SpinContainer
+            className={style.spinContainer}
+            onClick={() => setRule(undefined)}
+          >
+            <View className={style.content} dangerouslySetInnerHTML={{__html: rule}} />
+          </SpinContainer>
+        )
+      }
+    </>
+  )
+
 }
 
 export default UserCoupon

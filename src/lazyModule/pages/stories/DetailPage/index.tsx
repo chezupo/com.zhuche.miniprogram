@@ -11,10 +11,12 @@ import Button from "../../../../components/Button";
 import {getStoreById} from "../../../../api/store";
 import {StoreItemType} from "../../../../typings";
 import Loading from "../../../../components/Loading";
+import {useCheckedStore} from "../../../../util/storeHook";
+import {values} from "lodash";
 
 const DetailPage: React.FC = () => {
-  const {params} = useRouter()
   const [loading, setLoading] = useState<boolean>(false)
+  const {params} = useRouter();
   const [store, setStore] = useState<StoreItemType>({
     id: 0,
     name: '',
@@ -58,21 +60,41 @@ const DetailPage: React.FC = () => {
       setLoading(false)
     }).catch(() => setLoading(false) )
   }, [])
+  const body = (
+    <View className={style.main}>
+      <StoreInfoRender store={store} />
+      <CommandRender />
+    </View>
+  )
+  const handleCheckStore = useCheckedStore(store)
+
   return (<>
     { loading && <Loading /> }
     {
-      !loading && (
-        <MenuContainer menuBar={
-          <View className={style.bottomBar}>
-            <Button className={style.button}>选此门店</Button>
-          </View>
-        }
-        >
-          <View className={style.main}>
-            <StoreInfoRender store={store} />
-            <CommandRender />
-          </View>
-        </MenuContainer>
+      !params.isFromOrder && (
+        <>
+          {
+            !loading && (
+              <MenuContainer menuBar={
+                <View className={style.bottomBar}>
+                  <Button className={style.button}
+                    onClick={handleCheckStore}
+                  >选此门店</Button>
+                </View>
+              }
+              >
+                {body}
+              </MenuContainer>
+            )
+          }
+        </>
+      )
+    }
+    {
+      params.isFromOrder && (
+        <>
+          {body}
+        </>
       )
     }
   </>)

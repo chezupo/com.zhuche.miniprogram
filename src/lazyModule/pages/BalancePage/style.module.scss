@@ -1,0 +1,23 @@
+@import "../../../global.scss";
+
+.main {
+  position: relative;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  &:after {
+    width: 140%;
+    height: $unit70;
+    position: absolute;
+    left: -20%;
+    top: 0;
+    content: '';
+    border-radius: 0 0 50% 50%;
+    background: $primaryThemeColor;
+  }
+  .container {
+    position: absolute;
+    width:$unit100;
+    z-index: 1;
+  }
+}

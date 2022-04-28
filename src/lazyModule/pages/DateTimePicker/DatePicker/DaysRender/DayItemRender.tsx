@@ -1,9 +1,10 @@
 import {View} from "@tarojs/components";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import style from "./style.module.scss"
 import {timeToDateTime} from "../util";
 import StateRender from "./StateRender";
+// @ts-ignore
+import style from "./style.module.scss"
 
 type DayItemRenderPropsType = {
   date?: Date

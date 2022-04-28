@@ -10,7 +10,8 @@ import {StoreItemType} from "../../../../../typings";
 import {ITouchEvent} from "@tarojs/components/types/common";
 import {useAppDispatch, useAppSelector} from "../../../../../reduxStore";
 import {setEndStore, setStarStore, StartStoreOrEndStoreType} from "../../../../../reduxStore/module/order";
-import {navigateToHome} from "../../../../../store/module/router";
+import {navigateArgumentDetail, navigateStoreDetail, navigateToHome} from "../../../../../store/module/router";
+import {useCheckedStore} from "../../../../../util/storeHook";
 
 type AttractionPropsType = {
   value: StoreItemType
@@ -29,30 +30,14 @@ const Attraction: React.FC<AttractionPropsType> = ({
   const cityName = keyword ? value.city.name.replace(keyword, html) : value.city.name
   const areaName = keyword ? value.area.name.replace(keyword, html) : value.area.name
   const address = keyword ? value.address.replace(keyword, html) : value.address
-
-  const dispatch = useAppDispatch()
-  const {createOrder} = useAppSelector(state => state.order)
-  const handleClick = (e: ITouchEvent) => {
-      switch (createOrder.startStoreOrEndStore) {
-        case StartStoreOrEndStoreType.END:
-          dispatch(setEndStore(value))
-          navigateToHome()
-          break;
-        case StartStoreOrEndStoreType.START:
-          dispatch(setStarStore(value))
-          navigateToHome()
-          break
-      }
-  }
-
+  const  handleClick = useCheckedStore(value)
   const handleClickMap = (e: ITouchEvent) => {
     console.log("Show map.")
     console.log(e)
     e.stopPropagation()
   }
   const handleClickDetail = (e: ITouchEvent) => {
-    console.log("Show detail.")
-    console.log(e)
+    navigateStoreDetail(value.id)
     e.stopPropagation()
   }
 

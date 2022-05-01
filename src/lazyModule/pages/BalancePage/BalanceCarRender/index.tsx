@@ -1,16 +1,16 @@
 import React from "preact/compat";
+import taro from "@tarojs/taro";
 import {useState} from "preact/hooks";
 import {View} from "@tarojs/components";
-// @ts-ignore
-import style from './style.module.scss'
+import {getTransactionThunk, refreshThunk} from "../../../../reduxStore/module/me";
 import Button from "../../../../components/Button";
 import TopUpRender from "./TopUpRender";
 import {createToUpOrder} from "../../../../api/topUp";
 import Loading from "../../../../components/Loading";
 import tradePay from "../../../../nativeInterface/tradePay";
-import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
-import {refreshThunk} from "../../../../reduxStore/module/me";
-import taro from "@tarojs/taro";
+import {useAppDispatch, useAppSelector } from "../../../../reduxStore";
+// @ts-ignore
+import style from './style.module.scss'
 
 
 const BalanceCarRender: React.FC = () => {
@@ -23,7 +23,10 @@ const BalanceCarRender: React.FC = () => {
     try {
       const tradeNo = await createToUpOrder(amount)
       await tradePay(tradeNo)
-      await dispatch(refreshThunk())
+      await Promise.all([
+        dispatch(refreshThunk()),
+        dispatch(getTransactionThunk())
+      ])
       setIsTopUp(false)
     }finally {
       setLoading(false)
@@ -39,7 +42,7 @@ const BalanceCarRender: React.FC = () => {
     <View className={style.main}>
       <View className={style.balanceWrapper}>
         <View className={style.title}>可用余额(CNY)</View>
-        <View className={style.balance}>{me?.balance.toFixed(2) || '0.00'}</View>
+        <View className={style.balance}>{me?.balance?.toFixed(2) || '0.00'}</View>
         <View className={style.buttonWrapper}>
           <Button onClick={handleShowWithDraw}>提现</Button>
           <Button
@@ -51,6 +54,7 @@ const BalanceCarRender: React.FC = () => {
       <View>
       </View>
     </View>
+
   </>)
 }
 

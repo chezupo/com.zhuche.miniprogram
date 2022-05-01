@@ -5,6 +5,7 @@
   height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
+  background: $gray2;
   &:after {
     width: 140%;
     height: $unit70;

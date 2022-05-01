@@ -7,9 +7,10 @@ import ItemContainer, {ItemContainerEventType, ItemContainerType} from "./ItemCo
 import style from "./style.module.scss"
 import Point from "../../../components/Point";
 import {
-  navigateToContactPage, navigateToDriverLicenceValidationPage,
+  navigateToContactPage,
+  navigateToDriverLicenceValidationPage,
   navigateToIdCarValidationPage,
-  navigateToLoginOrRegister,
+  navigateToLoginOrRegister, navigateToTransactionPage,
   navigateToViolationPage
 } from "../../../store/module/router";
 import Icon from "../../../components/Icon";
@@ -31,6 +32,7 @@ const WechatNote = (props: NotePropstype): React.ReactElement => {
 const Items = (): React.ReactElement => {
   const  iconStyle: CSSProperties = {fontSize: '5vw'}
   const items: ItemContainerType[] = [
+    {title: '我的账单', icon: <Icon value='transaction' style={iconStyle} />, eventType: ItemContainerEventType.TRANSACTION} ,
   ...(getPlatformType() === 'wechat' ? [
     {title: '绑定公众号', icon: <Icon value='wechat' style={{...iconStyle, fontSize: '6vw'}} />,eventType: ItemContainerEventType.WECHAT_OFFICE, note: <WechatNote title='待绑定' />, }
   ] : []),
@@ -68,7 +70,10 @@ const Items = (): React.ReactElement => {
         break
       case ItemContainerEventType.DRIVER_S_LICENSE:
         navigateToDriverLicenceValidationPage()
-        break
+        break;
+      case ItemContainerEventType.TRANSACTION:
+        navigateToTransactionPage();
+        break;
     }
   }
 

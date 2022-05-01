@@ -33,7 +33,8 @@ export type IconType = 'close' |
   'train' |
   'airport'|
   'delete'|
-  'edit'
+  'edit' |
+  'transaction'
 
 
 type IconPropsType = {

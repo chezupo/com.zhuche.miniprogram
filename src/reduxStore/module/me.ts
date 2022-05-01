@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {MeItemType} from "../../typings";
+import {MeItemType, TransactionItemType} from "../../typings";
 import getPlatformType, {AllPlatformType} from "../../util/platformType";
 import authCode from "../../nativeInterface/authCode";
 import {authorize} from "../../api/authoriztion";
@@ -7,6 +7,7 @@ import {getMeInfo, updateMeInfo, updateMyPhoneNumber, UpdateMyPhoneNumberQueryTy
 import {AppDispatch, RootState} from "../index";
 import {getUserProfile} from "../../nativeInterface/getUserProfile";
 import {setToken} from "../../util/authUtil";
+import {getTransaction} from "../../api/transaction";
 
 type InitialStateType = {
   data?: MeItemType
@@ -22,12 +23,21 @@ const meSlice = createSlice({
   name: 'me',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<MeItemType>) => {
-      const {payload} = action
-      return {...state, data: payload}
+    login: (state, action: PayloadAction<Pick<MeItemType,
+      'isNewUser' |
+      'balance' |
+      'accessToken'
+    > >) => {
+      return {...state, data: {...state.data, ...action.payload}}
     },
     uploadUserInfo: (state, action: PayloadAction<MeItemType>) => {
       return {...state, data: action.payload, isLogin: true}
+    },
+    setTransaction:(state, action: PayloadAction<TransactionItemType[]>) => {
+      return {...state, data: {
+          ...state.data,
+          transactions: action.payload
+        } }
     },
     logout: (state) => {
       const {data, ...other} = state
@@ -97,8 +107,18 @@ const updateMyPhoneNumberThunk = (queryData: UpdateMyPhoneNumberQueryType) => {
   }
 }
 
+/**
+ * 获取账单
+ */
+const getTransactionThunk = () => {
+  return async (dispatch: AppDispatch): Promise<void> => {
+    const transactionItems = await getTransaction()
+    dispatch(setTransaction(transactionItems))
+  }
+}
+
 const meReducer = meSlice.reducer
 
-export {loginThunk, uploadUserInfoThunk, updateMyPhoneNumberThunk, refreshThunk}
-export const {login, uploadUserInfo, logout, save} = meSlice.actions
+export {loginThunk, uploadUserInfoThunk, updateMyPhoneNumberThunk, refreshThunk, getTransactionThunk}
+export const {login, uploadUserInfo, logout, save, setTransaction} = meSlice.actions
 export default meReducer

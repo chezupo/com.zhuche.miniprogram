@@ -1,5 +1,5 @@
 // @ts-ignore
-import React from "react"
+import React, {CSSProperties} from "react"
 import {Image, View} from "@tarojs/components";
 // @ts-ignore
 import notfound from '../../asesst/images/undraw_not_found_-60-pq.svg'
@@ -7,12 +7,13 @@ import notfound from '../../asesst/images/undraw_not_found_-60-pq.svg'
 import style from './style.module.scss';
 
 type NotFoundPropsType = {
-    title?: string
-    style?: Record<string, string>
+  title?: string
+  style?: CSSProperties
+  className?: string
 }
 const NotFound = (props: NotFoundPropsType): React.ReactElement => {
   return (
-    <View className={style.main} style={{...(props.style ? {...props.style} : {})}} >
+    <View className={[style.main, props.className || ''].join(' ')} style={props.style} >
       <Image src={notfound} className={style.image} />
       <View className={style.title}>{props.title ? props.title : '没有数据'}</View>
     </View>

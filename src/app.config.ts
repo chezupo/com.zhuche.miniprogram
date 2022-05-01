@@ -25,7 +25,8 @@ export default {
         'pages/ContactPage/index',
         'pages/DriverLicenceValidationPage/index',
         'pages/IdCarValidationPage/index',
-        'pages/BalancePage/index'
+        'pages/BalancePage/index',
+        'pages/TransactionPage/index'
       ]
     }
   ],

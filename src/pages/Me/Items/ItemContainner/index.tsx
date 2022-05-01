@@ -9,7 +9,8 @@ export enum ItemContainerEventType  {
   WECHAT_OFFICE='公众号',
   CONTACT='联系人',
   ID_CAR='身份证',
-  DRIVER_S_LICENSE='驾驶证'
+  DRIVER_S_LICENSE='驾驶证',
+  TRANSACTION='账单'
 }
 export type ItemContainerType = {
   title: string

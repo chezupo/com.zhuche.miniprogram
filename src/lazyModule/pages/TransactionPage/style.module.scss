@@ -1,0 +1,10 @@
+@import "../../../global.scss";
+.main {
+  padding: $unit3;
+}
+.notFound {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

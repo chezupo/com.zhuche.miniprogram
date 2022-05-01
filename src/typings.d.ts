@@ -129,26 +129,26 @@ declare type OrderStatus =
 
 
 declare type OrderItemType = {
-  "id": number
-  "startTimeStamp": number
-  "endTimeStamp": number
-  "isInsurance": false,
-  "insuranceFee": number
-  "rent": number
-  "deposit": number
-  "handlingFee": number
-  "waiverAmount": number
-  "amount": number
-  "alipayToken": string
-  "alipayTradeNo": string
-  "alipayOutTradeNo": string
-  "createAlipayAt": number
-  "status": OrderStatus
-  "title": string
-  "startStore": StoreItemType
-  "payType": OrderPayType,
-  "endStore": StoreItemType
-  "car": CarItemType
+  id: number
+  startTimeStamp: number
+  endTimeStamp: number
+  isInsurance: false,
+  insuranceFee: number
+  rent: number
+  deposit: number
+  handlingFee: number
+  waiverAmount: number
+  amount: number
+  alipayToken: string
+  alipayTradeNo: string
+  alipayOutTradeNo: string
+  createAlipayAt: number
+  status: OrderStatus
+  title: string
+  startStore: StoreItemType
+  payType: OrderPayType,
+  endStore: StoreItemType
+  car: CarItemType
   cover: string
 }
 declare type CommentItemType = {
@@ -178,6 +178,36 @@ declare type MeItemType = {
   province?: string
   isAuthorizeBaseInfo?: boolean
   balance?: number
+  transactions: TransactionItemType[]
+}
+
+declare type TransactionItemType = {
+  createdAt: string
+  id: number
+  amount: number
+  balance: number
+  title: string
+  payType: OrderPayType
+  alipayOutTradeNo: string
+  tradeNo: string
+  user: {
+    id: number
+    username: string
+    isEnabled: boolean
+    balance: number
+    alipayAccount: {
+      createdAt: string
+      id: number
+      city: string
+      nickName: string
+      phone: string
+      province: string
+      gender: string
+      countryCode: string
+      code: string
+      isAuthorizeBaseInfo: boolean
+    }
+  }
 }
 
 declare type AgreementItemType = {

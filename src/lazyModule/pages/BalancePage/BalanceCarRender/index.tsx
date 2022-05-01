@@ -10,6 +10,7 @@ import Loading from "../../../../components/Loading";
 import tradePay from "../../../../nativeInterface/tradePay";
 import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
 import {refreshThunk} from "../../../../reduxStore/module/me";
+import taro from "@tarojs/taro";
 
 
 const BalanceCarRender: React.FC = () => {
@@ -28,6 +29,9 @@ const BalanceCarRender: React.FC = () => {
       setLoading(false)
     }
   }
+  const handleShowWithDraw = async () => {
+    await taro.showToast({title: '您金额暂不能提现'})
+  }
 
   return (<>
     {loading && <Loading />}
@@ -37,7 +41,7 @@ const BalanceCarRender: React.FC = () => {
         <View className={style.title}>可用余额(CNY)</View>
         <View className={style.balance}>{me?.balance.toFixed(2) || '0.00'}</View>
         <View className={style.buttonWrapper}>
-          <Button>提现</Button>
+          <Button onClick={handleShowWithDraw}>提现</Button>
           <Button
             type='primary'
             onClick={() => setIsTopUp(true)}

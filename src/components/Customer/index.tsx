@@ -6,11 +6,12 @@ import Taro from "@tarojs/taro";
 import style from "./style.module.scss";
 import useObserve from "../../util/useObserve";
 import {useAppStoreSelector} from "../../store";
+import {useAppSelector} from "../../reduxStore";
 
 const Customer = (): React.ReactElement => {
-  const [{servicePhone: phone}] = useObserve(useAppStoreSelector().commonData)
+  const {servicePhone} = useAppSelector(state => state.configuration.config)
   const handleCall = (): void => {
-    Taro.makePhoneCall({ phoneNumber: phone }) .then(() => console.log("Call phone success."))
+    Taro.makePhoneCall({ phoneNumber: servicePhone}) .then(() => console.log("Call phone success."))
   }
 
   return (
@@ -18,7 +19,7 @@ const Customer = (): React.ReactElement => {
       className={style.main}
       onClick={handleCall}
     >
-      客服热线: <Text className={style.phone}>{phone}</Text>
+      客服热线: <Text className={style.phone}>{servicePhone}</Text>
     </View>
   )
 }

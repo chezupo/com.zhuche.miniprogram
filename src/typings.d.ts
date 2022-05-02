@@ -188,6 +188,10 @@ declare type TransactionItemType = {
   balance: number
   title: string
   payType: OrderPayType
+  status:
+  'FINISHED' // 成功
+  | 'PROCESSING' // 处理中
+  | 'FAILED' // 失败
   alipayOutTradeNo: string
   tradeNo: string
   user: {

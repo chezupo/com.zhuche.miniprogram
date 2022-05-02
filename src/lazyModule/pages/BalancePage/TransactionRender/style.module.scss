@@ -49,4 +49,21 @@
     @extend .leftBar;
   }
   border-bottom: solid 1px $gray2;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.warningColor {
+  color: rgb(251 191 36);
+}
+.amountWrapper {
+  display: flex;
+  align-items: center;
+  .notice {
+    font-size: $unit3;
+    margin-left: $unit1;
+  }
+  .failed {
+    color: red;
+  }
 }

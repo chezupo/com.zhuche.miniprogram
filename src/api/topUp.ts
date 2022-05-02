@@ -1,7 +1,11 @@
 import {post} from "../util/requestClient";
 import getPlatformType from "../util/platformType";
 
-const createToUpOrder = async (amount: number) => {
+export type TopUpValueType = {
+  amount: number
+  remark: string
+}
+const createToUpOrder = async (amount: TopUpValueType) => {
   return await post<string>(`/transaction/${getPlatformType()}/topUp`, {amount})
 }
 

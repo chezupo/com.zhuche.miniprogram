@@ -31,10 +31,19 @@
   border-radius: $borderRadiusCircle;
   width: $unit80;
   padding: $unit5;
+  @mixin  layout {
+    display: grid;
+    $firstGrid: 15%;
+    grid-template-columns: $firstGrid 100% - $firstGrid;
+  }
+  .textarea {
+    margin-top: $unit4;
+    @include layout;
+  }
   .inputWrapper {
-    display: flex;
+    @include layout;
     align-items: center;
-    margin-top: $unit10;
+    margin-top: $unit8;
     font-size: $unit8;
   }
   .buttonWrapper {
@@ -43,5 +52,10 @@
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: $unit2;
   }
+}
+.notice {
+  margin-top: $unit2;
+  color: red;
+  font-size: $unit3;
 }
 

@@ -5,7 +5,7 @@ import Tabs from "./Tabs";
 // @ts-ignore
 import style from "./style.module.scss"
 import Loading from "../../components/Loading";
-import {getOrders} from "../../api/order";
+import {cancelOrder, getOrders} from "../../api/order";
 import {OrderItemType, OrderStatus} from "../../typings";
 import TabContainer from "./components/TabContainer";
 
@@ -72,6 +72,15 @@ const Order = () : React.ReactElement => {
     setShowOrders(newOrders )
     setCurrentOrderCategory(currentTab)
   }
+  const handleCancel = async (value: OrderItemType) => {
+   const res =  await taro.showModal({ title: '你是否要取消这个订单?' })
+    if (res.confirm) {
+      setLoading(true)
+      await cancelOrder(value.id)
+      handleFetchData();
+      await taro.showToast({title: '取消成功', duration: 5000})
+    }
+  }
 
   return (<>
     { loading && <Loading /> }
@@ -80,7 +89,11 @@ const Order = () : React.ReactElement => {
       activeId={activeId}
       onChange={handleChange}
     />
-    <TabContainer items={showOrders} orderCategory={currentOrderCategory} />
+    <TabContainer
+      onCancel={handleCancel}
+      items={showOrders}
+      orderCategory={currentOrderCategory}
+    />
     </>)
 }
 

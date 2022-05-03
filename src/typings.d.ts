@@ -141,6 +141,7 @@ declare type OrderItemType = {
   amount: number
   alipayToken: string
   alipayTradeNo: string
+  authBody: string
   alipayOutTradeNo: string
   createAlipayAt: number
   status: OrderStatus

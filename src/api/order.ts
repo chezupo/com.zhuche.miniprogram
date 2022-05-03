@@ -1,4 +1,4 @@
-import {get, post} from "../util/requestClient";
+import {get, post, put} from "../util/requestClient";
 import getPlatformType from "../util/platformType";
 import {OrderItemType} from "../typings";
 
@@ -21,4 +21,8 @@ const getOrders = async (): Promise<OrderItemType[]> => {
   return await get<OrderItemType[]>(`/orders`)
 }
 
-export {createOrder, getOrders}
+const cancelOrder = async (id: number) => {
+  return await put<OrderItemType>(`/orders/${getPlatformType()}/${id}/canceling`)
+}
+
+export {createOrder, getOrders, cancelOrder}

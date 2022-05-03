@@ -19,6 +19,7 @@ import {navigateStoreDetail} from "../../../store/module/router";
 type OrderContainerPropsType = {
   data: OrderItemType
   orderCategory:OrderCategoryType
+  onCancel: (value: OrderItemType) => void
 }
 const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
@@ -123,7 +124,9 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
         {
           props.data.status === 'CAR_PICKUP_IN_PROGRESS' && (
             <>
-              <View className={style.button}>
+              <View className={style.button}
+                onClick={() => props.onCancel(props.data)}
+              >
                 取消订单
               </View>
               <View

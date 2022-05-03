@@ -10,9 +10,9 @@ import {OrderCategoryType} from "../../index";
 type TabContainerPropsType = {
   items: OrderItemType[]
   orderCategory:OrderCategoryType
+  onCancel: (value: OrderItemType) => void
 }
 const TabContainer: React.FC<TabContainerPropsType> = props => {
-
   return (
   <View className={style.orderListWrapper}>
     {
@@ -29,7 +29,9 @@ const TabContainer: React.FC<TabContainerPropsType> = props => {
         <>
           {
             props.items.map(order => (
-              <OrderItem key={order.id}
+              <OrderItem
+                onCancel={props.onCancel}
+                key={order.id}
                 data={order}
                 orderCategory={props.orderCategory}
               />

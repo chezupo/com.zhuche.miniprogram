@@ -61,6 +61,12 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const handleShowStoreDetail = () => {
     navigateStoreDetail(props.data.startStore.id, true)
   }
+  const handleShowRemark = async () => {
+    await taro.showModal({
+      title: '备注',
+      content: props.data.remark
+    })
+  }
 
   return (
     <View className={style.main}>
@@ -69,7 +75,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
         <View>￥{props.data.amount}</View>
       </View>
       <View className={style.orderNo} onClick={handleCopy}>
-        <View>订单号: {tradeNo}</View><Icon className={style.copyIcon} value='copy' />
+        <View>订单号: {props.data.alipayOutTradeNo}</View><Icon className={style.copyIcon} value='copy' />
       </View>
       <View className={style.name}>{props.data.title}</View>
       <View className={style.storeWrapper}>
@@ -100,6 +106,11 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
       </View>
       <View className={style.buttonWrapper}>
         {
+          !!props.data.remark && (
+            <View className={style.button} onClick={handleShowRemark}>备注</View>
+          )
+        }
+        {
           payStatus.includes(props.data.status ) && (
             <View className={style.button}>支 付</View>
           )
@@ -110,11 +121,18 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
           )
         }
         {
-          bookAgainStatus.includes(props.data.status) && (
+          [
+            'FINISHED', // 已完成
+            'CANCELED' // 已取消
+          ].includes(props.data.status) && (
+            <View className={style.button}>
+              再次预订
+            </View>
+          )
+        }
+        {
+          ['FINISHED'].includes(props.data.status) && (
             <>
-              <View className={style.button}>
-                再次预订
-              </View>
               <View className={style.button}>
                 评价
               </View>

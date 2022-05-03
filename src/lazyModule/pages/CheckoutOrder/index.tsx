@@ -98,8 +98,8 @@ const Order: React.FC = () => {
           endTimeStamp: endTime,
           ...(userCoupon ? {userCouponId: userCoupon.id} : {})
         })
-        await tradePay(newOrder.authBody, true)
-        await tradePay(newOrder.alipayTradeNo)
+        newOrder.authBody && await tradePay(newOrder.authBody, true)
+        newOrder.alipayTradeNo && await tradePay(newOrder.alipayTradeNo)
         navigateToOrder()
       } finally {
         await taro.hideLoading()

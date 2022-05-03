@@ -145,6 +145,7 @@ declare type OrderItemType = {
   alipayOutTradeNo: string
   createAlipayAt: number
   status: OrderStatus
+  remark: string // 备注
   title: string
   startStore: StoreItemType
   payType: OrderPayType,

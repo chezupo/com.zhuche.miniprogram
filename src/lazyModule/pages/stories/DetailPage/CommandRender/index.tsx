@@ -1,12 +1,11 @@
 import React from "preact/compat";
 import {Text, View} from "@tarojs/components";
+import {useEffect, useState} from "preact/hooks";
 // @ts-ignore
 import style from './style.module.scss'
 import LineRender from "../components/LineRender";
 import Icon from "../../../../../components/Icon";
 import ItemRender from "./ItemRender";
-import {useEffect, useState} from "preact/hooks";
-import {CommentItemType, StoreItemType} from "../../../../../typings";
 import NotFound from "../../../../../components/NotFound";
 import {getStoreComments} from "../../../../../api/store";
 
@@ -18,7 +17,7 @@ const CommandRender: React.FC<CommandRenderPropsType> = props => {
   const store = props.store
   useEffect(() => {
     getStoreComments(store.id).then(res => {
-      setComments(res)
+      setComments(res.list)
     }).catch(() => {
 
     })

@@ -1,4 +1,3 @@
-import {CommentItemType, StoreItemType} from "../typings";
 import {get} from "../util/requestClient";
 
 export const getStores = async (keyword: string) => {
@@ -10,7 +9,7 @@ const getStoreById = async (id: number) => {
 }
 
 const getStoreComments = async (id: number) => {
-  return await get<CommentItemType[]>(`/stores/${id}/comments`)
+  return await get<PageType<CommentItemType>>(`/stores/${id}/comments`)
 }
 
 export {getStoreById, getStoreComments}

@@ -1,19 +1,19 @@
-export type CityType = {
+declare type CityType = {
   code: string
   name: string
   pinyin: string
 }
 
-export type ProvinceType = Omit<CityType, 'pinyin'>
-export type AreaType = Omit<CityType, 'pinyin'>
+declare type ProvinceType = Omit<CityType, 'pinyin'>
+declare type AreaType = Omit<CityType, 'pinyin'>
 
-export type StoreBannerType = {
+declare type StoreBannerType = {
   id: number
   imgKey: string
   prefixUrl: string
 }
 
-export type GuidItemType = {
+declare type GuidItemType = {
   id: number
   imgKey: string
   title: string
@@ -251,4 +251,11 @@ declare type UserContactItemType = {
   name: string
   phone: string
   relation: string
+}
+
+declare type PageType<T> = {
+  list: T[]
+  total: number
+  current: number
+  size: number
 }

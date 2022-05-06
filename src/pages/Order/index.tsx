@@ -5,9 +5,11 @@ import Tabs from "./Tabs";
 // @ts-ignore
 import style from "./style.module.scss"
 import Loading from "../../components/Loading";
-import {cancelOrder, getOrders, returnCar} from "../../api/order";
+import {cancelOrder, createOrderComment, getOrders, returnCar} from "../../api/order";
 import {OrderItemType, OrderStatus} from "../../typings";
 import TabContainer from "./components/TabContainer";
+import CommentRender, {SubmitType} from "./components/TabContainer/CommentRender";
+import SpinContainer from "../../components/SpinContainer";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 
@@ -96,14 +98,38 @@ const Order = () : React.ReactElement => {
     }
   }
 
+  const [commentableOrder, setCommentableOrder] = useState<OrderItemType | undefined>()
+  const handleComment = async (newComment: SubmitType) => {
+    await taro.showLoading({title: '评论提交中...'})
+    try {
+      await createOrderComment(commentableOrder!.id, newComment)
+      handleFetchData()
+      setCommentableOrder(undefined)
+      await taro.showToast({title: '评论添加成功'})
+    }
+    finally {
+      await taro.hideLoading()
+    }
+  }
   return (<>
     { loading && <Loading /> }
+    {
+      !!commentableOrder && (
+        <SpinContainer>
+          <CommentRender
+            onCancel={() => setCommentableOrder(undefined)}
+            onSubmit={handleComment}
+          />
+        </SpinContainer>
+      )
+    }
     <Tabs
       tabs={tabs}
       activeId={activeId}
       onChange={handleChange}
     />
     <TabContainer
+      onComment={setCommentableOrder}
       onReturnCar={handleReturnCar}
       onCancel={handleCancel}
       items={showOrders}

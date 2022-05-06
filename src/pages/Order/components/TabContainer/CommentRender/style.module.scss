@@ -1,0 +1,37 @@
+@import "../../../../../global.scss";
+
+.main {
+  background: white;
+  width: $unit80;
+  padding: $unit5;
+  border-radius: $borderRadiusCircle;
+  .title {
+    font-weight: bold;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit6;
+    margin-top: $unit4;
+  }
+  .startWrapper {
+    display: flex;
+    align-items: center;
+  }
+  .rateTitle {
+    margin-right: $unit2;
+  }
+  .start {
+    font-size: $unit5;
+    padding: 0 $unit2;
+  }
+  .textArea {
+    border: solid 1px $gray2;
+    min-height: $unit20;
+  }
+  .buttonWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: $unit2;
+  }
+}

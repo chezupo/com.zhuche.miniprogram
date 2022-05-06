@@ -34,8 +34,9 @@ export type IconType = 'close' |
   'airport'|
   'delete'|
   'edit' |
-  'transaction'
-
+  'transaction' |
+  'star-empty' |
+  'start'
 
 type IconPropsType = {
   value: IconType

@@ -108,3 +108,9 @@
   @include globalSubtitle;
   margin-left: $unit1;
 }
+
+.remarkWrapper {
+  display: flex;
+  color: gray;
+  font-size: $unit3_5;
+}

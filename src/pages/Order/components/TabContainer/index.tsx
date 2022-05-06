@@ -12,39 +12,44 @@ type TabContainerPropsType = {
   orderCategory:OrderCategoryType
   onCancel: (value: OrderItemType) => void
   onReturnCar: (value: OrderItemType) => void
+  onComment: (value:  OrderItemType) => void
 }
 const TabContainer: React.FC<TabContainerPropsType> = props => {
+
   return (
-  <View className={style.orderListWrapper}>
-    {
-      props.items.length === 0 && (
-        <View className={style.emptyWrapper}>
-          <NotFound
-            title='暂无订单'
-          />
-        </View>
-      )
-    }
-    {
-      props.items.length > 0 && (
-        <>
-          {
-            props.items.map(order => (
-              <OrderItem
-                onReturnCar={props.onReturnCar}
-                onCancel={props.onCancel}
-                key={order.id}
-                data={order}
-                orderCategory={props.orderCategory}
+    <>
+      <View className={style.orderListWrapper}>
+        {
+          props.items.length === 0 && (
+            <View className={style.emptyWrapper}>
+              <NotFound
+                title='暂无订单'
               />
-            ))
-          }
-          <View className={style.bottom}>-- 到底了--</View>
-        </>
-      )
-    }
-  </View>
-)
+            </View>
+          )
+        }
+        {
+          props.items.length > 0 && (
+            <>
+              {
+                props.items.map(order => (
+                  <OrderItem
+                    onComment={props.onComment}
+                    onReturnCar={props.onReturnCar}
+                    onCancel={props.onCancel}
+                    key={order.id}
+                    data={order}
+                    orderCategory={props.orderCategory}
+                  />
+                ))
+              }
+              <View className={style.bottom}>-- 到底了--</View>
+            </>
+          )
+        }
+      </View>
+    </>
+  )
 
 
 }

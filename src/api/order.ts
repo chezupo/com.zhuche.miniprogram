@@ -12,6 +12,10 @@ type CreateOrderQueryType = {
   startTimeStamp: number
   endTimeStamp: number
 }
+type CreateOrderCommentType = {
+  content: string
+  rate: number
+}
 const createOrder = async (data: CreateOrderQueryType): Promise<OrderItemType> => {
   const platform = getPlatformType();
   return await post<OrderItemType>(`/orders/${platform}/orders`, data)
@@ -30,4 +34,8 @@ const cancelOrder = async (id: number) => {
  */
 const returnCar = async (id: number) => await put<OrderItemType>(`/orders/${id}/status/returning`)
 
-export {createOrder, getOrders, cancelOrder, returnCar}
+const createOrderComment = async (orderId: number, value: CreateOrderCommentType) => {
+  return await post<OrderItemType>(`/orders/${orderId}/commands`, value)
+}
+
+export {createOrder, getOrders, cancelOrder, returnCar, createOrderComment}

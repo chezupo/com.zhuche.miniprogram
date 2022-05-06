@@ -21,6 +21,7 @@ type OrderContainerPropsType = {
   orderCategory:OrderCategoryType
   onCancel: (value: OrderItemType) => void
   onReturnCar: (value: OrderItemType) => void
+  onComment: (value: OrderItemType) => void
 }
 const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
@@ -79,115 +80,115 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   }
 
   return (
-    <View className={style.main}>
-      <View className={style.headerWrapper}>
-        <View className={style.status}>{statusMapChinese[data.status].title}</View>
-        <View>￥{props.data.amount}</View>
-      </View>
-      <View className={style.orderNo} onClick={handleCopy}>
-        <View>订单号: {props.data.alipayOutTradeNo}</View><Icon className={style.copyIcon} value='copy' />
-      </View>
-      <View className={style.name}>{props.data.title}</View>
-      <View className={style.storeWrapper}>
-        <View className={style.storeAddressWrapper}>
-          <View className={style.pointWrapper}>
-            <Point color={warningColor} borderSize={pointSize} />
-            <View className={style.line} />
-            <Point color={targetAddressPointColor} borderSize={pointSize} />
+    <>
+      <View className={style.main}>
+        <View className={style.headerWrapper}>
+          <View className={style.status}>{statusMapChinese[data.status].title}</View>
+          <View>￥{props.data.amount}</View>
+        </View>
+        <View className={style.orderNo} onClick={handleCopy}>
+          <View>订单号: {props.data.alipayOutTradeNo}</View><Icon className={style.copyIcon} value='copy' />
+        </View>
+        <View className={style.name}>{props.data.title}</View>
+        <View className={style.storeWrapper}>
+          <View className={style.storeAddressWrapper}>
+            <View className={style.pointWrapper}>
+              <Point color={warningColor} borderSize={pointSize} />
+              <View className={style.line} />
+              <Point color={targetAddressPointColor} borderSize={pointSize} />
+            </View>
+            <View className={style.storeAddress}>
+              <View>{data.startStore.city.name} {data.startStore.name}</View>
+              <View>{data.endStore.city.name} {data.endStore.name}</View>
+            </View>
           </View>
-          <View className={style.storeAddress}>
-            <View>{data.startStore.city.name} {data.startStore.name}</View>
-            <View>{data.endStore.city.name} {data.endStore.name}</View>
+          <View className={style.imageWrapper}>
+            <Image src={cover} className={style.image} />
           </View>
         </View>
-
-        <View className={style.imageWrapper}>
-          <Image src={cover} className={style.image} />
+        <View className={style.dateWrapper}>
+          <View>{convertDate(starDate)}</View>
+          <View className={style.durationWrapper}>
+            <View className={style.backgroundLine} />
+            {days}天
+            <View className={style.backgroundLine} />
+          </View>
+          <View>{convertDate(endDate)}</View>
         </View>
-      </View>
-      <View className={style.dateWrapper}>
-        <View>{convertDate(starDate)}</View>
-        <View className={style.durationWrapper}>
-          <View className={style.backgroundLine} />
-          {days}天
-          <View className={style.backgroundLine} />
-        </View>
-        <View>{convertDate(endDate)}</View>
-      </View>
-      <View className={style.buttonWrapper}>
-        {
-          props.data.status === 'USING' && (
-            <View className={style.button} onClick={handleReturnCar}>还车</View>
-          )
-        }
         {
           !!props.data.remark && (
-            <View className={style.button} onClick={handleShowRemark}>备注</View>
-          )
-        }
-        {
-          payStatus.includes(props.data.status ) && (
-            <View className={style.button}>支 付</View>
-          )
-        }
-        {
-          props.data.status === 'OVERTIME' && (
-            <View className={style.button}>超时续约</View>
-          )
-        }
-        {
-          [
-            'FINISHED', // 已完成
-            'CANCELED' // 已取消
-          ].includes(props.data.status) && (
-            <View className={style.button}>
-              再次预订
+            <View className={style.remarkWrapper}>
+              <View>备注:</View>
+              <View>{props.data.remark}</View>
             </View>
           )
         }
-        {
-          ['FINISHED'].includes(props.data.status) && (
-            <>
+        <View className={style.buttonWrapper}>
+          {
+            props.data.status === 'USING' && (
+              <View className={style.button} onClick={handleReturnCar}>还车</View>
+            )
+          }
+          {
+            payStatus.includes(props.data.status ) && (
+              <View className={style.button}>支 付</View>
+            )
+          }
+          {
+            props.data.status === 'OVERTIME' && (
+              <View className={style.button}>超时续约</View>
+            )
+          }
+          {
+            [
+              'FINISHED', // 已完成
+              'CANCELED' // 已取消
+            ].includes(props.data.status) && (
               <View className={style.button}>
-                评价
+                再次预订
               </View>
-            </>
-          )
-        }
-        {
-          props.data.status === 'CAR_PICKUP_IN_PROGRESS' && (
-            <>
-              <View className={style.button}
-                onClick={() => props.onCancel(props.data)}
-              >
-                取消订单
-              </View>
+            )
+          }
+          {
+            ['FINISHED'].includes(props.data.status) && !props.data.comment && (
+              <View className={style.button} onClick={() => props.onComment(props.data)}>评价</View>
+            )
+          }
+          {
+            props.data.status === 'CAR_PICKUP_IN_PROGRESS' && (
+              <>
+                <View className={style.button}
+                  onClick={() => props.onCancel(props.data)}
+                >
+                  取消订单
+                </View>
+                <View
+                  className={style.button}
+                  onClick={handleShowStoreDetail}
+                >
+                  取车门店
+                </View>
+              </>
+            )
+          }
+          {
+            props.data.status === 'RETURNING' && (
               <View
                 className={style.button}
-                onClick={handleShowStoreDetail}
+                onClick={handleGoToEndStore}
               >
-                取车门店
+                还车门店
               </View>
-            </>
-          )
-        }
+            )
+          }
+        </View>
         {
-          props.data.status === 'RETURNING' && (
-            <View
-              className={style.button}
-              onClick={handleGoToEndStore}
-            >
-              还车门店
-            </View>
+          statusMapChinese[data.status].notice && (
+            <View className={style.notice}>{statusMapChinese[data.status].notice}</View>
           )
         }
       </View>
-      {
-        statusMapChinese[data.status].notice && (
-          <View className={style.notice}>{statusMapChinese[data.status].notice}</View>
-        )
-      }
-    </View>
+    </>
   )
 }
 

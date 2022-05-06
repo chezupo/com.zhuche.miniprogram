@@ -163,6 +163,7 @@ declare type OrderItemType = {
   endStore: StoreItemType
   car: CarItemType
   cover: string
+  comment?: CommentItemType
 }
 declare type CommentItemType = {
   id: number

@@ -36,7 +36,10 @@ export type IconType = 'close' |
   'edit' |
   'transaction' |
   'star-empty' |
-  'start'
+  'start' |
+  'time' |
+  'location' |
+  'distance'
 
 type IconPropsType = {
   value: IconType

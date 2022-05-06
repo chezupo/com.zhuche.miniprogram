@@ -26,7 +26,8 @@ export default {
         'pages/IdCarValidationPage/index',
         'pages/BalancePage/index',
         'pages/TransactionPage/index',
-        'pages/TmpPage/index'
+        'pages/TmpPage/index',
+        'pages/NavigationPage/index'
       ]
     }
   ],

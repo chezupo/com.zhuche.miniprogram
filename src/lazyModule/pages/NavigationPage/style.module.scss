@@ -1,0 +1,54 @@
+@import "../../../global.scss";
+
+.containerWrapper {
+  position:absolute;
+  bottom: $unit10;
+  width: $unit100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  .container {
+    position: relative;
+    padding: $unit4;
+    border-radius: $borderRadiusCircle;
+    background: white;
+    width: $unit70;
+    .name {
+      $height: $unit7;
+      line-height: $height;
+      border-bottom: solid 1px $gray2;
+    }
+    .infoWrapper {
+      margin-top: $unit3;
+      display: grid;
+      $firstGrid: 70%;
+      grid-column-gap: $unit4;
+      grid-template-columns: $firstGrid 100% - $firstGrid;
+      .leftWrapper {
+        font-size: $unit4;
+        display: grid;
+        $f1grid: 10%;
+        grid-template-columns: $f1grid 100% - $f1grid;
+        align-items: center;
+        grid-row-gap: $unit2;
+        .address {
+          @include textEllipsis;
+        }
+      }
+      .logo {
+        $size: $unit16;
+        height: $size;
+        width: $size;
+      }
+    }
+    .buttonWrapper {
+      display: flex;
+      justify-content: center;
+      .goButton {
+        margin-top: $unit5;
+        width: $unit50;
+      }
+    }
+  }
+}

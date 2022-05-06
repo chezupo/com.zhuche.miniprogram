@@ -20,9 +20,18 @@ type StoreInfoRenderPropsType = {
 }
 const StoreInfoRender: React.FC<StoreInfoRenderPropsType> = props => {
   const [activeButton, setActiveButton] = useState<ActiveButtonType>(ActiveButtonType.PICKUP_GUIDE)
-  const {store} = props
   const handleCallPhone = () => {
     taro.makePhoneCall({phoneNumber: props.store.servicePhone}).then(() => console.log("Call phone."))
+  }
+  const {store} = props
+  const handleOpenLocation = async () => {
+    await taro.openLocation({
+      longitude: store.lng,
+      latitude: store.lat,
+      name: store.name,
+      scale: 12,
+      address: `${store.city.name} ${store.area.name} ${store.address}`
+    })
   }
 
   return (
@@ -57,7 +66,10 @@ const StoreInfoRender: React.FC<StoreInfoRenderPropsType> = props => {
           <View>营业时间: {store.starAt} - {store.endAt}</View>
         </View>
         <View className={style.iconWrapper}>
-         <View className={style.tipWrapper}>
+         <View
+           className={style.tipWrapper}
+           onClick={handleOpenLocation}
+         >
            <Icon value='navigation' className={style.icon} />
            <View className={style.tip}>导航</View>
          </View>

@@ -1,4 +1,4 @@
-import {StoreItemType} from "../typings";
+import {CommentItemType, StoreItemType} from "../typings";
 import {get} from "../util/requestClient";
 
 export const getStores = async (keyword: string) => {
@@ -9,5 +9,9 @@ const getStoreById = async (id: number) => {
   return await get<StoreItemType>(`/stores/${id}`)
 }
 
-export {getStoreById}
+const getStoreComments = async (id: number) => {
+  return await get<CommentItemType[]>(`/stores/${id}/comments`)
+}
+
+export {getStoreById, getStoreComments}
 

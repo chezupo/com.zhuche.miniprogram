@@ -5,7 +5,7 @@ import Tabs from "./Tabs";
 // @ts-ignore
 import style from "./style.module.scss"
 import Loading from "../../components/Loading";
-import {cancelOrder, getOrders} from "../../api/order";
+import {cancelOrder, getOrders, returnCar} from "../../api/order";
 import {OrderItemType, OrderStatus} from "../../typings";
 import TabContainer from "./components/TabContainer";
 
@@ -81,6 +81,20 @@ const Order = () : React.ReactElement => {
       await taro.showToast({title: '取消成功', duration: 5000})
     }
   }
+  /**
+   * 还车
+   * @param value
+   */
+  const handleReturnCar = async (value: OrderItemType) => {
+    setLoading(true)
+    try {
+      await returnCar(value.id)
+      handleFetchData();
+      await taro.showToast({title: '还车中', duration: 5000})
+    }finally {
+      setLoading(false)
+    }
+  }
 
   return (<>
     { loading && <Loading /> }
@@ -90,6 +104,7 @@ const Order = () : React.ReactElement => {
       onChange={handleChange}
     />
     <TabContainer
+      onReturnCar={handleReturnCar}
       onCancel={handleCancel}
       items={showOrders}
       orderCategory={currentOrderCategory}

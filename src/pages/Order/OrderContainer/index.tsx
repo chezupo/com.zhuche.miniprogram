@@ -20,6 +20,7 @@ type OrderContainerPropsType = {
   data: OrderItemType
   orderCategory:OrderCategoryType
   onCancel: (value: OrderItemType) => void
+  onReturnCar: (value: OrderItemType) => void
 }
 const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
@@ -28,7 +29,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     CAR_PICKUP_IN_PROGRESS: {title: '取车中', notice: '请到门店提取您预定的汽车'},
     USING: {title: '使用中', notice: ''},
     OVERTIME: {title: '用车超时', notice: ''},
-    RETURNING: {title: '还车中', notice: ''},
+    RETURNING: {title: '还车中', notice: `请把车开到${props.data.endStore.name}，完成还车`},
     RENEWED: {title: '已续约', notice: ''},
     FINISHED: {title: '已完成', notice: ''},
     CANCELED: {title:'已取消', notice: '' }
@@ -61,11 +62,20 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const handleShowStoreDetail = () => {
     navigateStoreDetail(props.data.startStore.id, true)
   }
+  const handleGoToEndStore = () => {
+    navigateStoreDetail(props.data.endStore.id, true)
+  }
   const handleShowRemark = async () => {
     await taro.showModal({
       title: '备注',
       content: props.data.remark
     })
+  }
+  const handleReturnCar = async () => {
+    const res = await taro.showModal({
+      title: '您确定要还车吗？'
+    })
+    res.confirm && props.onReturnCar(props.data)
   }
 
   return (
@@ -105,6 +115,11 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
         <View>{convertDate(endDate)}</View>
       </View>
       <View className={style.buttonWrapper}>
+        {
+          props.data.status === 'USING' && (
+            <View className={style.button} onClick={handleReturnCar}>还车</View>
+          )
+        }
         {
           !!props.data.remark && (
             <View className={style.button} onClick={handleShowRemark}>备注</View>
@@ -151,9 +166,19 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
                 className={style.button}
                 onClick={handleShowStoreDetail}
               >
-                联系门店
+                取车门店
               </View>
             </>
+          )
+        }
+        {
+          props.data.status === 'RETURNING' && (
+            <View
+              className={style.button}
+              onClick={handleGoToEndStore}
+            >
+              还车门店
+            </View>
           )
         }
       </View>

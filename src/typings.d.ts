@@ -19,11 +19,21 @@ export type GuidType = {
   title: string
   prefixUrl: string
 }
-
+declare type AlipayAccount = {
+  "createdAt": string
+  "id": number
+  "avatar": string
+  "city": string
+  "nickName": string
+  "phone": string
+  "province": string
+  "gender": string
+}
 declare type UserItemType = {
   id: number
   username: string
   isEnabled: boolean
+  alipayAccount?: AlipayAccount
 }
 
 declare type StoreItemType = {
@@ -145,6 +155,7 @@ declare type OrderItemType = {
   alipayOutTradeNo: string
   createAlipayAt: number
   status: OrderStatus
+  user: UserItemType
   remark: string // 备注
   title: string
   startStore: StoreItemType
@@ -159,11 +170,8 @@ declare type CommentItemType = {
   content: string
   rating: number
   images: string[]
-  flag: string
-  order: OrderItemType
-  car: CarItemType
   user: UserItemType
-  store: StoreItemType
+  order: OrderItemType
 }
 
 declare type MeItemType = {

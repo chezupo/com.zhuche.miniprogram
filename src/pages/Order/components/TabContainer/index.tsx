@@ -11,6 +11,7 @@ type TabContainerPropsType = {
   items: OrderItemType[]
   orderCategory:OrderCategoryType
   onCancel: (value: OrderItemType) => void
+  onReturnCar: (value: OrderItemType) => void
 }
 const TabContainer: React.FC<TabContainerPropsType> = props => {
   return (
@@ -30,6 +31,7 @@ const TabContainer: React.FC<TabContainerPropsType> = props => {
           {
             props.items.map(order => (
               <OrderItem
+                onReturnCar={props.onReturnCar}
                 onCancel={props.onCancel}
                 key={order.id}
                 data={order}

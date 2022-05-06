@@ -24,5 +24,10 @@ const getOrders = async (): Promise<OrderItemType[]> => {
 const cancelOrder = async (id: number) => {
   return await put<OrderItemType>(`/orders/${getPlatformType()}/${id}/canceling`)
 }
+/**
+ * 还车
+ * @param id
+ */
+const returnCar = async (id: number) => await put<OrderItemType>(`/orders/${id}/status/returning`)
 
-export {createOrder, getOrders, cancelOrder}
+export {createOrder, getOrders, cancelOrder, returnCar}

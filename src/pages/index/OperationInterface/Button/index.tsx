@@ -17,14 +17,14 @@ const Button = (): React.ReactElement => {
     })
   }
   const handleSelectCar = () => {
-    if ( createOrder.startCity === null) {
+    if ( !createOrder.startCity || !createOrder.startStore) {
       handleErrorMessage('请选择取车城市和门店')
-    } else if (createOrder.startStore === null) {
+    } else if (!createOrder.startStore) {
       handleErrorMessage('请选择取车门店')
-    }else if (createOrder.isForeignCity === true) {
+    }else if (!createOrder.isForeignCity) {
       const {endStore, endCity} = createOrder
-      if (endCity === null) handleErrorMessage('请选择异地还车的城市')
-      else if (endStore === null) handleErrorMessage('请选择异地还车的商店')
+      if (!endCity) handleErrorMessage('请选择异地还车的城市')
+      else if (!endStore) handleErrorMessage('请选择异地还车的商店')
     } else {
       navigateToSelectCarPage()
     }

@@ -9,7 +9,6 @@ export default {
         'pages/login/index',
         'pages/login/phoneLogin/index',
         'pages/DateTimePicker/index',
-        'pages/bannerDetail/index',
         'pages/complaintFeedback/index',
         'pages/city/index',
         'pages/stories/index',

@@ -3,8 +3,12 @@ import {useState} from "preact/hooks";
 import {Image, Swiper, SwiperItem, View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
-import {GuidType} from "../../../../../typings";
+import {GuidItemType} from "../../../../../typings";
 import {ActiveButtonType} from "../StoreInfoRender";
+import {useAppSelector} from "../../../../../reduxStore";
+import taro from "@tarojs/taro";
+import {pick} from "lodash";
+import {getPickUpGuides, getReturnGuides} from "../../../../../util/guideUtil";
 
 type TabItemPropsType = {
   name: string;
@@ -21,34 +25,19 @@ const TabItem: React.FC<TabItemPropsType>  = props => (
   </View>
 )
 const GuideDetailPage: React.FC = () => {
-  const [guides, setGuides] = useState<GuidType[]>([
-    {
-      id: 1,
-      imgKey: '2022-3-17-17-40-1-1647510001605-806d6cd71f7141e9b2d8e1d1c8d3140c.jpg',
-      prefixUrl: 'https://zhuche-a1001.qiniu.wuchuheng.com',
-      title: '见南二入口右转上坡'
-    },
-    {
-      id: 2,
-      imgKey: '2022-3-17-17-40-1-1647510001605-806d6cd71f7141e9b2d8e1d1c8d3140c.jpg',
-      prefixUrl: 'https://zhuche-a1001.qiniu.wuchuheng.com',
-      title: '见南二入口右转上坡'
-    },
-    {
-      id: 3,
-      imgKey: '2022-3-17-17-40-1-1647510001605-806d6cd71f7141e9b2d8e1d1c8d3140c.jpg',
-      prefixUrl: 'https://zhuche-a1001.qiniu.wuchuheng.com',
-      title: '见南二入口右转上坡'
-    },
-    {
-      id: 4,
-      imgKey: '2022-3-17-17-40-1-1647510001605-806d6cd71f7141e9b2d8e1d1c8d3140c.jpg',
-      prefixUrl: 'https://zhuche-a1001.qiniu.wuchuheng.com',
-      title: '见南二入口右转上坡'
-    },
-  ])
+  const pickupGuides = getPickUpGuides()
+  const returnGuides = getReturnGuides()
+  const [guides, setGuides] = useState<GuidItemType[]>(returnGuides)
   const [activeButton, setActiveButton] = useState<ActiveButtonType>(ActiveButtonType.RETURN_GUIDE)
   const handleActive = (newActiveButton: ActiveButtonType) => {
+    switch (newActiveButton) {
+      case ActiveButtonType.PICKUP_GUIDE:
+        setGuides(pickupGuides)
+        break;
+      case ActiveButtonType.RETURN_GUIDE:
+        setGuides(returnGuides)
+        break;
+    }
     setActiveButton(newActiveButton)
   }
 

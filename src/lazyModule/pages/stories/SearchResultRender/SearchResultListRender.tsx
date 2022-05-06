@@ -1,13 +1,11 @@
 import {View} from "@tarojs/components";
 import * as React from "react";
 import {StoreItemType} from "../../../../typings";
-import style from "./style.module.scss";
 import LoadingRender from "./LoadingRender";
 import EmptyRender from "./EmptyRender";
-import Attraction, {Tmp} from "../List/Attraction";
-import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
-import {setEndStore, setStarStore, StartStoreOrEndStoreType} from "../../../../reduxStore/module/order";
-import {navigateToHome} from "../../../../store/module/router";
+import Attraction from "../List/Attraction";
+// @ts-ignore
+import style from "./style.module.scss";
 
 type SearchResultPropsType = {
   stores: StoreItemType[]
@@ -32,9 +30,6 @@ const SearchResult:React.FC<SearchResultPropsType> = ({onClick, stores, keyword,
              key={store.id}
              classname={style.itemRender}
              keyword={keyword}
-             onSelect={() => console.log("hello")}
-             onClickDetail={() => handleClickDetail(store)}
-             onClickMap={() => handleClickMap(store)}
            />
          ))
        }

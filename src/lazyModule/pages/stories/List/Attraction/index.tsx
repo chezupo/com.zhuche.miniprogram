@@ -1,4 +1,5 @@
 import {View} from "@tarojs/components";
+import {ITouchEvent} from "@tarojs/components/types/common";
 import * as React from "react";
 // @ts-ignore
 import style from "./style.module.scss"
@@ -7,10 +8,7 @@ import {noticeColor} from "../../../../../config/globalConfig";
 import MenuIcon from "../../../../../components/icon/MenuIcon";
 import GuidIcon from "../../../../../components/icon/GuidIcon";
 import {StoreItemType} from "../../../../../typings";
-import {ITouchEvent} from "@tarojs/components/types/common";
-import {useAppDispatch, useAppSelector} from "../../../../../reduxStore";
-import {setEndStore, setStarStore, StartStoreOrEndStoreType} from "../../../../../reduxStore/module/order";
-import {navigateArgumentDetail, navigateStoreDetail, navigateToHome} from "../../../../../store/module/router";
+import {navigateStoreDetail} from "../../../../../store/module/router";
 import {useCheckedStore} from "../../../../../util/storeHook";
 
 type AttractionPropsType = {

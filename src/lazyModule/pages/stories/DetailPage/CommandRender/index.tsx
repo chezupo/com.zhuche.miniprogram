@@ -6,14 +6,16 @@ import LineRender from "../components/LineRender";
 import Icon from "../../../../../components/Icon";
 import ItemRender from "./ItemRender";
 import {useEffect, useState} from "preact/hooks";
-import {CommentItemType} from "../../../../../typings";
+import {CommentItemType, StoreItemType} from "../../../../../typings";
 import NotFound from "../../../../../components/NotFound";
-import {useAppSelector} from "../../../../../reduxStore";
 import {getStoreComments} from "../../../../../api/store";
 
-const CommandRender: React.FC = () => {
+type CommandRenderPropsType = {
+  store: StoreItemType
+}
+const CommandRender: React.FC<CommandRenderPropsType> = props => {
   const [comments, setComments] = useState<CommentItemType[]>([])
-  const store = useAppSelector(state => state.order.createOrder.startStore)
+  const store = props.store
   useEffect(() => {
     getStoreComments(store.id).then(res => {
       setComments(res)

@@ -81,6 +81,7 @@ const navigateToIdCarValidationPage = () => navigateTo(`${lazyModulePrefix}/page
 const navigateToDriverLicenceValidationPage = () => navigateTo(`${lazyModulePrefix}/pages/DriverLicenceValidationPage/index`)
 const navigateToBalancePage = () =>  navigateTo(`${lazyModulePrefix}/pages/BalancePage/index`)
 const navigateToTransactionPage = () => navigateTo(`${lazyModulePrefix}/pages/TransactionPage/index`)
+const navigateToGuideDetailPage = () => navigateTo(`${lazyModulePrefix}/pages/stories/DetailPage/GuideDetailPage/index`)
 
 export {
   navigateTo,
@@ -107,5 +108,6 @@ export {
   navigateToIdCarValidationPage,
   navigateToDriverLicenceValidationPage,
   navigateToBalancePage,
-  navigateToTransactionPage
+  navigateToTransactionPage,
+  navigateToGuideDetailPage
 }

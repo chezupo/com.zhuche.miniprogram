@@ -3,17 +3,26 @@ import {Image, Swiper, SwiperItem} from "@tarojs/components";
 import {ReactNode} from "react";
 // @ts-ignore
 import style from './style.module.scss'
-import {GuidType} from "../../../../../../typings";
+import {GuidItemType, StoreItemType} from "../../../../../../typings";
+import {navigateToGuideDetailPage} from "../../../../../../store/module/router";
+import {setPickUpGuides, setReturnGuides} from "../../../../../../util/guideUtil";
 
 type SwiperRenderPropsType = {
-  images: GuidType[]
+  images: GuidItemType[]
+  store: StoreItemType
 }
-const SwiperRender: React.FC<SwiperRenderPropsType> = ({images}) => {
+const SwiperRender: React.FC<SwiperRenderPropsType> = ({images, store}) => {
   const dom: ReactNode[] = []
   let tmpDom: ReactNode[] = []
+  const handleShowGuideDetailPage = () => {
+    setPickUpGuides(store.pickupGuides)
+    setReturnGuides(store.returnGuides)
+    navigateToGuideDetailPage()
+  }
   images.forEach((item, index) => {
     tmpDom.push(
       <Image
+        onClick={handleShowGuideDetailPage}
         key={item.id}
         src={`${item.prefixUrl}/${item.imgKey}`}
         className={style.image}

@@ -6,53 +6,17 @@ import MenuContainer from "../../../../components/MenuContainer";
 // @ts-ignore
 import style from './style.module.scss'
 import StoreInfoRender from "./StoreInfoRender";
-import CommandRender from "./CommandRender";
 import Button from "../../../../components/Button";
 import {getStoreById} from "../../../../api/store";
 import {StoreItemType} from "../../../../typings";
 import Loading from "../../../../components/Loading";
 import {useCheckedStore} from "../../../../util/storeHook";
-import {values} from "lodash";
+import CommandRender from "./CommandRender";
 
 const DetailPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const {params} = useRouter();
-  const [store, setStore] = useState<StoreItemType>({
-    id: 0,
-    name: '',
-    mark: '',
-    starAt: '',
-    endAt: '',
-    address: '',
-    servicePhone: '',
-    lat: 0,
-    lng: 0,
-    isEnable: false,
-    isStation: false,
-    isAirport: false,
-    isSelfService: false,
-    banners:[],
-    pickupGuides:[],
-    returnGuides:[],
-    city: {
-      code:  '',
-      name: '',
-      pinyin: '',
-    },
-    area: {
-      code: '',
-      name: '',
-    },
-    province: {
-      code: '',
-      name: '',
-    },
-    admin:{
-      id: 0,
-      username: '',
-      isEnabled: false
-    }
-  })
+  const [store, setStore] = useState<StoreItemType | undefined>()
   useEffect(() => {
     setLoading(true)
     getStoreById(parseInt(params.id)).then(res => {
@@ -62,8 +26,12 @@ const DetailPage: React.FC = () => {
   }, [])
   const body = (
     <View className={style.main}>
-      <StoreInfoRender store={store} />
-      <CommandRender />
+      {
+        !!store  && (<>
+          <StoreInfoRender store={store} />
+          <CommandRender store={store} />
+        </>)
+      }
     </View>
   )
   const handleCheckStore = useCheckedStore(store)

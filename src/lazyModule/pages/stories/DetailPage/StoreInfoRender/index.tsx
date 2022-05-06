@@ -1,4 +1,5 @@
 import React from "preact/compat";
+import taro from "@tarojs/taro";
 import {View} from "@tarojs/components";
 import {useState} from "preact/hooks";
 // @ts-ignore
@@ -9,7 +10,6 @@ import BannerRender from "./BannerRender";
 import NameRender from "./NameRender";
 import LineRender from "../components/LineRender";
 import {StoreItemType} from "../../../../../typings";
-import taro from "@tarojs/taro";
 
 export enum ActiveButtonType {
   RETURN_GUIDE,
@@ -48,8 +48,8 @@ const StoreInfoRender: React.FC<StoreInfoRenderPropsType> = props => {
             onClick={() => setActiveButton(ActiveButtonType.RETURN_GUIDE)}
           >还车指引</View>
         </View>
-        { activeButton === ActiveButtonType.PICKUP_GUIDE && ( <SwiperRender images={props.store.pickupGuides} /> ) }
-        { activeButton === ActiveButtonType.RETURN_GUIDE && ( <SwiperRender images={props.store.returnGuides} /> ) }
+        { activeButton === ActiveButtonType.PICKUP_GUIDE && ( <SwiperRender images={props.store.pickupGuides} store={store} /> ) }
+        { activeButton === ActiveButtonType.RETURN_GUIDE && ( <SwiperRender images={props.store.returnGuides} store={store} /> ) }
       </View>
       <View className={style.addressWrapper}>
         <View className={style.address}>

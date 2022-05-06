@@ -13,7 +13,7 @@ export type StoreBannerType = {
   prefixUrl: string
 }
 
-export type GuidType = {
+export type GuidItemType = {
   id: number
   imgKey: string
   title: string
@@ -51,8 +51,8 @@ declare type StoreItemType = {
   isAirport: boolean
   isSelfService: boolean
   banners: StoreBannerType[]
-  pickupGuides: GuidType[],
-  returnGuides: GuidType[],
+  pickupGuides: GuidItemType[],
+  returnGuides: GuidItemType[],
   city: CityType
   area: AreaType
   province: ProvinceType

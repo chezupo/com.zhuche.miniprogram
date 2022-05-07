@@ -259,3 +259,11 @@ declare type PageType<T> = {
   current: number
   size: number
 }
+
+declare type FeedbackItemType = {
+  id: number
+  flag: string
+  content: string
+  phone: string
+  email?: string
+}

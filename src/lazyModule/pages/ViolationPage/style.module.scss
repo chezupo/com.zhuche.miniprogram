@@ -1,6 +1,41 @@
+@import "../../../global";
+
 .main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background: #EEEEEE;
+  padding-top: $unit2;
+  min-height: 100vh;
+  .notfound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .itemWrapper  {
+    background: white;
+    $padding: $unit3;
+    margin: $padding $padding 0;
+    padding: $padding;
+    border-radius: $unit1;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit2;
+  }
+}
+.rowWrapper {
+  display: grid;
+  $firstGrid: 20%;
+  grid-template-columns: $firstGrid 100% - $firstGrid;
+  grid-column-gap: $unit2;
+}
+
+.image {
+  $size: $unit8;
+  width: $size;
+  height: $size;
+}
+.bottomWrapper {
+  margin-top: $unit2;
+  width: 100%;
+  text-align: center;
+  color: gray;
 }

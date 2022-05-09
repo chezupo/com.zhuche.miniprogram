@@ -15,7 +15,6 @@ import {
   StartStoreOrEndStoreType
 } from "../../../reduxStore/module/order"
 import {messageObserve} from "../../../store/module/message";
-import {CityType} from "../../../typings";
 
 type OperationInterfacePropsType = {
   className?: string
@@ -40,9 +39,19 @@ const OperationInterface = (props: OperationInterfacePropsType): React.ReactElem
     }
   }
   const handleClickStartStore = () => {
-    handleRedirect(createOrder.startCity, StartStoreOrEndStoreType.START)
+    if (!createOrder.startCity) {
+      messageObserve.next({type: 'error', title: '请先选择取车的城市'})
+    } else {
+      handleRedirect(createOrder.startCity, StartStoreOrEndStoreType.START)
+    }
   }
-  const handleClickEndStore = () => handleRedirect(createOrder.endCity, StartStoreOrEndStoreType.END)
+  const handleClickEndStore = () => {
+    if (!createOrder.endCity) {
+      messageObserve.next({type: 'error', title: '请先选择还车的城市'})
+    } else {
+      handleRedirect(createOrder.endCity, StartStoreOrEndStoreType.END)
+    }
+  }
 
   return (
     <View className={[style.main, props.className ? props.className : ''].join(' ')}>

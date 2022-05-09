@@ -267,3 +267,14 @@ declare type FeedbackItemType = {
   phone: string
   email?: string
 }
+
+declare type ViolationItemType = {
+  id: number
+  title: string
+  description: string
+  images: string[]; // 图
+  amount: number; // 扣除的费
+  freezeAmount: number; // 余下冻结的费
+  user: UserItemType
+}
+

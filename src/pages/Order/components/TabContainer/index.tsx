@@ -1,6 +1,5 @@
 import * as React from "react";
 import {View} from "@tarojs/components";
-import {OrderItemType} from "../../../../typings";
 import OrderItem from "../../OrderContainer";
 // @ts-ignore
 import style from "../../style.module.scss";
@@ -13,6 +12,7 @@ type TabContainerPropsType = {
   onCancel: (value: OrderItemType) => void
   onReturnCar: (value: OrderItemType) => void
   onComment: (value:  OrderItemType) => void
+  onPayOverTimeFeeAndReturnCared: (value: OrderItemType) => void
 }
 const TabContainer: React.FC<TabContainerPropsType> = props => {
 
@@ -39,6 +39,7 @@ const TabContainer: React.FC<TabContainerPropsType> = props => {
                     onCancel={props.onCancel}
                     key={order.id}
                     data={order}
+                    onPayOverTimeFeeAndReturnCared={props.onPayOverTimeFeeAndReturnCared}
                     orderCategory={props.orderCategory}
                   />
                 ))
@@ -50,8 +51,6 @@ const TabContainer: React.FC<TabContainerPropsType> = props => {
       </View>
     </>
   )
-
-
 }
 
 export default TabContainer

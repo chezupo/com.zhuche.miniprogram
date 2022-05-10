@@ -6,10 +6,10 @@ import Tabs from "./Tabs";
 import style from "./style.module.scss"
 import Loading from "../../components/Loading";
 import {cancelOrder, createOrderComment, getOrders, returnCar} from "../../api/order";
-import {OrderItemType, OrderStatus} from "../../typings";
 import TabContainer from "./components/TabContainer";
 import CommentRender, {SubmitType} from "./components/TabContainer/CommentRender";
 import SpinContainer from "../../components/SpinContainer";
+import {sleep} from "../../util/helper";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 
@@ -92,7 +92,20 @@ const Order = () : React.ReactElement => {
     try {
       await returnCar(value.id)
       handleFetchData();
-      await taro.showToast({title: '还车中', duration: 5000})
+    }finally {
+      setLoading(false)
+    }
+  }
+
+  /**
+   * 超时补交费用并还车
+   * @param value
+   */
+  const handlePayOverTimeFeeAndReturnCar = async (value: OrderItemType) => {
+    setLoading(true)
+    try {
+      await sleep(3000);
+      handleFetchData();
     }finally {
       setLoading(false)
     }
@@ -133,6 +146,7 @@ const Order = () : React.ReactElement => {
       onReturnCar={handleReturnCar}
       onCancel={handleCancel}
       items={showOrders}
+      onPayOverTimeFeeAndReturnCared={handlePayOverTimeFeeAndReturnCar}
       orderCategory={currentOrderCategory}
     />
     </>)

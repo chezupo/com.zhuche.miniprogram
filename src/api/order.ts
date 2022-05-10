@@ -1,6 +1,5 @@
 import {get, post, put} from "../util/requestClient";
 import getPlatformType from "../util/platformType";
-import {OrderItemType} from "../typings";
 
 type CreateOrderQueryType = {
   remark: string
@@ -24,7 +23,12 @@ const createOrder = async (data: CreateOrderQueryType): Promise<OrderItemType> =
 const getOrders = async (): Promise<OrderItemType[]> => {
   return await get<OrderItemType[]>(`/orders`)
 }
-
+const getOrderById = async (orderId: number): Promise<OrderItemType> => {
+  return await get<OrderItemType>(`/orders/${orderId}`)
+}
+const tradeOverTimeOrderById = async (orderId: number) => {
+  return await post<string>(`/orders/${orderId}/trade/overtime`)
+}
 const cancelOrder = async (id: number) => {
   return await put<OrderItemType>(`/orders/${getPlatformType()}/${id}/canceling`)
 }
@@ -38,4 +42,4 @@ const createOrderComment = async (orderId: number, value: CreateOrderCommentType
   return await post<OrderItemType>(`/orders/${orderId}/commands`, value)
 }
 
-export {createOrder, getOrders, cancelOrder, returnCar, createOrderComment}
+export {createOrder, getOrders, cancelOrder, returnCar, createOrderComment, getOrderById, tradeOverTimeOrderById}

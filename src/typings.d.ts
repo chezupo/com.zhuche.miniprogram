@@ -164,6 +164,8 @@ declare type OrderItemType = {
   car: CarItemType
   cover: string
   comment?: CommentItemType
+  expiredFee: number
+  expiredDays: number
 }
 declare type CommentItemType = {
   id: number

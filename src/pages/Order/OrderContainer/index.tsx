@@ -8,13 +8,14 @@ import {useState} from "preact/hooks";
 import * as React from "react";
 import Point from "../../../components/Point";
 import {targetAddressPointColor, warningColor} from "../../../config/globalConfig";
-import {OrderItemType, OrderStatus} from "../../../typings";
 import {convertDate} from "../../../util/Carlendar";
 // @ts-ignore
 import style from "./style.module.scss"
 import {OrderCategoryType} from "../index";
 import Icon from "../../../components/Icon";
-import {navigateStoreDetail} from "../../../store/module/router";
+import {navigateStoreDetail, navigateToHome} from "../../../store/module/router";
+import {getOrderById, getOrders, tradeOverTimeOrderById} from "../../../api/order";
+import tradePay from "../../../nativeInterface/tradePay";
 
 type OrderContainerPropsType = {
   data: OrderItemType
@@ -22,6 +23,7 @@ type OrderContainerPropsType = {
   onCancel: (value: OrderItemType) => void
   onReturnCar: (value: OrderItemType) => void
   onComment: (value: OrderItemType) => void
+  onPayOverTimeFeeAndReturnCared: (value: OrderItemType) => void
 }
 const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
@@ -29,7 +31,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     PAYING: {title: '待支付', notice: ''},
     CAR_PICKUP_IN_PROGRESS: {title: '取车中', notice: '请到门店提取您预定的汽车'},
     USING: {title: '使用中', notice: ''},
-    OVERTIME: {title: '用车超时', notice: ''},
+    OVERTIME: {title: '用车超时', notice: `您已用车超时${props.data.expiredDays?.toFixed(1)}天，还车时还需另外补交超时费用: ${props.data.expiredFee?.toFixed(2)}`},
     RETURNING: {title: '还车中', notice: `请把车开到${props.data.endStore.name}，完成还车`},
     RENEWED: {title: '已续约', notice: ''},
     FINISHED: {title: '已完成', notice: ''},
@@ -49,10 +51,6 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const starDate = new Date(data.startTimeStamp)
   const endDate = new Date(data.endTimeStamp)
   const days = (data.endTimeStamp - data.startTimeStamp) / (60 * 60 * 24 * 1000)
-  const [notice, setNotice] = useState<string>('')
-  const handlePay = () => {
-
-  }
   const pointSize: number = 2;
   const tradeNo = data.alipayTradeNo;
   const handleCopy = async (e: ITouchEvent) => {
@@ -66,17 +64,28 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const handleGoToEndStore = () => {
     navigateStoreDetail(props.data.endStore.id, true)
   }
-  const handleShowRemark = async () => {
-    await taro.showModal({
-      title: '备注',
-      content: props.data.remark
-    })
-  }
   const handleReturnCar = async () => {
-    const res = await taro.showModal({
-      title: '您确定要还车吗？'
+    const order = await getOrderById(props.data.id)
+    await taro.showLoading({
+      title: '还车中...'
     })
-    res.confirm && props.onReturnCar(props.data)
+    if (order.expiredFee > 0) {
+      const res = await taro.showModal({
+        title: `您已超时用车${props.data.expiredDays.toFixed(1)}天, 需补交${props.data.expiredFee.toFixed(2)}元, 是否补交并还车?`
+      })
+      const overtimeTradeNo = await tradeOverTimeOrderById(order.id)
+      res.confirm && await tradePay(overtimeTradeNo)
+      props.onPayOverTimeFeeAndReturnCared(props.data)
+    } else {
+      const res = await taro.showModal({
+        title: '您确定要还车吗？'
+      })
+      res.confirm && props.onReturnCar(props.data)
+    }
+    await taro.hideLoading()
+  }
+  const handleReservation = () => {
+    navigateToHome();
   }
 
   return (
@@ -110,7 +119,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
           <View>{convertDate(starDate)}</View>
           <View className={style.durationWrapper}>
             <View className={style.backgroundLine} />
-            {days}天
+            {days.toFixed(1)}天
             <View className={style.backgroundLine} />
           </View>
           <View>{convertDate(endDate)}</View>
@@ -125,7 +134,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
         }
         <View className={style.buttonWrapper}>
           {
-            props.data.status === 'USING' && (
+            ['USING', 'OVERTIME'].includes(props.data.status )  && (
               <View className={style.button} onClick={handleReturnCar}>还车</View>
             )
           }
@@ -134,17 +143,20 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
               <View className={style.button}>支 付</View>
             )
           }
-          {
-            props.data.status === 'OVERTIME' && (
-              <View className={style.button}>超时续约</View>
-            )
-          }
+          {/*{*/}
+          {/*  props.data.status === 'OVERTIME' && (*/}
+          {/*    <View className={style.button}>超时续约</View>*/}
+          {/*  )*/}
+          {/*}*/}
           {
             [
               'FINISHED', // 已完成
               'CANCELED' // 已取消
             ].includes(props.data.status) && (
-              <View className={style.button}>
+              <View
+                className={style.button}
+                onClick={handleReservation}
+              >
                 再次预订
               </View>
             )

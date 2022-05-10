@@ -30,6 +30,15 @@ export const debounce = <T>(callback: DebounceType<T>, wait: number): DebounceTy
 
 const formatTimeNumber = (n: number): string => n < 9 ? `0${n}` : `${n}`
 
+const sleep = (timeout: number): Promise<void> => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, timeout)
+  })
+}
+
 export {
-  formatTimeNumber
+  formatTimeNumber,
+  sleep
 }

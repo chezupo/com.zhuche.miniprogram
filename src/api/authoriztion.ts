@@ -3,7 +3,7 @@ import getPlatformType, {AllPlatformType} from "../util/platformType";
 import ErrorHandle, {ErrorType} from "../config/ErrorHandle";
 import {AccessTokenType} from "../store/module/me";
 
-export const authorize = async (authorizationCode: string): Promise<AccessTokenType> => {
+export const authorize = async (authorizationCode: string, pid?: number): Promise<AccessTokenType> => {
   let platform = "";
   const currentPlayForm =getPlatformType()
   if (currentPlayForm ===  AllPlatformType.ALIPAY){
@@ -15,5 +15,8 @@ export const authorize = async (authorizationCode: string): Promise<AccessTokenT
   }
   const url = `/socials/${platform}/authorizations`
 
-  return await post<AccessTokenType>(url, {authorizationCode})
+  return await post<AccessTokenType>(url, {
+    authorizationCode,
+    pid
+  })
 }

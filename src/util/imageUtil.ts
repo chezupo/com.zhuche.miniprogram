@@ -5,4 +5,6 @@ const imageKeyConvertFullURL = (key: string): string => {
   return `${config.imgPrefix}/${key}`
 }
 
-export {imageKeyConvertFullURL}
+const loadImage = (value: HTMLImageElement): Promise<void> => new Promise(resolve => value.onload = () => resolve() )
+
+export {imageKeyConvertFullURL, loadImage}

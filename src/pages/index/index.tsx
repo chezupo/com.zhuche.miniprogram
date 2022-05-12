@@ -1,6 +1,7 @@
 import * as React from "react";
 import {View} from "@tarojs/components";
-import authCode from "../../nativeInterface/authCode";
+import {useRouter} from "@tarojs/taro";
+import {useEffect} from "preact/hooks";
 import OperationInterface from "./OperationInterface";
 import Layout from "../../container/Layout";
 import Order from "../Order";
@@ -11,84 +12,19 @@ import style from './style.module.scss'
 import Guilds from "./Guids";
 import NoticeBar from "./NoticeBar";
 import ComplaintFeedbackBar from "./ComplaintFeedbackBar";
-import {useAppSelector} from "../../reduxStore";
+import {useAppDispatch, useAppSelector} from "../../reduxStore";
 import {TabBarType} from "../../reduxStore/module/layout";
 import Icon from "../../components/Icon";
+import {loginThunk} from "../../reduxStore/module/me";
 
 const Index = () => {
   const {configuration} = useAppSelector(state => state)
-  const handleCode = async (): Promise<void> => {
-    const code = await authCode();
-    // const res = await graphQLClient({
-    //   query: quthrizationGQL,
-    //   variables: {
-    //     input: {
-    //       platform: "ALIPAY",
-    //       code
-    //     }
-    //   }
-    // })
-
-    // console.log(res)
-  }
-
-  const handlePay = () => {
-    // graphQLClient({
-    //   query: gql`
-    //     mutation CREATEORDER {
-    //       createOrder
-    //     }
-    //   `,
-    // }).then(({data: {createOrder}}) => {
-    //   console.log(createOrder)
-    //   my.tradePay({
-    //     // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
-    //     tradeNO: `${createOrder}`,
-    //     success: (res) => {
-    //       my.alert({
-    //         content: JSON.stringify(res),
-    //       });
-    //     },
-    //     fail: (res) => {
-    //       my.alert({
-    //         content: JSON.stringify(res),
-    //       });
-    //     }
-    //   });
-    // })
-  }
-
-  const handleFreezeOrder = (): void => {
-    // graphQLClient({
-    //   query: gql`
-    //     mutation CREATEORDER {
-    //       createFreezeOrder
-    //     }
-    //   `,
-    // }).then(({data: {createFreezeOrder}}) => {
-    //   console.log(createFreezeOrder)
-    //   my.tradePay({
-    //     // 调用资金冻结接口（alipay.fund.auth.order.app.freeze），获取支付宝预授权参数
-    //     orderStr: createFreezeOrder,
-    //     success: (res) => {
-    //       console.log("success")
-    //       console.log(JSON.stringify(res))
-    //       my.alert({
-    //         content: JSON.stringify(res),
-    //       });
-    //     },
-    //     fail: (res) => {
-    //       console.log("fail")
-    //       console.log(JSON.stringify(res))
-    //       my.alert({
-    //         content: JSON.stringify(res),
-    //       });
-    //     }
-    //   });
-    //
-    //
-    // })
-  }
+  const {params} = useRouter()
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    const userId = params.userId ? parseInt(params.userId) : undefined
+      dispatch(loginThunk(userId)).then(() => { })
+  }, [])
   const IndexRender = () => (
     <>
       <ComplaintFeedbackBar />

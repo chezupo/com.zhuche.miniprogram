@@ -7,15 +7,10 @@ import './global.scss'
 import './asesst/font/iconfont/iconfont.css'
 import {initThunk} from "./reduxStore/module/banner";
 import {initThunk as cityInitThunk} from "./reduxStore/module/city"
-import {loginThunk} from "./reduxStore/module/me";
 
 const InitData: React.FC  = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
-
-      dispatch(loginThunk()).then(() => {
-
-      })
       dispatch(initThunk()).then(() => {
 
       })

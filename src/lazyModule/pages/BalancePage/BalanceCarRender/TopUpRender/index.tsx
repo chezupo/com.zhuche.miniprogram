@@ -8,11 +8,11 @@ import Button from "../../../../../components/Button";
 import style from "../style.module.scss";
 import {TopUpValueType} from "../../../../../api/topUp";
 
-type TopUpRenderPropsType = {
+export type TopUpRenderPropsType = {
   onSubmit:(newValue:TopUpValueType) => void
   onCancel:() => void
   title: string
-  isShowWithdrawNotice: boolean
+  isShowWithdrawNotice?: boolean
 }
 const TopUpRender: React.FC<TopUpRenderPropsType> = props => {
   const [topUp, setTopUp] = useState<number | undefined>(undefined)

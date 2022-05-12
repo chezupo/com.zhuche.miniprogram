@@ -11,6 +11,7 @@ $borderGrayColor: #E1E1E1;
 $primaryThemeColor: #3C61FF;
 $primaryThemeColor2: rgb(186 230 253);
 $backgroundColor: #F5F5F5;
+$theme-base-bg:#F3F3F3;
 @mixin globalSubtitle {
   color: $subtitleColor;
   font-size: $subtitleSize;

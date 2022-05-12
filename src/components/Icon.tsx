@@ -39,7 +39,8 @@ export type IconType = 'close' |
   'start' |
   'time' |
   'location' |
-  'distance'
+  'distance' |
+  'promotion'
 
 type IconPropsType = {
   value: IconType

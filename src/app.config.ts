@@ -27,7 +27,10 @@ export default {
         'pages/BalancePage/index',
         'pages/TransactionPage/index',
         'pages/TmpPage/index',
-        'pages/NavigationPage/index'
+        'pages/NavigationPage/index',
+        'pages/PromotionPage/index',
+        'pages/PromotionPage/PromotionPosterPage/index',
+        'pages/PromotionPage/PromotionUsersPage/index'
       ]
     }
   ],

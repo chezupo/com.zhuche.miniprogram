@@ -1,0 +1,116 @@
+@import "../../../global.scss";
+
+.main {
+  color: gray;
+  background: $theme-base-bg;
+  min-height: 100vh;
+  $padding: $unit3;
+  $margin: $padding;
+  .commissionWrapper {
+    background: $primaryThemeColor;
+    height: $unit30;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    .balanceWrapper {
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      margin-bottom: $unit3;
+      .balance {
+        font-size: $unit6;
+      }
+      .withDraw {
+        position: absolute;
+        right: -$unit13;
+      }
+    }
+  }
+  @mixin layout {
+    margin: $margin;
+    padding: 0 $padding;
+    background: white;
+    border-radius: $borderRadiusCircle;
+  }
+  @mixin itemLineHeight {
+    $itemHeight: $unit10;
+    line-height: $itemHeight;
+    height: $itemHeight;
+  }
+  .menuBarWrapper  {
+    @include layout;
+    .itemWrapper {
+      display: flex;
+      @include itemLineHeight;
+      justify-content: space-between;
+      .balance {
+        color: $primaryThemeColor;
+      }
+      border-bottom: solid 1px $theme-base-bg;
+      &:last-child {
+        border-bottom: none;
+      }
+      .rebatePoints {
+        color: red;
+      }
+    }
+  }
+  .ordersWrapper {
+    @include layout;
+    .orderHeaderBar {
+      @include itemLineHeight;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: solid 1px $theme-base-bg;
+    }
+    .orderItemWrapper {
+      @mixin orderItemHeight {
+        $orderItemHeight: $unit7;
+        line-height: $orderItemHeight;
+        height: $orderItemHeight;
+      }
+      padding: $padding 0;
+      border-bottom: solid 1px $gray2;
+      &:last-child {
+        border-bottom: none;
+      }
+      .NoWrapper {
+        @include orderItemHeight;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: $unit4;
+        .balance {
+          color: $primaryThemeColor;
+        }
+      }
+      .item {
+        @include orderItemHeight;
+      }
+    }
+  }
+  .icon {
+    font-size: $unit5;
+  }
+  .promotionWrapper {
+    position: absolute;
+    bottom: $unit20;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .button {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        margin-right: $unit2;
+        font-size: $unit4;
+      }
+    }
+  }
+}

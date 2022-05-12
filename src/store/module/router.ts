@@ -82,8 +82,12 @@ const navigateToDriverLicenceValidationPage = () => navigateTo(`${lazyModulePref
 const navigateToBalancePage = () =>  navigateTo(`${lazyModulePrefix}/pages/BalancePage/index`)
 const navigateToTransactionPage = () => navigateTo(`${lazyModulePrefix}/pages/TransactionPage/index`)
 const navigateToGuideDetailPage = () => navigateTo(`${lazyModulePrefix}/pages/stories/DetailPage/GuideDetailPage/index`)
+const navigateToPromotionPage = () => navigateTo(`${lazyModulePrefix}/pages/PromotionPage/index`)
+const navigateToPromotionPosterPage = () => navigateTo(`${lazyModulePrefix}/pages/PromotionPage/PromotionPosterPage/index`)
+const navigateToPromotionUsersPage = () => navigateTo(`${lazyModulePrefix}/pages/PromotionPage/PromotionUsersPage/index`)
 
 export {
+  navigateToPromotionPage,
   navigateTo,
   navigateToHome,
   navigateToStore,
@@ -109,5 +113,7 @@ export {
   navigateToDriverLicenceValidationPage,
   navigateToBalancePage,
   navigateToTransactionPage,
-  navigateToGuideDetailPage
+  navigateToGuideDetailPage,
+  navigateToPromotionPosterPage,
+  navigateToPromotionUsersPage
 }

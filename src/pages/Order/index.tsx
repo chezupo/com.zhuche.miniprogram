@@ -13,7 +13,7 @@ import {sleep} from "../../util/helper";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 
-const tabs: OrderCategoryType[] = [
+export const tabs: OrderCategoryType[] = [
   {id: 0, name: '全部', status: [
       'CREDITING',  // 信用授权中
       'PAYING',  // 支付中

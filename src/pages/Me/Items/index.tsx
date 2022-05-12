@@ -10,7 +10,7 @@ import {
   navigateToContactPage,
   navigateToDriverLicenceValidationPage,
   navigateToIdCarValidationPage,
-  navigateToLoginOrRegister, navigateToTransactionPage,
+  navigateToLoginOrRegister, navigateToPromotionPage, navigateToTransactionPage,
   navigateToViolationPage
 } from "../../../store/module/router";
 import Icon from "../../../components/Icon";
@@ -40,6 +40,7 @@ const Items = (): React.ReactElement => {
     {title: '紧急联系人', icon: <Icon value='lianxiren' style={iconStyle} />, eventType: ItemContainerEventType.CONTACT } ,
     {title: '身份认证', icon: <Icon value='shenfenzheng' style={iconStyle} />, eventType: ItemContainerEventType.ID_CAR } ,
     {title: '驾照认证', icon: <Icon value='kaojiazhao' style={iconStyle} />, eventType: ItemContainerEventType.DRIVER_S_LICENSE } ,
+    {title: '我的推广', icon: <Icon value='promotion' style={iconStyle} />, eventType: ItemContainerEventType.PROMOTION} ,
   ]
   const handleClick = (item: ItemContainerType) => {
     if (!isLogin()) {
@@ -74,6 +75,9 @@ const Items = (): React.ReactElement => {
       case ItemContainerEventType.TRANSACTION:
         navigateToTransactionPage();
         break;
+      case ItemContainerEventType.PROMOTION:
+        navigateToPromotionPage()
+        break
     }
   }
 

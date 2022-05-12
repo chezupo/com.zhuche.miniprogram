@@ -2,7 +2,7 @@ import {UserInfoType} from "../nativeInterface/getUserProfile";
 import * as request from "../util/requestClient";
 import {getPlatformName} from "../util/platformType";
 import {MeItemType} from "../typings";
-import {put} from "../util/requestClient";
+import {get, put} from "../util/requestClient";
 
 type MeInfoType = MeItemType
 type UpdateMyPhoneNumberQueryType = {
@@ -26,6 +26,10 @@ const updateMyPhoneNumber = async (query: UpdateMyPhoneNumberQueryType ) => {
   return await put<MeInfoType>(`/socials/${getPlatformName()}/me/phoneNumber`, query)
 }
 
+const getMyQr = async () => {
+  return await get<string>(`/QR`)
+}
+
 export type {
   MeInfoType,
   UpdateMyPhoneNumberQueryType
@@ -33,5 +37,6 @@ export type {
 export {
   getMeInfo,
   updateMeInfo,
-  updateMyPhoneNumber
+  updateMyPhoneNumber,
+  getMyQr
 }

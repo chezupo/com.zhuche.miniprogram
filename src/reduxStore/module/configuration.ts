@@ -19,7 +19,9 @@ const initialState: InitialStateType = {
     servicePhone: '',
     insurance: 0,
     orderAgreement: '',
-    insuranceAgreement: ''
+    insuranceAgreement: '',
+    promotionLevel1: 0,
+    promotionLevel2: 0
   },
   isShowNotice: true
 }

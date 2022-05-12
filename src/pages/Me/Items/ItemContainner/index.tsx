@@ -10,7 +10,8 @@ export enum ItemContainerEventType  {
   CONTACT='联系人',
   ID_CAR='身份证',
   DRIVER_S_LICENSE='驾驶证',
-  TRANSACTION='账单'
+  TRANSACTION='账单',
+  PROMOTION='我的推广'
 }
 export type ItemContainerType = {
   title: string

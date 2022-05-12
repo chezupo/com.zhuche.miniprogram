@@ -1,0 +1,41 @@
+@import "../../../../global.scss";
+.main {
+  height: 100%;
+  padding: $unit2;
+  .tabWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: $unit2;
+  }
+}
+.userWrapper {
+  margin-top: $unit2;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit2;
+}
+.userItemWrapper {
+  display: grid;
+  $fistGrid: 15%;
+  grid-template-columns: $fistGrid 100% - $fistGrid;
+  grid-column-gap: $unit5;
+  .avatar {
+    $size: $unit13;
+    height: $size;
+    width: $size;
+    border-radius: 100%;
+  }
+  .infoWrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit2;
+    .itemWrapper {
+      display: flex;
+    }
+  }
+}
+.bottomNotice {
+  width: 100%;
+  text-align: center;
+  color: gray;
+}

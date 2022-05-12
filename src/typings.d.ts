@@ -154,6 +154,7 @@ declare type OrderItemType = {
   authBody: string
   alipayOutTradeNo: string
   createAlipayAt: number
+  createdAt: string
   status: OrderStatus
   user: UserItemType
   remark: string // 备注
@@ -166,6 +167,10 @@ declare type OrderItemType = {
   comment?: CommentItemType
   expiredFee: number
   expiredDays: number
+  promotionLevel1?: number // 一级返点
+  promotionLevel1User?: UserItemType
+  promotionLevel2?: number // 二级返点
+  promotionLevel2User?: UserItemType
 }
 declare type CommentItemType = {
   id: number
@@ -192,6 +197,9 @@ declare type MeItemType = {
   isAuthorizeBaseInfo?: boolean
   balance?: number
   transactions: TransactionItemType[]
+  commission: number; // 佣金
+  withdrawnCommission: number; // 已提现佣金
+  withdrawalInProgressCommission: number; // 提现中佣金
 }
 
 declare type TransactionItemType = {
@@ -278,5 +286,22 @@ declare type ViolationItemType = {
   amount: number; // 扣除的费
   freezeAmount: number; // 余下冻结的费
   user: UserItemType
+}
+
+declare type PosterItemType = {
+  createdAt: string
+  updatedAt: string
+  id: number
+  url: string
+  size: number
+  positionX: number
+  positionY: number
+}
+
+declare type PromotionInfoType = {
+  downLineCount: number
+  orders:OrderItemType[],
+  promotionLevel2Users: UserItemType[]
+  promotionLevel1Users: UserItemType[]
 }
 

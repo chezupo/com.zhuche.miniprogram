@@ -7,7 +7,7 @@ export type TopUpValueType = {
   isCommission?: boolean
 }
 const createToUpOrder = async (amount: TopUpValueType) => {
-  return await post<string>(`/transaction/${getPlatformType()}/topUp`, {amount})
+  return await post<string>(`/transaction/${getPlatformType()}/topUp`, amount)
 }
 
 export {createToUpOrder}

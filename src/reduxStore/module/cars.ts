@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppDispatch, RootState} from "..";
-import {CarItemType, StoreItemType} from "../../typings";
 import {getCars} from "../../api/cars";
 
 type CategoryType = {

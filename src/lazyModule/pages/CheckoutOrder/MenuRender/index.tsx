@@ -9,7 +9,6 @@ import Icon from "../../../../components/Icon";
 import SpinContainer from "../../../../components/SpinContainer";
 import {navigateToCheckoutOrderAgreement} from "../../../../store/module/router";
 import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
-import {CarItemType} from "../../../../typings";
 import getPhoneNumber from "../../../../nativeInterface/getPhoneNumber";
 import {updateMyPhoneNumberThunk} from "../../../../reduxStore/module/me";
 import PopModal from "../../../../components/PopModal";

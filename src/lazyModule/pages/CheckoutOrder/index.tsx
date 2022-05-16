@@ -6,7 +6,7 @@ import Car from "./Car/Car";
 import Insurance from "./Insurance";
 import CheckRender from "./CheckRender";
 import Coupon from "./Coupon";
-import {useAppSelector} from "../../../reduxStore";
+import {useAppDispatch, useAppSelector} from "../../../reduxStore";
 import MenuContainer from "../../../components/MenuContainer";
 import MenuRender, {AmountListType} from "./MenuRender";
 import DepositRender from "./DepositRender";
@@ -18,6 +18,8 @@ import tradePay from "../../../nativeInterface/tradePay";
 import {navigateToOrder} from "../../../store/module/router";
 import RemarkRender from "./MarkRender";
 import OrderAgreement from "./OrderAgreement";
+import {getUserCoupons} from "../../../api/userCoupons";
+import {iniUserCouponThunk} from "../../../reduxStore/module/userCoupons";
 
 const Order: React.FC = () => {
   const {
@@ -80,6 +82,7 @@ const Order: React.FC = () => {
   useEffect(() => handleInitAmountList(), [car, starTime, endTime, userCoupon, isInsuranceFee, userCoupon])
   useEffect(() => handleInitAmountList(), [])
   const [remark, setRemark] = useState<string>('')
+  const dispatch = useAppDispatch()
   const handleSubmit = () => {
     const p = async (): Promise<void> => {
       if (!allowed) {
@@ -100,6 +103,7 @@ const Order: React.FC = () => {
         })
         newOrder.authBody && await tradePay(newOrder.authBody, true)
         newOrder.alipayTradeNo && await tradePay(newOrder.alipayTradeNo)
+        await dispatch(iniUserCouponThunk())
         navigateToOrder()
       } finally {
         await taro.hideLoading()

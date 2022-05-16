@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {UserCouponItemType} from "../../typings";
 import {AppDispatch, RootState} from "../index";
 import {getUserCoupons} from "../../api/userCoupons";
 

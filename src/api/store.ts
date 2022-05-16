@@ -12,5 +12,7 @@ const getStoreComments = async (id: number) => {
   return await get<PageType<CommentItemType>>(`/stores/${id}/comments`)
 }
 
-export {getStoreById, getStoreComments}
+const getStoreByLocation = async (params: {lat: number, lng: number}) =>  get<StoreItemType>(`/store`, params)
+
+export {getStoreById, getStoreComments, getStoreByLocation}
 

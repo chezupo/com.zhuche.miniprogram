@@ -1,6 +1,6 @@
 import * as React from "react";
 import {View} from "@tarojs/components";
-import {useRouter} from "@tarojs/taro";
+import taro, {useRouter} from "@tarojs/taro";
 import {useEffect} from "preact/hooks";
 import OperationInterface from "./OperationInterface";
 import Layout from "../../container/Layout";
@@ -16,12 +16,23 @@ import {useAppDispatch, useAppSelector} from "../../reduxStore";
 import {TabBarType} from "../../reduxStore/module/layout";
 import Icon from "../../components/Icon";
 import {loginThunk} from "../../reduxStore/module/me";
+import {initLocationThunk} from "../../reduxStore/module/order";
 
 const Index = () => {
   const {configuration} = useAppSelector(state => state)
   const {params} = useRouter()
   const dispatch = useAppDispatch()
+  const startCity = useAppSelector(state => state.order.createOrder?.startCity)
   useEffect(() => {
+    if (!startCity) {
+      taro.getLocation({
+        type: 'gcj02'
+      }).then(({latitude, longitude}) =>
+        dispatch( initLocationThunk(latitude, longitude) )
+      ).then(() => {
+        console.log("init start.")
+      })
+    }
     const userId = params.userId ? parseInt(params.userId) : undefined
       dispatch(loginThunk(userId)).then(() => { })
   }, [])

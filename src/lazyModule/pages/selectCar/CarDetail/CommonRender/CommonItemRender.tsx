@@ -34,6 +34,7 @@ const CommonItemRender: React.FC<CommonItemRenderPropsType> = props => {
     </View>
     <View className={style.imagesWrapper}>
       {
+        props?.images?.length > 0 &&
         props.images.map((src, i) => (
           <Image
             key={i}

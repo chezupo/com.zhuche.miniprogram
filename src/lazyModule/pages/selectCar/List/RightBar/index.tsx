@@ -4,13 +4,10 @@ import * as React from "react";
 import style from './style.module.scss'
 import Car from "./Car";
 import Notice from "../Notice";
-import {navigateToCarDetailPage, navigateToCheckoutOrder, switchTab} from "../../../../../store/module/router";
-import {CarItemType} from "../../../../../typings";
+import {navigateToCarDetailPage} from "../../../../../store/module/router";
 import {useAppDispatch} from "../../../../../reduxStore";
 import {setCarDetail} from "../../../../../reduxStore/module/cars";
 import EmptyRender from "../../../stories/SearchResultRender/EmptyRender";
-import {TabBarType} from "../../../../../reduxStore/module/layout";
-import {setCar} from "../../../../../reduxStore/module/order";
 import {useCheckedCar} from "../../../../../util/carUtil";
 
 type RightBarPropsType = {

@@ -2,7 +2,6 @@ import React from 'react';
 import {useEffect, useState} from "preact/hooks";
 import {Image, Text, View} from "@tarojs/components";
 import CommonItemRender from "./CommonItemRender";
-import {CommentItemType} from "../../../../../typings";
 import {getCarComments} from "../../../../../api/cars";
 // @ts-ignore
 import style from "./style.module.scss";
@@ -22,7 +21,6 @@ type ActiveCommentsType = {
   flag: string
   comments: CommentItemType[]
 }
-
 const flagMapComments:Map<string, CommentItemType[]> = new Map<string, CommentItemType[]>();
 const allFlag = '全部'
 const CommonRender: React.FC<CommonRenderPropsType> = props => {
@@ -85,7 +83,8 @@ const CommonRender: React.FC<CommonRenderPropsType> = props => {
           </View>
         </>
       }
-      { activeComments.comments.length > 0 &&
+      {
+        activeComments.comments.length > 0 &&
         activeComments.comments.map(comment => ( <CommonItemRender
           key={comment.id}
           images={comment.images}

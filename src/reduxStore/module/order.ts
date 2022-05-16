@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AreaStoreType, CarItemType, CityType, StoreItemType, UserCouponItemType} from "../../typings";
 import {AppDispatch, RootState} from "../index";
 import {getAreaStores} from "../../api/area";
+import {getStoreByLocation} from "../../api/store";
 
 export enum StartCityOrEndCityType {
   START,
@@ -624,6 +624,16 @@ const orderSlice = createSlice({
 })
 const {reducer: orderReducer, actions} = orderSlice
 
+const initLocationThunk = (lat: number, lng: number) => {
+  return async (dispatch: AppDispatch) => {
+    const store = await getStoreByLocation({lat, lng})
+    if (store) {
+      await dispatch(setStartCityThunk(store.city))
+      await dispatch(setStarStore(store))
+    }
+  }
+}
+
 const setStartCityThunk = (city: CityType) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     dispatch(setCreatedStartCity(city))
@@ -664,5 +674,5 @@ export const {
   setUserCoupon,
   setCar
 } = actions
-export {setStartCityThunk, setEndCityStoresThunk}
+export {setStartCityThunk, setEndCityStoresThunk, initLocationThunk}
 export default orderReducer

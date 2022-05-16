@@ -3,7 +3,6 @@ import {CoverImage, Text, View} from "@tarojs/components";
 // @ts-ignore
 import style from "./style.module.scss";
 import PlayIcon from "../../../../../../components/icon/PlayIcon";
-import {CarItemType} from "../../../../../../typings";
 
 export type CarPropsType = {
   data: CarItemType

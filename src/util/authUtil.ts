@@ -8,13 +8,13 @@ const tokenKey = "token";
 export const hasLogin = (): Promise<AccessTokenType> => {
   return new Promise<AccessTokenType>((resolve, reject) => {
     Taro.getStorage({
-      key: tokenKey,
-      success: res => {
-        const accessToken = JSON.parse(res as string) as AccessTokenType
-        if (accessToken.expiration < Date.now()) return reject()
-        resolve(accessToken)
-      },
-      fail: () => reject()
+      key: tokenKey
+    }).then(res => {
+      const accessToken = JSON.parse(res as string) as AccessTokenType
+      if (accessToken.expiration < Date.now()) return reject()
+      resolve(accessToken)
+    }).catch(err => {
+      reject()
     })
   })
 }
@@ -25,7 +25,8 @@ const setToken = (token: string) => {
 
 const getToken = (): string => {
   try {
-    return taro.getStorageSync(tokenKey)
+    const res = taro.getStorageSync(tokenKey)
+    return res
   }catch (e) {
     return '';
   }

@@ -1,5 +1,4 @@
 import taro from "@tarojs/taro";
-import {GuidItemType, StoreItemType} from "../typings";
 
 const returnGuidesKey = 'returnGuides'
 const pickUpGuidesKey = 'pickUpGuides'

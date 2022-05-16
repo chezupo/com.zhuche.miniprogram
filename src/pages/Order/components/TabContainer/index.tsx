@@ -13,6 +13,7 @@ type TabContainerPropsType = {
   onReturnCar: (value: OrderItemType) => void
   onComment: (value:  OrderItemType) => void
   onPayOverTimeFeeAndReturnCared: (value: OrderItemType) => void
+  onPayed: (value: OrderItemType) => void
 }
 const TabContainer: React.FC<TabContainerPropsType> = props => {
 
@@ -41,6 +42,7 @@ const TabContainer: React.FC<TabContainerPropsType> = props => {
                     data={order}
                     onPayOverTimeFeeAndReturnCared={props.onPayOverTimeFeeAndReturnCared}
                     orderCategory={props.orderCategory}
+                    onPayed={props.onPayed}
                   />
                 ))
               }

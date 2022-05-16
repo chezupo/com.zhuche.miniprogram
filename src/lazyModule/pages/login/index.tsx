@@ -15,7 +15,6 @@ import {uploadUserInfoThunk} from "../../../reduxStore/module/me";
 
 const Login = (): React.ReactElement => {
   const [agreement, agreementDispatch] = useReducer((state): boolean => !state, false)
-  const handleLoginOrRegister = () => navigateToPhoneLoginPage()
   let platform: string;
   if (getPlatformType() ===  AllPlatformType.ALIPAY ) platform = '支付宝'
   if (getPlatformType() ===  AllPlatformType.WECHAT) platform = '微信'

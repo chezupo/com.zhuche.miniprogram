@@ -1,7 +1,8 @@
+import Taro from "@tarojs/taro"
 import BaseError, {ErrorTypes} from "../errors/BaseError";
 // @ts-ignore
-import Taro from "@tarojs/taro"
 import {alipay, weapp} from "./base";
+import {AllPlatformType} from "../util/platformType";
 
 const authCode = (): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
@@ -19,6 +20,12 @@ const authCode = (): Promise<string> => {
           success: (res) => res.code ?
             resolve(res.code) :
             reject(new BaseError({errorType: ErrorTypes.USER_AUTH_REJECT, message: res.errMsg}))
+        })
+        break;
+      case AllPlatformType.TT:
+        Taro.login()
+          .then(res => {
+            res.code ? resolve(res.code) : reject(new BaseError({errorType: ErrorTypes.USER_AUTH_REJECT, message: res.errMsg}))
         })
         break;
 

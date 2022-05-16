@@ -24,6 +24,7 @@ type OrderContainerPropsType = {
   onReturnCar: (value: OrderItemType) => void
   onComment: (value: OrderItemType) => void
   onPayOverTimeFeeAndReturnCared: (value: OrderItemType) => void
+  onPayed: (value: OrderItemType) => void
 }
 const OrderItem:React.FC<OrderContainerPropsType> = props => {
   const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
@@ -41,11 +42,6 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     'CREDITING',
     'PAYING'
   ]
-  const bookAgainStatus: OrderStatus[] = [
-    'FINISHED',
-    'RENEWED',
-    'CANCELED',
-  ]
   const {cover} = props.data
   const {data} = props
   const starDate = new Date(data.startTimeStamp)
@@ -62,6 +58,9 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     navigateStoreDetail(props.data.startStore.id, true)
   }
   const handleGoToEndStore = () => {
+    navigateStoreDetail(props.data.endStore.id, true)
+  }
+  const handleGoToStoreDetail = () => {
     navigateStoreDetail(props.data.endStore.id, true)
   }
   const handleReturnCar = async () => {
@@ -86,6 +85,10 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   }
   const handleReservation = () => {
     navigateToHome();
+  }
+  const handlePay = async () => {
+
+    props.onPayed(props.data)
   }
 
   return (
@@ -140,7 +143,9 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
           }
           {
             payStatus.includes(props.data.status ) && (
-              <View className={style.button}>支 付</View>
+              <View className={style.button}
+                onClick={handlePay}
+              >支 付</View>
             )
           }
           {/*{*/}
@@ -174,25 +179,21 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
                 >
                   取消订单
                 </View>
-                <View
-                  className={style.button}
-                  onClick={handleShowStoreDetail}
-                >
-                  取车门店
-                </View>
               </>
             )
           }
-          {
-            props.data.status === 'RETURNING' && (
-              <View
-                className={style.button}
-                onClick={handleGoToEndStore}
-              >
-                还车门店
-              </View>
-            )
-          }
+          {/*<View*/}
+          {/*  className={style.button}*/}
+          {/*  onClick={handleShowStoreDetail}*/}
+          {/*>*/}
+          {/*  取车门店*/}
+          {/*</View>*/}
+          <View
+            className={style.button}
+            onClick={handleGoToStoreDetail}
+          >
+            详情
+          </View>
         </View>
         {
           statusMapChinese[data.status].notice && (

@@ -10,6 +10,8 @@ import TabContainer from "./components/TabContainer";
 import CommentRender, {SubmitType} from "./components/TabContainer/CommentRender";
 import SpinContainer from "../../components/SpinContainer";
 import {sleep} from "../../util/helper";
+import tradePay from "../../nativeInterface/tradePay";
+import {messageObserve} from "../../store/module/message";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 
@@ -110,6 +112,19 @@ const Order = () : React.ReactElement => {
       setLoading(false)
     }
   }
+  const handlePay = async (value: OrderItemType) => {
+    const data = value
+    if (data.status === 'CREDITING') {
+      data.authBody && await tradePay(data.authBody, true)
+    }
+    data.alipayTradeNo && await tradePay(data.alipayTradeNo)
+    messageObserve.next({
+      title: '支付成功',
+      duration: 300,
+      type: 'success'
+    })
+    handleFetchData();
+  }
 
   const [commentableOrder, setCommentableOrder] = useState<OrderItemType | undefined>()
   const handleComment = async (newComment: SubmitType) => {
@@ -142,6 +157,7 @@ const Order = () : React.ReactElement => {
       onChange={handleChange}
     />
     <TabContainer
+      onPayed={handlePay}
       onComment={setCommentableOrder}
       onReturnCar={handleReturnCar}
       onCancel={handleCancel}

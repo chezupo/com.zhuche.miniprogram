@@ -5,11 +5,14 @@ import {AccessTokenType} from "../store/module/me";
 
 export const authorize = async (authorizationCode: string, pid?: number): Promise<AccessTokenType> => {
   let platform = "";
-  const currentPlayForm =getPlatformType()
+  const currentPlayForm = getPlatformType()
   if (currentPlayForm ===  AllPlatformType.ALIPAY){
-    platform = "alipay";
+    platform = AllPlatformType.ALIPAY
   } else if (currentPlayForm === AllPlatformType.WECHAT) {
-    platform = "wechat";
+    platform = AllPlatformType.WECHAT
+  }
+  else if (currentPlayForm === AllPlatformType.TT) {
+    platform = AllPlatformType.TT
   } else {
     throw new ErrorHandle(ErrorType.NOT_SUPPORT_PLATFORM )
   }

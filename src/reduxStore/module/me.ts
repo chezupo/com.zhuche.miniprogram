@@ -55,7 +55,8 @@ const meSlice = createSlice({
 // 静默登录
 const loginThunk =  (pid?: number) => {
   return async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
-    if (AllPlatformType.ALIPAY === getPlatformType()) {
+    const platformType = getPlatformType()
+    if (AllPlatformType.ALIPAY === platformType) {
       const code = await authCode()
       const {isNewUser, accessToken} = await authorize(code, pid)
       setToken(accessToken)
@@ -71,6 +72,11 @@ const loginThunk =  (pid?: number) => {
         ...meData,
         ...newUserInfo
       }))
+    } else if (AllPlatformType.TT === platformType) {
+      const code = await authCode()
+      const {isNewUser, accessToken} = await authorize(code, pid)
+      debugger
+
     }
   }
 }

@@ -1,14 +1,10 @@
 import React from "preact/compat";
 import {useState} from "preact/hooks";
 import {Image, Swiper, SwiperItem, View} from "@tarojs/components";
+import {ActiveButtonType} from "../StoreInfoRender";
+import {getPickUpGuides, getReturnGuides} from "../../../../../util/guideUtil";
 // @ts-ignore
 import style from './style.module.scss';
-import {GuidItemType} from "../../../../../typings";
-import {ActiveButtonType} from "../StoreInfoRender";
-import {useAppSelector} from "../../../../../reduxStore";
-import taro from "@tarojs/taro";
-import {pick} from "lodash";
-import {getPickUpGuides, getReturnGuides} from "../../../../../util/guideUtil";
 
 type TabItemPropsType = {
   name: string;

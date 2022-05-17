@@ -1,16 +1,18 @@
 import * as React from "react";
+import {View} from "@tarojs/components";
 import {useEffect, useState} from "react";
 import TimePicker from "./TimePicker";
-import {View} from "@tarojs/components";
-import style from "./style.module.scss"
 import DatePicker from "./DatePicker";
 import NoteRender from "./NoteRender";
 import ButtonRender from "./ButtonRender";
 import {parseDate} from "./DatePicker/util";
 import {messageObserve} from "../../../store/module/message";
 import {useAppDispatch, useAppSelector} from "../../../reduxStore";
-import { setTime } from "../../../reduxStore/module/order";
-import {navigateToHome} from "../../../store/module/router";
+import {setTime} from "../../../reduxStore/module/order";
+import {navigateToCheckoutOrder, navigateToHome} from "../../../store/module/router";
+// @ts-ignore
+import style from "./style.module.scss"
+import {useRouter} from "@tarojs/taro";
 
 const convertTimeToDate = (time: string, date: Date): Date  => {
   let {fullYear, month, date: newDate} = parseDate(date)
@@ -49,6 +51,7 @@ const DateTimePicker: React.FC<TimePickerType> = (props) => {
     setEndDate(null)
     setStartDate(null)
   }
+  const {params} = useRouter()
   const handleSubmit = () => {
     if ( endDate.getTime() - startDate.getTime() < 60 * 60 * 1000 ) {
       messageObserve.next({
@@ -60,7 +63,7 @@ const DateTimePicker: React.FC<TimePickerType> = (props) => {
         startTime: startDate.getTime(),
         endTime: endDate.getTime()
       }))
-      navigateToHome()
+      params.isRebook ? navigateToCheckoutOrder() :  navigateToHome()
     }
   }
 

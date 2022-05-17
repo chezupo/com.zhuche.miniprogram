@@ -1,0 +1,20 @@
+@import "./common.module.scss";
+
+.main {
+  background: $theme-base-bg;
+  $containerHeight: 91vh;
+  .containerWrapper {
+    height: $containerHeight;
+    overflow-y: scroll;
+  }
+  .bottomWrapper  {
+    background: white;
+    padding: 0 $unit5;
+    border-top: solid $gray2 1px;
+    height: 100vh - $containerHeight;
+    display: grid;
+    grid-template-columns: auto 30%;
+    align-items: center;
+    grid-column-gap: $unit2_5;
+  }
+}

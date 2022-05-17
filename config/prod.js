@@ -1,6 +1,7 @@
 module.exports = {
   env: {
-    NODE_ENV: '"production"'
+    NODE_ENV: '"production"',
+    apiPrefix: '"https://a1001zhuche.jds.wuchuheng.com/api/v1/miniProgram"'
   },
   defineConstants: {
   },

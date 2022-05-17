@@ -137,7 +137,6 @@ declare type OrderStatus =
   'RENEWED' | // 已续约
   'CANCELED' // 已取消
 
-
 declare type OrderItemType = {
   id: number
   startTimeStamp: number
@@ -165,6 +164,8 @@ declare type OrderItemType = {
   car: CarItemType
   cover: string
   comment?: CommentItemType
+  waiverHandlingFee: number
+  waiverRent: number
   expiredFee: number
   expiredDays: number
   promotionLevel1?: number // 一级返点

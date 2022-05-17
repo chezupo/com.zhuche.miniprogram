@@ -23,9 +23,9 @@ specifiers:
   eslint-plugin-import: ^2.12.0
   eslint-plugin-react: ^7.8.2
   eslint-plugin-react-hooks: ^4.2.0
-  js-base64: ^3.7.2
   lodash: 4.17.15
   preact: ^10.6.6
+  qrcode: ^1.5.0
   react: ^17.0.0
   react-dom: ^17.0.0
   react-redux: ^7.2.6
@@ -45,9 +45,9 @@ dependencies:
   '@tarojs/runtime': 3.4.0
   '@tarojs/taro': 3.4.0
   '@wuchuhengtools/helper': 1.0.12
-  js-base64: 3.7.2
   lodash: 4.17.15
   preact: 10.7.2
+  qrcode: 1.5.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
@@ -5258,7 +5258,7 @@ packages:
     dev: false
 
   /camelcase/2.1.1:
-    resolution: {integrity: sha1-fB0W1nmhu+WcoCys7PsBHiAfWh8=}
+    resolution: {integrity: sha512-DLIsRzJVBQu72meAKPkWQOLcujdXT32hwdfnkI1frSiSRMK1MofjKHf+MEx0SB6fjEFXL8fBDv1dKymBlOp4Qw==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -6440,6 +6440,10 @@ packages:
       miller-rabin: 4.0.1
       randombytes: 2.1.0
 
+  /dijkstrajs/1.0.2:
+    resolution: {integrity: sha512-QV6PMaHTCNmKSeP6QoXhVTw9snc9VD8MulTT0Bd99Pacp4SS1cjcrYPgBPmibqKVtMJJfqC6XvOXgPMEEPH/fg==}
+    dev: false
+
   /dir-glob/2.0.0:
     resolution: {integrity: sha512-37qirFDz8cA5fimp9feo43fSuRo2gHwaIn6dXL8Ber1dGwUosDrGZeCCXq57WnIqE4aQ+u3eQZzsk1yOzhdwag==}
     engines: {node: '>=4'}
@@ -6648,6 +6652,10 @@ packages:
   /emojis-list/3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
     engines: {node: '>= 4'}
+
+  /encode-utf8/1.0.3:
+    resolution: {integrity: sha512-ucAnuBEhUK4boH2HjVYG5Q2mQyPorvv0u/ocS+zhdw0S8AlHYY+GOFhP1Gio5z4icpP2ivFSvhtFjQi8+T9ppw==}
+    dev: false
 
   /encodeurl/1.0.2:
     resolution: {integrity: sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=}
@@ -9491,10 +9499,6 @@ packages:
     resolution: {integrity: sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ==}
     dev: true
 
-  /js-base64/3.7.2:
-    resolution: {integrity: sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==}
-    dev: false
-
   /js-tokens/3.0.2:
     resolution: {integrity: sha1-mGbfOVECEw449/mWvOtlRDIJwls=}
     dev: false
@@ -11513,6 +11517,11 @@ packages:
   /pn/1.1.0:
     resolution: {integrity: sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==}
 
+  /pngjs/5.0.0:
+    resolution: {integrity: sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==}
+    engines: {node: '>=10.13.0'}
+    dev: false
+
   /portfinder/1.0.28:
     resolution: {integrity: sha512-Se+2isanIcEqf2XMHjyUKskczxbPH7dQnlMjXX6+dybayyHvAf/TCgyMRlzf/B6QDhAEFOGes0pzRo3by4AbMA==}
     engines: {node: '>= 0.12.0'}
@@ -11984,6 +11993,17 @@ packages:
   /punycode/2.1.1:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
     engines: {node: '>=6'}
+
+  /qrcode/1.5.0:
+    resolution: {integrity: sha512-9MgRpgVc+/+47dFvQeD6U2s0Z92EsKzcHogtum4QB+UNd025WOJSHvn/hjk9xmzj7Stj95CyUAs31mrjxliEsQ==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dependencies:
+      dijkstrajs: 1.0.2
+      encode-utf8: 1.0.3
+      pngjs: 5.0.0
+      yargs: 15.4.1
+    dev: false
 
   /qs/6.10.3:
     resolution: {integrity: sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==}

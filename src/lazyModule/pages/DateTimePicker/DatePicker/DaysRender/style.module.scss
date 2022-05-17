@@ -60,6 +60,9 @@ $dateHeight: $unit9;
   width: 100%;
   display: flex;
   justify-content: center;
+  .week {
+    color: red;
+  }
   .radius {
     height: $dateHeight;
     width: $dateHeight;

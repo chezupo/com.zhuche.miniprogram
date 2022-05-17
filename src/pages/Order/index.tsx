@@ -12,6 +12,7 @@ import SpinContainer from "../../components/SpinContainer";
 import {sleep} from "../../util/helper";
 import tradePay from "../../nativeInterface/tradePay";
 import {messageObserve} from "../../store/module/message";
+import {useCancelOrder} from "../../util/orderUtil";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 
@@ -76,14 +77,15 @@ const Order = () : React.ReactElement => {
     setShowOrders(newOrders )
     setCurrentOrderCategory(currentTab)
   }
+  const cancelOrderHook = useCancelOrder()
   const handleCancel = async (value: OrderItemType) => {
-   const res =  await taro.showModal({ title: '你是否要取消这个订单?' })
-    if (res.confirm) {
-      setLoading(true)
-      await cancelOrder(value.id)
-      handleFetchData();
-      await taro.showToast({title: '取消成功', duration: 5000})
+    setLoading(true)
+    try {
+      await cancelOrderHook(value)
+    }finally {
+      setLoading(false)
     }
+    handleFetchData();
   }
   /**
    * 还车

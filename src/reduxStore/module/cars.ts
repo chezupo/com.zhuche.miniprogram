@@ -12,7 +12,6 @@ type InitialStateType = {
   list: CarItemType[]
   categories: CategoryType[]
   loading: boolean
-  showCarItemDetail?: CarItemType
 }
 const initialState: InitialStateType = {
   list: [],
@@ -32,9 +31,6 @@ const carSlice = createSlice({
     setCategories: (state, action:PayloadAction<CategoryType[]>) => {
       return {...state, categories: action.payload}
     },
-    setCarDetail: (state,action: PayloadAction<CarItemType>): InitialStateType => {
-      return {...state, showCarItemDetail: action.payload}
-    }
   }
 })
 const carReducer = carSlice.reducer
@@ -72,6 +68,6 @@ const getCarsThunk = (storeId: number) => {
 }
 
 
-export const {save, setLoading, setCategories, setCarDetail} = carSlice.actions
+export const {save, setLoading, setCategories} = carSlice.actions
 export {getCarsThunk}
 export default carReducer

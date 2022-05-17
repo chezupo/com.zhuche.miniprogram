@@ -12,8 +12,10 @@ import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
 import getPhoneNumber from "../../../../nativeInterface/getPhoneNumber";
 import {updateMyPhoneNumberThunk} from "../../../../reduxStore/module/me";
 import PopModal from "../../../../components/PopModal";
+import AmountDetail from "./AmountDetail";
+import {getDepositItems} from "../../../../util/orderUtil";
 
-type PayNowItemType = {
+export type PayNowItemType = {
   title: string
   amount: number
   waiverFee?: number
@@ -44,8 +46,16 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
 
   const handleInit = () => {
     setPayNowItems([
-      { title: '车辆租金及门店服务费', amount: amountList.rent, waiverFee: amountList.waiverRent ? amountList.waiverRent + amountList.rent : 0 },
-      {title: '手续费', amount: amountList.handlingFee, waiverFee: amountList.waiverHandlingFee ?  amountList.handlingFee + amountList.waiverHandlingFee : 0},
+      {
+        title: '车辆租金及门店服务费',
+        amount: amountList.rent,
+        waiverFee: amountList.waiverRent ? amountList.waiverRent + amountList.rent : 0
+      },
+      {
+        title: '手续费',
+        amount: amountList.handlingFee,
+        waiverFee: amountList.waiverHandlingFee ?  amountList.handlingFee + amountList.waiverHandlingFee : 0
+      },
       ...(amountList.insuranceFee ? [
         {title: '驾无忧', amount: amountList.insuranceFee},
       ] : []),
@@ -53,9 +63,7 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
         {title: '优惠卷减免', amount: -(amountList.waiverHandlingFee + amountList.waiverRent), activeColor: true }
       ] : []),
     ])
-    setDepositItems([
-      { title: '车辆保证金(可退)', amount:  amountList.deposit},
-    ])
+    setDepositItems( getDepositItems(amountList.deposit) )
     setAmount(amountList.rent + amountList.handlingFee + amountList.insuranceFee)
   }
   useEffect(() => handleInit(), [])
@@ -63,10 +71,6 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
 
   const handleClose = () => {
     setVisible(false)
-  }
-  const handleShowAgreement = (e: ITouchEvent) => {
-    e.stopPropagation();
-    navigateToCheckoutOrderAgreement(3)
   }
   const me = useAppSelector(state => state.me)
   const dispatch = useAppDispatch()
@@ -121,61 +125,15 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
         </View>
       </View>
       {
-        visible && ( <SpinContainer className={style.spinWrapper}
-          onClick={handleClose}
-        >
-          <View className={style.spinContainer}>
-            <View className={style.header}>
-              <Icon value='close' className={style.icon}
-                onClick={handleClose}
-              />
-              <View>费用明细</View>
-              <View
-                className={style.rule}
-                onClick={handleShowAgreement}
-              >费用规则</View>
-            </View>
-            <View className={style.itemsWrapper}>
-              {
-                payNowItems.map((item) =>
-                  <View
-                    className={style.itemWrapper}
-                    key={item.title}
-                  >
-                    <View className={style.title}>{item.title}</View>
-                    <View className={style.amount}>
-                      {
-                        !!item.waiverFee && ( <Text className={[style.wrapperAmount].join(' ')}>￥{Math.round(item.waiverFee * 100) / 100}</Text> )
-                      }
-                      <Text className={item.activeColor ? style.activeAmount : ''}>￥{Math.round(item.amount * 100) / 100}</Text>
-                    </View>
-                  </View>
-                )
-              }
-            </View>
-            <View className={style.line} />
-            <View className={style.itemsWrapper}>
-              {
-                depositItems.map((item) =>
-                  <View
-                    className={style.itemWrapper}
-                    key={item.title}
-                  >
-                    <View className={style.title}>{item.title}</View>
-                    <View className={style.amount}>
-                      <Text>￥{Math.round(item.amount * 100) / 100}</Text>
-                    </View>
-                  </View>
-                )
-              }
-              <View className={[style.itemWrapper, style.amountItemWrapper].join(' ')} >
-                <View className={style.title}>订单总额</View>
-                <View className={style.amount}>￥<Text className={style.amountNumber}>{amount.toFixed(2)}</Text></View>
-              </View>
-            </View>
+        visible && (
+          <AmountDetail
+            amount={amount}
+            depositItems={depositItems}
+            payNowItems={payNowItems}
+            onClose={handleClose}
+          />
 
-          </View>
-        </SpinContainer>)
+        )
       }
       {
         popErrorVisible && (

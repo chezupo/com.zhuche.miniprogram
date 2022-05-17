@@ -3,8 +3,7 @@ import store from "../reduxStore"
 import {getToken} from "./authUtil";
 import {navigateToLoginOrRegister} from "../store/module/router";
 
-// export const prefixUrl = "https://a1001zhuche.jds.wuchuheng.com/api/v1/miniProgram"
-export const prefixUrl = "https://dev.a1001zhuche.wuchuheng.com/api/v1/miniProgram"
+export const prefixUrl = process.env.apiPrefix
 const getHeaders = (): Object => {
   const token = `Bearer ${store.getState().me.data?.accessToken || getToken() || ''}`
   return   {...(token.length > 7 ? {header: {Authorization: token}} : {})}

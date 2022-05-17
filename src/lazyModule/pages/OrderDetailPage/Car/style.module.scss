@@ -1,0 +1,55 @@
+@import "../common.module.scss";
+
+.carInfoWrapper {
+  margin-bottom: $unit5;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-column-gap: $unit5;
+  .image {
+    width: $unit20;
+  }
+  .infoWrapper {
+    .title {
+      display: flex;
+      justify-content: space-between;
+      font-size: $unit5;
+      font-weight: bold;
+      .detail {
+        display: flex;
+        align-items: center;
+        font-size: $unit3;
+        color: $primaryThemeColor;
+      }
+    }
+    display: grid;
+    align-items: center;
+    grid-template-columns: 100%;
+    grid-column-gap: $unit2_5;
+  }
+}
+.addressItemWrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit5;
+}
+.itemWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .address {
+    display: flex;
+    align-items: center;
+    .itemNameWrapper {
+      display: flex;
+      align-items: center;
+      .direct {
+        margin: 0 $unit2;
+      }
+    }
+  }
+  .location {
+    font-size: $unit5;
+    font-weight: bold;
+    color: $primaryThemeColor;
+  }
+}

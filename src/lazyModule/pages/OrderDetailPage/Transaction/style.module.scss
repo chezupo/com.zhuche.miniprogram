@@ -1,0 +1,63 @@
+@import "../common.module";
+
+.main {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit3_5;
+  .amountWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: $unit5;
+    .amount {
+      color: $primaryThemeColor;
+    }
+    .amountDetail {
+      color: $primaryThemeColor;
+      font-size: $unit3_5;
+    }
+  }
+  .order {
+    display: flex;
+    align-items: center;
+    .icon {
+      font-size: $unit3_5;
+      margin-left: $unit1;
+    }
+  }
+  .itemWrapper {
+    display: flex;
+    justify-content: space-between;
+    .flag {
+      padding: 0 $unit0_5;
+      background: $primaryThemeColor2;
+      color: $primaryThemeColor;
+      border-radius: $unit1;
+    }
+    .freeze {
+      color: $primaryThemeColor;
+      font-size: $unit3;
+    }
+  }
+  .dateWrapper {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 40% 20% 40%;
+    .day {
+      display: flex;
+      flex-direction: column;
+      .line {
+        border-bottom: solid 1px black;
+      }
+    }
+  }
+  .actionWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: $unit1;
+    .button {
+
+    }
+  }
+}

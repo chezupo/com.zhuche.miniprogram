@@ -1,10 +1,13 @@
 module.exports = {
   env: {
-    NODE_ENV: '"development"'
+    NODE_ENV: '"development"',
+    apiPrefix: '"https://dev.a1001zhuche.wuchuheng.com/api/v1/miniProgram"'
   },
   defineConstants: {
   },
-  mini: {},
+  mini: {
+    enableSourceMap: true
+  },
   alipay: {
     module: {
       postcss: {

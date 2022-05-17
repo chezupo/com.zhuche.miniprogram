@@ -1,3 +1,11 @@
+import taro from "@tarojs/taro";
+import {cancelOrder} from "../api/order";
+import {useState} from "preact/compat";
+import DatePicker from "../lazyModule/pages/DateTimePicker/DatePicker";
+import {navigateTimeRangePage, navigateToHome} from "../store/module/router";
+import {useAppDispatch} from "../reduxStore";
+import {setCar, setEndStore, setStarStore, setStartCityThunk} from "../reduxStore/module/order";
+
 const orderStatusMayStr: Record<OrderStatus, string> = {
   'CREDITING' :  '信用授权中',
   'PAYING' :  '支付中',
@@ -10,4 +18,61 @@ const orderStatusMayStr: Record<OrderStatus, string> = {
   'CANCELED':  '已取消'
 }
 
-export {orderStatusMayStr}
+const getStatusMapInfo = (order: OrderItemType) => {
+  const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
+    CREDITING: {title: '信用授权中', notice: ''},
+    PAYING: {title: '待支付', notice: ''},
+    CAR_PICKUP_IN_PROGRESS: {title: '取车中', notice: '请到门店提取您预定的汽车'},
+    USING: {title: '使用中', notice: ''},
+    OVERTIME: {title: '用车超时', notice: `您已用车超时${order.expiredDays?.toFixed(1)}天，还车时还需另外补交超时费用: ${order.expiredFee?.toFixed(2)}`},
+    RETURNING: {title: '还车中', notice: `请把车开到${order.endStore.name}，完成还车`},
+    RENEWED: {title: '已续约', notice: ''},
+    FINISHED: {title: '已完成', notice: ''},
+    CANCELED: {title:'已取消', notice: '' }
+  }
+
+  return statusMapChinese[order.status]
+}
+
+const getDepositItems = (deposit: number) => [
+  { title: '车辆保证金(可退)', amount: deposit},
+]
+
+/**
+ * 取消订单hook
+ * @param order
+ */
+const useCancelOrder = () => {
+  return async (value: OrderItemType) => {
+    const res =  await taro.showModal({ title: '你是否要取消这个订单?' })
+    if (res.confirm) {
+      await cancelOrder(value.id)
+      await taro.showToast({title: '取消成功', duration: 5000})
+    }
+  }
+}
+
+/**
+ * 再次预订
+ */
+const useRebook = () => {
+  const dispatch = useAppDispatch();
+  return async (order: OrderItemType) => {
+    await Promise.all([
+      dispatch(setStartCityThunk(order.startStore.city)),
+      dispatch(setStarStore(order.startStore)),
+      dispatch(setEndStore(order.endStore)),
+      dispatch(setCar(order.car))
+    ])
+    navigateToHome()
+    navigateTimeRangePage(true)
+  }
+}
+
+export {
+  orderStatusMayStr,
+  getStatusMapInfo,
+  getDepositItems,
+  useCancelOrder,
+  useRebook
+}

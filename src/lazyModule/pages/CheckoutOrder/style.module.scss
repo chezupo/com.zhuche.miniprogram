@@ -11,16 +11,5 @@
   grid-row-gap: $unit1_5;
 }
 .carContainer {
-  position: relative;
-  overflow: hidden;
-  &:after {
-    width: 140%;
-    height: $unit50;
-    position: absolute;
-    left: -20%;
-    top: 0;
-    content: '';
-    border-radius: 0 0 50% 50%;
-    background: $primaryThemeColor;
-  }
+  @include curveBottomLine($unit50);
 }

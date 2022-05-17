@@ -1,8 +1,9 @@
 import * as React from "react";
-import {View} from "@tarojs/components";
-import style from "./style.module.scss"
 import {useEffect, useState} from "react";
+import {View} from "@tarojs/components";
 import {getNextMonthTime, timeToDateTime, timeToMonthTime} from "../util";
+// @ts-ignore
+import style from "./style.module.scss"
 
 type StateRenderPropsType = {
   number: string
@@ -48,6 +49,7 @@ const StateRender: React.FC<StateRenderPropsType> = (props) => {
     ].join(' ')}
     >
       <View className={[
+        [0, 6].includes( props.date.getDay() ) ? style.week : '',
         style.radius,
         isActive ? style.active : '',
         isToday ? style.today : '',

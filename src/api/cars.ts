@@ -9,4 +9,6 @@ const getCarComments = async (id: number): Promise<CommentItemType[]> => {
   return await get<CommentItemType[]>(`/cars/${id}/comments`)
 }
 
-export {getCars, getCarComments}
+const getCarByid = async (id: number): Promise<CarItemType> => await get(`/cars/${id}`)
+
+export {getCars, getCarComments, getCarByid}

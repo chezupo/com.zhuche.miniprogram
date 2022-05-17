@@ -30,7 +30,8 @@ export default {
         'pages/NavigationPage/index',
         'pages/PromotionPage/index',
         'pages/PromotionPage/PromotionPosterPage/index',
-        'pages/PromotionPage/PromotionUsersPage/index'
+        'pages/PromotionPage/PromotionUsersPage/index',
+        'pages/OrderDetailPage/index'
       ]
     }
   ],
@@ -40,5 +41,10 @@ export default {
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
     enablePullDownRefresh: true
+  },
+  permission: {
+    "scope.userLocation": {
+      desc: "你的位置信息将用于找到最近的门店" // 高速公路行驶持续后台定位
+    }
   }
 }

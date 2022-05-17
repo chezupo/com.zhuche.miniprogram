@@ -13,9 +13,11 @@ import {convertDate} from "../../../util/Carlendar";
 import style from "./style.module.scss"
 import {OrderCategoryType} from "../index";
 import Icon from "../../../components/Icon";
-import {navigateStoreDetail, navigateToHome} from "../../../store/module/router";
+import {navigateStoreDetail, navigateToHome, navigateToOrderDetailPage} from "../../../store/module/router";
 import {getOrderById, getOrders, tradeOverTimeOrderById} from "../../../api/order";
 import tradePay from "../../../nativeInterface/tradePay";
+import {getStatusMapInfo, useRebook} from "../../../util/orderUtil";
+import OrderRemark from "./OrderRemark";
 
 type OrderContainerPropsType = {
   data: OrderItemType
@@ -27,17 +29,6 @@ type OrderContainerPropsType = {
   onPayed: (value: OrderItemType) => void
 }
 const OrderItem:React.FC<OrderContainerPropsType> = props => {
-  const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
-    CREDITING: {title: '信用授权中', notice: ''},
-    PAYING: {title: '待支付', notice: ''},
-    CAR_PICKUP_IN_PROGRESS: {title: '取车中', notice: '请到门店提取您预定的汽车'},
-    USING: {title: '使用中', notice: ''},
-    OVERTIME: {title: '用车超时', notice: `您已用车超时${props.data.expiredDays?.toFixed(1)}天，还车时还需另外补交超时费用: ${props.data.expiredFee?.toFixed(2)}`},
-    RETURNING: {title: '还车中', notice: `请把车开到${props.data.endStore.name}，完成还车`},
-    RENEWED: {title: '已续约', notice: ''},
-    FINISHED: {title: '已完成', notice: ''},
-    CANCELED: {title:'已取消', notice: '' }
-  }
   const payStatus: OrderStatus[] = [
     'CREDITING',
     'PAYING'
@@ -53,15 +44,6 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     await taro.setClipboardData({ data: tradeNo })
     await taro.showToast({title: '订单号复制成功', duration: 5000})
     e.stopPropagation()
-  }
-  const handleShowStoreDetail = () => {
-    navigateStoreDetail(props.data.startStore.id, true)
-  }
-  const handleGoToEndStore = () => {
-    navigateStoreDetail(props.data.endStore.id, true)
-  }
-  const handleGoToStoreDetail = () => {
-    navigateStoreDetail(props.data.endStore.id, true)
   }
   const handleReturnCar = async () => {
     const order = await getOrderById(props.data.id)
@@ -83,9 +65,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     }
     await taro.hideLoading()
   }
-  const handleReservation = () => {
-    navigateToHome();
-  }
+  const handleRebook = useRebook()
   const handlePay = async () => {
 
     props.onPayed(props.data)
@@ -95,7 +75,9 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
     <>
       <View className={style.main}>
         <View className={style.headerWrapper}>
-          <View className={style.status}>{statusMapChinese[data.status].title}</View>
+          <View className={style.status}>{
+            getStatusMapInfo(data)
+          }</View>
           <View>￥{props.data.amount}</View>
         </View>
         <View className={style.orderNo} onClick={handleCopy}>
@@ -158,10 +140,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
               'FINISHED', // 已完成
               'CANCELED' // 已取消
             ].includes(props.data.status) && (
-              <View
-                className={style.button}
-                onClick={handleReservation}
-              >
+              <View className={style.button} onClick={() => handleRebook(props.data)} >
                 再次预订
               </View>
             )
@@ -190,16 +169,14 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
           {/*</View>*/}
           <View
             className={style.button}
-            onClick={handleGoToStoreDetail}
+            onClick={() => navigateToOrderDetailPage(data.id)}
           >
             详情
           </View>
+
         </View>
-        {
-          statusMapChinese[data.status].notice && (
-            <View className={style.notice}>{statusMapChinese[data.status].notice}</View>
-          )
-        }
+        <OrderRemark order={data} />
+
       </View>
     </>
   )

@@ -1,0 +1,54 @@
+@import "../common.module.scss";
+
+.main {
+  .container {
+    $height: $unit40;
+    @include curveBottomLine($height);
+    .itemWrapper {
+      .statusWrapper {
+        padding: $padding;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-row-gap: $unit3;
+        .status {
+          color: white;
+          font-size: $unit5;
+          font-weight: bold;
+        }
+        .remark {
+          color: white;
+          font-size: $unit3;
+        }
+      }
+      z-index: 1;
+      position: relative;
+      .title {
+        font-size: $unit4;
+        font-weight: bold;
+      }
+      .carItemWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .leftWrapper {
+          margin-top: $unit3_5;
+          display: grid;
+          grid-template-columns: 100%;
+          grid-row-gap: $unit2;
+          font-size: $unit3_5;
+          .item {
+            display: flex;
+            align-items: center;
+            .point {
+              margin-right: $unit1;
+            }
+          }
+        }
+
+        .icon {
+          font-size: $unit4;
+        }
+      }
+    }
+  }
+}

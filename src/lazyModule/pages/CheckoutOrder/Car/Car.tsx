@@ -6,7 +6,6 @@ import {primaryThemeColor} from "../../../../global";
 import Icon from "../../../../components/Icon";
 // @ts-ignore
 import style from './style.module.scss'
-import {CarItemType, StoreItemType} from "../../../../typings";
 import {TimestampType} from "../../../../reduxStore/module/order";
 import {convertDate} from "../../../../util/Carlendar";
 

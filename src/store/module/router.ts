@@ -11,16 +11,17 @@ const timeRangeUrl = `${lazyModulePrefix}/pages/DateTimePicker/index`
 const navigateTo = (url: string) => {
   taro.navigateTo({ url })
 }
-const navigateToHome = () => {
-  goToSwitchTab()
-}
+const navigateToHome = () => goToSwitchTab(TabBarType.HOME)
 const navigateToStore = () => {
   taro.navigateTo({url: storeUrl})
 }
 const navigateToCity = () => {
   taro.navigateTo({url:cityUrl})
 }
-const navigateTimeRangePage = () => taro.navigateTo({ url: timeRangeUrl})
+const navigateTimeRangePage = (isRebook?: boolean) => {
+  const query = isRebook ? `?isRebook=true` : ''
+  navigateTo( timeRangeUrl + query )
+}
 
 const navigateToLoginOrRegister = () => {
   taro.navigateTo({ url: `${lazyModulePrefix}/pages/login/index`})
@@ -28,7 +29,10 @@ const navigateToLoginOrRegister = () => {
 
 const navigateToSelectCarPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/index`)
 
-const navigateToCarDetailPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/CarDetail/index`)
+const navigateToCarDetailPage = (id?: number) => {
+  const query = id ? `?id=id` : ''
+  navigateTo(`${lazyModulePrefix}/pages/selectCar/CarDetail/index${query}`)
+}
 
 const navigateToFeedbackPage = () => navigateTo(`${lazyModulePrefix}/pages/complaintFeedback/index`)
 
@@ -47,6 +51,9 @@ const navigateToUserCoupon = (amount?: number) => {
   const query = amount ? `?amount=${amount}` : ''
   navigateTo(`${lazyModulePrefix}/pages/CheckoutOrder/UserCoupon/index${query}`)
 }
+const navigateToOrderDetailPage = (orderId: number) => {
+  navigateTo(`${lazyModulePrefix}/pages/OrderDetailPage/index?id=${orderId}`)
+}
 
 const getHistory = (): string[] => store.currentRoute.history.map(i => i.data)
 
@@ -55,10 +62,9 @@ const switchTab = (tabBar: TabBarType): void => {
   taro.reLaunch({ url: homeUrl })
 }
 
-const goToSwitchTab = (): void => {
-  taro.reLaunch({
-    url: '/pages/index/index'
-  })
+const goToSwitchTab = (tab?: TabBarType): void => {
+  const query = tab ? `?tab=${tab}` : ''
+  navigateTo(`/pages/index/index${query}`)
 }
 
 export const navigateBack = ():void => {
@@ -71,7 +77,6 @@ const navigateArgumentDetail = (id: number) => {
 
 const navigateStoreDetail = (id: number, isFromOrder?: boolean) => {
   const query = isFromOrder ? `&isFromOrder=true`  : ''
-
   navigateTo(`${lazyModulePrefix}/pages/stories/DetailPage/index?id=${id}${query}`)
 }
 
@@ -115,5 +120,6 @@ export {
   navigateToTransactionPage,
   navigateToGuideDetailPage,
   navigateToPromotionPosterPage,
-  navigateToPromotionUsersPage
+  navigateToPromotionUsersPage,
+  navigateToOrderDetailPage
 }

@@ -30,7 +30,7 @@ const navigateToLoginOrRegister = () => {
 const navigateToSelectCarPage = () => navigateTo(`${lazyModulePrefix}/pages/selectCar/index`)
 
 const navigateToCarDetailPage = (id?: number) => {
-  const query = id ? `?id=id` : ''
+  const query = id ? `?id=${id}` : ''
   navigateTo(`${lazyModulePrefix}/pages/selectCar/CarDetail/index${query}`)
 }
 

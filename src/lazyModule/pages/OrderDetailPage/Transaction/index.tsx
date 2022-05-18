@@ -115,11 +115,24 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType> = ({order, on
               >取消订单</Button>
             )
           }
-          <Button
-            className={style.button}
-            type='primary'
-            onClick={handleRelet}
-          >续租</Button>
+          {
+            [
+
+              'CAR_PICKUP_IN_PROGRESS' , // 取车中
+              'USING' , // 使用中
+              'OVERTIME' , // 用车超时
+              'RETURNING' , // 还车中
+            ].includes(
+              order.status
+            )
+            && (
+              <Button
+                className={style.button}
+                type='primary'
+                onClick={handleRelet}
+              >续租</Button>
+            )
+          }
         </View>
         <OrderRemark order={order} />
       </View>

@@ -1,7 +1,5 @@
 import taro from "@tarojs/taro";
 import {cancelOrder} from "../api/order";
-import {useState} from "preact/compat";
-import DatePicker from "../lazyModule/pages/DateTimePicker/DatePicker";
 import {navigateTimeRangePage, navigateToHome} from "../store/module/router";
 import {useAppDispatch} from "../reduxStore";
 import {setCar, setEndStore, setStarStore, setStartCityThunk} from "../reduxStore/module/order";

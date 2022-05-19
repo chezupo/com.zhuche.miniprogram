@@ -5,6 +5,23 @@
   padding: $unit3;
   width: 80%;
   background-color:white;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: $unit2_5;
+  .title {
+    font-weight: bold;
+    text-align: center;
+  }
+  .itemWrapper {
+    display: grid;
+    grid-template-columns: 100% ;
+    grid-gap: $unit2_5;
+  }
+  .buttonWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: $unit2_5;
+  }
 }
 .picker {
   height: $unit30;

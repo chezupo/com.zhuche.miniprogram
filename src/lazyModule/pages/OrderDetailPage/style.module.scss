@@ -17,4 +17,7 @@
     align-items: center;
     grid-column-gap: $unit2_5;
   }
+  .loading {
+    z-index: 2;
+  }
 }

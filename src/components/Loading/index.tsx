@@ -6,9 +6,12 @@ import loadingSvg from "../../asesst/images/loading.svg"
 // @ts-ignore
 import style from './style.module.scss';
 
-const Loading: React.FC = () => {
+type LoadingPropsType = {
+  className?: string
+}
+const Loading: React.FC<LoadingPropsType> = props => {
   return (
-    <SpinContainer>
+    <SpinContainer className={props.className || ''}>
       <View className={style.main}>
         <Image
           src={loadingSvg}

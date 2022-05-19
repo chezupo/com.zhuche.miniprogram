@@ -7,12 +7,14 @@ import style from './style.module.scss';
 import RemarkRender from "./RemarkRender";
 import Transaction from "./Transaction";
 import Car from "./Car";
-import Button from "../../../components/Button";
-import Insurance from "./Insurance";
-import {getOrderById} from "../../../api/order";
+import {expireOrder, getOrderById} from "../../../api/order";
 import Loading from "../../../components/Loading";
 import BottomMenuBarRender from "./ButtonMenuBarRender";
 import {useCancelOrder} from "../../../util/orderUtil";
+import tradePay from "../../../nativeInterface/tradePay";
+import {sleep} from "../../../util/helper";
+import SpinContainer from "../../../components/SpinContainer";
+import PanelRenderer from "./Transaction/PanelRender";
 
 const OrderDetailPage: React.FC = () => {
   const {params} = useRouter()
@@ -42,17 +44,33 @@ const OrderDetailPage: React.FC = () => {
       setLoading(false)
     }
   }
+  const handleReletSubmit = async (days: number) => {
+    await taro.showLoading({title: '续租中...'})
+    try {
+      const tradeNo = await expireOrder(order.id, {days})
+      await tradePay(tradeNo)
+      await sleep(3000)
+      setReletPanel(false)
+      fetchOrderData()
+      await taro.showToast({title: '续租成功'})
+    }finally {
+      await taro.hideLoading();
+    }
+  }
+  const [reletPanel, setReletPanel] = useState<boolean>(false)
   return (
     <>
-      {!order &&  loading &&  <Loading /> }
+      {!order &&  loading &&  <Loading className={style.loading} /> }
       {
         !!order && (
           <View className={style.main}>
             <View className={style.containerWrapper}>
               <RemarkRender order={order} />
               <Transaction
+                onRelet={() => setReletPanel(true)}
                 order={order}
                 onCancelOrder={handleCancelOrder}
+                onReletSubmit={handleReletSubmit}
               />
               <Car order={order} />
             </View>
@@ -62,6 +80,13 @@ const OrderDetailPage: React.FC = () => {
               />
             </View>
           </View>
+        )
+      }
+      {
+        reletPanel && (
+          <SpinContainer>
+            <PanelRenderer order={order} onCancel={() => setReletPanel(false)} onSubmit={handleReletSubmit} />
+          </SpinContainer>
         )
       }
     </>

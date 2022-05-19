@@ -1,5 +1,6 @@
 import {get, post, put} from "../util/requestClient";
 import getPlatformType from "../util/platformType";
+import * as path from "path";
 
 type CreateOrderQueryType = {
   remark: string
@@ -14,6 +15,9 @@ type CreateOrderQueryType = {
 type CreateOrderCommentType = {
   content: string
   rate: number
+}
+type ExpireOrderQueryType = {
+  days:number
 }
 const createOrder = async (data: CreateOrderQueryType): Promise<OrderItemType> => {
   const platform = getPlatformType();
@@ -42,4 +46,20 @@ const createOrderComment = async (orderId: number, value: CreateOrderCommentType
   return await post<OrderItemType>(`/orders/${orderId}/commands`, value)
 }
 
-export {createOrder, getOrders, cancelOrder, returnCar, createOrderComment, getOrderById, tradeOverTimeOrderById}
+/**
+ * 订单续租
+ * @param id
+ * @param data
+ */
+const expireOrder = async (id: number,  data: ExpireOrderQueryType) => await put<string>(`/orders/${id}/expired`, data)
+
+export {
+  createOrder,
+  getOrders,
+  cancelOrder,
+  returnCar,
+  createOrderComment,
+  getOrderById,
+  tradeOverTimeOrderById,
+  expireOrder
+}

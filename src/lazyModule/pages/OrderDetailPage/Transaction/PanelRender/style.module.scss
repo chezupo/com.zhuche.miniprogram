@@ -1,0 +1,15 @@
+@import "../../../../../global.scss";
+
+.main {
+  border-radius: $borderRadiusCircle;
+  padding: $unit3;
+  width: 80%;
+  background-color:white;
+}
+.picker {
+  height: $unit30;
+  width: 100%;
+}
+.indicator{
+  height: $unit10;
+}

@@ -1,7 +1,7 @@
-import React, {useState} from "preact/compat";
+import React, {Component, useState} from "preact/compat";
 import {useEffect} from "preact/hooks";
 import taro from "@tarojs/taro";
-import {Text, View} from "@tarojs/components";
+import {PickerView, PickerViewColumn, Text, View} from "@tarojs/components";
 import Card from "../components/Card";
 // @ts-ignore
 import style from './style.module.scss';
@@ -11,10 +11,12 @@ import {convertDate} from "../../../../util/Carlendar";
 import AmountDetail from "../../CheckoutOrder/MenuRender/AmountDetail";
 import {getDepositItems, useRebook} from "../../../../util/orderUtil";
 import {PayNowItemType} from "../../CheckoutOrder/MenuRender";
-import {setDetail} from "../../../../reduxStore/module/agreement";
 import OrderRemark from "../../../../pages/Order/OrderContainer/OrderRemark";
-import OrderItem from "../../PromotionPage/OrderItem";
+import SpinContainer from "../../../../components/SpinContainer";
+import PanelRenderer from "./PanelRender";
+import DateRange from "./components/DateRange";
 
+export const getDays = (v: OrderItemType) => ((v.endTimeStamp - v.startTimeStamp) / (60 * 60 * 24 * 1000) ).toFixed(1)
 export type OrderPropsType = {
   order: OrderItemType
 }
@@ -23,7 +25,6 @@ type OrderCancelPropsType = {
 }
 const Transaction: React.FC<OrderPropsType & OrderCancelPropsType> = ({order, onCancelOrder}) => {
   const getOrderNo = (v: OrderItemType) => v.alipayTradeNo
-  const getDays = (v: OrderItemType) => ((v.endTimeStamp - v.startTimeStamp) / (60 * 60 * 24 * 1000) ).toFixed(1)
   const handleCopy = async () => {
     await taro.setClipboardData({ data: getOrderNo(order)})
     await taro.showToast({title: '订单号复制成功', duration: 5000})
@@ -53,6 +54,7 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType> = ({order, on
   }, [])
   const handleShowAmountDetail = () => setAmountVisible(true)
   const handleRebook = useRebook()
+  const [reletPanel, setReletPanel] = useState<boolean>(true)
   const handleRelet = async () => {
     await taro.showToast({
       title: '当前订单无法续租'
@@ -90,6 +92,7 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType> = ({order, on
           </View>
           <View className={style.freeze}>取车合同、取车验车单</View>
         </View>
+
         <View className={style.dateWrapper}>
           <View>{convertDate(new Date(order.startTimeStamp))}</View>
           <View className={style.day}>
@@ -98,6 +101,7 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType> = ({order, on
           </View>
           <View>{convertDate(new Date(order.endTimeStamp))}</View>
         </View>
+        <DateRange order={order} />
         <View className={style.actionWrapper}>
           {
             ['FINISHED', 'CANCELED'].includes( order.status ) && (
@@ -110,7 +114,8 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType> = ({order, on
           }
           {
             order.status === 'CAR_PICKUP_IN_PROGRESS' && (
-              <Button className={style.button} type='primary'
+              <Button
+                className={style.button} type='primary'
                 onClick={() => onCancelOrder(order)}
               >取消订单</Button>
             )
@@ -147,7 +152,13 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType> = ({order, on
         />
       )
     }
-
+    {
+      reletPanel && (
+        <SpinContainer>
+          <PanelRenderer />
+        </SpinContainer>
+      )
+    }
   </>)
 }
 

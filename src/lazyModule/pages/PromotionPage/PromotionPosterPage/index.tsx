@@ -1,4 +1,5 @@
 import React from "preact/compat";
+import {ReactNode} from "react";
 import taro from "@tarojs/taro";
 import {useEffect, useState} from "preact/hooks";
 import {Image, Swiper, SwiperItem, View} from "@tarojs/components";
@@ -11,6 +12,7 @@ import {getMyQr} from "../../../../api/me";
 type ItemRenderPropsType = {
   data: PosterItemType
   qr: string
+  index: number
 }
 const ItemRender:React.FC<ItemRenderPropsType> = props => {
   const {
@@ -23,33 +25,61 @@ const ItemRender:React.FC<ItemRenderPropsType> = props => {
   const size = props.data.size * 50 / radio;
   const left = positionX / radio;
   const top = height - positionY / radio;
+  let QrDom: ReactNode = <></>
+  if(props.index === 0 && props.qr) {
+    QrDom = (
+      <SwiperItem>
+        <View
+          className={style.imageContainer}
+          style={{
+            height: `${height}vw`,
+            width: '100vw'
+          }}
+        >
+          <Image
+            src={props.qr}
+            style={{
+              height: `${height}vw`,
+              width: '100vw'
+            }}
+          />
+        </View>
+      </SwiperItem>
+    )
+  }
 
   return (
-    <View
-      className={style.imageContainer}
-      style={{
-        height: `${height}vw`,
-        width: '100vw'
-      }}
-    >
-      <Image
-        src={url}
-        style={{
-          height: `${height}vw`,
-          width: '100vw'
-        }}
-      />
-      <Image
-        src={props.qr}
-        className={style.qr}
-        style={{
-          height: `${size}vw`,
-          width: `${size}vw`,
-          top: `-${top}vw`,
-          left: `${left}vw`
-        }}
-      />
-  </View>)
+    <>
+      {QrDom}
+      <SwiperItem>
+        <View
+          className={style.imageContainer}
+          style={{
+            height: `${height}vw`,
+            width: '100vw'
+          }}
+        >
+          <Image
+            src={url}
+            style={{
+              height: `${height}vw`,
+              width: '100vw'
+            }}
+          />
+          <Image
+            src={props.qr}
+            className={style.qr}
+            style={{
+              height: `${size}vw`,
+              width: `${size}vw`,
+              top: `-${top}vw`,
+              left: `${left}vw`
+            }}
+          />
+        </View>
+      </SwiperItem>
+    </>
+  )
 }
 const PromotionPosterPage: React.FC = () => {
   const [data, setData] = useState<PosterItemType[]>([])
@@ -72,13 +102,13 @@ const PromotionPosterPage: React.FC = () => {
     {loading && (<Loading />)}
     <Swiper className={style.main} >
       {
-        data.map(item => (
-          <SwiperItem key={item.id}>
+        data.map((item, i) => (
             <ItemRender
+              index={i}
               data={item}
               qr={qr}
+              key={item.id}
             />
-          </SwiperItem>
         ))
       }
     </Swiper>

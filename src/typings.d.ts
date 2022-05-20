@@ -148,6 +148,7 @@ declare type OrderItemType = {
   handlingFee: number
   waiverAmount: number
   amount: number
+  contract?: string
   alipayToken: string
   alipayTradeNo: string
   authBody: string

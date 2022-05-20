@@ -1,18 +1,18 @@
 import React, {useState} from "preact/compat";
 import {useEffect} from "preact/hooks";
 import taro from "@tarojs/taro";
-import {Text, View} from "@tarojs/components";
+import {Image, Text, View} from "@tarojs/components";
 import Card from "../components/Card";
 // @ts-ignore
 import style from './style.module.scss';
 import Icon from "../../../../components/Icon";
 import Button from "../../../../components/Button";
-import {convertDate} from "../../../../util/Carlendar";
 import AmountDetail from "../../CheckoutOrder/MenuRender/AmountDetail";
 import {getDepositItems, useRebook} from "../../../../util/orderUtil";
 import {PayNowItemType} from "../../CheckoutOrder/MenuRender";
 import OrderRemark from "../../../../pages/Order/OrderContainer/OrderRemark";
 import DateRange from "./components/DateRange";
+import SpinContainer from "../../../../components/SpinContainer";
 
 export const getDays = (v: OrderItemType) => ((v.endTimeStamp - v.startTimeStamp) / (60 * 60 * 24 * 1000) ).toFixed(1)
 export type OrderPropsType = {
@@ -55,8 +55,21 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType & {
   }, [])
   const handleShowAmountDetail = () => setAmountVisible(true)
   const handleRebook = useRebook()
+  const [contract, setContract] = useState<string | undefined>()
+  const handleShowContract = () => {
+    setContract( order.contract! )
+  }
 
   return (<>
+    {
+      !!contract && (
+        <SpinContainer
+          onClick={() => setContract(undefined)}
+        >
+          <Image src={contract} />
+        </SpinContainer>
+      )
+    }
     <Card>
       <View className={style.main}>
         <View className={style.amountWrapper}>
@@ -85,7 +98,14 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType & {
           <View>
             <View>租车合同: </View>
           </View>
-          <View className={style.freeze}>取车合同、取车验车单</View>
+          {
+            !!order?.contract && (
+              <View
+                className={style.freeze}
+                onClick={handleShowContract}
+              >取车合同、取车验车单</View>
+            )
+          }
         </View>
         <DateRange order={order} />
         <View className={style.actionWrapper}>

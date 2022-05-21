@@ -202,6 +202,9 @@ declare type MeItemType = {
   commission: number; // 佣金
   withdrawnCommission: number; // 已提现佣金
   withdrawalInProgressCommission: number; // 提现中佣金
+  idCarFrontal: string; // 身份证明面
+  idCarBack: string // 背面
+  driverLicense: string // 司机证
 }
 
 declare type TransactionItemType = {

@@ -13,3 +13,27 @@
 .carContainer {
   @include curveBottomLine($unit50);
 }
+.spin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  .title {
+    text-align: center;
+  }
+  .listenWrapper {
+    padding: $unit3;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit4;
+    background: white;
+    justify-self: center;
+    border-radius: $borderRadiusCircle;
+    max-height: 90%;
+    overflow-y: scroll;
+    .button {
+      padding-bottom: $unit4;
+    }
+  }
+}

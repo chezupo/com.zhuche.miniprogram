@@ -1,3 +1,5 @@
+import store from "../reduxStore";
+
 const replaceStr = (str: string, start: number, length: number, character: string,): string => {
   const characters: string = Array.from( Array(length), () => character).join('')
 
@@ -38,7 +40,18 @@ const sleep = (timeout: number): Promise<void> => {
   })
 }
 
+/**
+ * 是否认证
+ */
+const isIdentificate = (): boolean => {
+  const {idCarBack, idCarFrontal, driverLicense} = store.getState().me.data || {}
+  const res = !driverLicense || !idCarFrontal || !idCarBack
+
+  return !res;
+}
+
 export {
   formatTimeNumber,
-  sleep
+  sleep,
+  isIdentificate
 }

@@ -40,7 +40,10 @@ export type IconType = 'close' |
   'time' |
   'location' |
   'distance' |
-  'promotion'
+  'promotion' |
+  'backOfIdCard' |
+  'idCardFrontal' |
+  'DriverLicense'
 
 type IconPropsType = {
   value: IconType

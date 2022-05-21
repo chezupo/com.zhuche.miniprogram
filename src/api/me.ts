@@ -1,13 +1,18 @@
 import {UserInfoType} from "../nativeInterface/getUserProfile";
 import * as request from "../util/requestClient";
 import {getPlatformName} from "../util/platformType";
-import {MeItemType} from "../typings";
 import {get, put} from "../util/requestClient";
 
 type MeInfoType = MeItemType
 type UpdateMyPhoneNumberQueryType = {
   sign: string
   response: string
+}
+
+type UploadLicenceType = {
+  idCarFrontal?: string
+  idCarBack?: string
+  driverLicense?: string
 }
 
 const updateMeInfo = async (meInfo: UserInfoType):Promise<MeInfoType> => {
@@ -30,6 +35,8 @@ const getMyQr = async () => {
   return await get<string>(`/QR`)
 }
 
+const uploadLicence = async (data: UploadLicenceType) => await put<MeInfoType>(`/me/license`, data)
+
 export type {
   MeInfoType,
   UpdateMyPhoneNumberQueryType
@@ -38,5 +45,6 @@ export {
   getMeInfo,
   updateMeInfo,
   updateMyPhoneNumber,
-  getMyQr
+  getMyQr,
+  uploadLicence
 }

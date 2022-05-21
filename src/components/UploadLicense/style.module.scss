@@ -1,0 +1,56 @@
+@import "../../global.scss";
+
+@mixin borderRadius {
+  border-radius: $borderRadiusCircle;
+}
+.main {
+  $margin: $unit4;
+  margin: $margin;
+  $padding: $margin;
+  padding: $padding;
+  border: 1px solid $gray2;
+  @include borderRadius;
+  width: calc( 100%) - $padding * 2 - $margin * 2;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-column-gap: $unit2;
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: $unit8;
+    text-align: center;
+    .icon {
+      font-size: $unit40;
+      color: $gray2;
+    }
+    .notice {
+      color: $gray2;
+    }
+  }
+  .button {
+    border-radius: $borderRadiusCircle;
+    background: $primaryThemeColor;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  position: relative;
+  .loadingWrapper {
+    @include borderRadius;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: rgba(225, 225, 225, 0.8);
+    justify-content: center;
+    align-items: center;
+  }
+  .image {
+    width: 100%;
+    height: $unit50;
+  }
+}

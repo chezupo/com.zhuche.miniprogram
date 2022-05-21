@@ -1,19 +1,16 @@
 import React from "preact/compat";
 import {View} from "@tarojs/components";
-import NotFound from "../../../components/NotFound";
+import UploadIdCarFrontal from "../../../components/UploadIdCarFrontal";
+import UploadIdCardBack from "../../../components/UploadIdCarBack";
 
 const IdCarValidationPage: React.FC = () => {
   return (<View
     style={{
       height: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
     }}
   >
-    <NotFound
-      title='请在取车时，与门店进行认证'
-    />
+    <UploadIdCarFrontal />
+    <UploadIdCardBack />
   </View>)
 }
 

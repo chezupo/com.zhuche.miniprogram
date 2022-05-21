@@ -18,8 +18,14 @@ import tradePay from "../../../nativeInterface/tradePay";
 import {navigateToOrder} from "../../../store/module/router";
 import RemarkRender from "./MarkRender";
 import OrderAgreement from "./OrderAgreement";
-import {getUserCoupons} from "../../../api/userCoupons";
 import {iniUserCouponThunk} from "../../../reduxStore/module/userCoupons";
+import SpinContainer from "../../../components/SpinContainer";
+import UploadIdCarBack from "../../../components/UploadIdCarBack";
+import UploadIdCarFrontal from "../../../components/UploadIdCarFrontal";
+import UploadDrvierLicense from "../../../components/UploadDriverLicense";
+import Button from "../../../components/Button";
+import {messageObserve} from "../../../store/module/message";
+import {isIdentificate} from "../../../util/helper";
 
 const Order: React.FC = () => {
   const {
@@ -83,7 +89,15 @@ const Order: React.FC = () => {
   useEffect(() => handleInitAmountList(), [])
   const [remark, setRemark] = useState<string>('')
   const dispatch = useAppDispatch()
+  const {idCarBack, idCarFrontal, driverLicense} = useAppSelector(state => state.me?.data) || {}
+  const [isUploadListen, setIsUploadListen ] = useState<boolean>(false)
   const handleSubmit = () => {
+    if (!isIdentificate()) {
+      setIsUploadListen(true)
+      messageObserve.next({title: '请上传您的证件', duration: 5000, type: 'info'})
+      return
+    }
+
     const p = async (): Promise<void> => {
       if (!allowed) {
         await taro.showToast({title: '请同意协议'})
@@ -121,9 +135,40 @@ const Order: React.FC = () => {
     amountList={amountList}
     allowed={allowed}
   />)
+  const handleCloseSpin = async () => {
+    if (!idCarBack) {
+      await taro.showToast({title: '身份证背面不能为空'})
+      return
+    }
+    if (!idCarFrontal) {
+      await taro.showToast({title: '身份证正面不能为空'})
+      return
+    }
+    if (!driverLicense) {
+      await taro.showToast({title: '驾驶证不能为空'})
+      return
+    }
+    setIsUploadListen(false)
+  }
 
   return (
     <>
+      {
+        isUploadListen && (
+          <SpinContainer className={style.spin} >
+            <View className={style.listenWrapper}>
+              <View className={style.title}>请上传相关证件</View>
+              <UploadIdCarBack />
+              <UploadIdCarFrontal />
+              <UploadDrvierLicense />
+              <View className={style.button}><Button
+                type='primary'
+                onClick={handleCloseSpin}
+              >确认</Button></View>
+            </View>
+          </SpinContainer>
+        )
+      }
       <Message style={{zIndex: 3}} />
       <View className={style.main}>
         <MenuContainer
@@ -159,6 +204,8 @@ const Order: React.FC = () => {
           </View>
         </MenuContainer>
       </View>
+
+
     </>
   )
 }

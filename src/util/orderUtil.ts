@@ -33,7 +33,7 @@ const getStatusMapInfo = (order: OrderItemType) => {
 }
 
 const getDepositItems = (deposit: number) => [
-  { title: '车辆保证金(可退)', amount: deposit},
+  { title: '车辆保证金(到店付,可退)', amount: deposit},
 ]
 
 /**

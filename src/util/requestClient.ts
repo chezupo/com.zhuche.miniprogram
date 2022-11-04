@@ -29,7 +29,10 @@ export const get = <T>(url: string, query?: Record<string, any> ): Promise<T> =>
           .then((data) => resolve(data) )
           .catch(err => reject(err))
       ,
-      fail: (e) => reject(e)
+      fail: (e) => {
+        console.error(e);
+        reject(e);
+      }
     });
   })
 }
@@ -46,7 +49,9 @@ export const post = <T>(url: string, requestData?: Object): Promise<T> => {
           .then((data) => resolve(data) )
           .catch(err => reject(err))
       ,
-      fail: (e) => reject(e)
+      fail: (e) => {
+        console.error(e);
+        reject(e)}
     });
   })
 }
@@ -63,7 +68,9 @@ export const put = <T>(url: string, requestData?: Object): Promise<T> => {
           .then((data) => resolve(data) )
           .catch(err => reject(err))
       ,
-      fail: (e) => reject(e)
+      fail: (e) =>  {
+        console.error(e);
+        reject(e)}
     });
   })
 }
@@ -79,7 +86,9 @@ const deleteRequest = <T>(url: string): Promise<T> => {
           .then((data) => resolve(data) )
           .catch(err => reject(err))
       ,
-      fail: (e) => reject(e)
+      fail: (e) => {
+        console.error(e);
+        reject(e)}
     });
   })
 }

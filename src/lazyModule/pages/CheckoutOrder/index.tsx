@@ -115,7 +115,7 @@ const Order: React.FC = () => {
           endTimeStamp: endTime,
           ...(userCoupon ? {userCouponId: userCoupon.id} : {})
         })
-        newOrder.authBody && await tradePay(newOrder.authBody, true)
+        // newOrder.authBody && await tradePay(newOrder.authBody, true)
         newOrder.alipayTradeNo && await tradePay(newOrder.alipayTradeNo)
         await dispatch(iniUserCouponThunk())
         navigateToOrder()

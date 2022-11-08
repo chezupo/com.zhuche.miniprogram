@@ -1,4 +1,3 @@
-import {CarItemType, CommentItemType} from "../typings";
 import {get} from "../util/requestClient";
 
 const getCars = async (storeId: number): Promise<CarItemType[]> => {

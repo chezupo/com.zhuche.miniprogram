@@ -19,7 +19,7 @@ const orderStatusMayStr: Record<OrderStatus, string> = {
 const getStatusMapInfo = (order: OrderItemType) => {
   const statusMapChinese: Record<OrderStatus, {title: string; notice?: string}> = {
     CREDITING: {title: '信用授权中', notice: ''},
-    PAYING: {title: '待支付', notice: ''},
+    PAYING: {title: '待支付', notice: '您的订单还未支付，请及时支付'},
     CAR_PICKUP_IN_PROGRESS: {title: '取车中', notice: '请到门店提取您预定的汽车'},
     USING: {title: '使用中', notice: ''},
     OVERTIME: {title: '用车超时', notice: `您已用车超时${order.expiredDays?.toFixed(1)}天，还车时还需另外补交超时费用: ${order.expiredFee?.toFixed(2)}`},
@@ -33,7 +33,7 @@ const getStatusMapInfo = (order: OrderItemType) => {
 }
 
 const getDepositItems = (deposit: number) => [
-  { title: '车辆保证金(到店付,可退)', amount: deposit},
+  { title: '车辆保证金(到店冻结,还车解冻)', amount: deposit},
 ]
 
 /**

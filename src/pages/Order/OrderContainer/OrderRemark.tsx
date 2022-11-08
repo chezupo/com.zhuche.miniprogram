@@ -9,7 +9,7 @@ const OrderRemark: React.FC<OrderPropsType> = ({order: data}) => {
   return (
     <>
       {
-        getStatusMapInfo(data).notice &&
+        !!getStatusMapInfo(data).notice &&
         (
           <View className={style.notice}>{
             getStatusMapInfo(data).notice

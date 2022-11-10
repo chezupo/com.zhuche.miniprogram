@@ -75,8 +75,21 @@ const loginThunk =  (pid?: number) => {
     } else if (AllPlatformType.TT === platformType) {
       const code = await authCode()
       const {isNewUser, accessToken} = await authorize(code, pid)
-      debugger
-
+    } else if (AllPlatformType.WECHAT == platformType) {
+      const code = await authCode()
+      const {isNewUser, accessToken} = await authorize(code, pid)
+      setToken(accessToken)
+      dispatch(login({
+        isNewUser,
+        balance: 0,
+        accessToken,
+      }))
+      const newUserInfo = await getMeInfo()
+      const meData = getState().me.data
+      dispatch(login({
+        ...meData,
+        ...newUserInfo
+      }))
     }
   }
 }

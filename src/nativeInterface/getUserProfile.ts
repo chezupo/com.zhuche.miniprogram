@@ -22,19 +22,24 @@ export const getUserProfile  = (): Promise<UserInfoType> => {
             return resolve(userInfo)
           }
       })
-    } else {
-      Taro.getUserProfile({
-        desc: "您正在登录车租车应用",
-        success: res => {
-          debugger
-          return resolve(res)
+    } else if (getPlatformType() === AllPlatformType.WECHAT) {
+      Taro.getUserInfo({
+        success: (res) => {
+          const userInfo: UserInfoType = {
+            avatar: res.userInfo.avatarUrl,
+            city: res.userInfo.city,
+            code: '',
+            countryCode: res.userInfo.country,
+            gender: res.userInfo.gender + '',
+            nickName: res.userInfo.nickName,
+            province: res.userInfo.province,
+          };
+          return resolve(userInfo)
         },
-        fail: res => {
-          debugger
-
-          return reject(res)
-        }
+        fail: (res) => reject(res)
       })
+    } else {
+      return reject(Error('No suitable platform found.'))
     }
   })
 }

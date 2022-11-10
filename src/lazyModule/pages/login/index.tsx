@@ -47,16 +47,26 @@ const Login = (): React.ReactElement => {
         src={carSvg}
         className={style.image}
       />
-      <Button
-        openType='getAuthorize'
-        scope='userInfo'
-        onGetAuthorize={handleUploadUserInfo}
-        className={style.directLogin}
-      >{platform}账号一键登录</Button>
-      {/*<View*/}
-      {/*  className={style.phoneLoginOrRegister}*/}
-      {/*  onClick={handleLoginOrRegister}*/}
-      {/*>手机号登录/注册</View>*/}
+        {/*支付宝调用*/}
+        {
+          getPlatformType() === AllPlatformType.ALIPAY &&
+          <Button
+            openType='getAuthorize'
+            scope='userInfo'
+            onGetAuthorize={handleUploadUserInfo}
+            className={style.directLogin}
+          >{platform}账号一键登录</Button>
+        }
+        {/* 微信调用*/}
+        {
+          getPlatformType() === AllPlatformType.WECHAT &&
+          <Button
+            openType='getUserInfo'
+            scope='userInfo'
+            onGetUserInfo={handleUploadUserInfo}
+            className={style.directLogin}
+          >{platform}账号一键登录</Button>
+        }
       <View className={style.agreementWrapper}>
         <Agreement checked={agreement} onChange={agreementDispatch} />
       </View>

@@ -3,6 +3,7 @@ import BaseError, {ErrorTypes} from "../errors/BaseError";
 // @ts-ignore
 import {alipay, weapp} from "./base";
 import {AllPlatformType} from "../util/platformType";
+import {differenceBy} from "lodash";
 
 const authCode = (): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
@@ -17,9 +18,17 @@ const authCode = (): Promise<string> => {
 
       case weapp:
         Taro.login({
-          success: (res) => res.code ?
-            resolve(res.code) :
-            reject(new BaseError({errorType: ErrorTypes.USER_AUTH_REJECT, message: res.errMsg}))
+          success: (res) => {
+            if(res.code) {
+              resolve(res.code);
+            } else {
+              reject(new BaseError({errorType: ErrorTypes.USER_AUTH_REJECT, message: res.errMsg}));
+            }
+          },
+          fail: (res) => {
+            return reject(res);
+          }
+
         })
         break;
       case AllPlatformType.TT:

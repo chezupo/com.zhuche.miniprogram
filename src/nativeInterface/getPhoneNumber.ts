@@ -23,8 +23,8 @@ const getPhoneNumber = async (): Promise<GetPhoneNumberReturnType> => {
   switch (getPlatformType()) {
     case AllPlatformType.ALIPAY:
       return await getAlipayPhone();
-      break
     case AllPlatformType.WECHAT:
+
       break
   }
 }

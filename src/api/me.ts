@@ -9,6 +9,11 @@ type UpdateMyPhoneNumberQueryType = {
   response: string
 }
 
+export type UpdateWechatPhoneNumberQueryType = {
+  encryptData: string
+  iv: string
+}
+
 type UploadLicenceType = {
   idCarFrontal?: string
   idCarBack?: string
@@ -30,6 +35,9 @@ const getMeInfo = async (): Promise<MeInfoType> => {
 const updateMyPhoneNumber = async (query: UpdateMyPhoneNumberQueryType ) => {
   return await put<MeInfoType>(`/socials/${getPlatformName()}/me/phoneNumber`, query)
 }
+const updateWechatPhoneNumber = async (query: UpdateWechatPhoneNumberQueryType ) => {
+  return await put<MeInfoType>(`/socials/${getPlatformName()}/me/phoneNumber`, query)
+}
 
 const getMyQr = async () => {
   return await get<string>(`/QR`)
@@ -46,5 +54,6 @@ export {
   updateMeInfo,
   updateMyPhoneNumber,
   getMyQr,
-  uploadLicence
+  uploadLicence,
+  updateWechatPhoneNumber
 }

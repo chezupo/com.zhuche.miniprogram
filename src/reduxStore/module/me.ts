@@ -2,7 +2,14 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import getPlatformType, {AllPlatformType} from "../../util/platformType";
 import authCode from "../../nativeInterface/authCode";
 import {authorize} from "../../api/authoriztion";
-import {getMeInfo, updateMeInfo, updateMyPhoneNumber, UpdateMyPhoneNumberQueryType} from "../../api/me";
+import {
+  getMeInfo,
+  updateMeInfo,
+  updateMyPhoneNumber,
+  UpdateMyPhoneNumberQueryType,
+  updateWechatPhoneNumber,
+  UpdateWechatPhoneNumberQueryType,
+} from "../../api/me";
 import {AppDispatch, RootState} from "../index";
 import {getUserProfile} from "../../nativeInterface/getUserProfile";
 import {setToken} from "../../util/authUtil";
@@ -33,6 +40,9 @@ const meSlice = createSlice({
     uploadUserInfo: (state, action: PayloadAction<MeItemType>) => {
       return {...state, data: action.payload, isLogin: true}
     },
+    uploadIdCarBack: (state, action: PayloadAction<string>) => ({...state, data: {...state.data, idCarBack: action.payload}}),
+    uploadIdCarFrontal: (state, action: PayloadAction<string>) => ({...state, data: {...state.data,idCarFrontal: action.payload}}),
+    uploadDriverLicence: (state, action: PayloadAction<string>) => ({...state, data: {...state.data,driverLicense: action.payload}}),
     setTransaction:(state, action: PayloadAction<TransactionItemType[]>) => {
       return {...state, data: {
           ...state.data,
@@ -128,6 +138,16 @@ const updateMyPhoneNumberThunk = (queryData: UpdateMyPhoneNumberQueryType) => {
     dispatch(save(newUserInfo))
   }
 }
+/**
+ * 更新用户手机号
+ */
+const updateWechatPhoneNumberThunk = (queryData: UpdateWechatPhoneNumberQueryType ) => {
+  return async (dispatch: AppDispatch): Promise<void> => {
+    const newUserInfo = await updateWechatPhoneNumber(queryData)
+    debugger
+    dispatch(save(newUserInfo))
+  }
+}
 
 /**
  * 获取账单
@@ -141,6 +161,13 @@ const getTransactionThunk = () => {
 
 const meReducer = meSlice.reducer
 
-export {loginThunk, uploadUserInfoThunk, updateMyPhoneNumberThunk, refreshThunk, getTransactionThunk}
-export const {login, uploadUserInfo, logout, save, setTransaction, setPid} = meSlice.actions
+export {
+  loginThunk,
+  uploadUserInfoThunk,
+  updateMyPhoneNumberThunk,
+  refreshThunk,
+  getTransactionThunk,
+  updateWechatPhoneNumberThunk,
+}
+export const {login, uploadUserInfo, logout, save, setTransaction, setPid, uploadDriverLicence, uploadIdCarBack, uploadIdCarFrontal } = meSlice.actions
 export default meReducer

@@ -1,19 +1,18 @@
 import React from "preact/compat";
 import {useCallback, useEffect, useState} from "preact/hooks";
-import {ITouchEvent, Text, View} from "@tarojs/components";
+import {Text, View} from "@tarojs/components";
 import {debounce} from "@wuchuhengtools/helper";
 // @ts-ignore
 import style from './style.module.scss';
 import Button from "../../../../components/Button";
 import Icon from "../../../../components/Icon";
-import SpinContainer from "../../../../components/SpinContainer";
-import {navigateToCheckoutOrderAgreement} from "../../../../store/module/router";
 import {useAppDispatch, useAppSelector} from "../../../../reduxStore";
 import getPhoneNumber from "../../../../nativeInterface/getPhoneNumber";
-import {updateMyPhoneNumberThunk} from "../../../../reduxStore/module/me";
+import {updateMyPhoneNumberThunk, updateWechatPhoneNumberThunk} from "../../../../reduxStore/module/me";
 import PopModal from "../../../../components/PopModal";
 import AmountDetail from "./AmountDetail";
 import {getDepositItems} from "../../../../util/orderUtil";
+import getPlatformType, {AllPlatformType} from "../../../../util/platformType";
 
 export type PayNowItemType = {
   title: string
@@ -80,6 +79,41 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
     await dispatch(updateMyPhoneNumberThunk(res));
     handleSubmit(true)
   }
+  const handleGetWechatPhone = async (iv: string, encryptData: string) => {
+    await dispatch(updateWechatPhoneNumberThunk({iv, encryptData}));
+    setPopErrorVisible(false)
+    handleSubmit(true)
+  }
+  const getPhoneNumberOnPayButton = () => {
+    const text = '立即支付';
+    switch (getPlatformType()) {
+      case AllPlatformType.ALIPAY:
+        return (<Button
+          type='primary'
+          className={style.button}
+          openType='getAuthorize'
+          scope='phoneNumber'
+          onGetAuthorize={handleGetPhone}
+          onError={e => {
+            setPopErrorVisible(true)
+          }}
+        >{text}</Button>)
+      case AllPlatformType.WECHAT:
+        return (<Button
+          type='primary'
+          className={style.button}
+          openType='getPhoneNumber'
+          onGetPhoneNumber={e => handleGetWechatPhone(e.detail.iv, e.detail.encryptedData)}
+          onError={e => {
+            setPopErrorVisible(true)
+          }}
+        >{text}</Button>)
+      case AllPlatformType.H5:
+        throw  Error('Not Found');
+      case AllPlatformType.TT:
+        throw  Error('Not Found');
+    }
+  }
 
   return (
     <>
@@ -99,18 +133,7 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
           <View className={style.rightWrapper}>
             <View className={style.detailTitle} onClick={() => setVisible(true)}>费用明细</View>
             {
-              !me?.data?.phone && (
-                <Button
-                  type='primary'
-                  className={style.button}
-                  openType='getAuthorize'
-                  scope='phoneNumber'
-                  onGetAuthorize={handleGetPhone}
-                  onError={e => {
-                    setPopErrorVisible(true)
-                  }}
-                >立即支付</Button>
-              )
+              !me?.data?.phone && (getPhoneNumberOnPayButton())
             }
             {
               me?.data?.phone && (

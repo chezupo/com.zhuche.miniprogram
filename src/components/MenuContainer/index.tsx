@@ -1,6 +1,6 @@
 import React from "preact/compat";
 import {View} from "@tarojs/components";
-import {CSSProperties, ReactChildren, ReactNode} from "react";
+import {CSSProperties, LegacyRef, ReactChildren, ReactNode, useEffect, useRef} from "react";
 // @ts-ignore
 import style from './style.module.scss';
 
@@ -10,13 +10,14 @@ type MenuContainerPropsType = {
   bodyClassName?: string
   menuBarClassName?: string
   bodyHeight?: number
+  ref: LegacyRef<null>
 }
 const MenuContainer: React.FC<MenuContainerPropsType> = props => {
   const {bodyHeight} = props
   const [bodyStyle, bottomStyle]: [CSSProperties, CSSProperties] = bodyHeight ? [{height: `${bodyHeight}vh`}, {height: `${100 - bodyHeight}vh`}] : [{}, {}]
-
   return (<>
     <View
+      ref={props.ref}
       style={bodyStyle}
       className={
       [

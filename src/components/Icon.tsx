@@ -1,9 +1,6 @@
 import {ITouchEvent, View} from "@tarojs/components";
 import * as React from "react";
 import {CSSProperties} from "react";
-import {TabBarType} from "../reduxStore/module/layout";
-import Order from "../pages/Order";
-import Me from "../pages/Me";
 
 export type IconType = 'close' |
   'right' |

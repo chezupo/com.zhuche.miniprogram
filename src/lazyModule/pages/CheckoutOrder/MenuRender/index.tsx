@@ -84,8 +84,8 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
     setPopErrorVisible(false)
     handleSubmit(true)
   }
+  const text = '立即支付';
   const getPhoneNumberOnPayButton = () => {
-    const text = '立即支付';
     switch (getPlatformType()) {
       case AllPlatformType.ALIPAY:
         return (<Button
@@ -141,7 +141,7 @@ const MenuRender: React.FC<MenuRenderPropsType> = ({amountList, ...props}) => {
                   type='primary'
                   className={style.button}
                   onClick={() => handleSubmit(true)}
-                >立即支付</Button>
+                >{text}</Button>
               )
             }
           </View>

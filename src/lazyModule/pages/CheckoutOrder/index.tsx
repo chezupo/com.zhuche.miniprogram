@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {LegacyRef, useRef} from 'react'
 import taro from "@tarojs/taro";
 import {useEffect, useState} from "preact/hooks";
 import {View} from "@tarojs/components";
@@ -27,6 +27,10 @@ import Button from "../../../components/Button";
 import {messageObserve} from "../../../store/module/message";
 import {isIdentificate} from "../../../util/helper";
 
+enum OrderPayType {
+  ALIPAY ="ALIPAY",
+  WECHAT = 'WECHAT'
+}
 const Order: React.FC = () => {
   const {
     userCoupon,
@@ -37,6 +41,7 @@ const Order: React.FC = () => {
     starTime,
     endTime
   } = useAppSelector(state => state.order.createOrder)
+  const mainRef = useRef(null); //represents main section
   const [allowed, setAllowed] = useState<boolean>(false)
   useEffect(() => {console.log(allowed)},  [allowed])
   const [isInsuranceFee, setIsInsuranceFee] = useState<boolean>(false) // 是否启用驾无忧保险
@@ -115,8 +120,16 @@ const Order: React.FC = () => {
           endTimeStamp: endTime,
           ...(userCoupon ? {userCouponId: userCoupon.id} : {})
         })
-        // newOrder.authBody && await tradePay(newOrder.authBody, true)
-        newOrder.alipayTradeNo && await tradePay(newOrder.alipayTradeNo)
+        // 支付方式
+        switch (newOrder.payType) {
+          case OrderPayType.ALIPAY:
+             await tradePay(newOrder.alipayTradeNo)
+            break;
+          case OrderPayType.WECHAT:
+            await tradePay(newOrder.wechatPayToken)
+            break;
+          default:
+        }
         await dispatch(iniUserCouponThunk())
         navigateToOrder()
       } finally {
@@ -130,11 +143,7 @@ const Order: React.FC = () => {
     })
   }
 
-  const menuRender = (<MenuRender
-    onSubmit={handleSubmit}
-    amountList={amountList}
-    allowed={allowed}
-  />)
+  const menuRender = (<MenuRender onSubmit={handleSubmit} amountList={amountList} allowed={allowed} />)
   const handleCloseSpin = async () => {
     if (!idCarBack) {
       await taro.showToast({title: '身份证背面不能为空'})
@@ -172,6 +181,7 @@ const Order: React.FC = () => {
       <Message style={{zIndex: 3}} />
       <View className={style.main}>
         <MenuContainer
+          ref={mainRef}
           menuBar={menuRender}
           bodyHeight={88}
         >
@@ -197,9 +207,7 @@ const Order: React.FC = () => {
             <OrderAgreement />
             <CheckRender
               checked={allowed}
-              onChange={() => {
-                setAllowed(() => !allowed)
-              }}
+              onChange={setAllowed}
             />
           </View>
         </MenuContainer>

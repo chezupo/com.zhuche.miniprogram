@@ -1,7 +1,8 @@
+import Taro from "@tarojs/taro";
 import getPlatformType, {AllPlatformType} from "../util/platformType";
 
-const tradePay = (tradeNO: string, isFreeze?: boolean): Promise<void> => {
-  return new Promise((resolve, reject) => {
+const tradePay = async (tradeNO: string, isFreeze?: boolean): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
 
     switch (getPlatformType()) {
       case AllPlatformType.ALIPAY:
@@ -16,7 +17,21 @@ const tradePay = (tradeNO: string, isFreeze?: boolean): Promise<void> => {
 
         break;
       case AllPlatformType.WECHAT:
-        // todo wech pay
+        const wechatPayToken = JSON.parse(tradeNO) as WechatPayToken;
+        Taro.requestPayment({
+          timeStamp: wechatPayToken.timeStamp + '',
+          nonceStr: wechatPayToken.nonceStr,
+          package: wechatPayToken.package,
+          paySign: wechatPayToken.paySign,
+          // @ts-ignore
+          signType: 'RSA',
+          success: ()  => resolve(),
+          fail: res => reject()
+        })
+        break;
+      case AllPlatformType.H5:
+        break;
+      case AllPlatformType.TT:
         break;
     }
   })

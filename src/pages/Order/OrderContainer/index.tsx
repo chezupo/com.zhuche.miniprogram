@@ -81,7 +81,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
           <View>￥{props.data.amount}</View>
         </View>
         <View className={style.orderNo} onClick={handleCopy}>
-          <View>订单号: {props.data.alipayOutTradeNo}</View><Icon className={style.copyIcon} value='copy' />
+          <View>订单号: {props.data.outTradeNo}</View><Icon className={style.copyIcon} value='copy' />
         </View>
         <View className={style.name}>{props.data.title}</View>
         <View className={style.storeWrapper}>

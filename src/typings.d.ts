@@ -124,7 +124,10 @@ declare type CarItemType = {
   comments: CommentItemType[]
 }
 
-declare type OrderPayType = 'ALIPAY' | 'WECHAT'
+declare enum OrderPayType {
+  ALIPAY ="ALIPAY",
+  WECHAT = 'WECHAT'
+}
 
 declare type OrderStatus =
   'CREDITING' | // 信用授权中
@@ -151,8 +154,9 @@ declare type OrderItemType = {
   contract?: string
   alipayToken: string
   alipayTradeNo: string
+  wechatPayToken: string // 微信支付用户id
   authBody: string
-  alipayOutTradeNo: string
+  outTradeNo: string // 订单号
   createAlipayAt: number
   createdAt: string
   status: OrderStatus
@@ -317,3 +321,10 @@ declare module '*.scss' {
 
 declare module '*.svg';
 
+declare type WechatPayToken = {
+    "timeStamp":  number
+    "signType": string
+    "package": string,
+    "nonceStr": string,
+    "paySign": string
+}

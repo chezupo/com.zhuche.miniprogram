@@ -7,6 +7,7 @@ import config from '../Agreements/index.config'
 import style from './style.module.scss'
 import {useAppSelector} from "../../../../reduxStore";
 import {navigateToCheckoutOrderAgreement} from "../../../../store/module/router";
+import {differenceBy} from "lodash";
 
 type CheckRenderPropsType = {
   checked: boolean
@@ -27,6 +28,7 @@ const CheckRender: React.FC<CheckRenderPropsType> = props => {
         value='hello'
         color={primaryThemeColor}
         checked={props.checked}
+        onClick={() => props.onChange(!props.checked)}
         onChange={() => props.onChange(!props.checked)}
       />
       <View className={style.titleWrapper} >

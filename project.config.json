@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "com.zhuche.miniprogram",
 	"description": "",
-	"appid": "touristappid",
+	"appid": "wx6c5b672991b4f00a",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,

@@ -129,10 +129,8 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType & {
           {
             [
 
-              'CAR_PICKUP_IN_PROGRESS' , // 取车中
               'USING' , // 使用中
               'OVERTIME' , // 用车超时
-              'RETURNING' , // 还车中
             ].includes(
               order.status
             )

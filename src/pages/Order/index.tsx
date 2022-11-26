@@ -1,11 +1,11 @@
 import * as React from "react";
-import taro, {usePullDownRefresh} from "@tarojs/taro";
 import {useEffect, useState} from "react";
+import taro, {usePullDownRefresh} from "@tarojs/taro";
 import Tabs from "./Tabs";
 // @ts-ignore
 import style from "./style.module.scss"
 import Loading from "../../components/Loading";
-import {cancelOrder, createOrderComment, getOrders, returnCar} from "../../api/order";
+import {createOrderComment, getOrders, returnCar} from "../../api/order";
 import TabContainer from "./components/TabContainer";
 import CommentRender, {SubmitType} from "./components/TabContainer/CommentRender";
 import SpinContainer from "../../components/SpinContainer";
@@ -13,6 +13,7 @@ import {sleep} from "../../util/helper";
 import tradePay from "../../nativeInterface/tradePay";
 import {messageObserve} from "../../store/module/message";
 import {useCancelOrder} from "../../util/orderUtil";
+import getPlatformType, {AllPlatformType} from "../../util/platformType";
 
 export type OrderCategoryType = {id: number; name: string; status:  OrderStatus[]}
 
@@ -119,7 +120,18 @@ const Order = () : React.ReactElement => {
     if (data.status === 'CREDITING') {
       data.authBody && await tradePay(data.authBody, true)
     }
-    data.alipayTradeNo && await tradePay(data.alipayTradeNo)
+    switch (getPlatformType()) {
+      case AllPlatformType.ALIPAY:
+        await tradePay(data.alipayTradeNo)
+        break;
+      case AllPlatformType.WECHAT:
+        await tradePay(data.wechatPayToken)
+        break;
+      case AllPlatformType.H5:
+        break;
+      case AllPlatformType.TT:
+        break;
+    }
     messageObserve.next({
       title: '支付成功',
       duration: 300,

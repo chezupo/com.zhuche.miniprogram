@@ -139,6 +139,7 @@ const Order: React.FC = () => {
     p().then(() => {
       console.log("Success submit.")
     }).catch(e => {
+      taro.hideLoading()
       debugger
     })
   }

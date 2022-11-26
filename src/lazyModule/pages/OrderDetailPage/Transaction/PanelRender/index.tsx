@@ -53,7 +53,7 @@ const PanelRenderer: React.FC<PanelRendererPropsType> = ({order, ...props}) => {
         <PickerViewColumn>
           {days.map(item => {
             return (
-              <View>{item}天</View>
+              <View style={{textAlign: 'center'}}>{item}天</View>
             );
           })}
         </PickerViewColumn>

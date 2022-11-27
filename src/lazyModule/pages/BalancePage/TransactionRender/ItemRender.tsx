@@ -2,7 +2,6 @@ import React from "preact/compat";
 import {View} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss'
-import {TransactionItemType} from "../../../../typings";
 import {convertDate} from "../../../../util/Carlendar";
 
 type ItemRenderPropsType = {

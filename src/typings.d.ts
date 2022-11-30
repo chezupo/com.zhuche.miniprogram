@@ -215,6 +215,7 @@ declare type TransactionItemType = {
   createdAt: string
   id: number
   amount: number
+  failedReason?: string
   balance: number
   title: string
   payType: OrderPayType

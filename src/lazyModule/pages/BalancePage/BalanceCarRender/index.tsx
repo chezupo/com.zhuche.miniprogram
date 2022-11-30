@@ -46,6 +46,7 @@ const BalanceCarRender: React.FC = () => {
     if (value.amount > me.balance) {
       await taro.showToast({title: '提现金额不能大于账户余额'})
     }
+    value.isCommission = false
     await createWithdraw(value)
     await Promise.all([
       dispatch(refreshThunk()),

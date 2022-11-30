@@ -40,7 +40,7 @@ const updateWechatPhoneNumber = async (query: UpdateWechatPhoneNumberQueryType )
 }
 
 const getMyQr = async () => {
-  return await get<string>(`/QR`)
+  return await get<string>(`/socials/${getPlatformName()}/QR`)
 }
 
 const uploadLicence = async (data: UploadLicenceType) => await put<MeInfoType>(`/me/license`, data)

@@ -34,7 +34,8 @@ const TopUpRender: React.FC<TopUpRenderPropsType> = props => {
     }
     props.onSubmit({
       amount: topUp,
-      remark
+      remark,
+      isCommission: false
     })
   }
 

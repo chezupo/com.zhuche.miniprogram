@@ -31,7 +31,7 @@ const ItemRender: React.FC<ItemRenderPropsType> = props => {
           { props.data.status === 'PROCESSING' && ( <View className={[style.notice, style.warningColor].join(' ')} >进行中</View>) }
           { props.data.status === 'FAILED' && ( <View className={[style.notice, style.failed].join(' ')} >失败</View>) }
         </View>
-        <View className={style.subtitle}>余额 {props.data.balance.toFixed(2)}</View>
+        <View className={style.subtitle}>余额 {(props.data.balance * .01).toFixed(2)}</View>
       </View>
     </View>
   </>)

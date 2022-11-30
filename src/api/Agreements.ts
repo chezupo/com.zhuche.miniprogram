@@ -1,4 +1,3 @@
-import {AgreementItemType} from "../typings";
 import {get} from "../util/requestClient";
 
 const getCheckoutOrderAgreements = async (): Promise<AgreementItemType[]> => {

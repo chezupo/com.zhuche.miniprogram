@@ -25,7 +25,7 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType & {
   onReletSubmit: (days: number) => void
   onRelet: () => void
 }> = ({order, onCancelOrder, ...props}) => {
-  const getOrderNo = (v: OrderItemType) => v.alipayTradeNo
+  const getOrderNo = (v: OrderItemType) => v.outTradeNo
   const handleCopy = async () => {
     await taro.setClipboardData({ data: getOrderNo(order)})
     await taro.showToast({title: '订单号复制成功', duration: 5000})

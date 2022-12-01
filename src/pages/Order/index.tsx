@@ -34,7 +34,7 @@ export const tabs: OrderCategoryType[] = [
       'CREDITING',  // 信用授权中
       'PAYING',  // 支付中
     ]},
-  {id: 2, name: '取车中', status: [
+  {id: 2, name: '待取车', status: [
       'CAR_PICKUP_IN_PROGRESS',  // 取车中
     ]},
   {id: 3, name: '进行中', status: [

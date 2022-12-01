@@ -1,5 +1,5 @@
 import taro from "@tarojs/taro";
-import {cancelOrder} from "../api/order";
+import {cancelOrder, deleteOrder} from "../api/order";
 import {navigateTimeRangePage, navigateToHome} from "../store/module/router";
 import {useAppDispatch} from "../reduxStore";
 import {setCar, setEndStore, setStarStore, setStartCityThunk} from "../reduxStore/module/order";
@@ -51,6 +51,19 @@ const useCancelOrder = () => {
 }
 
 /**
+ * 删除订单
+ */
+const useDeleteOrder = () => {
+  return async (value: OrderItemType) => {
+    const res =  await taro.showModal({ title: '你是否要删除这个订单?' })
+    if (res.confirm) {
+      await deleteOrder(value.id)
+      await taro.showToast({title: '删除成功', duration: 5000})
+    }
+  }
+}
+
+/**
  * 再次预订
  */
 const useRebook = () => {
@@ -72,5 +85,6 @@ export {
   getStatusMapInfo,
   getDepositItems,
   useCancelOrder,
-  useRebook
+  useRebook,
+  useDeleteOrder
 }

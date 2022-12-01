@@ -10,7 +10,7 @@ import Car from "./Car";
 import {expireOrder, getOrderById} from "../../../api/order";
 import Loading from "../../../components/Loading";
 import BottomMenuBarRender from "./ButtonMenuBarRender";
-import {useCancelOrder} from "../../../util/orderUtil";
+import {useCancelOrder, useDeleteOrder} from "../../../util/orderUtil";
 import tradePay from "../../../nativeInterface/tradePay";
 import {sleep} from "../../../util/helper";
 import SpinContainer from "../../../components/SpinContainer";
@@ -35,6 +35,7 @@ const OrderDetailPage: React.FC = () => {
     params.id && fetchOrderData()
   }, [])
   const cancelOrderHook = useCancelOrder()
+  const deleteOrderHook = useDeleteOrder()
   const handleCancelOrder = async (cancelOrder: OrderItemType) => {
     setLoading(true)
     try {
@@ -57,6 +58,19 @@ const OrderDetailPage: React.FC = () => {
       await taro.hideLoading();
     }
   }
+  /**
+   * 删除订单
+   * @param deleteOrder
+   */
+  const onDeleteOrder = async  (deleteOrder: OrderItemType) => {
+    setLoading(true)
+    try {
+      await deleteOrderHook(deleteOrder)
+      fetchOrderData()
+    }finally {
+      setLoading(false)
+    }
+  }
   const [reletPanel, setReletPanel] = useState<boolean>(false)
   return (
     <>
@@ -71,6 +85,7 @@ const OrderDetailPage: React.FC = () => {
                 order={order}
                 onCancelOrder={handleCancelOrder}
                 onReletSubmit={handleReletSubmit}
+                onDeleteOrder={onDeleteOrder}
               />
               <Car order={order} />
             </View>

@@ -47,9 +47,6 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
   }
   const handleReturnCar = async () => {
     const order = await getOrderById(props.data.id)
-    await taro.showLoading({
-      title: '还车中...'
-    })
     if (order.expiredFee > 0) {
       const res = await taro.showModal({
         title: `您已超时用车${props.data.expiredDays.toFixed(1)}天, 需补交${props.data.expiredFee.toFixed(2)}元, 是否补交并还车?`
@@ -63,7 +60,6 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
       })
       res.confirm && props.onReturnCar(props.data)
     }
-    await taro.hideLoading()
   }
   const handleRebook = useRebook()
   const handlePay = async () => {
@@ -161,18 +157,7 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
               </>
             )
           }
-          {/*<View*/}
-          {/*  className={style.button}*/}
-          {/*  onClick={handleShowStoreDetail}*/}
-          {/*>*/}
-          {/*  取车门店*/}
-          {/*</View>*/}
-          <View
-            className={style.button}
-            onClick={() => navigateToOrderDetailPage(data.id)}
-          >
-            详情
-          </View>
+          <View className={style.button} onClick={() => navigateToOrderDetailPage(data.id)} > 详情 </View>
 
         </View>
         <OrderRemark order={data} />

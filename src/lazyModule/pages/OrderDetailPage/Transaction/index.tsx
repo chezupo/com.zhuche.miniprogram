@@ -20,6 +20,7 @@ export type OrderPropsType = {
 }
 type OrderCancelPropsType = {
   onCancelOrder: (order: OrderItemType) => void
+  onDeleteOrder: (order: OrderItemType) => void
 }
 const Transaction: React.FC<OrderPropsType & OrderCancelPropsType & {
   onReletSubmit: (days: number) => void
@@ -124,6 +125,14 @@ const Transaction: React.FC<OrderPropsType & OrderCancelPropsType & {
                 className={style.button} type='primary'
                 onClick={() => onCancelOrder(order)}
               >取消订单</Button>
+            )
+          }
+          {
+            ['CANCELED', 'FINISHED'].findIndex(e => e == order.status ) !== -1   && (
+              <Button
+                className={style.button} type='primary'
+                onClick={() => props.onDeleteOrder(order)}
+              >删除订单</Button>
             )
           }
           {

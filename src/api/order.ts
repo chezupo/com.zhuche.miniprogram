@@ -1,6 +1,5 @@
-import {get, post, put} from "../util/requestClient";
+import {deleteRequest, get, post, put} from "../util/requestClient";
 import getPlatformType from "../util/platformType";
-import * as path from "path";
 
 type CreateOrderQueryType = {
   remark: string
@@ -42,6 +41,12 @@ const cancelOrder = async (id: number) => {
  */
 const returnCar = async (id: number) => await put<OrderItemType>(`/orders/${id}/status/returning`)
 
+/**
+ * 删除订单
+ * @param id
+ */
+const  deleteOrder= async (id: number) => await deleteRequest<void>(`/orders/${id}`)
+
 const createOrderComment = async (orderId: number, value: CreateOrderCommentType) => {
   return await post<OrderItemType>(`/orders/${orderId}/commands`, value)
 }
@@ -61,5 +66,6 @@ export {
   createOrderComment,
   getOrderById,
   tradeOverTimeOrderById,
-  expireOrder
+  expireOrder,
+  deleteOrder
 }

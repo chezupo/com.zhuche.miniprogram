@@ -15,6 +15,8 @@ import tradePay from "../../../nativeInterface/tradePay";
 import {sleep} from "../../../util/helper";
 import SpinContainer from "../../../components/SpinContainer";
 import PanelRenderer from "./Transaction/PanelRender";
+import {navigateToOrder} from "../../../store/module/router";
+import {messageObserve} from "../../../store/module/message";
 
 const OrderDetailPage: React.FC = () => {
   const {params} = useRouter()
@@ -66,7 +68,15 @@ const OrderDetailPage: React.FC = () => {
     setLoading(true)
     try {
       await deleteOrderHook(deleteOrder)
-      fetchOrderData()
+      const duration =  2000
+      messageObserve.next({
+          title: '删除订单成功',
+          type: 'success',
+          duration,
+        })
+      setTimeout(() => {
+        navigateToOrder();
+      }, duration)
     }finally {
       setLoading(false)
     }

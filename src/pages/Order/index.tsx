@@ -2,10 +2,8 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import taro, {usePullDownRefresh} from "@tarojs/taro";
 import Tabs from "./Tabs";
-// @ts-ignore
-import style from "./style.module.scss"
 import Loading from "../../components/Loading";
-import {createOrderComment, getOrders, returnCar} from "../../api/order";
+import {createOrderComment, deleteOrder, getOrders, returnCar} from "../../api/order";
 import TabContainer from "./components/TabContainer";
 import CommentRender, {SubmitType} from "./components/TabContainer/CommentRender";
 import SpinContainer from "../../components/SpinContainer";
@@ -101,6 +99,15 @@ const Order = () : React.ReactElement => {
       setLoading(false)
     }
   }
+  const onDeleteOrder = async (value: OrderItemType) => {
+    setLoading(true)
+    try {
+      await deleteOrder(value.id)
+      handleFetchData();
+    }finally {
+      setLoading(false)
+    }
+  }
 
   /**
    * 超时补交费用并还车
@@ -174,6 +181,7 @@ const Order = () : React.ReactElement => {
       onPayed={handlePay}
       onComment={setCommentableOrder}
       onReturnCar={handleReturnCar}
+      onDeleteOrder={onDeleteOrder}
       onCancel={handleCancel}
       items={showOrders}
       onPayOverTimeFeeAndReturnCared={handlePayOverTimeFeeAndReturnCar}

@@ -24,6 +24,7 @@ type OrderContainerPropsType = {
   orderCategory:OrderCategoryType
   onCancel: (value: OrderItemType) => void
   onReturnCar: (value: OrderItemType) => void
+  onDeleteOrder: (value: OrderItemType) => void
   onComment: (value: OrderItemType) => void
   onPayOverTimeFeeAndReturnCared: (value: OrderItemType) => void
   onPayed: (value: OrderItemType) => void
@@ -60,6 +61,12 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
       })
       res.confirm && props.onReturnCar(props.data)
     }
+  }
+  const onDeleteOrder = async  () => {
+    const res = await taro.showModal({
+      title: '您确定要删除订单吗？'
+    })
+    res.confirm && props.onDeleteOrder(props.data)
   }
   const handleRebook = useRebook()
   const handlePay = async () => {
@@ -117,6 +124,11 @@ const OrderItem:React.FC<OrderContainerPropsType> = props => {
           {
             ['USING', 'OVERTIME'].includes(props.data.status )  && (
               <View className={style.button} onClick={handleReturnCar}>还车</View>
+            )
+          }
+          {
+            [ 'FINISHED', 'CANCELED' ].includes(props.data.status )  && (
+              <View className={style.button} onClick={onDeleteOrder}>删除订单</View>
             )
           }
           {

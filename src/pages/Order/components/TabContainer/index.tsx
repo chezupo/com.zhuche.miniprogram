@@ -11,6 +11,7 @@ type TabContainerPropsType = {
   orderCategory:OrderCategoryType
   onCancel: (value: OrderItemType) => void
   onReturnCar: (value: OrderItemType) => void
+  onDeleteOrder: (value: OrderItemType) => void
   onComment: (value:  OrderItemType) => void
   onPayOverTimeFeeAndReturnCared: (value: OrderItemType) => void
   onPayed: (value: OrderItemType) => void
@@ -37,6 +38,7 @@ const TabContainer: React.FC<TabContainerPropsType> = props => {
                   <OrderItem
                     onComment={props.onComment}
                     onReturnCar={props.onReturnCar}
+                    onDeleteOrder={props.onDeleteOrder}
                     onCancel={props.onCancel}
                     key={order.id}
                     data={order}

@@ -3,7 +3,6 @@ import BaseError, {ErrorTypes} from "../errors/BaseError";
 // @ts-ignore
 import {alipay, weapp} from "./base";
 import {AllPlatformType} from "../util/platformType";
-import {differenceBy} from "lodash";
 
 const authCode = (): Promise<string> => {
   return new Promise<string>((resolve, reject) => {

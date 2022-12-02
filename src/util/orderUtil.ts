@@ -6,8 +6,8 @@ import {setCar, setEndStore, setStarStore, setStartCityThunk} from "../reduxStor
 
 const orderStatusMayStr: Record<OrderStatus, string> = {
   'CREDITING' :  '信用授权中',
-  'PAYING' :  '支付中',
-  'CAR_PICKUP_IN_PROGRESS' :  '取车中',
+  'PAYING' :  '待支付',
+  'CAR_PICKUP_IN_PROGRESS' :  '待取车',
   'USING' :  '使用中',
   'OVERTIME' :  '用车超时',
   'RETURNING' :  '还车中',

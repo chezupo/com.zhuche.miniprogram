@@ -1,12 +1,10 @@
 import React from "react";
+import {useRouter} from "@tarojs/taro"
 import {useState,useEffect} from "preact/hooks";
 import {View} from "@tarojs/components";
 import Icon from "../../../../components/Icon";
-// @ts-ignore
 import style from "./style.module.scss";
-import {AgreementItemType} from "../../../../typings";
 import {getCheckoutOrderAgreements} from "../../../../api/Agreements";
-import {useRouter} from "@tarojs/taro";
 import Loading from "../../../../components/Loading";
 
 const Agreements: React.FC = () => {

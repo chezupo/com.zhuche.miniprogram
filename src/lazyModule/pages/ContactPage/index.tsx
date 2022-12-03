@@ -3,10 +3,8 @@ import {View} from "@tarojs/components";
 import {useEffect, useState} from "preact/hooks";
 import MenuContainer from "../../../components/MenuContainer";
 import ItemRender from "./ItemRender";
-// @ts-ignore
 import style from './style.module.scss'
 import FormRender from "./FormRender";
-import {UserContactItemType} from "../../../typings";
 import {createUserContact, deleteUserContact, editUserContact, getUserContact} from "../../../api/userContact";
 import Loading from "../../../components/Loading";
 import PopModal from "../../../components/PopModal";

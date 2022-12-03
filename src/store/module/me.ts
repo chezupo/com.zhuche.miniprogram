@@ -10,6 +10,7 @@ export type MeType = {
 export type AccessTokenType = {
   accessToken: string
   isNewUser: boolean
+  expiration: number
 }
 
 const initUser: MeType = {

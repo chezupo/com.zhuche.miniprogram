@@ -2,14 +2,12 @@ import React from "preact/compat";
 import taro from "@tarojs/taro";
 import {View} from "@tarojs/components";
 import {useState} from "preact/hooks";
-// @ts-ignore
 import style from './style.module.scss';
 import SwiperRender from "./SwiperRender";
 import Icon from "../../../../../components/Icon";
 import BannerRender from "./BannerRender";
 import NameRender from "./NameRender";
 import LineRender from "../components/LineRender";
-import {StoreItemType} from "../../../../../typings";
 
 export enum ActiveButtonType {
   RETURN_GUIDE,

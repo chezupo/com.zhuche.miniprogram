@@ -13,6 +13,7 @@ export type UserInfoType = {
 export const getUserProfile  = (): Promise<UserInfoType> => {
   return new Promise<UserInfoType>((resolve, reject) => {
     if (getPlatformType() === AllPlatformType.ALIPAY ) {
+      // @ts-ignore
       my.getOpenUserInfo({
         fail: (res) => {
             return reject(res)

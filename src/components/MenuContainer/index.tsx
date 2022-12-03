@@ -10,7 +10,6 @@ type MenuContainerPropsType = {
   bodyClassName?: string
   menuBarClassName?: string
   bodyHeight?: number
-  ref: LegacyRef<null>
 }
 const MenuContainer: React.FC<MenuContainerPropsType> = props => {
   const {bodyHeight} = props

@@ -29,11 +29,20 @@ declare type AlipayAccount = {
   "province": string
   "gender": string
 }
+
+type WechatAccount = {
+avatar: string
+gender: "0" | "1" | "2"
+nickName: string
+phone: string
+}
+
 declare type UserItemType = {
   id: number
   username: string
   isEnabled: boolean
   alipayAccount?: AlipayAccount
+  wechatAccount: WechatAccount
 }
 
 declare type StoreItemType = {

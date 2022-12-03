@@ -2,15 +2,28 @@ import React from "preact/compat";
 import {Image, View, Text} from "@tarojs/components";
 // @ts-ignore
 import style from './style.module.scss';
-import {CommentItemType} from "../../../../../../typings";
 
 type ItemRenderPropsType = {
   data: CommentItemType
 }
 const ItemRender: React.FC<ItemRenderPropsType> = props => {
-  let phone = props.data.order.user.alipayAccount.phone;
-  phone = phone.substring(0, 3) + "****" + phone.substring(7)
-  let avatar = props.data.order.user.alipayAccount.avatar
+  // let phone: string ? = props.data.order.user.alipayAccount.phone;
+  let phone: string = '';
+  let avatar: string = '';
+  switch (props.data.order.payType) {
+    case 'WECHAT':
+      phone = props.data.order.user.wechatAccount.phone;
+      avatar = props.data.order.user.wechatAccount.avatar
+      break;
+    case 'ALIPAY':
+      phone = props.data.order.user.alipayAccount.phone;
+      avatar = props.data.order.user.alipayAccount.avatar
+      break;
+  }
+
+  if (phone.length == 11) {
+    phone = phone.substring(0, 3) + "****" + phone.substring(7)
+  }
   return (
     <View className={style.main}>
       <View className={style.userWrapper}>

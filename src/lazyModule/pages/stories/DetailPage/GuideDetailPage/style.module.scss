@@ -11,6 +11,9 @@
     justify-items: center;
   }
   .bodyWrapper {
+    .swiper {
+      height: 100vh - $tabsHeight;
+    }
     .swiperWrapper {
       height: 100vh - $tabsHeight;
       width: 100%;
@@ -21,7 +24,7 @@
     .image {
       width: 100%;
     }
-    height: 100vh - $tabsHeight;
+    //height: 100vh - $tabsHeight;
     width: 100%;
     background: #3E3C3B;
   }

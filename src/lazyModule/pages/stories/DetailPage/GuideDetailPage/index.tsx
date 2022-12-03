@@ -3,7 +3,6 @@ import {useState} from "preact/hooks";
 import {Image, Swiper, SwiperItem, View} from "@tarojs/components";
 import {ActiveButtonType} from "../StoreInfoRender";
 import {getPickUpGuides, getReturnGuides} from "../../../../../util/guideUtil";
-// @ts-ignore
 import style from './style.module.scss';
 
 type TabItemPropsType = {
@@ -53,6 +52,7 @@ const GuideDetailPage: React.FC = () => {
     <View className={style.bodyWrapper}>
       <Swiper
         indicatorDots
+        className={style.swiper}
         indicatorColor='white'
       >
         {

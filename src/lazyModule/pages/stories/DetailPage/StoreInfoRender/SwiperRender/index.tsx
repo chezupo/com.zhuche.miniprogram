@@ -1,9 +1,7 @@
 import React from "preact/compat";
 import {Image, Swiper, SwiperItem} from "@tarojs/components";
 import {ReactNode} from "react";
-// @ts-ignore
 import style from './style.module.scss'
-import {GuidItemType, StoreItemType} from "../../../../../../typings";
 import {navigateToGuideDetailPage} from "../../../../../../store/module/router";
 import {setPickUpGuides, setReturnGuides} from "../../../../../../util/guideUtil";
 
@@ -50,7 +48,6 @@ const SwiperRender: React.FC<SwiperRenderPropsType> = ({images, store}) => {
       indicatorColor='#999'
       indicatorActiveColor='#333'
       circular
-      displayMultipleItems={3}
     >
       {dom}
     </Swiper>

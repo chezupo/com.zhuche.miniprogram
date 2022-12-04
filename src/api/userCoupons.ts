@@ -1,10 +1,9 @@
-import {UserCouponItemType} from "../typings";
-import {get} from "../util/requestClient";
+import { get } from "../util/requestClient";
 
-type GetUserCouponsReturnType = UserCouponItemType[]
+type GetUserCouponsReturnType = UserCouponItemType[];
 
 const getUserCoupons = async (): Promise<GetUserCouponsReturnType> => {
-  return await get<GetUserCouponsReturnType>('/me/userCoupons')
-}
+  return await get<GetUserCouponsReturnType>("/me/userCoupons");
+};
 
-export {getUserCoupons}
+export { getUserCoupons };

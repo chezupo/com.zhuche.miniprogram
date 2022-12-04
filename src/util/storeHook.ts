@@ -1,4 +1,3 @@
-import {StoreItemType} from "../typings";
 import {setEndStore, setStarStore, StartStoreOrEndStoreType} from "../reduxStore/module/order";
 import {navigateToHome} from "../store/module/router";
 import {useAppDispatch, useAppSelector} from "../reduxStore";

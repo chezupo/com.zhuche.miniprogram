@@ -1,13 +1,12 @@
-import React from 'react';
-import {Image, View} from "@tarojs/components";
-// @ts-ignore
+import React from "react";
+import { Image, View } from "@tarojs/components";
 import style from "./style.module.scss";
 
 type BaseInfoRenderPropsType = {
-  data: CarItemType
-}
+  data: CarItemType;
+};
 const BaseInfoRender: React.FC<BaseInfoRenderPropsType> = props => {
-  const {tags} = props.data
+  const { tags } = props.data;
   return (
     <View className={style.baseInfoWrapper}>
       <View className={style.imageContainer}>
@@ -17,15 +16,15 @@ const BaseInfoRender: React.FC<BaseInfoRenderPropsType> = props => {
       <View className={style.nameWrapper}>
         <View className={style.key}></View>
         <View className={style.tags}>
-          {
-            tags.map((tag, i) => (
-              <View className={style.tag} key={i}>{tag}</View>
-            ))
-          }
+          {tags.map((tag, i) => (
+            <View className={style.tag} key={i}>
+              {tag}
+            </View>
+          ))}
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default BaseInfoRender
+export default BaseInfoRender;

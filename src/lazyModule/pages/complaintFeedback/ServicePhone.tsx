@@ -1,5 +1,4 @@
 import * as React from "react";
-// @ts-ignore
 import Taro from "@tarojs/taro";
 import {Text, View} from "@tarojs/components";
 import useObserve from "../../../util/useObserve";

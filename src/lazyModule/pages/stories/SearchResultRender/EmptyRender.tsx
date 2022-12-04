@@ -1,7 +1,6 @@
 import * as React from "react";
 import {View} from "@tarojs/components";
 import NotFound from "../../../../components/NotFound";
-// @ts-ignore
 import style from "./style.module.scss"
 
 const EmptyRender = () => (

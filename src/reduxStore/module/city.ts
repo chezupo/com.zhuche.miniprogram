@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {CityType} from "../../typings";
 import {AppDispatch, RootState} from "../index";
 import {getCity} from "../../api/city";
 
